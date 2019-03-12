@@ -1,0 +1,40 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: argon2i
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|scss|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            anonymous: true
+            logout:
+                path: app_logout
+                target: app_index
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            form_login:
+                check_path: app_login
+                login_path: app_login
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: index
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN

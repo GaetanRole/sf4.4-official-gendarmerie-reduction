@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <section>
+
+        {% include 'default/_flash_messages.html.twig' %}
+
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1><i class="fab fa-galactic-republic"></i> Dashboard</h1>
+                    <ul>
+                        <li><a href="{{ path('app_logout') }}">Let's log out</a></li>
+                        <li><a href="{{ path('reduction_index') }}">See all reductions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

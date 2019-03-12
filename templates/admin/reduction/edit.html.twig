@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reduction{% endblock %}
+
+{% block body %}
+    <h1>Edit Reduction</h1>
+
+    {{ include('reduction/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('reduction_index') }}">back to list</a>
+
+    {{ include('admin/reduction/_delete_form.html.twig') }}
+{% endblock %}

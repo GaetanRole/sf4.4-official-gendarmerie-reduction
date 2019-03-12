@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Opinion{% endblock %}
+
+{% block body %}
+
+    {% include 'default/_flash_messages.html.twig' %}
+
+    <h1>Create new Opinion</h1>
+
+    {{ include('opinion/_form.html.twig') }}
+{% endblock %}

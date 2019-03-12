@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin index{% endblock %}
+
+{% block body %}
+
+    {% include 'default/_flash_messages.html.twig' %}
+
+    <h1>Admin index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Identity</th>
+            <th>Email</th>
+            <th>CreationDate</th>
+            <th>Roles</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.identity }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.creationDate ? user.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>
+                    {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
+                        <p>Vos droits sont égaux, vous ne pouvez modifier cet administrateur.</p>
+                    {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
+                        <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Editer l'utilisateur de rôle {{ user.roles|json_encode }}.</a>
+                    {% endif %}
+                    <a href="{{ path('user_show', {'id': user.id}) }}">Voir</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no users found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_new') }}">Create new user</a>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

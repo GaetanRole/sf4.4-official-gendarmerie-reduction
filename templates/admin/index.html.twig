@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin index{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+    {% include 'default/_flash_messages.html.twig' %}
+
+    <h1>Admin index</h1>
+
+    <ul>
+        <li><a href="{{ path('app_logout') }}">Let's log out</a></li>
+        <li><a href="{{ path('admin_user_index') }}">User</a></li>
+        <li><a href="{{ path('admin_brand_index') }}">Brand</a></li>
+        <li><a href="{{ path('admin_category_index') }}">Category</a></li>
+        <li><a href="{{ path('reduction_index') }}">Reduction</a></li>
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

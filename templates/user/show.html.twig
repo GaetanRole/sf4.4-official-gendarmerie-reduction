@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Identity</th>
+                <td>{{ user.identity }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ user.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>CreationDate</th>
+                <td>{{ user.creationDate ? user.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsActive</th>
+                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_index') }}">back to list</a>
+
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('admin/user/_delete_form.html.twig') }}
+{% endblock %}
