@@ -6,7 +6,7 @@
  * PHP Version 7.2
  *
  * @category    User
- * @package     App\Security
+ * @package     App\Security\Voter
  * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Security;
  *
  * @see         https://symfony.com/doc/current/security/voters.html
  * @category    User
- * @package     App\Security
+ * @package     App\Security\Voter
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class UserVoter extends Voter
@@ -42,7 +42,6 @@ class UserVoter extends Voter
      * Voter action
      */
     private const BANISH = 'banish';
-
 
     /**
      * @var Security

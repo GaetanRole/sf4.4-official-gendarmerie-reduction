@@ -57,10 +57,11 @@ For [translation][4] to XLIFF files (`app_locales: en|fr`) :
 $ bin/console translation:update --output-format xlf --dump-messages --force en
 $ bin/console translation:update --output-format xlf --dump-messages --force fr
 ```
+You can use [Loco][5] to manage all your translations. 5 domains are presents : exceptions, flashes, forms, messages and validators. Two _locales: fr|en, fallbacks: en.
 
 Personal commands
 -----------------
-To use a personal sample [command][5] (displaying all users from DB) :
+To use a personal sample [command][6] (displaying all users from DB) :
 
 ```bash
 $ bin/console app:list-users --help
@@ -75,6 +76,7 @@ This project is based on symfony4-starter-kit : [https://github.com/GaetanRole/s
 [2]: https://symfony.com/doc/current/configuration.html#the-env-file-environment-variables
 [3]: https://symfony.com/doc/current/doctrine.html#doctrine-fixtures
 [4]: https://symfony.com/doc/current/translation.html
-[5]: https://symfony.com/doc/current/console.html
+[5]: https://localise.biz/
+[6]: https://symfony.com/doc/current/console.html
 
 08/03/2019 gaetan@wildcodeschool.fr
