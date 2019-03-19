@@ -1,41 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}{{ 'admin.category.index.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'admin-category-index' %}
 
 {% block body %}
+    <section>
 
-    {% include 'default/_flash_messages.html.twig' %}
+        {% include 'default/_flash_messages.html.twig' %}
 
-    <h1>Category index</h1>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'admin.category.index.body.h1'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>CreationDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>{{ category.creationDate ? category.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>CreationDate</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.description }}</td>
+                                <td>{{ category.creationDate ? category.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('app_admin_admincategory_edit', {'id': category.id}) }}">{{ 'link.admin.category.edit'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">{{ 'table.empty'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
-    <a href="{{ path('admin_category_new') }}">Create new</a>
+                    <a href="{{ path('app_admin_admincategory_new') }}">{{ 'link.admin.category.new'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

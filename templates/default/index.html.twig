@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block description %}{{ 'index.head.meta.description'|trans }}{% endblock %}
+{% block title %}{{ 'index.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'index' %}
 
 {% block body %}
     <section>
@@ -10,18 +13,18 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col">
-                    <h1><i class="fab fa-galactic-republic"></i> Home</h1>
+                    <h1><i class="fab fa-galactic-republic"></i> {{ 'index.body.h1'|trans }}</h1>
                     {% if is_granted('ROLE_ADMIN') %}
                         <ul>
-                            <li><a href="{{ path('admin_index') }}">Go to the admin dashboard</a></li>
+                            <li><a href="{{ path('app_admin_index') }}">{{ 'link.admin.index'|trans }}</a></li>
                         </ul>
                     {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
                         <ul>
-                            <li><a href="{{ path('dashboard') }}">Go to the dashboard</a></li>
+                            <li><a href="{{ path('app_dashboard') }}">{{ 'link.dashboard'|trans }}</a></li>
                         </ul>
                     {% else %}
                         <ul>
-                            <li><a href="{{ path('app_login') }}">Let's log in</a></li>
+                            <li><a href="{{ path('app_login') }}">{{ 'link.login'|trans }}</a></li>
                         </ul>
                     {% endif %}
                 </div>

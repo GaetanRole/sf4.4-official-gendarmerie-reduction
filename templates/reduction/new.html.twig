@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reduction{% endblock %}
+{% block title %}{{ 'reduction.new.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'reduction-new' %}
 
 {% block body %}
-    <h1>Create new Reduction</h1>
+    <section>
 
-    {{ include('reduction/_form.html.twig') }}
+        {% include 'default/_flash_messages.html.twig' %}
 
-    <a href="{{ path('reduction_index') }}">back to list</a>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'reduction.new.body.h1'|trans }}</h1>
+
+                    {{ include('reduction/_form.html.twig') }}
+                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

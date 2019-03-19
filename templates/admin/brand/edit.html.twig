@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Brand{% endblock %}
+{% block title %}{{ 'admin.brand.edit.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'admin-brand-edit' %}
 
 {% block body %}
-    <h1>Edit Brand</h1>
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'admin.brand.edit.body.h1'|trans }}</h1>
 
-    {{ include('admin/brand/_form.html.twig', {'button_label': 'Update'}) }}
+                    {{ include('admin/brand/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('admin_brand_index') }}">back to list</a>
+                    <a href="{{ path('app_admin_adminbrand_index') }}">back to list</a>
 
-    {{ include('admin/brand/_delete_form.html.twig') }}
+                    {{ include('admin/brand/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

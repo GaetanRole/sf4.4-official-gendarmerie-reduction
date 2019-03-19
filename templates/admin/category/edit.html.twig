@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Category{% endblock %}
+{% block title %}{{ 'admin.category.edit.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'admin-category-edit' %}
 
 {% block body %}
-    <h1>Edit Category</h1>
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'admin.category.edit.body.h1'|trans }}</h1>
 
-    {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
+                    {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('admin_category_index') }}">back to list</a>
+                    <a href="{{ path('app_admin_admincategory_index') }}">{{ 'link.admin.category.index'|trans }}</a>
 
-    {{ include('admin/category/_delete_form.html.twig') }}
+                    {{ include('admin/category/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

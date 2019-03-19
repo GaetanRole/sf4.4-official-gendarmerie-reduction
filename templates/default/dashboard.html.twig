@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block description %}{{ 'dashboard.head.meta.description'|trans }}{% endblock %}
+{% block title %}{{ 'dashboard.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'dashboard' %}
 
 {% block body %}
     <section>
@@ -10,10 +13,10 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col">
-                    <h1><i class="fab fa-galactic-republic"></i> Dashboard</h1>
+                    <h1><i class="fab fa-galactic-republic"></i> {{ 'dashboard.body.h1'|trans }}</h1>
                     <ul>
-                        <li><a href="{{ path('app_logout') }}">Let's log out</a></li>
-                        <li><a href="{{ path('reduction_index') }}">See all reductions</a></li>
+                        <li><a href="{{ path('app_logout') }}">{{ 'link.logout'|trans }}</a></li>
+                        <li><a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a></li>
                     </ul>
                 </div>
             </div>

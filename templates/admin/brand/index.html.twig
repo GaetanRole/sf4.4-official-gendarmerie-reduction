@@ -1,41 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Brand index{% endblock %}
+{% block title %}{{ 'admin.brand.index.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'admin-brand-index' %}
 
 {% block body %}
+    <section>
 
-    {% include 'default/_flash_messages.html.twig' %}
+        {% include 'default/_flash_messages.html.twig' %}
 
-    <h1>Brand index</h1>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'admin.brand.index.body.h1'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>CreationDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for brand in brands %}
-            <tr>
-                <td>{{ brand.id }}</td>
-                <td>{{ brand.name }}</td>
-                <td>{{ brand.description }}</td>
-                <td>{{ brand.creationDate ? brand.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>CreationDate</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for brand in brands %}
+                            <tr>
+                                <td>{{ brand.id }}</td>
+                                <td>{{ brand.name }}</td>
+                                <td>{{ brand.description }}</td>
+                                <td>{{ brand.creationDate ? brand.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('app_admin_adminbrand_edit', {'id': brand.id}) }}">{{ 'link.admin.brand.edit'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">{{ 'table.empty'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
-    <a href="{{ path('admin_brand_new') }}">Create new</a>
+                    <a href="{{ path('app_admin_adminbrand_new') }}">{{ 'link.admin.brand.new'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

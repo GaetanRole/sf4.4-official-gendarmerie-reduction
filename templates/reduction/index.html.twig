@@ -1,66 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reduction index{% endblock %}
+{% block title %}{{ 'reduction.index.head.meta.title'|trans }}{% endblock %}
+
+{% block body_id 'reduction-index' %}
 
 {% block body %}
+    <section>
 
-    {% include 'default/_flash_messages.html.twig' %}
+        {% include 'default/_flash_messages.html.twig' %}
 
-    <h1>Reduction index</h1>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'reduction.index.body.h1'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>ClientIp</th>
-            <th>Title</th>
-            <th>Slug</th>
-            <th>Description</th>
-            <th>Catégorie</th>
-            <th>Region</th>
-            <th>Department</th>
-            <th>City</th>
-            <th>CreationDate</th>
-            <th>IsBigDeal</th>
-            <th>IsActive</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for reduction in reductions %}
-            <tr>
-                <td>{{ reduction.id }}</td>
-                <td>{{ reduction.name }}</td>
-                <td>{{ reduction.email }}</td>
-                <td>{{ reduction.clientIp }}</td>
-                <td>{{ reduction.title }}</td>
-                <td>{{ reduction.slug }}</td>
-                <td>{{ reduction.description }}</td>
-                <td>
-                    {% for category in reduction.categories %}
-                        {{ category }}
-                    {% endfor %}
-                </td>
-                <td>{{ reduction.region }}</td>
-                <td>{{ reduction.department }}</td>
-                <td>{{ reduction.city }}</td>
-                <td>{{ reduction.creationDate ? reduction.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reduction.isBigDeal? 'Yes' : 'No' }}</td>
-                <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('reduction_show', {'slug': reduction.slug}) }}">show</a>
-                    <a href="{{ path('reduction_edit', {'id': reduction.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>ClientIp</th>
+                            <th>Title</th>
+                            <th>Slug</th>
+                            <th>Description</th>
+                            <th>Catégorie</th>
+                            <th>Region</th>
+                            <th>Department</th>
+                            <th>City</th>
+                            <th>CreationDate</th>
+                            <th>IsBigDeal</th>
+                            <th>IsActive</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reduction in reductions %}
+                            <tr>
+                                <td>{{ reduction.id }}</td>
+                                <td>{{ reduction.name }}</td>
+                                <td>{{ reduction.email }}</td>
+                                <td>{{ reduction.clientIp }}</td>
+                                <td>{{ reduction.title }}</td>
+                                <td>{{ reduction.slug }}</td>
+                                <td>{{ reduction.description }}</td>
+                                <td>
+                                    {% for category in reduction.categories %}
+                                        {{ category }}
+                                    {% endfor %}
+                                </td>
+                                <td>{{ reduction.region }}</td>
+                                <td>{{ reduction.department }}</td>
+                                <td>{{ reduction.city }}</td>
+                                <td>{{ reduction.creationDate ? reduction.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ reduction.isBigDeal? 'Yes' : 'No' }}</td>
+                                <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <a href="{{ path('app_reduction_show', {'slug': reduction.slug}) }}">{{ 'link.reduction.show'|trans }}</a>
+                                    <a href="{{ path('app_admin_adminreduction_edit', {'id': reduction.id}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="9">{{ 'table.empty'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
 
-    <a href="{{ path('reduction_new') }}">Create new</a>
+                    <a href="{{ path('app_reduction_new') }}">{{ 'link.reduction.new'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
