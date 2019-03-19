@@ -42,13 +42,11 @@ class UserIdentityType extends AbstractType
                 TextType::class,
                 [
                     'required' => false,
-                    'empty_data' => 'Aucune identité renseignée.',
-                    'label' => 'Votre identité',
-                    'help' => 'Le nom n\'est pas obligatoire,
-                    il permet simplement de vous identifier auprès des autres utilisateurs 
-                    et de suivre un fil de discussion logique.',
+                    'empty_data' => null,
+                    'label' => 'form.user_identity.name.label',
+                    'help' => 'form.user_identity.name.help',
                     'attr' => [
-                        'placeholder' => 'Indiquez votre identité. Ex: MDC Michel Rolé.',
+                        'placeholder' => 'form.user_identity.name.placeholder',
                         'maxLength' => '64',
                     ],
                 ]
@@ -59,12 +57,10 @@ class UserIdentityType extends AbstractType
                 [
                     'required' => false,
                     'empty_data' => null,
-                    'label' => 'Votre e-mail',
-                    'help' => 'L\'email n\'est pas obligatoire,
-                    il permet d\'être contacté uniquement pour un éventuel échange hors plateforme
-                    au sujet d\'une réduction.',
+                    'label' => 'form.user_identity.email.label',
+                    'help' => 'form.user_identity.email.help',
                     'attr' => [
-                        'placeholder' => 'Votre e-mail. Ex: email@email.fr.',
+                        'placeholder' => 'form.user_identity.email.placeholder',
                         'maxLength' => '64',
                     ],
                 ]
@@ -82,6 +78,7 @@ class UserIdentityType extends AbstractType
     {
         $resolver->setDefaults([
             'inherit_data' => true,
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -26,7 +26,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
  *     fields={"username"},
- *     message="Ce nom de compte est déjà pris. Veuillez en entrer un nouveau."
+ *     message="valitor.user.unique.message"
  * )
  *
  * @category    User
@@ -52,12 +52,12 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(type="string", length=64, unique=true)
-     * @Assert\NotBlank(message="Un nom de référence (login) doit être renseigné pour créer un compte.")
+     * @Assert\NotBlank(message="validator.user.username.not_blank")
      * @Assert\Length(
      *     min=2,
-     *     minMessage="Le login est bien trop court ({{ limit }} min).",
+     *     minMessage="validator.user.username.min_length",
      *     max=64,
-     *     maxMessage="Le login est bien trop long ({{ limit }} max)."
+     *     maxMessage="validator.user.username.max_length"
      * )
      */
     private $username;
@@ -66,12 +66,12 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="Une identité doit être renseignée pour créer un compte. Rôle et nom.")
+     * @Assert\NotBlank(message="validator.user.identity.not_blank")
      * @Assert\Length(
      *     min=2,
-     *     minMessage="L'identité est bien trop courte ({{ limit }} min).",
+     *     minMessage="validator.user.identity.min_length",
      *     max=64,
-     *     maxMessage="L'identité est bien trop longue ({{ limit }} max)."
+     *     maxMessage="validator.user.identity.max_length"
      * )
      */
     private $identity;
@@ -81,11 +81,11 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=64, unique=true, nullable=true)
      * @Assert\Email(
-     *     message = "L'adresse e-mail '{{ value }}' n'est pas valide. Veuillez vérifier celle-ci."
+     *     message="validator.user.email.email"
      * )
      * @Assert\Length(
      *     max=64,
-     *     maxMessage="L'email est bien trop long ! ({{ limit }} max)."
+     *     maxMessage="validator.user.email.max_length"
      * )
      */
     private $email;
@@ -96,14 +96,14 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=32, nullable=true)
      * @Assert\Regex(
      *     pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
-     *     message="Le téléphone doit être écrit de la manière suivante : 06 00 00 00 00 or +33 6.")
+     *     message="validator.user.phone_number.regex")
      */
     private $phoneNumber;
 
     /**
      * @Assert\Length(max=4096)
      * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",
-     *     message="Le mot de passe doit être composé de 8 caractères dont 1 chiffre.")
+     *     message="validator.user.plain_password.regex")
      */
     private $plainPassword;
 

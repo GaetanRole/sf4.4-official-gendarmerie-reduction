@@ -23,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * AdminReduction Controller Class
@@ -33,39 +34,56 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin/reduction")
+ * @Route("/{_locale}/admin/reduction", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminReductionController extends AbstractController
 {
     /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * AdminReductionController constructor.
+     *
+     * @param EntityManagerInterface $em Entity Manager injection
+     * @param TranslatorInterface $translator Translator injection
+     */
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->translator = $translator;
+    }
+
+    /**
      * Displays a form to edit a existing Reduction entity
      *
      * @param Request $request POST'ed data
      * @param Reduction $reduction Reduction given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}/edit", name="reduction_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
         Request $request,
-        Reduction $reduction,
-        EntityManagerInterface $em
+        Reduction $reduction
     ): Response {
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reduction->setSlug(Slugger::slugify($reduction->getTitle()));
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'La réduction a bien été éditée.'
-            );
+            $this->addFlash('success', $this->translator->trans('reduction.edit.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('reduction_index', [
+            return $this->redirectToRoute('app_reduction_index', [
                 'id' => $reduction->getId(),
             ]);
         }
@@ -81,26 +99,21 @@ class AdminReductionController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Reduction $reduction Reduction given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}", name="reduction_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", methods={"DELETE"})
      * @return RedirectResponse A Response instance
      */
     public function delete(
         Request $request,
-        Reduction $reduction,
-        EntityManagerInterface $em
+        Reduction $reduction
     ): RedirectResponse {
         if ($this->isCsrfTokenValid('delete'.$reduction->getId(), $request->request->get('_token'))) {
-            $em->remove($reduction);
-            $em->flush();
+            $this->em->remove($reduction);
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'La réduction et tous les commentaires liés sont bien supprimés.'
-            );
+            $this->addFlash('success', $this->translator->trans('reduction.delete.flash.success', [], 'flashes'));
         }
 
-        return $this->redirectToRoute('reduction_index');
+        return $this->redirectToRoute('app_reduction_index');
     }
 }

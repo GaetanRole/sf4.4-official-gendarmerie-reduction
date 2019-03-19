@@ -11,7 +11,7 @@
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
-namespace App\Security;
+namespace App\Security\Voter;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

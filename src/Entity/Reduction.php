@@ -80,8 +80,8 @@ class Reduction extends UserIdentity
      * @Assert\Count(
      *     min = "1",
      *     max = "3",
-     *     minMessage = "{{ limit }} catégorie au minimum doit être ajoutée.",
-     *     maxMessage = "{{ limit }} catégories au maximum peuvent être ajoutées."
+     *     minMessage = "validator.reduction.categories.min_count",
+     *     maxMessage = "validator.reduction.categories.max_count"
      * )
      */
     private $categories;
@@ -90,12 +90,12 @@ class Reduction extends UserIdentity
      * @var string
      *
      * @ORM\Column(type="string", length=64, unique=true)
-     * @Assert\NotBlank(message="Un titre doit être renseigné pour poster une reduction.")
+     * @Assert\NotBlank(message="validator.reduction.title.not_blank")
      * @Assert\Length(
      *     min=5,
-     *     minMessage="Le titre est bien trop court ({{ limit }} min).",
+     *     minMessage="validator.reduction.title.min_length",
      *     max=64,
-     *     maxMessage="Le titre est bien trop long ({{ limit }} max)."
+     *     maxMessage="validator.reduction.title.max_length"
      * )
      */
     private $title;
@@ -103,7 +103,7 @@ class Reduction extends UserIdentity
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", unique=true, length=100)
      */
     private $slug;
 
@@ -111,12 +111,12 @@ class Reduction extends UserIdentity
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="La description de la réduction doit être renseignée.")
+     * @Assert\NotBlank(message="validator.reduction.description.not_blank")
      * @Assert\Length(
      *     min=10,
-     *     minMessage="Votre réduction est bien trop courte ({{ limit }} min).",
+     *     minMessage="validator.reduction.description.min_length",
      *     max=10000,
-     *     maxMessage="Votre réduction est bien trop longue ({{ limit }} max)."
+     *     maxMessage="validator.reduction.description.max_length"
      * )
      */
     private $description;
@@ -132,12 +132,12 @@ class Reduction extends UserIdentity
      * @var string
      *
      * @ORM\Column(type="string", length=32)
-     * @Assert\NotBlank(message="Un département doit être renseigné pour poster la réduction.")
+     * @Assert\NotBlank(message="validator.reduction.department.not_blank")
      * @Assert\Length(
      *     min=3,
-     *     minMessage="Le nom du département est trop court ({{ limit }} min).",
+     *     minMessage="validator.reduction.department.min_length",
      *     max=32,
-     *     maxMessage="Le nom du département est trop long ({{ limit }} max)."
+     *     maxMessage="validator.reduction.department.max_length"
      * )
      */
     private $department;
@@ -147,14 +147,14 @@ class Reduction extends UserIdentity
      * @Assert\Regex(
      *     pattern="(^none$)",
      *     match=false,
-     *     message="Cette ville n'éxiste pas. Veuillez vérifier celle-ci."
+     *     message="validator.reduction.city.regex"
      * )
-     * @Assert\NotBlank(message="Une ville doit être renseignée pour poster la réduction.")
+     * @Assert\NotBlank(message="validator.reduction.city.not_blank")
      * @Assert\Length(
      *     min=2,
-     *     minMessage="Le nom de la ville est trop court ({{ limit }} min).",
+     *     minMessage="validator.reduction.city.min_length",
      *     max=64,
-     *     maxMessage="Le nom de la ville est trop long ({{ limit }} max)."
+     *     maxMessage="validator.reduction.city.max_length"
      * )
      */
     private $city;

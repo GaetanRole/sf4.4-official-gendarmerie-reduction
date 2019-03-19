@@ -46,12 +46,12 @@ class Brand
      * @var string
      *
      * @ORM\Column(type="string", length=128, unique=true)
-     * @Assert\NotBlank(message="Un nom d'enseigne doit être renseigné.")
+     * @Assert\NotBlank(message="validator.brand.name.not_blank")
      * @Assert\Length(
      *     min=2,
-     *     minMessage="Le nom d'enseigne est bien trop court ({{ limit }} min).",
+     *     minMessage="validator.brand.name.min_length",
      *     max=128,
-     *     maxMessage="Le nom d'enseigne est bien trop long ({{ limit }} max)."
+     *     maxMessage="validator.brand.name.max_length"
      * )
      */
     private $name;
@@ -62,7 +62,7 @@ class Brand
      * @ORM\Column(type="text", nullable=true)
      * @Assert\Length(
      *     max=255,
-     *     maxMessage="La description est bien longue ? ({{ limit }} max)."
+     *     maxMessage="validator.brand.description.max_length"
      * )
      */
     private $description;
@@ -85,7 +85,6 @@ class Brand
     public function __construct()
     {
         $this->reductions = new ArrayCollection();
-        $this->description = 'Aucune description renseignée.';
     }
 
     /*

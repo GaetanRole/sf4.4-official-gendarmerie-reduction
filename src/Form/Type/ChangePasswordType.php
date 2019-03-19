@@ -45,16 +45,16 @@ class ChangePasswordType extends AbstractType
                 [
                     'type' => PasswordType::class,
                     'constraints' => [
-                        new NotBlank(['message' => 'Vous devez renseigner un mot de passe valide.']),
+                        new NotBlank(['message' => 'form.change_password.plain_password.not_blank']),
                     ],
-                    'invalid_message' => 'Les mots de passe ne concordent pas.',
+                    'invalid_message' => 'form.change_password.plain_password.invalid',
                     'options' => ['attr' => ['class' => 'password-field']],
                     'first_options'  => [
-                        'label' => 'Entrez un mot de passe',
-                        'attr' => ['placeholder' => '********']],
+                        'label' => 'form.change_password.plain_password.first.label',
+                        'attr' => ['placeholder' => 'form.change_password.plain_password.first.placeholder']],
                     'second_options' => [
-                        'label' => 'Répétez le même mot de passe',
-                        'attr' => ['placeholder' => '********']],
+                        'label' => 'form.change_password.plain_password.second.label',
+                        'attr' => ['placeholder' => 'form.change_password.plain_password.second.placeholder']],
                 ]
             )
         ;
@@ -69,6 +69,7 @@ class ChangePasswordType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

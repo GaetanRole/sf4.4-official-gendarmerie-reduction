@@ -64,10 +64,10 @@ class UserType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Nom de compte (login) *',
-                    'help' => 'Le nom n\'est pas visible au public et est exclusif à la connexion.',
+                    'label' => 'form.user.username.label',
+                    'help' => 'form.user.username.help',
                     'attr' => [
-                        'placeholder' => 'Login. Ex: gaetan94',
+                        'placeholder' => 'form.user.username.placeholder',
                         'minLength' => '2',
                         'maxLength' => '64',
                     ],
@@ -78,10 +78,10 @@ class UserType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Identité du compte *',
-                    'help' => 'L\'identité sera visible par tout le monde. Vous pouvez indiquer le rôle du compte.',
+                    'label' => 'form.user.identity.label',
+                    'help' => 'form.user.identity.help',
                     'attr' => [
-                        'placeholder' => 'Propriétaire du compte. Ex: Admin MDC Michel R.',
+                        'placeholder' => 'form.user.identity.placeholder',
                         'minLength' => '2',
                         'maxLength' => '64',
                     ],
@@ -93,12 +93,10 @@ class UserType extends AbstractType
                 [
                     'required' => false,
                     'empty_data' => null,
-                    'label' => 'E-mail du compte',
-                    'help' => 'L\'email n\'est pas obligatoire,
-                    il permet d\'être contacté uniquement pour un éventuel échange hors plateforme
-                    au sujet d\'une réduction. Il sera visible pour toute annonce.',
+                    'label' => 'form.user.email.label',
+                    'help' => 'form.user.email.help',
                     'attr' => [
-                        'placeholder' => 'Un e-mail. Ex: email@email.fr.',
+                        'placeholder' => 'form.user.email.placeholder',
                         'maxLength' => '64',
                     ],
                 ]
@@ -108,12 +106,10 @@ class UserType extends AbstractType
                 TextType::class,
                 [
                     'required' => false,
-                    'label' => 'Téléphone du compte',
-                    'help' => 'Le téléphone n\'est pas obligatoire,
-                    il permet d\'être contacté uniquement pour un éventuel échange hors plateforme
-                    au sujet d\'une réduction. Il sera visible pour toute annonce.',
+                    'label' => 'form.user.phone_number.label',
+                    'help' => 'form.user.phone_number.help',
                     'attr' => [
-                        'placeholder' => 'Un numéro. Ex: 06-54-54-54-54 ou +33 6...',
+                        'placeholder' => 'form.user.phone_number.placeholder',
                         'maxLength' => '32',
                     ],
                 ]
@@ -123,8 +119,8 @@ class UserType extends AbstractType
                 CheckboxType::class,
                 [
                     'required' => false,
-                    'label'    => 'Profil actif par défaut ?',
-                    'help' => 'Vous pouvez désactiver un profil à tout moment'
+                    'label'    => 'form.user.is_active.label',
+                    'help' => 'form.user.is_active.help'
                 ]
             );
         if ($this->auth->isGranted('ROLE_SUPER_ADMIN')) {
@@ -133,15 +129,15 @@ class UserType extends AbstractType
                     'roles',
                     ChoiceType::class,
                     [
-                        'label'    => 'Choississez les droits du compte *',
+                        'label'    => 'form.user.roles.label',
                         'choices' => [
-                            'Utilisateur' => 'ROLE_USER',
-                            'Administrateur' => 'ROLE_ADMIN'
+                            'form.user.roles.choices.role_user' => 'ROLE_USER',
+                            'form.user.roles.choices.role_admin' => 'ROLE_ADMIN'
                         ],
                         'expanded' => false,
                         'multiple' => false,
                         'empty_data' => 'ROLE_USER',
-                        'help' => 'Vous pouvez changer les droits d\'un administrateur ou utilisateur à tout moment.'
+                        'help' => 'form.user.roles.help'
                     ]
                 )
                 ->get('roles')
@@ -155,7 +151,7 @@ class UserType extends AbstractType
                     'required' => true,
                     'label' => false,
                     'inherit_data' => true,
-                    'help' => 'Le mot de passe de l\'utilisateur sera utilisé lors de la connexion.',
+                    'help' => 'form.user.plain_password.help',
                 ]
             );
         }
@@ -170,6 +166,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

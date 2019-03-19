@@ -19,6 +19,7 @@ use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * OpinionFixture class
@@ -43,14 +44,23 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     private $clock;
 
     /**
+     * Injecting Container Interface
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * ReductionFixture constructor.
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param GlobalClock $clock Global project's clock
+     * @param ContainerInterface $container Container Interface
      */
-    public function __construct(GlobalClock $clock)
+    public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
         $this->clock = $clock;
+        $this->container = $container;
     }
 
     /**
@@ -65,7 +75,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
 
         foreach ($this->getOpinionReferenceData() as [$index, $author, $reduction]) {
             $opinion = new Opinion();

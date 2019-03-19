@@ -30,7 +30,7 @@ class DefaultController extends AbstractController
     /**
      * Home page before connexion
      *
-     * @Route("/", name="app_index", methods={"GET"})
+     * @Route("/{_locale}", defaults={"_locale"="%locale%"}, name="app_index", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(): Response
@@ -43,7 +43,7 @@ class DefaultController extends AbstractController
      *
      * @todo Add all useful data for a dashboard index (only for users)
      *
-     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     * @Route("/{_locale}/dashboard", defaults={"_locale"="%locale%"}, name="app_dashboard", methods={"GET"})
      * @IsGranted("ROLE_USER")
      * @return     Response A Response instance
      */

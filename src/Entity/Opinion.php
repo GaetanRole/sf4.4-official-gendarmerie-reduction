@@ -62,12 +62,12 @@ class Opinion extends UserIdentity implements \JsonSerializable
      * @var string
      *
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Vous devez renseigner votre commentaire.")
+     * @Assert\NotBlank(message="validator.opinion.comment.not_blank")
      * @Assert\Length(
      *     min=5,
-     *     minMessage="Votre commentaire est bien trop court ({{ limit }} min).",
+     *     minMessage="validator.opinion.comment.min_length",
      *     max=10000,
-     *     maxMessage="Votre commentaire est bien trop long ({{ limit }} max)."
+     *     maxMessage="validator.opinion.comment.max_length"
      * )
      */
     private $comment;

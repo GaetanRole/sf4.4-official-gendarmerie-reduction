@@ -49,16 +49,16 @@ class ReductionType extends AbstractType
                 'userIdentity',
                 UserIdentityType::class,
                 [
-                    'data_class' => Reduction::class
+                    'data_class' => Reduction::class,
+                    'label' => false,
                 ]
             )
             ->add(
                 'brand',
                 EntityType::class,
                 [
-                    'label' => 'Choisissez l\'enseigne proposant une réduction *',
-                    'help' => 'Retrouvez et sélectionnez une enseigne déjà existante
-                    ou proposez en une nouvelle, qui sera ajoutée une fois l\'annonce validée.',
+                    'label' => 'form.reduction.brand.label',
+                    'help' => 'form.reduction.brand.help',
                     'class' => Brand::class,
                     'choice_label' => 'name',
                     'required' => true,
@@ -70,12 +70,11 @@ class ReductionType extends AbstractType
                 'title',
                 TextType::class,
                 [
-                    'label' => 'Titre de votre réduction (montant inclus) *',
-                    'help' => 'Les titres non conformes à notre code de conduite seront modérés
-                    et la réduction non acceptée. Veuillez précisez le montant de la réduction dans le titre.',
+                    'label' => 'form.reduction.title.label',
+                    'help' => 'form.reduction.title.help',
                     'required' => true,
                     'attr' => [
-                        'placeholder' => 'Ex: McDonald\'s -15% durant le weekend.',
+                        'placeholder' => 'form.reduction.title.placeholder',
                         'minLength' => '5',
                         'maxLength' => '64',
                     ],
@@ -86,11 +85,10 @@ class ReductionType extends AbstractType
                 TextareaType::class,
                 [
                     'required' => true,
-                    'label' => 'Votre description *',
-                    'help' => 'Les descriptions non conformes à notre code de conduite seront modérées
-                    et la réduction non acceptée.',
+                    'label' => 'form.reduction.description.label',
+                    'help' => 'form.reduction.description.help',
                     'attr' => [
-                        'placeholder' => 'Ex: Réduction de 15%, uniquement avec la carte pro !',
+                        'placeholder' => 'form.reduction.description.placeholder',
                         'minLength' => '10',
                         'maxLength' => '10000',
                         'rows' => 50,
@@ -102,9 +100,8 @@ class ReductionType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Sélectionnez votre département *',
-                    'help' => 'Votre réduction sera filtrable par département une fois celle-ci validée par les
-                    administrateurs.',
+                    'label' => 'form.reduction.department.label',
+                    'help' => 'form.reduction.department.help',
                     'attr' => [
                         'minLength' => '3',
                         'maxLength' => '32',
@@ -116,9 +113,8 @@ class ReductionType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Renseignez votre ville *',
-                    'help' => 'Votre réduction sera filtrable par ville une fois celle-ci validée par les
-                    administrateurs.',
+                    'label' => 'form.reduction.city.label',
+                    'help' => 'form.reduction.city.help',
                     'attr' => [
                         'minLength' => '2',
                         'maxLength' => '64',
@@ -132,8 +128,8 @@ class ReductionType extends AbstractType
                     'required' => true,
                     'class' => Category::class,
                     'choice_label' => 'name',
-                    'label' => 'Ajoutez les différentes catégories applicables à votre réduction *',
-                    'help' => 'Vous pouvez ajouter entre une et trois catégories.',
+                    'label' => 'form.reduction.categories.label',
+                    'help' => 'form.reduction.categories.help',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->orderBy('c.name', 'ASC');
@@ -154,6 +150,7 @@ class ReductionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Reduction::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -50,10 +50,10 @@ class OpinionType extends AbstractType
                 TextareaType::class,
                 [
                     'required' => true,
-                    'label' => 'Votre commentaire *',
-                    'help' => 'Les commentaires non conformes à notre code de conduite seront modérés.',
+                    'label' => 'form.opinion.comment.label',
+                    'help' => 'form.opinion.comment.help',
                     'attr' => [
-                        'placeholder' => 'Ex: Merci pour cette réduction de 15% !',
+                        'placeholder' => 'form.opinion.comment.placeholder',
                         'minLength' => '5',
                         'maxLength' => '10000',
                         'rows' => 30,
@@ -71,6 +71,7 @@ class OpinionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Opinion::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

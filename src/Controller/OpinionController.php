@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Opinion Controller Class
@@ -34,7 +35,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/opinion")
+ * @Route("/{_locale}/opinion", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_USER")
  */
 class OpinionController extends AbstractController
@@ -48,9 +49,10 @@ class OpinionController extends AbstractController
      * @param Request $request POST'ed data
      * @param Reduction $reduction According to one reduction
      * @param EntityManagerInterface $em Entity Manager
+     * @param TranslatorInterface $translator Translator injection
      * @param GlobalClock $clock Global project's clock
      *
-     * @Route("/new/{slug}", name="opinion_new", methods={"GET","POST"})
+     * @Route("/new/{slug}", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      * @throws \Exception Datetime Exception
      */
@@ -58,6 +60,7 @@ class OpinionController extends AbstractController
         Request $request,
         Reduction $reduction,
         EntityManagerInterface $em,
+        TranslatorInterface $translator,
         GlobalClock $clock
     ): Response {
         $opinion = new Opinion();
@@ -73,9 +76,9 @@ class OpinionController extends AbstractController
             $em->persist($opinion);
             $em->flush();
 
-            $this->addFlash('success', 'Le commentaire a bien été ajouté.');
+            $this->addFlash('success', $translator->trans('opinion.new.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('reduction_show', ['slug' => $reduction->getSlug()]);
+            return $this->redirectToRoute('app_reduction_show', ['slug' => $reduction->getSlug()]);
         }
 
         return $this->render('opinion/new.html.twig', [

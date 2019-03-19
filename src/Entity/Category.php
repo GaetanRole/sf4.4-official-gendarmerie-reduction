@@ -46,12 +46,12 @@ class Category implements \JsonSerializable
      * @var string
      *
      * @ORM\Column(type="string", length=64, unique=true)
-     * @Assert\NotBlank(message="Un nom de catégorie doit être renseigné.")
+     * @Assert\NotBlank(message="validator.category.name.not_blank")
      * @Assert\Length(
      *     min=2,
-     *     minMessage="Le nom de la catégorie est bien trop court ({{ limit }} min).",
+     *     minMessage="validator.category.name.min_length",
      *     max=64,
-     *     maxMessage="Le nom de la catégorie est bien trop long ({{ limit }} max)."
+     *     maxMessage="validator.category.name.max_length"
      * )
      */
     private $name;
@@ -62,7 +62,7 @@ class Category implements \JsonSerializable
      * @ORM\Column(type="text", nullable=true)
      * @Assert\Length(
      *     max=255,
-     *     maxMessage="La description est bien longue ? ({{ limit }} max)."
+     *     maxMessage="validator.category.description.max_length"
      * )
      */
     private $description;
@@ -85,7 +85,6 @@ class Category implements \JsonSerializable
     public function __construct()
     {
         $this->reductions = new ArrayCollection();
-        $this->description = 'Aucune description renseignée.';
     }
 
     /*

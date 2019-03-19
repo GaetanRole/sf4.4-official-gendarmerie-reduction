@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * AdminOpinion Controller Class
@@ -32,11 +33,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin/opinion")
+ * @Route("/{_locale}/admin/opinion", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminOpinionController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * AdminOpinionController constructor.
+     *
+     * @param EntityManagerInterface $em Entity Manager injection
+     * @param TranslatorInterface $translator Translator injection
+     */
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->translator = $translator;
+    }
+
     /**
      * Displays a form to edit an existing Opinion entity
      *
@@ -44,28 +67,23 @@ class AdminOpinionController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Opinion $opinion Opinion given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}/edit", name="admin_opinion_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
         Request $request,
-        Opinion $opinion,
-        EntityManagerInterface $em
+        Opinion $opinion
     ): Response {
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'Le commentaire a bien été édité.'
-            );
+            $this->addFlash('success', $this->translator->trans('opinion.edit.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_index', [
+            return $this->redirectToRoute('app_admin_index', [
                 'id' => $opinion->getId(),
             ]);
         }
@@ -81,26 +99,21 @@ class AdminOpinionController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Opinion $opinion Opinion given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}", name="admin_opinion_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", methods={"DELETE"})
      * @return RedirectResponse A Response instance
      */
     public function delete(
         Request $request,
-        Opinion $opinion,
-        EntityManagerInterface $em
+        Opinion $opinion
     ): RedirectResponse {
         if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
-            $em->remove($opinion);
-            $em->flush();
+            $this->em->remove($opinion);
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'Le commentaire a bien été supprimé.'
-            );
+            $this->addFlash('success', $this->translator->trans('opinion.delete.flash.success', [], 'flashes'));
         }
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('app_admin_index');
     }
 }

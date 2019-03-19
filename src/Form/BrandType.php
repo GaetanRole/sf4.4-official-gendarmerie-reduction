@@ -43,10 +43,10 @@ class BrandType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Nom de l\'enseigne *',
-                    'help' => 'Pensez à bien vérifier l\'intégrité de votre nom d\'enseigne.',
+                    'label' => 'form.brand.name.label',
+                    'help' => 'form.brand.name.help',
                     'attr' => [
-                        'placeholder' => 'Indiquez une enseigne. Ex: McDonald\'s.',
+                        'placeholder' => 'form.brand.name.placeholder',
                         'minLength' => '2',
                         'maxLength' => '128',
                     ],
@@ -57,11 +57,11 @@ class BrandType extends AbstractType
                 TextareaType::class,
                 [
                     'required' => false,
-                    'label' => 'Description de l\'enseigne',
-                    'empty_data' => 'Aucune description renseignée.',
-                    'help' => 'Description non obligatoire, mais pouvant expliciter les services d\'une enseigne.',
+                    'label' => 'form.brand.description.label',
+                    'empty_data' => null,
+                    'help' => 'form.brand.description.help',
                     'attr' => [
-                        'placeholder' => 'Renseignez ici une éventuelle description.',
+                        'placeholder' => 'form.brand.description.placeholder',
                         'maxLength' => '255',
                         'rows' => 20,
                     ],
@@ -79,6 +79,7 @@ class BrandType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Brand::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * AdminUser Controller Class
@@ -36,17 +37,39 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin/user")
+ * @Route("/{_locale}/admin/user", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminUserController extends AbstractController
 {
     /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * AdminUserController constructor.
+     *
+     * @param EntityManagerInterface $em Entity Manager injection
+     * @param TranslatorInterface $translator Translator injection
+     */
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->translator = $translator;
+    }
+
+    /**
      * AdminUser home page
      *
      * @param UserRepository $userRepository User manager
      *
-     * @Route("/", methods={"GET"}, name="admin_user_index")
+     * @Route("/", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(UserRepository $userRepository): Response
@@ -61,17 +84,15 @@ class AdminUserController extends AbstractController
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param Request $request POST'ed data
-     * @param EntityManagerInterface $em Entity Manager
      * @param UserPasswordEncoderInterface $passwordEncoder Var to encode password
      * @param GlobalClock $clock Global project's clock
      *
-     * @Route("/new", name="admin_user_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      * @throws \Exception Datetime Exception
      */
     public function new(
         Request $request,
-        EntityManagerInterface $em,
         UserPasswordEncoderInterface $passwordEncoder,
         GlobalClock $clock
     ): Response {
@@ -87,12 +108,12 @@ class AdminUserController extends AbstractController
                 )
             );
             $user->setCreationDate($clock->getNowInDateTime());
-            $em->persist($user);
-            $em->flush();
+            $this->em->persist($user);
+            $this->em->flush();
 
-            $this->addFlash('success', 'L\'utilisateur a bien été ajouté.');
+            $this->addFlash('success', $this->translator->trans('user.new.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_user_index');
+            return $this->redirectToRoute('app_admin_adminuser_index');
         }
 
         return $this->render('admin/user/new.html.twig', [
@@ -106,17 +127,15 @@ class AdminUserController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param User $user User given by an id
-     * @param EntityManagerInterface $em Entity Manager
      * @param UserPasswordEncoderInterface $encoder
      *
-     * @Route("/{id<\d+>}/edit", name="admin_user_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
      * @IsGranted("edit", subject="user", message="An admin can only be edited by a super admin account.")
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
         Request $request,
         User $user,
-        EntityManagerInterface $em,
         UserPasswordEncoderInterface $encoder
     ): Response {
         $form
@@ -128,14 +147,11 @@ class AdminUserController extends AbstractController
         $formChangePassword->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'L\'utilisateur a bien été édité.'
-            );
+            $this->addFlash('success', $this->translator->trans('user.edit.account.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_user_index', [
+            return $this->redirectToRoute('app_admin_adminuser_index', [
                 'id' => $user->getId(),
             ]);
         }
@@ -150,14 +166,11 @@ class AdminUserController extends AbstractController
                         )
                 );
 
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'Le mot de passe a bien été édité.'
-            );
+            $this->addFlash('success', $this->translator->trans('user.edit.password.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_user_index', [
+            return $this->redirectToRoute('app_admin_adminuser_index', [
                 'id' => $user->getId(),
             ]);
         }
@@ -175,36 +188,27 @@ class AdminUserController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param User $user User given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}", name="admin_user_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", methods={"DELETE"})
      * @IsGranted("delete", subject="user", message="An admin can only be deleted by a super admin account.")
      * @return RedirectResponse A Response instance
      */
     public function delete(
         Request $request,
-        User $user,
-        EntityManagerInterface $em
+        User $user
     ): RedirectResponse {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             if ($user->getOpinions()->count() > 0 || $user->getReductions()->count() > 0) {
-                $this->addFlash(
-                    'danger',
-                    'Un utilisateur ne peut pas être supprimé si il est associé à des commentaires et articles.'
-                );
-
-                return $this->redirectToRoute('admin_user_index');
+                $this->addFlash('danger', $this->translator->trans('user.delete.flash.danger', [], 'flashes'));
+                return $this->redirectToRoute('app_admin_adminuser_index');
             }
 
-            $this->addFlash(
-                'success',
-                'L\'utilisateur a bien été supprimé.'
-            );
+            $this->addFlash('success', $this->translator->trans('user.delete.flash.success', [], 'flashes'));
 
-            $em->remove($user);
-            $em->flush();
+            $this->em->remove($user);
+            $this->em->flush();
         }
 
-        return $this->redirectToRoute('admin_user_index');
+        return $this->redirectToRoute('app_admin_adminuser_index');
     }
 }

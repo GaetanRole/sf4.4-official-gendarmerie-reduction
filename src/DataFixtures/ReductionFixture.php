@@ -20,6 +20,7 @@ use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * ReductionFixture class
@@ -49,14 +50,23 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     private $clock;
 
     /**
+     * Injecting Container Interface
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * ReductionFixture constructor.
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param GlobalClock $clock Global project's clock
+     * @param ContainerInterface $container Container Interface
      */
-    public function __construct(GlobalClock $clock)
+    public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
         $this->clock = $clock;
+        $this->container = $container;
     }
 
     /**
@@ -71,7 +81,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      */
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
 
         foreach ($this->getReductionData() as [$index, $author, $brand, $categories]) {
             $reduction = new Reduction();

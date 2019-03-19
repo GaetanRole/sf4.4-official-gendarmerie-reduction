@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package     App\Controller
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/user")
+ * @Route("/{_locale}/user", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_USER")
  */
 class UserController extends AbstractController
@@ -36,7 +36,7 @@ class UserController extends AbstractController
      *
      * @param User $user User given by an id
      *
-     * @Route("/{id<\d+>}", name="user_show", methods={"GET"})
+     * @Route("/{id<\d+>}", methods={"GET"})
      * @return     Response A Response instance
      */
     public function show(User $user): Response

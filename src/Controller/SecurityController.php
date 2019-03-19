@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Security Controller
@@ -36,18 +37,20 @@ class SecurityController extends AbstractController
      *
      * @param AuthenticationUtils $authenticationUtils get last Auth
      * @param Security $security Security injection
+     * @param TranslatorInterface $translator Translator injection
      *
-     * @Route("/login", name="app_login")
+     * @Route("/{_locale}/login", defaults={"_locale"="%locale%"}, name="app_login")
      * @return          RedirectResponse|Response A Response instance
      */
     public function login(
         AuthenticationUtils $authenticationUtils,
-        Security $security
+        Security $security,
+        TranslatorInterface $translator
     ): Response {
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash(
                 'danger',
-                'Vous ne pouvez pas accéder à la page de connexion, étant déjà connecté.'
+                $translator->trans('is_authenticated_fully.flash.redirection', [], 'flashes')
             );
             return $this->redirectToRoute('app_index');
         }
@@ -64,7 +67,7 @@ class SecurityController extends AbstractController
     /**
      * Logout method
      *
-     * @Route("/logout", name="app_logout")
+     * @Route("/{_locale}/logout", defaults={"_locale"="%locale%"}, name="app_logout")
      */
     public function logout(): void
     {

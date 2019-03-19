@@ -37,7 +37,7 @@ class UserIdentity
      * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Length(
      *     max=64,
-     *     maxMessage="Votre nom est bien trop long ! ({{ limit }} max)."
+     *     maxMessage="validator.user_identity.name.max_length"
      * )
      */
     private $name;
@@ -47,11 +47,11 @@ class UserIdentity
      *
      * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Email(
-     *     message = "L'adresse e-mail '{{ value }}' n'est pas valide. Veuillez vérifier celle-ci."
+     *     message="validator.user_identity.email.email"
      * )
      * @Assert\Length(
      *     max=64,
-     *     maxMessage="Votre email est bien trop long ! ({{ limit }} max)."
+     *     maxMessage="validator.user_identity.email.max_length"
      * )
      */
     private $email;

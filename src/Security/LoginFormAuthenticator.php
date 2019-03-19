@@ -29,6 +29,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * LoginFormAuthenticator Class
@@ -48,6 +49,11 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @var EntityManagerInterface
      */
     private $entityManager;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
      * @var RouterInterface
@@ -73,17 +79,20 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * LoginFormAuthenticator constructor.
      *
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator Translator injection
      * @param RouterInterface $router
      * @param CsrfTokenManagerInterface $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(
         EntityManagerInterface $entityManager,
+        TranslatorInterface $translator,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder
     ) {
         $this->entityManager = $entityManager;
+        $this->translator = $translator;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
@@ -134,7 +143,9 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
 
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException('Token CSRF invalide.');
+            throw new InvalidCsrfTokenException(
+                $this->translator->trans('security.authenticator.user.csrf_token.exception', [], 'exceptions')
+            );
         }
 
         $user = $this->entityManager
@@ -143,7 +154,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
-                'Votre login ou votre mot de passe est incorrect. Veuillez réessayer à nouveau.'
+                $this->translator->trans('security.authenticator.user.authentication.exception', [], 'exceptions')
             );
         }
 
@@ -164,7 +175,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $state = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
         if (false === $state) {
             throw new CustomUserMessageAuthenticationException(
-                'Votre login ou votre mot de passe est incorrect. Veuillez réessayer à nouveau.'
+                $this->translator->trans('security.authenticator.user.authentication.exception', [], 'exceptions')
             );
         }
         return $state;
@@ -190,9 +201,9 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (in_array('ROLE_ADMIN', $roles, true)
             || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
-            return new RedirectResponse($this->router->generate('admin_index'));
+            return new RedirectResponse($this->router->generate('app_admin_index'));
         }
-        return new RedirectResponse($this->router->generate('dashboard'));
+        return new RedirectResponse($this->router->generate('app_dashboard'));
     }
 
     /**

@@ -20,6 +20,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * UserFixture class
@@ -56,18 +57,28 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
     private $clock;
 
     /**
+     * Injecting Container Interface
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * UserFixture constructor.
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param UserPasswordEncoderInterface $passwordEncoder Var to encode password
      * @param GlobalClock $clock Global project's clock
+     * @param ContainerInterface $container Container Interface
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
-        GlobalClock $clock
+        GlobalClock $clock,
+        ContainerInterface $container
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->clock = $clock;
+        $this->container = $container;
     }
 
     /**
@@ -87,7 +98,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
         // E.g : Login : $faker->userName
         //     : Password : password0
 
-        $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
         $roles = ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'];
 
         for ($index = 0; $index < self::USER_NB_TUPLE; $index++) {

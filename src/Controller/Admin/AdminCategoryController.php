@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * AdminCategory Controller Class
@@ -34,11 +35,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin/category")
+ * @Route("/{_locale}/admin/category", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminCategoryController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * AdminCategoryController constructor.
+     *
+     * @param EntityManagerInterface $em Entity Manager injection
+     * @param TranslatorInterface $translator Translator injection
+     */
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->translator = $translator;
+    }
+
     /**
      * AdminCategory home page listing all categories
      *
@@ -46,7 +69,7 @@ class AdminCategoryController extends AbstractController
      *
      * @param CategoryRepository $categoryRepository Category manager
      *
-     * @Route("/", name="admin_category_index", methods={"GET"})
+     * @Route("/", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(CategoryRepository $categoryRepository): Response
@@ -61,16 +84,14 @@ class AdminCategoryController extends AbstractController
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param Request $request POST'ed data
-     * @param EntityManagerInterface $em Entity Manager
      * @param GlobalClock $clock Global project's clock
      *
-     * @Route("/new", name="admin_category_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      * @throws \Exception Datetime Exception
      */
     public function new(
         Request $request,
-        EntityManagerInterface $em,
         GlobalClock $clock
     ): Response {
         $category = new Category();
@@ -79,12 +100,12 @@ class AdminCategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setCreationDate($clock->getNowInDateTime());
-            $em->persist($category);
-            $em->flush();
+            $this->em->persist($category);
+            $this->em->flush();
 
-            $this->addFlash('success', 'La catégorie a bien été ajoutée.');
+            $this->addFlash('success', $this->translator->trans('category.new.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_category_index');
+            return $this->redirectToRoute('app_admin_admincategory_index');
         }
 
         return $this->render('admin/category/new.html.twig', [
@@ -98,28 +119,23 @@ class AdminCategoryController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Category $category Category given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}/edit", name="admin_category_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
         Request $request,
-        Category $category,
-        EntityManagerInterface $em
+        Category $category
     ): Response {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'La catégorie a bien été éditée.'
-            );
+            $this->addFlash('success', $this->translator->trans('category.edit.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_category_index', [
+            return $this->redirectToRoute('app_admin_admincategory_index', [
                 'id' => $category->getId(),
             ]);
         }
@@ -135,34 +151,26 @@ class AdminCategoryController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Category $category Category given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}", name="admin_category_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", methods={"DELETE"})
      * @return RedirectResponse A Response instance
      */
     public function delete(
         Request $request,
-        Category $category,
-        EntityManagerInterface $em
+        Category $category
     ): RedirectResponse {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             if ($category->getReductions()->count() > 0) {
-                $this->addFlash(
-                    'danger',
-                    'La catégorie ne peut pas être supprimée si elle est déjà liée à des articles.'
-                );
-                return $this->redirectToRoute('admin_category_index');
+                $this->addFlash('danger', $this->translator->trans('category.delete.flash.danger', [], 'flashes'));
+                return $this->redirectToRoute('app_admin_admincategory_index');
             }
 
-            $this->addFlash(
-                'success',
-                'La catégorie a bien été supprimée.'
-            );
+            $this->addFlash('success', $this->translator->trans('category.delete.flash.success', [], 'flashes'));
 
-            $em->remove($category);
-            $em->flush();
+            $this->em->remove($category);
+            $this->em->flush();
         }
 
-        return $this->redirectToRoute('admin_category_index');
+        return $this->redirectToRoute('app_admin_admincategory_index');
     }
 }

@@ -25,6 +25,7 @@ use App\Service\GlobalClock;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Reduction Controller Class
@@ -35,7 +36,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/reduction")
+ * @Route("/{_locale}/reduction", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_USER")
  */
 class ReductionController extends AbstractController
@@ -48,7 +49,7 @@ class ReductionController extends AbstractController
      *
      * @param ReductionRepository $reductionRepository Reduction manager
      *
-     * @Route("/", name="reduction_index", methods={"GET"})
+     * @Route("/", methods={"GET"})
      * @return Response A Response instance
      * @throws \Exception Datetime Exception
      */
@@ -67,15 +68,17 @@ class ReductionController extends AbstractController
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param Request $request POST'ed data
      * @param EntityManagerInterface $em Entity Manager
+     * @param TranslatorInterface $translator Translator injection
      * @param GlobalClock $clock Global project's clock
      *
-     * @Route("/new", name="reduction_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      * @throws \Exception Datetime Exception
      */
     public function new(
         Request $request,
         EntityManagerInterface $em,
+        TranslatorInterface $translator,
         GlobalClock $clock
     ): Response {
         $reduction = new Reduction();
@@ -93,9 +96,9 @@ class ReductionController extends AbstractController
             $em->persist($reduction);
             $em->flush();
 
-            $this->addFlash('success', 'La réduction a bien été ajoutée.');
+            $this->addFlash('success', $translator->trans('reduction.new.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('reduction_index');
+            return $this->redirectToRoute('app_reduction_index');
         }
 
         return $this->render('reduction/new.html.twig', [
@@ -112,7 +115,7 @@ class ReductionController extends AbstractController
      * @param Reduction $reduction Reduction given by an id
      *
      * @see https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
-     * @Route("/{slug}", name="reduction_show", methods={"GET"})
+     * @Route("/{slug}", methods={"GET"})
      * @return     Response A Response instance
      */
     public function show(Reduction $reduction): Response

@@ -19,6 +19,7 @@ use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * BrandFixture class
@@ -52,14 +53,23 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
     private $clock;
 
     /**
+     * Injecting Container Interface
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
      * BrandFixture constructor.
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param GlobalClock $clock Global project's clock
+     * @param ContainerInterface $container Container Interface
      */
-    public function __construct(GlobalClock $clock)
+    public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
         $this->clock = $clock;
+        $this->container = $container;
     }
 
     /**
@@ -73,7 +83,7 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
 
         $this->loadFoodBrands($manager, $faker);
         $this->loadCarBrands($manager, $faker);

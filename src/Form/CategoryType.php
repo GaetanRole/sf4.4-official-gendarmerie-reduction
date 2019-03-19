@@ -43,10 +43,10 @@ class CategoryType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label' => 'Nom de la catégorie *',
-                    'help' => 'Pensez à bien vérifier l\'intégrité de votre nom de catégorie.',
+                    'label' => 'form.category.name.label',
+                    'help' => 'form.category.name.help',
                     'attr' => [
-                        'placeholder' => 'Indiquez une catégorie. Ex: Restauration.',
+                        'placeholder' => 'form.category.name.placeholder',
                         'minLength' => '2',
                         'maxLength' => '64',
                     ],
@@ -57,11 +57,11 @@ class CategoryType extends AbstractType
                 TextareaType::class,
                 [
                     'required' => false,
-                    'label' => 'Description de la catégorie',
-                    'empty_data' => 'Aucune description renseignée.',
-                    'help' => 'Description non obligatoire, mais pouvant expliciter votre catégorie.',
+                    'label' => 'form.category.description.label',
+                    'empty_data' => null,
+                    'help' => 'form.category.description.help',
                     'attr' => [
-                        'placeholder' => 'Renseignez une éventuelle description.',
+                        'placeholder' => 'form.category.description.placeholder',
                         'maxLength' => '255',
                         'rows' => 20,
                     ],
@@ -79,6 +79,7 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

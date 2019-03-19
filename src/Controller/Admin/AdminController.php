@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin")
+ * @Route("/{_locale}/admin", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
      *
      * @todo Add all useful data for admin index
      *
-     * @Route("/", methods={"GET"}, name="admin_index")
+     * @Route("/", name="app_admin_index", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(): Response

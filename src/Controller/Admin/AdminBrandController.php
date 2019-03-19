@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * AdminBrand Controller Class
@@ -34,11 +35,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @package     App\Controller\Admin
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  *
- * @Route("/admin/brand")
+ * @Route("/{_locale}/admin/brand", defaults={"_locale"="%locale%"})
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminBrandController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * AdminBrandController constructor.
+     *
+     * @param EntityManagerInterface $em Entity Manager injection
+     * @param TranslatorInterface $translator Translator injection
+     */
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->translator = $translator;
+    }
+
     /**
      * AdminBrand home page listing all brands
      *
@@ -46,7 +69,7 @@ class AdminBrandController extends AbstractController
      *
      * @param BrandRepository $brandRepository Brand manager
      *
-     * @Route("/", name="admin_brand_index", methods={"GET"})
+     * @Route("/", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(BrandRepository $brandRepository): Response
@@ -61,16 +84,14 @@ class AdminBrandController extends AbstractController
      *
      * @link https://github.com/Innmind/TimeContinuum Global clock
      * @param Request $request POST'ed data
-     * @param EntityManagerInterface $em Entity Manager
      * @param GlobalClock $clock Global project's clock
      *
-     * @Route("/new", name="admin_brand_new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      * @throws \Exception Datetime Exception
      */
     public function new(
         Request $request,
-        EntityManagerInterface $em,
         GlobalClock $clock
     ): Response {
         $brand = new Brand();
@@ -79,12 +100,12 @@ class AdminBrandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $brand->setCreationDate($clock->getNowInDateTime());
-            $em->persist($brand);
-            $em->flush();
+            $this->em->persist($brand);
+            $this->em->flush();
 
-            $this->addFlash('success', 'L\'enseigne a bien été ajoutée.');
+            $this->addFlash('success', $this->translator->trans('brand.new.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_brand_index');
+            return $this->redirectToRoute('app_admin_adminbrand_index');
         }
 
         return $this->render('admin/brand/new.html.twig', [
@@ -98,28 +119,23 @@ class AdminBrandController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Brand $brand Brand given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}/edit", name="admin_brand_edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
         Request $request,
-        Brand $brand,
-        EntityManagerInterface $em
+        Brand $brand
     ): Response {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+            $this->em->flush();
 
-            $this->addFlash(
-                'success',
-                'L\'enseigne a bien été éditée.'
-            );
+            $this->addFlash('success', $this->translator->trans('brand.edit.flash.success', [], 'flashes'));
 
-            return $this->redirectToRoute('admin_brand_index', [
+            return $this->redirectToRoute('app_admin_adminbrand_index', [
                 'id' => $brand->getId(),
             ]);
         }
@@ -135,34 +151,26 @@ class AdminBrandController extends AbstractController
      *
      * @param Request $request POST'ed data
      * @param Brand $brand Brand given by an id
-     * @param EntityManagerInterface $em Entity Manager
      *
-     * @Route("/{id<\d+>}", name="admin_brand_delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", methods={"DELETE"})
      * @return RedirectResponse A Response instance
      */
     public function delete(
         Request $request,
-        Brand $brand,
-        EntityManagerInterface $em
+        Brand $brand
     ): RedirectResponse {
         if ($this->isCsrfTokenValid('delete'.$brand->getId(), $request->request->get('_token'))) {
             if ($brand->getReductions()->count() > 0) {
-                $this->addFlash(
-                    'danger',
-                    'L\'enseigne ne peut pas être supprimée si elle est déjà liée à des articles.'
-                );
-                return $this->redirectToRoute('admin_brand_index');
+                $this->addFlash('danger', $this->translator->trans('brand.delete.flash.danger', [], 'flashes'));
+                return $this->redirectToRoute('app_admin_adminbrand_index');
             }
 
-            $this->addFlash(
-                'success',
-                'L\'enseigne a bien été supprimée.'
-            );
+            $this->addFlash('success', $this->translator->trans('brand.delete.flash.success', [], 'flashes'));
 
-            $em->remove($brand);
-            $em->flush();
+            $this->em->remove($brand);
+            $this->em->flush();
         }
 
-        return $this->redirectToRoute('admin_brand_index');
+        return $this->redirectToRoute('app_admin_adminbrand_index');
     }
 }
