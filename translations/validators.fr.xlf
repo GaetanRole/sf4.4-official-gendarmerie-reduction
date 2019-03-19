@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="rvZ2e6p" resname="validator.user_identity.name.max_length">
+        <source>validator.user_identity.name.max_length</source>
+        <target>__validator.user_identity.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="LFgT1ls" resname="validator.user_identity.email.email">
+        <source>validator.user_identity.email.email</source>
+        <target>__validator.user_identity.email.email</target>
+      </trans-unit>
+      <trans-unit id="dMKe8d7" resname="validator.user_identity.email.max_length">
+        <source>validator.user_identity.email.max_length</source>
+        <target>__validator.user_identity.email.max_length</target>
+      </trans-unit>
+      <trans-unit id=".1JBJTD" resname="validator.brand.name.not_blank">
+        <source>validator.brand.name.not_blank</source>
+        <target>__validator.brand.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="zNvUOfl" resname="validator.brand.name.min_length">
+        <source>validator.brand.name.min_length</source>
+        <target>__validator.brand.name.min_length</target>
+      </trans-unit>
+      <trans-unit id="P9.7gsw" resname="validator.brand.name.max_length">
+        <source>validator.brand.name.max_length</source>
+        <target>__validator.brand.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="yRYRG5y" resname="validator.brand.description.max_length">
+        <source>validator.brand.description.max_length</source>
+        <target>__validator.brand.description.max_length</target>
+      </trans-unit>
+      <trans-unit id="ca5HTmf" resname="validator.category.name.not_blank">
+        <source>validator.category.name.not_blank</source>
+        <target>__validator.category.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="Kts5oPQ" resname="validator.category.name.min_length">
+        <source>validator.category.name.min_length</source>
+        <target>__validator.category.name.min_length</target>
+      </trans-unit>
+      <trans-unit id="WPtU_D0" resname="validator.category.name.max_length">
+        <source>validator.category.name.max_length</source>
+        <target>__validator.category.name.max_length</target>
+      </trans-unit>
+      <trans-unit id="zXnBVjA" resname="validator.category.description.max_length">
+        <source>validator.category.description.max_length</source>
+        <target>__validator.category.description.max_length</target>
+      </trans-unit>
+      <trans-unit id="TZP1TO5" resname="validator.opinion.comment.not_blank">
+        <source>validator.opinion.comment.not_blank</source>
+        <target>__validator.opinion.comment.not_blank</target>
+      </trans-unit>
+      <trans-unit id="3REOnLO" resname="validator.opinion.comment.min_length">
+        <source>validator.opinion.comment.min_length</source>
+        <target>__validator.opinion.comment.min_length</target>
+      </trans-unit>
+      <trans-unit id="4XZMWzA" resname="validator.opinion.comment.max_length">
+        <source>validator.opinion.comment.max_length</source>
+        <target>__validator.opinion.comment.max_length</target>
+      </trans-unit>
+      <trans-unit id="DIT28a5" resname="validator.reduction.categories.min_count">
+        <source>validator.reduction.categories.min_count</source>
+        <target>__validator.reduction.categories.min_count</target>
+      </trans-unit>
+      <trans-unit id="Jv3RKcU" resname="validator.reduction.categories.max_count">
+        <source>validator.reduction.categories.max_count</source>
+        <target>__validator.reduction.categories.max_count</target>
+      </trans-unit>
+      <trans-unit id="SevwkxI" resname="validator.reduction.title.not_blank">
+        <source>validator.reduction.title.not_blank</source>
+        <target>__validator.reduction.title.not_blank</target>
+      </trans-unit>
+      <trans-unit id="4MxENQL" resname="validator.reduction.title.min_length">
+        <source>validator.reduction.title.min_length</source>
+        <target>__validator.reduction.title.min_length</target>
+      </trans-unit>
+      <trans-unit id="peEYJLS" resname="validator.reduction.title.max_length">
+        <source>validator.reduction.title.max_length</source>
+        <target>__validator.reduction.title.max_length</target>
+      </trans-unit>
+      <trans-unit id="ZivDiCf" resname="validator.reduction.description.not_blank">
+        <source>validator.reduction.description.not_blank</source>
+        <target>__validator.reduction.description.not_blank</target>
+      </trans-unit>
+      <trans-unit id="MOzwEFA" resname="validator.reduction.description.min_length">
+        <source>validator.reduction.description.min_length</source>
+        <target>__validator.reduction.description.min_length</target>
+      </trans-unit>
+      <trans-unit id="wm3d2PA" resname="validator.reduction.description.max_length">
+        <source>validator.reduction.description.max_length</source>
+        <target>__validator.reduction.description.max_length</target>
+      </trans-unit>
+      <trans-unit id="Bkcpc3Y" resname="validator.reduction.department.not_blank">
+        <source>validator.reduction.department.not_blank</source>
+        <target>__validator.reduction.department.not_blank</target>
+      </trans-unit>
+      <trans-unit id="K_vDwUf" resname="validator.reduction.department.min_length">
+        <source>validator.reduction.department.min_length</source>
+        <target>__validator.reduction.department.min_length</target>
+      </trans-unit>
+      <trans-unit id="S8pfxPX" resname="validator.reduction.department.max_length">
+        <source>validator.reduction.department.max_length</source>
+        <target>__validator.reduction.department.max_length</target>
+      </trans-unit>
+      <trans-unit id="ugiyao1" resname="validator.reduction.city.regex">
+        <source>validator.reduction.city.regex</source>
+        <target>__validator.reduction.city.regex</target>
+      </trans-unit>
+      <trans-unit id="itGved3" resname="validator.reduction.city.not_blank">
+        <source>validator.reduction.city.not_blank</source>
+        <target>__validator.reduction.city.not_blank</target>
+      </trans-unit>
+      <trans-unit id="LTunMtx" resname="validator.reduction.city.min_length">
+        <source>validator.reduction.city.min_length</source>
+        <target>__validator.reduction.city.min_length</target>
+      </trans-unit>
+      <trans-unit id="P3xOsu6" resname="validator.reduction.city.max_length">
+        <source>validator.reduction.city.max_length</source>
+        <target>__validator.reduction.city.max_length</target>
+      </trans-unit>
+      <trans-unit id="fyQdvKq" resname="valitor.user.unique.message">
+        <source>valitor.user.unique.message</source>
+        <target>__valitor.user.unique.message</target>
+      </trans-unit>
+      <trans-unit id="dT0Aehg" resname="validator.user.username.not_blank">
+        <source>validator.user.username.not_blank</source>
+        <target>__validator.user.username.not_blank</target>
+      </trans-unit>
+      <trans-unit id="8JwdC.9" resname="validator.user.username.min_length">
+        <source>validator.user.username.min_length</source>
+        <target>__validator.user.username.min_length</target>
+      </trans-unit>
+      <trans-unit id="lppe9pn" resname="validator.user.username.max_length">
+        <source>validator.user.username.max_length</source>
+        <target>__validator.user.username.max_length</target>
+      </trans-unit>
+      <trans-unit id="XzIGlwC" resname="validator.user.identity.not_blank">
+        <source>validator.user.identity.not_blank</source>
+        <target>__validator.user.identity.not_blank</target>
+      </trans-unit>
+      <trans-unit id="Fk6w1Rb" resname="validator.user.identity.min_length">
+        <source>validator.user.identity.min_length</source>
+        <target>__validator.user.identity.min_length</target>
+      </trans-unit>
+      <trans-unit id="3rX7e7J" resname="validator.user.identity.max_length">
+        <source>validator.user.identity.max_length</source>
+        <target>__validator.user.identity.max_length</target>
+      </trans-unit>
+      <trans-unit id="GyJDrol" resname="validator.user.email.email">
+        <source>validator.user.email.email</source>
+        <target>__validator.user.email.email</target>
+      </trans-unit>
+      <trans-unit id="JKmqon_" resname="validator.user.email.max_length">
+        <source>validator.user.email.max_length</source>
+        <target>__validator.user.email.max_length</target>
+      </trans-unit>
+      <trans-unit id="PUwyL22" resname="validator.user.phone_number.regex">
+        <source>validator.user.phone_number.regex</source>
+        <target>__validator.user.phone_number.regex</target>
+      </trans-unit>
+      <trans-unit id="BQ4RhbO" resname="validator.user.plain_password.regex">
+        <source>validator.user.plain_password.regex</source>
+        <target>__validator.user.plain_password.regex</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
