@@ -1,89 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr-FR" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
       <trans-unit id="qNFnxiB" resname="is_authenticated_fully.flash.redirection">
         <source>is_authenticated_fully.flash.redirection</source>
-        <target>__is_authenticated_fully.flash.redirection</target>
+        <target>Vous ne pouvez pas accéder à la page de connexion, étant déjà connecté.</target>
       </trans-unit>
       <trans-unit id="zymisG7" resname="reduction.new.flash.success">
         <source>reduction.new.flash.success</source>
-        <target>__reduction.new.flash.success</target>
+        <target>La réduction a bien été soumise. Elle passera en validation par le staff, puis sera publiée si elle respecte bien les régles prédéfinies par la plateforme.</target>
       </trans-unit>
       <trans-unit id="pkM8AMt" resname="opinion.new.flash.success">
         <source>opinion.new.flash.success</source>
-        <target>__opinion.new.flash.success</target>
+        <target>Votre commentaire a été soumis.</target>
       </trans-unit>
       <trans-unit id="IwKGSjY" resname="user.new.flash.success">
         <source>user.new.flash.success</source>
-        <target>__user.new.flash.success</target>
+        <target>L'utilisateur a bien été créé.</target>
       </trans-unit>
       <trans-unit id="LwcE3q0" resname="user.edit.account.flash.success">
         <source>user.edit.account.flash.success</source>
-        <target>__user.edit.account.flash.success</target>
+        <target>Le compte a bien été modifié.</target>
       </trans-unit>
       <trans-unit id="oAbbi.K" resname="user.edit.password.flash.success">
         <source>user.edit.password.flash.success</source>
-        <target>__user.edit.password.flash.success</target>
+        <target>Le mot de passe a bien été modifié.</target>
       </trans-unit>
       <trans-unit id="q6KZAJO" resname="user.delete.flash.danger">
         <source>user.delete.flash.danger</source>
-        <target>__user.delete.flash.danger</target>
+        <target>Vous ne pouvez pas supprimer un utilisateur ayant déjà posté des commentaires ou réductions. Veuillez les supprimer avant, ou bannir celui-ci.</target>
       </trans-unit>
       <trans-unit id="9lxc71M" resname="user.delete.flash.success">
         <source>user.delete.flash.success</source>
-        <target>__user.delete.flash.success</target>
+        <target>L'utilisateur a bien été supprimé.</target>
       </trans-unit>
       <trans-unit id="jon9bKP" resname="brand.new.flash.success">
         <source>brand.new.flash.success</source>
-        <target>__brand.new.flash.success</target>
+        <target>L'entreprise a bien été ajoutée.</target>
       </trans-unit>
       <trans-unit id="MIXe.iG" resname="brand.edit.flash.success">
         <source>brand.edit.flash.success</source>
-        <target>__brand.edit.flash.success</target>
+        <target>L'entreprise a bien été modifiée.</target>
       </trans-unit>
       <trans-unit id="zG5VlZO" resname="brand.delete.flash.danger">
         <source>brand.delete.flash.danger</source>
-        <target>__brand.delete.flash.danger</target>
+        <target>Vous ne pouvez pas supprimer une entreprise associée à des reductions. Veuillez vous assurer de les supprimer avant.</target>
       </trans-unit>
       <trans-unit id="JwQEuNd" resname="brand.delete.flash.success">
         <source>brand.delete.flash.success</source>
-        <target>__brand.delete.flash.success</target>
+        <target>L'entreprise a bien été supprimée.</target>
       </trans-unit>
       <trans-unit id="WI1BW0v" resname="category.new.flash.success">
         <source>category.new.flash.success</source>
-        <target>__category.new.flash.success</target>
+        <target>La catégorie a bien été ajoutée.</target>
       </trans-unit>
       <trans-unit id="UB3lokZ" resname="category.edit.flash.success">
         <source>category.edit.flash.success</source>
-        <target>__category.edit.flash.success</target>
+        <target>La catégorie a bien été modifiée.</target>
       </trans-unit>
       <trans-unit id="iq90MA." resname="category.delete.flash.danger">
         <source>category.delete.flash.danger</source>
-        <target>__category.delete.flash.danger</target>
+        <target>Vous ne pouvez pas supprimer une catégorie associée à des réductions. Veuillez vous assurer de les supprimer avant.</target>
       </trans-unit>
       <trans-unit id="y8uNKP5" resname="category.delete.flash.success">
         <source>category.delete.flash.success</source>
-        <target>__category.delete.flash.success</target>
+        <target>La catégorie a bien été supprimée.</target>
       </trans-unit>
       <trans-unit id="9MLFIy1" resname="opinion.edit.flash.success">
         <source>opinion.edit.flash.success</source>
-        <target>__opinion.edit.flash.success</target>
+        <target>Le commentaire a bien été édité.</target>
       </trans-unit>
       <trans-unit id="AbVZ2wo" resname="opinion.delete.flash.success">
         <source>opinion.delete.flash.success</source>
-        <target>__opinion.delete.flash.success</target>
+        <target>Le commentaire a bien été supprimé.</target>
       </trans-unit>
       <trans-unit id="dfu4inj" resname="reduction.edit.flash.success">
         <source>reduction.edit.flash.success</source>
-        <target>__reduction.edit.flash.success</target>
+        <target>La réduction a bien été modifiée.</target>
       </trans-unit>
       <trans-unit id="ZZJFcDI" resname="reduction.delete.flash.success">
         <source>reduction.delete.flash.success</source>
-        <target>__reduction.delete.flash.success</target>
+        <target>La réduction a bien été supprimée.</target>
       </trans-unit>
     </body>
   </file>

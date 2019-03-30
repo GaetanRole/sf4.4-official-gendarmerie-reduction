@@ -79,4 +79,4 @@ This project is based on symfony4-starter-kit : [https://github.com/GaetanRole/s
 [5]: https://localise.biz/
 [6]: https://symfony.com/doc/current/console.html
 
-08/03/2019 gaetan@wildcodeschool.fr
+30/03/2019 gaetan.role@gmail.com

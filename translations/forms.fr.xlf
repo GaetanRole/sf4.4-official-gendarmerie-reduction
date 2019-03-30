@@ -1,249 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr-FR" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
       <trans-unit id="OoIBxzJ" resname="form.user_identity.name.label">
         <source>form.user_identity.name.label</source>
-        <target>__form.user_identity.name.label</target>
+        <target>Votre identité</target>
       </trans-unit>
       <trans-unit id="38jYa8q" resname="form.user_identity.name.help">
         <source>form.user_identity.name.help</source>
-        <target>__form.user_identity.name.help</target>
+        <target>Le nom n'est pas obligatoire, il permet simplement de vous identifier auprès des autres utilisateurs et de suivre un fil de discussion logique.</target>
       </trans-unit>
       <trans-unit id="aXNPUkX" resname="form.user_identity.name.placeholder">
         <source>form.user_identity.name.placeholder</source>
-        <target>__form.user_identity.name.placeholder</target>
+        <target>Indiquez votre identité. Ex: MDC Michel Rolé.</target>
       </trans-unit>
       <trans-unit id="lPmcGWM" resname="form.user_identity.email.label">
         <source>form.user_identity.email.label</source>
-        <target>__form.user_identity.email.label</target>
+        <target>Votre e-mail</target>
       </trans-unit>
       <trans-unit id="J1JW7fE" resname="form.user_identity.email.help">
         <source>form.user_identity.email.help</source>
-        <target>__form.user_identity.email.help</target>
+        <target>L'email n'est pas obligatoire, il permet d'être contacté uniquement pour un éventuel échange hors plateforme, notamment au sujet d'une réduction ou d'un commentaire.</target>
       </trans-unit>
       <trans-unit id="hQ6zEYt" resname="form.user.identity.placeholder">
         <source>form.user.identity.placeholder</source>
-        <target>__form.user.identity.placeholder</target>
+        <target>Propriétaire du compte. Ex: Admin MDC Michel R.</target>
       </trans-unit>
       <trans-unit id="kI7zk9E" resname="form.user.email.label">
         <source>form.user.email.label</source>
-        <target>__form.user.email.label</target>
+        <target>E-mail du compte</target>
       </trans-unit>
       <trans-unit id="qSR4QRv" resname="form.user.email.help">
         <source>form.user.email.help</source>
-        <target>__form.user.email.help</target>
+        <target>L'email n'est pas obligatoire, il permet à un compte administrateur d'être contacté uniquement pour un éventuel échange hors plateforme, notamment au sujet d'une réduction. Il est inutile pour un compte utilisateur.</target>
       </trans-unit>
       <trans-unit id="ew9RAAp" resname="form.user.email.placeholder">
         <source>form.user.email.placeholder</source>
-        <target>__form.user.email.placeholder</target>
+        <target>Un e-mail. Ex: email@email.fr.</target>
       </trans-unit>
       <trans-unit id="Pso6PHg" resname="form.user.phone_number.label">
         <source>form.user.phone_number.label</source>
-        <target>__form.user.phone_number.label</target>
+        <target>Téléphone du compte</target>
       </trans-unit>
       <trans-unit id="Pc3j..g" resname="form.user.phone_number.help">
         <source>form.user.phone_number.help</source>
-        <target>__form.user.phone_number.help</target>
+        <target>Le téléphone n'est pas obligatoire, il permet à un compte administrateur d'être contacté uniquement pour un éventuel échange hors plateforme au sujet d'une réduction.</target>
       </trans-unit>
       <trans-unit id="gxuHB0N" resname="form.user.phone_number.placeholder">
         <source>form.user.phone_number.placeholder</source>
-        <target>__form.user.phone_number.placeholder</target>
+        <target>Un numéro. Ex: 06-54-54-54-54 ou +33 6...</target>
       </trans-unit>
       <trans-unit id="zHF_zZd" resname="form.user.is_active.label">
         <source>form.user.is_active.label</source>
-        <target>__form.user.is_active.label</target>
+        <target>Profil actif par défaut ?</target>
       </trans-unit>
       <trans-unit id="htupRVb" resname="form.user.is_active.help">
         <source>form.user.is_active.help</source>
-        <target>__form.user.is_active.help</target>
+        <target>Vous pouvez désactiver un profil à tout moment.</target>
       </trans-unit>
       <trans-unit id="X0Sd2Bf" resname="form.user.roles.label">
         <source>form.user.roles.label</source>
-        <target>__form.user.roles.label</target>
+        <target>Choississez les droits du compte *</target>
       </trans-unit>
       <trans-unit id="nMDXT2O" resname="form.user.roles.choices.role_user">
         <source>form.user.roles.choices.role_user</source>
-        <target>__form.user.roles.choices.role_user</target>
+        <target>Utilisateur</target>
       </trans-unit>
       <trans-unit id="TXSfCPI" resname="form.user.roles.choices.role_admin">
         <source>form.user.roles.choices.role_admin</source>
-        <target>__form.user.roles.choices.role_admin</target>
+        <target>Administrateur</target>
       </trans-unit>
       <trans-unit id="wouPBT." resname="form.user.roles.help">
         <source>form.user.roles.help</source>
-        <target>__form.user.roles.help</target>
+        <target>Vous pouvez changer les droits d'un administrateur ou utilisateur à tout moment.</target>
       </trans-unit>
       <trans-unit id="bd9qfFn" resname="form.user.plain_password.help">
         <source>form.user.plain_password.help</source>
-        <target>__form.user.plain_password.help</target>
+        <target>Le mot de passe de l'utilisateur sera utilisé lors de la connexion.</target>
       </trans-unit>
       <trans-unit id="jo8ZR3a" resname="form.user_identity.email.placeholder">
         <source>form.user_identity.email.placeholder</source>
-        <target>__form.user_identity.email.placeholder</target>
+        <target>Indiquez votre e-mail. Ex: email@email.fr.</target>
       </trans-unit>
       <trans-unit id="sLmQ15Z" resname="form.change_password.plain_password.not_blank">
         <source>form.change_password.plain_password.not_blank</source>
-        <target>__form.change_password.plain_password.not_blank</target>
+        <target>Vous devez renseigner un mot de passe valide.</target>
       </trans-unit>
       <trans-unit id="WojBVRs" resname="form.change_password.plain_password.invalid">
         <source>form.change_password.plain_password.invalid</source>
-        <target>__form.change_password.plain_password.invalid</target>
+        <target>Les mots de passe ne concordent pas.</target>
       </trans-unit>
       <trans-unit id="IJkJmVj" resname="form.change_password.plain_password.first.label">
         <source>form.change_password.plain_password.first.label</source>
-        <target>__form.change_password.plain_password.first.label</target>
+        <target>Entrez un mot de passe</target>
       </trans-unit>
       <trans-unit id="RZ5bk.c" resname="form.change_password.plain_password.first.placeholder">
         <source>form.change_password.plain_password.first.placeholder</source>
-        <target>__form.change_password.plain_password.first.placeholder</target>
+        <target>********</target>
       </trans-unit>
       <trans-unit id="GWhKR6S" resname="form.change_password.plain_password.second.label">
         <source>form.change_password.plain_password.second.label</source>
-        <target>__form.change_password.plain_password.second.label</target>
+        <target>Répétez le même mot de passe</target>
       </trans-unit>
       <trans-unit id="HLdUqXZ" resname="form.change_password.plain_password.second.placeholder">
         <source>form.change_password.plain_password.second.placeholder</source>
-        <target>__form.change_password.plain_password.second.placeholder</target>
+        <target>********</target>
       </trans-unit>
       <trans-unit id="AgIUVR4" resname="form.brand.name.label">
         <source>form.brand.name.label</source>
-        <target>__form.brand.name.label</target>
+        <target>Nom de l'enseigne *</target>
       </trans-unit>
       <trans-unit id="NKup3sv" resname="form.brand.name.help">
         <source>form.brand.name.help</source>
-        <target>__form.brand.name.help</target>
+        <target>Pensez à bien vérifier l'intégrité du nom d'enseigne.</target>
       </trans-unit>
       <trans-unit id="wcYA198" resname="form.brand.name.placeholder">
         <source>form.brand.name.placeholder</source>
-        <target>__form.brand.name.placeholder</target>
+        <target>Indiquez une enseigne. Ex: McDonald's.</target>
       </trans-unit>
       <trans-unit id="nLZIQmf" resname="form.brand.description.label">
         <source>form.brand.description.label</source>
-        <target>__form.brand.description.label</target>
+        <target>Description de l'enseigne</target>
       </trans-unit>
       <trans-unit id="iQa9.ul" resname="form.brand.description.help">
         <source>form.brand.description.help</source>
-        <target>__form.brand.description.help</target>
+        <target>Description non obligatoire, mais pouvant expliciter les services d'une enseigne.</target>
       </trans-unit>
       <trans-unit id="pYYS9vb" resname="form.brand.description.placeholder">
         <source>form.brand.description.placeholder</source>
-        <target>__form.brand.description.placeholder</target>
+        <target>Renseignez ici une éventuelle description.</target>
       </trans-unit>
       <trans-unit id="tn_m0hd" resname="form.category.name.label">
         <source>form.category.name.label</source>
-        <target>__form.category.name.label</target>
+        <target>Nom de la catégorie *</target>
       </trans-unit>
       <trans-unit id="uPjxsq6" resname="form.category.name.help">
         <source>form.category.name.help</source>
-        <target>__form.category.name.help</target>
+        <target>Pensez à bien vérifier l'intégrité du nom de la catégorie.</target>
       </trans-unit>
       <trans-unit id="mxomnmF" resname="form.category.description.help">
         <source>form.category.description.help</source>
-        <target>__form.category.description.help</target>
+        <target>Description non obligatoire, mais pouvant expliciter la catégorie créée.</target>
       </trans-unit>
       <trans-unit id="PilAtpW" resname="form.category.name.placeholder">
         <source>form.category.name.placeholder</source>
-        <target>__form.category.name.placeholder</target>
+        <target>Indiquez une catégorie. Ex: Restauration.</target>
       </trans-unit>
       <trans-unit id="sopBOU3" resname="form.category.description.label">
         <source>form.category.description.label</source>
-        <target>__form.category.description.label</target>
+        <target>Description de la catégorie</target>
       </trans-unit>
       <trans-unit id="7IORjB5" resname="form.category.description.placeholder">
         <source>form.category.description.placeholder</source>
-        <target>__form.category.description.placeholder</target>
+        <target>Renseignez une éventuelle description.</target>
       </trans-unit>
       <trans-unit id="WuOPBA0" resname="form.opinion.comment.label">
         <source>form.opinion.comment.label</source>
-        <target>__form.opinion.comment.label</target>
+        <target>Votre commentaire *</target>
       </trans-unit>
       <trans-unit id="425y6xS" resname="form.opinion.comment.help">
         <source>form.opinion.comment.help</source>
-        <target>__form.opinion.comment.help</target>
+        <target>Les commentaires non conformes à notre code de conduite seront modérés.</target>
       </trans-unit>
       <trans-unit id="rjF8hk4" resname="form.opinion.comment.placeholder">
         <source>form.opinion.comment.placeholder</source>
-        <target>__form.opinion.comment.placeholder</target>
+        <target>Ex: Merci pour cette réduction de 15% !</target>
       </trans-unit>
       <trans-unit id="Y5kg5Am" resname="form.reduction.brand.label">
         <source>form.reduction.brand.label</source>
-        <target>__form.reduction.brand.label</target>
+        <target>Choisissez l'enseigne proposant une réduction *</target>
       </trans-unit>
       <trans-unit id="jbuN_sX" resname="form.reduction.brand.help">
         <source>form.reduction.brand.help</source>
-        <target>__form.reduction.brand.help</target>
+        <target>Retrouvez et sélectionnez une enseigne déjà existante ou proposez en une nouvelle, qui sera ajoutée une fois l'annonce validée.</target>
       </trans-unit>
       <trans-unit id="BQ9LPCQ" resname="form.reduction.title.label">
         <source>form.reduction.title.label</source>
-        <target>__form.reduction.title.label</target>
+        <target>Titre de la réduction (montant inclus) *</target>
       </trans-unit>
       <trans-unit id="XLIGDXc" resname="form.reduction.title.help">
         <source>form.reduction.title.help</source>
-        <target>__form.reduction.title.help</target>
+        <target>Les titres non conformes à notre code de conduite seront modérés et la réduction non acceptée. Veuillez précisez le montant de la réduction dans le titre.</target>
       </trans-unit>
       <trans-unit id="mK4Wxzl" resname="form.reduction.title.placeholder">
         <source>form.reduction.title.placeholder</source>
-        <target>__form.reduction.title.placeholder</target>
+        <target>Ex: McDonald's -15% durant le weekend.</target>
       </trans-unit>
       <trans-unit id="Pym.J0t" resname="form.reduction.description.label">
         <source>form.reduction.description.label</source>
-        <target>__form.reduction.description.label</target>
+        <target>Votre description *</target>
       </trans-unit>
       <trans-unit id="2kfFaSU" resname="form.reduction.description.help">
         <source>form.reduction.description.help</source>
-        <target>__form.reduction.description.help</target>
+        <target>Les descriptions non conformes à notre code de conduite seront modérées et la réduction non acceptée.</target>
       </trans-unit>
       <trans-unit id="IXs7O64" resname="form.reduction.description.placeholder">
         <source>form.reduction.description.placeholder</source>
-        <target>__form.reduction.description.placeholder</target>
+        <target>Ex: Réduction de 15%, uniquement avec la carte pro !</target>
       </trans-unit>
       <trans-unit id="ROwJeYW" resname="form.reduction.department.label">
         <source>form.reduction.department.label</source>
-        <target>__form.reduction.department.label</target>
+        <target>Sélectionnez le département *</target>
       </trans-unit>
       <trans-unit id="wnfnRu6" resname="form.reduction.department.help">
         <source>form.reduction.department.help</source>
-        <target>__form.reduction.department.help</target>
+        <target>La réduction sera filtrable par département une fois celle-ci validée par les administrateurs.</target>
       </trans-unit>
       <trans-unit id="wcE8VXa" resname="form.reduction.city.label">
         <source>form.reduction.city.label</source>
-        <target>__form.reduction.city.label</target>
+        <target>Renseignez la ville *</target>
       </trans-unit>
       <trans-unit id="KazyteE" resname="form.reduction.city.help">
         <source>form.reduction.city.help</source>
-        <target>__form.reduction.city.help</target>
+        <target>La réduction sera filtrable par ville une fois celle-ci validée par les administrateurs.</target>
       </trans-unit>
       <trans-unit id="4ijzt0h" resname="form.reduction.categories.label">
         <source>form.reduction.categories.label</source>
-        <target>__form.reduction.categories.label</target>
+        <target>Ajoutez les différentes catégories applicables à votre réduction *</target>
       </trans-unit>
       <trans-unit id="EEIRLeX" resname="form.reduction.categories.help">
         <source>form.reduction.categories.help</source>
-        <target>__form.reduction.categories.help</target>
+        <target>Vous pouvez ajouter entre une et trois catégories.</target>
       </trans-unit>
       <trans-unit id="VstnuES" resname="form.user.username.label">
         <source>form.user.username.label</source>
-        <target>__form.user.username.label</target>
+        <target>Nom de compte (login) *</target>
       </trans-unit>
       <trans-unit id="lmD8cgW" resname="form.user.username.help">
         <source>form.user.username.help</source>
-        <target>__form.user.username.help</target>
+        <target>Le nom de compte n'est pas visible au public et est exclusif pour la connexion.</target>
       </trans-unit>
       <trans-unit id="SP29f3i" resname="form.user.username.placeholder">
         <source>form.user.username.placeholder</source>
-        <target>__form.user.username.placeholder</target>
+        <target>Login. Ex: gaetan94.</target>
       </trans-unit>
       <trans-unit id="8MmmqaI" resname="form.user.identity.label">
         <source>form.user.identity.label</source>
-        <target>__form.user.identity.label</target>
+        <target>Identité du compte *</target>
       </trans-unit>
       <trans-unit id="Ptfaj3G" resname="form.user.identity.help">
         <source>form.user.identity.help</source>
-        <target>__form.user.identity.help</target>
+        <target>L'identité sera visible par tout le monde. Vous pouvez indiquer le rôle du compte (savoir s'il s'agit d'un admin ou utilisateur simple).</target>
       </trans-unit>
     </body>
   </file>
