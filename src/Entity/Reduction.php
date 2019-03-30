@@ -13,7 +13,7 @@
 
 namespace App\Entity;
 
-use App\Entity\MappedSuperClass\UserIdentity;
+use App\Entity\Traits\UserIdentityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,13 +24,15 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
  *
- * @see UserIdentity To have user identity
+ * @see         Notice UserIdentityTrait
  * @category    Reduction
  * @package     App\Entity
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class Reduction extends UserIdentity
+class Reduction
 {
+    use UserIdentityTrait;
+
     /**
      * Use constants to define configuration options that rarely change instead
      * of specifying them under parameters section in config/services.yaml file.
@@ -200,18 +202,6 @@ class Reduction extends UserIdentity
         $this->opinions = new ArrayCollection();
         $this->isBigDeal = false;
         $this->isActive = false;
-    }
-
-    /*
-     * Personal methods
-     */
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->getName() . ' : ' .  $this->brand->getName();
     }
 
     /**
