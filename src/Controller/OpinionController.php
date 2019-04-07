@@ -3,11 +3,7 @@
 /**
  * Opinion Controller File
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\Controller
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -27,15 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Opinion Controller Class
- *
  * @todo Add patterns on new() method (mediator, adapter...)
  *
- * @category    Opinion
- * @package     App\Controller
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/opinion", defaults={"_locale"="%locale%"})
+ * @Route("/opinion")
  * @IsGranted("ROLE_USER")
  */
 class OpinionController extends AbstractController

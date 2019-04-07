@@ -3,23 +3,12 @@
 /**
  * Slugger util file
  *
- * PHP Version 7.2
- *
  * @category    Slugger
- * @package     App\Utils
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
 namespace App\Utils;
 
-/**
- * Slugger util class.
- *
- * @category    Slugger
- * @package     App\Utils
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 final class Slugger
 {
     /**

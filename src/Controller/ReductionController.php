@@ -3,11 +3,7 @@
 /**
  * Reduction Controller File
  *
- * PHP Version 7.2
- *
  * @category    Reduction
- * @package     App\Controller
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -28,15 +24,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Reduction Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    Reduction
- * @package     App\Controller
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/reduction", defaults={"_locale"="%locale%"})
+ * @Route("/reduction")
  * @IsGranted("ROLE_USER")
  */
 class ReductionController extends AbstractController

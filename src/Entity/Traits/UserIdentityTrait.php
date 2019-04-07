@@ -3,11 +3,7 @@
 /**
  * Entity Trait File
  *
- * PHP Version 7.2
- *
  * @category    Trait
- * @package     App\Entity\Traits
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -25,9 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * Private instead of Protected because of a well know behaviour from Doctrine --regenerate.
  *
- * @category    Trait
- * @package     App\Entity\Traits
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 trait UserIdentityTrait
 {

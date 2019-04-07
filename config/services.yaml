@@ -17,13 +17,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # Aliases to TimeContinuum
     app.earth:
         class: Innmind\TimeContinuum\TimeContinuum\Earth
     app.format:
         class: Innmind\TimeContinuum\Format\ISO8601
 
-    # Creating a service with TimeContinuum
     App\Service\GlobalClock:
         arguments:
             $clock: '@app.earth'

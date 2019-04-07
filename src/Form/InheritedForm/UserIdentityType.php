@@ -3,11 +3,7 @@
 /**
  * UserIdentity FormType File
  *
- * PHP Version 7.2
- *
  * @category    UserIdentityType
- * @package     App\Form\InheritedForm
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -21,10 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * UserIdentity FormType Class used by OpinionType and ReductionType
- *
- * @category    UserIdentityType
- * @package     App\Form\InheritedForm
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class UserIdentityType extends AbstractType
 {

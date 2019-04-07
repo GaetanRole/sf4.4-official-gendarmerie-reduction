@@ -3,11 +3,7 @@
 /**
  * ArrayToStringTransformer File
  *
- * PHP Version 7.2
- *
  * @category    DataTransformer
- * @package     App\Form\DataTransformer
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -15,13 +11,6 @@ namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-/**
- * ArrayToStringTransformer Class
- *
- * @category    DataTransformer
- * @package     App\Form\DataTransformer
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class ArrayToStringTransformer implements DataTransformerInterface
 {
     /**

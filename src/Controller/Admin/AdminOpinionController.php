@@ -3,11 +3,7 @@
 /**
  * AdminOpinion Controller File
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -25,15 +21,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * AdminOpinion Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    Opinion
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin/opinion", defaults={"_locale"="%locale%"})
+ * @Route("/admin/opinion")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminOpinionController extends AbstractController

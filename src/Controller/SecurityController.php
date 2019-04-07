@@ -3,11 +3,7 @@
 /**
  * Security Controller File
  *
- * PHP Version 7.2
- *
  * @category    Security
- * @package     App\Controller
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -22,13 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Security Controller
- *
  * @todo Check best practices on this one
- *
- * @category    Security
- * @package     App\Controller
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class SecurityController extends AbstractController
 {
@@ -39,7 +29,7 @@ class SecurityController extends AbstractController
      * @param Security $security Security injection
      * @param TranslatorInterface $translator Translator injection
      *
-     * @Route("/{_locale}/login", defaults={"_locale"="%locale%"}, name="app_login")
+     * @Route("/login", name="app_login")
      * @return          RedirectResponse|Response A Response instance
      */
     public function login(
@@ -67,7 +57,7 @@ class SecurityController extends AbstractController
     /**
      * Logout method
      *
-     * @Route("/{_locale}/logout", defaults={"_locale"="%locale%"}, name="app_logout")
+     * @Route("/logout", name="app_logout")
      */
     public function logout(): void
     {

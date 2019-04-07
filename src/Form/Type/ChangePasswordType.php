@@ -3,11 +3,7 @@
 /**
  * ChangePassword FormType File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Form\Type
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -21,13 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * ChangePassword FormType Class
- *
- * @category    User
- * @package     App\Form\Type
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class ChangePasswordType extends AbstractType
 {
     /**

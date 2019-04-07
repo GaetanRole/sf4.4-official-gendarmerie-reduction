@@ -3,11 +3,7 @@
 /**
  * AdminBrand Controller File
  *
- * PHP Version 7.2
- *
  * @category    Brand
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -27,15 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * AdminBrand Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    Brand
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin/brand", defaults={"_locale"="%locale%"})
+ * @Route("/admin/brand")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminBrandController extends AbstractController

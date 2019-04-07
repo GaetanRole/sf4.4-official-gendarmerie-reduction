@@ -9,10 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
-/**
- * Class Kernel
- * @package App
- */
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;

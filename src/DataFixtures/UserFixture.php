@@ -3,11 +3,7 @@
 /**
  * UserFixture file
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\DataFixtures
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -18,17 +14,13 @@ use Faker;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * UserFixture class
- *
  * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
- * @category    User
- * @package     App\DataFixtures
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserFixture extends Fixture implements FixtureGroupInterface
 {
@@ -104,6 +96,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
         for ($index = 0; $index < self::USER_NB_TUPLE; $index++) {
             $user = new User();
             $user
+                ->setUuid(Uuid::uuid4())
                 ->setUsername($faker->userName)
                 ->setIdentity($this->getRandomIdentity())
                 ->setEmail($faker->email)

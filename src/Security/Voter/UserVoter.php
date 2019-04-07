@@ -3,11 +3,7 @@
 /**
  * User Voter File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Security\Voter
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -19,12 +15,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * User Voter Class
- *
  * @see         https://symfony.com/doc/current/security/voters.html
- * @category    User
- * @package     App\Security\Voter
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class UserVoter extends Voter
 {

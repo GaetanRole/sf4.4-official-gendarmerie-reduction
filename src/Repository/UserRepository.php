@@ -3,11 +3,7 @@
 /**
  * User Repository File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Repository
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -18,12 +14,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * User Repository Class
- *
- * @category    User
- * @packagy     App\Repository
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
-
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()

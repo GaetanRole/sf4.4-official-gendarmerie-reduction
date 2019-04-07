@@ -3,11 +3,7 @@
 /**
  * Twig Extension file
  *
- * PHP Version 7.2
- *
  * @category    Internationalisation
- * @package     App\Twig\Extension
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -18,13 +14,6 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-/**
- * Class LinksExtension
- *
- * @category    Internationalisation
- * @package     App\Twig\Extension
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class LinksExtension extends AbstractExtension
 {
     /**

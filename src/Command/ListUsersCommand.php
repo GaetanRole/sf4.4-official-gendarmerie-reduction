@@ -6,8 +6,6 @@
  * PHP Version 7.2
  *
  * @category    User
- * @package     App\Command
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -34,7 +32,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * https://symfony.com/doc/current/console/commands_as_services.html
  *
  * @category    User
- * @package     App\Command
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ListUsersCommand extends Command
@@ -67,8 +64,6 @@ final class ListUsersCommand extends Command
 
     /**
      * {@inheritdoc}
-     *
-     * @return void
      */
     protected function configure(): void
     {

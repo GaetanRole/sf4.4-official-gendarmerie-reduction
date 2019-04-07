@@ -3,11 +3,7 @@
 /**
  * AdminCategory Controller File
  *
- * PHP Version 7.2
- *
  * @category    Category
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -27,15 +23,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * AdminCategory Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    Category
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin/category", defaults={"_locale"="%locale%"})
+ * @Route("/admin/category")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminCategoryController extends AbstractController

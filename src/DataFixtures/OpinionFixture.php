@@ -3,11 +3,7 @@
 /**
  * OpinionFixture file
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\DataFixtures
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -22,12 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * OpinionFixture class
- *
  * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
- * @category    Opinion
- * @package     App\DataFixtures
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class OpinionFixture extends Fixture implements DependentFixtureInterface
 {

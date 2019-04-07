@@ -3,11 +3,7 @@
 /**
  * Brand FormType File
  *
- * PHP Version 7.2
- *
  * @category    Brand
- * @package     App\Form
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -20,13 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Brand FormType Class
- *
- * @category    Brand
- * @package     App\Form
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class BrandType extends AbstractType
 {
     /**

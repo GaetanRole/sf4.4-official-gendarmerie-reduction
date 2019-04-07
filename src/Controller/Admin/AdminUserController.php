@@ -3,11 +3,7 @@
 /**
  * AdminUser Controller File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -29,15 +25,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * AdminUser Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    User
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin/user", defaults={"_locale"="%locale%"})
+ * @Route("/admin/user")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminUserController extends AbstractController
@@ -126,10 +116,10 @@ class AdminUserController extends AbstractController
      * Displays a form to edit an existing User entity.
      *
      * @param Request $request POST'ed data
-     * @param User $user User given by an id
+     * @param User $user User given by an uuid
      * @param UserPasswordEncoderInterface $encoder
      *
-     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
+     * @Route("/{uuid}/edit", methods={"GET","POST"})
      * @IsGranted("edit", subject="user", message="An admin can only be edited by a super admin account.")
      * @return RedirectResponse|Response A Response instance
      */
@@ -187,9 +177,9 @@ class AdminUserController extends AbstractController
      * Deletes a User object.
      *
      * @param Request $request POST'ed data
-     * @param User $user User given by an id
+     * @param User $user User given by an uuid
      *
-     * @Route("/{id<\d+>}", methods={"DELETE"})
+     * @Route("/{uuid}", methods={"DELETE"})
      * @IsGranted("delete", subject="user", message="An admin can only be deleted by a super admin account.")
      * @return RedirectResponse A Response instance
      */

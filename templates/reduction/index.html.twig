@@ -57,7 +57,7 @@
                                 <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
                                 <td>
                                     <a href="{{ path('app_reduction_show', {'slug': reduction.slug}) }}">{{ 'link.reduction.show'|trans }}</a>
-                                    <a href="{{ path('app_admin_adminreduction_edit', {'id': reduction.id}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
+                                    <a href="{{ path('app_admin_adminreduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
                                 </td>
                             </tr>
                         {% else %}

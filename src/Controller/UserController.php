@@ -3,11 +3,7 @@
 /**
  * User Controller File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Controller
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -20,13 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * User Controller Class
- *
- * @category    User
- * @package     App\Controller
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/user", defaults={"_locale"="%locale%"})
+ * @Route("/user")
  * @IsGranted("ROLE_USER")
  */
 class UserController extends AbstractController
@@ -36,7 +26,7 @@ class UserController extends AbstractController
      *
      * @param User $user User given by an id
      *
-     * @Route("/{id<\d+>}", methods={"GET"})
+     * @Route("/{uuid}", methods={"GET"})
      * @return     Response A Response instance
      */
     public function show(User $user): Response

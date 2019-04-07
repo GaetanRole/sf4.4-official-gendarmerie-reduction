@@ -3,11 +3,7 @@
 /**
  * Opinion Entity File
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\Entity
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -18,14 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Opinion Entity Class
- *
- * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
- *
  * @see         Notice UserIdentityTrait
- * @category    Opinion
- * @package     App\Entity
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
  */
 class Opinion implements \JsonSerializable
 {

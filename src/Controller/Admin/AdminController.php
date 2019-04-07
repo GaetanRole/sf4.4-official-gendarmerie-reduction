@@ -3,11 +3,7 @@
 /**
  * Admin Controller File
  *
- * PHP Version 7.2
- *
  * @category    Admin
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -19,13 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Admin Controller Class
- *
- * @category    Admin
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin", defaults={"_locale"="%locale%"})
+ * @Route("/admin")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController

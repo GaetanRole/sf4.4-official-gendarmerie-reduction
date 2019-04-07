@@ -3,11 +3,7 @@
 /**
  * Reduction FormType File
  *
- * PHP Version 7.2
- *
  * @category    Reduction
- * @package     App\Form
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -25,13 +21,6 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Reduction FormType Class
- *
- * @category    Reduction
- * @package     App\Form
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class ReductionType extends AbstractType
 {
     /**

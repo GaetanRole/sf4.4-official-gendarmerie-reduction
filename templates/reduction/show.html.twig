@@ -73,7 +73,7 @@
 
                     <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
 
-                    <a href="{{ path('app_admin_adminreduction_edit', {'id': reduction.id}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
+                    <a href="{{ path('app_admin_adminreduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
 
                     {{ include('admin/reduction/_delete_form.html.twig') }}
                 </div>

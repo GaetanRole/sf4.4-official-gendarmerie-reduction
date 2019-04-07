@@ -3,11 +3,7 @@
 /**
  * Opinion FormType File
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\Form
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -20,13 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Opinion FormType Class
- *
- * @category    Opinion
- * @package     App\Form
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class OpinionType extends AbstractType
 {
     /**

@@ -3,11 +3,7 @@
 /**
  * Brand Entity File
  *
- * PHP Version 7.2
- *
  * @category    Brand
- * @package     App\Entity
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -19,13 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Brand Entity Class
- *
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
- *
- * @category    Brand
- * @package     App\Entity
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Brand
 {

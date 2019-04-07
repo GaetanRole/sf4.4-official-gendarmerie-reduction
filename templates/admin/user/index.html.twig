@@ -30,6 +30,7 @@
                         {% for user in users %}
                             <tr>
                                 <td>{{ user.id }}</td>
+                                <td>{{ user.uuid }}</td>
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.identity }}</td>
                                 <td>{{ user.email }}</td>
@@ -39,9 +40,9 @@
                                     {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
                                         <p>{{ 'admin.user.index.table.p.same_acl'|trans }}</p>
                                     {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
-                                        <a href="{{ path('app_admin_adminuser_edit', {'id': user.id}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
+                                        <a href="{{ path('app_admin_adminuser_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
                                     {% endif %}
-                                    <a href="{{ path('app_user_show', {'id': user.id}) }}">{{ 'link.user.show'|trans }}</a>
+                                    <a href="{{ path('app_user_show', {'uuid': user.uuid}) }}">{{ 'link.user.show'|trans }}</a>
                                 </td>
                             </tr>
                         {% else %}

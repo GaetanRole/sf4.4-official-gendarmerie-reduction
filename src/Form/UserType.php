@@ -3,11 +3,7 @@
 /**
  * User FormType File
  *
- * PHP Version 7.2
- *
  * @category    User
- * @package     App\Form
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -25,13 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * User FormType Class
- *
- * @category    User
- * @package     App\Form
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class UserType extends AbstractType
 {
     /**

@@ -3,11 +3,7 @@
 /**
  * Default Controller File
  *
- * PHP Version 7.2
- *
  * @category    Default
- * @package     App\Controller
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -18,19 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * Default Controller Class
- *
- * @category    Default
- * @package     App\Controller
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 class DefaultController extends AbstractController
 {
     /**
      * Home page before connexion
      *
-     * @Route("/{_locale}", defaults={"_locale"="%locale%"}, name="app_index", methods={"GET"})
+     * @Route("/", name="app_index", methods={"GET"})
      * @return     Response A Response instance
      */
     public function index(): Response
@@ -43,7 +32,7 @@ class DefaultController extends AbstractController
      *
      * @todo Add all useful data for a dashboard index (only for users)
      *
-     * @Route("/{_locale}/dashboard", defaults={"_locale"="%locale%"}, name="app_dashboard", methods={"GET"})
+     * @Route("/dashboard", name="app_dashboard", methods={"GET"})
      * @IsGranted("ROLE_USER")
      * @return     Response A Response instance
      */

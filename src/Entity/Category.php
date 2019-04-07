@@ -3,11 +3,7 @@
 /**
  * Category Entity File
  *
- * PHP Version 7.2
- *
  * @category    Category
- * @package     App\Entity
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -19,13 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category Entity Class
- *
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- *
- * @category    Category
- * @package     App\Entity
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Category implements \JsonSerializable
 {

@@ -3,11 +3,7 @@
 /**
  * AdminReduction Controller File
  *
- * PHP Version 7.2
- *
  * @category    Reduction
- * @package     App\Controller\Admin
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -26,15 +22,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * AdminReduction Controller Class
- *
  * @todo Add patterns on each methods (mediator, adapter...)
  *
- * @category    Reduction
- * @package     App\Controller\Admin
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
- * @Route("/{_locale}/admin/reduction", defaults={"_locale"="%locale%"})
+ * @Route("/admin/reduction")
  * @IsGranted("ROLE_ADMIN")
  */
 class AdminReductionController extends AbstractController
@@ -67,7 +57,7 @@ class AdminReductionController extends AbstractController
      * @param Request $request POST'ed data
      * @param Reduction $reduction Reduction given by an id
      *
-     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
      */
     public function edit(
@@ -100,7 +90,7 @@ class AdminReductionController extends AbstractController
      * @param Request $request POST'ed data
      * @param Reduction $reduction Reduction given by an id
      *
-     * @Route("/{id<\d+>}", methods={"DELETE"})
+     * @Route("/{slug}", methods={"DELETE"})
      * @return RedirectResponse A Response instance
      */
     public function delete(

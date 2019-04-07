@@ -3,11 +3,7 @@
 /**
  * Opinion Repository File
  *
- * PHP Version 7.2
- *
  * @category    Opinion
- * @package     App\Repository
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -19,12 +15,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * Opinion Repository Class
- *
- * @category    Opinion
- * @package     App\Repository
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
  * @method Opinion|null find($id, $lockMode = null, $lockVersion = null)
  * @method Opinion|null findOneBy(array $criteria, array $orderBy = null)
  * @method Opinion[]    findAll()

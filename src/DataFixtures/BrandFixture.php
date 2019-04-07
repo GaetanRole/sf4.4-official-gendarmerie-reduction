@@ -6,8 +6,6 @@
  * PHP Version 7.2
  *
  * @category    Brand
- * @package     App\DataFixtures
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -22,12 +20,7 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * BrandFixture class
- *
  * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
- * @category    Brand
- * @package     App\DataFixtures
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class BrandFixture extends Fixture implements FixtureGroupInterface
 {

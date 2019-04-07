@@ -3,11 +3,7 @@
 /**
  * Reduction Repository File
  *
- * PHP Version 7.2
- *
  * @category    Reduction
- * @package     App\Repository
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -20,12 +16,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * Reduction Repository Class
- *
- * @category    Reduction
- * @package     App\Repository
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- *
  * @method Reduction|null find($id, $lockMode = null, $lockVersion = null)
  * @method Reduction|null findOneBy(array $criteria, array $orderBy = null)
  * @method Reduction[]    findAll()

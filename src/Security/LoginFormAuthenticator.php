@@ -3,11 +3,7 @@
 /**
  * LoginFormAuthenticator File
  *
- * PHP Version 7.2
- *
  * @category    Login
- * @package     App\Security
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -31,13 +27,6 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * LoginFormAuthenticator Class
- *
- * @category    Login
- * @package     App\Security
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
 final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     /**

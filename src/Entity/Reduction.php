@@ -20,14 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Reduction Entity Class
- *
- * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
- *
  * @see         Notice UserIdentityTrait
- * @category    Reduction
- * @package     App\Entity
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
  */
 class Reduction
 {

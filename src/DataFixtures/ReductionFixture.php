@@ -3,11 +3,7 @@
 /**
  * ReductionFixture file
  *
- * PHP Version 7.2
- *
  * @category    Reduction
- * @package     App\DataFixtures
- * @version     1.0
  * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 
@@ -23,12 +19,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ReductionFixture class
- *
  * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
- * @category    Reduction
- * @package     App\DataFixtures
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ReductionFixture extends Fixture implements DependentFixtureInterface
 {
