@@ -87,38 +87,34 @@
       </trans-unit>
       <trans-unit id="MOzwEFA" resname="validator.reduction.description.min_length">
         <source>validator.reduction.description.min_length</source>
-        <target>La description de la réduction doit avoir plus de {{ limit }} caractères.</target>
+        <target>La description de la réduction doit contenir plus de {{ limit }} caractères.</target>
       </trans-unit>
       <trans-unit id="wm3d2PA" resname="validator.reduction.description.max_length">
         <source>validator.reduction.description.max_length</source>
         <target>La description de la réduction ne doit pas dépasser plus de {{ limit }} caractères.</target>
       </trans-unit>
-      <trans-unit id="Bkcpc3Y" resname="validator.reduction.department.not_blank">
-        <source>validator.reduction.department.not_blank</source>
-        <target>Le département de la réduction ne peut pas être vide.</target>
+      <trans-unit id="IMoh4bT" resname="validator.reduction.region.not_blank">
+        <source>validator.reduction.region.not_blank</source>
+        <target>Le code région de la réduction ne peut pas être vide.</target>
       </trans-unit>
-      <trans-unit id="K_vDwUf" resname="validator.reduction.department.min_length">
-        <source>validator.reduction.department.min_length</source>
-        <target>Le département de la réduction doit avoir plus de {{ limit }} caractères.</target>
+      <trans-unit id="Rrp1HYE" resname="validator.reduction.region.regex">
+        <source>validator.reduction.region.regex</source>
+        <target>Le code région de la réduction ne doit contenir que 2 chiffres.</target>
       </trans-unit>
-      <trans-unit id="S8pfxPX" resname="validator.reduction.department.max_length">
-        <source>validator.reduction.department.max_length</source>
-        <target>Le département de la réduction ne doit pas dépasser plus de {{ limit }} caractères.</target>
+      <trans-unit id="yXrRIBV" resname="validator.reduction.department.regex">
+        <source>validator.reduction.department.regex</source>
+        <target>Le département de la réduction ne doit contenir que 2 ou 3 chiffres.</target>
       </trans-unit>
-      <trans-unit id="ugiyao1" resname="validator.reduction.city.regex">
-        <source>validator.reduction.city.regex</source>
+      <trans-unit id="zEdkqA5" resname="validator.reduction.municipality.regex">
+        <source>validator.reduction.municipality.regex</source>
         <target>La syntaxe de votre ville ne semble pas correcte. Veuillez vérifier celle-ci.</target>
       </trans-unit>
-      <trans-unit id="itGved3" resname="validator.reduction.city.not_blank">
-        <source>validator.reduction.city.not_blank</source>
-        <target>La ville de la réduction ne peut pas être vide.</target>
-      </trans-unit>
-      <trans-unit id="LTunMtx" resname="validator.reduction.city.min_length">
-        <source>validator.reduction.city.min_length</source>
+      <trans-unit id="REBRsnb" resname="validator.reduction.municipality.min_length">
+        <source>validator.reduction.municipality.min_length</source>
         <target>La ville de la réduction doit avoir plus de {{ limit }} caractères.</target>
       </trans-unit>
-      <trans-unit id="P3xOsu6" resname="validator.reduction.city.max_length">
-        <source>validator.reduction.city.max_length</source>
+      <trans-unit id="rAKb17R" resname="validator.reduction.municipality.max_length">
+        <source>validator.reduction.municipality.max_length</source>
         <target>La ville de la réduction ne doit pas dépasser plus de {{ limit }} caractères.</target>
       </trans-unit>
       <trans-unit id="fyQdvKq" resname="valitor.user.unique.message">

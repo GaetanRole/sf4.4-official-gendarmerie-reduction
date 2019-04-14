@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Default Controller File
- *
- * @category    Default
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,13 +7,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @Route("/", name="app_", methods={"GET"})
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ */
 class DefaultController extends AbstractController
 {
     /**
-     * Home page before connexion
-     *
-     * @Route("/", name="app_index", methods={"GET"})
-     * @return     Response A Response instance
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -28,13 +22,11 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * Dashboard page after connexion
+     * Dashboard page after connexion.
+     * @todo Add all useful data for a dashboard index (only for users).
      *
-     * @todo Add all useful data for a dashboard index (only for users)
-     *
-     * @Route("/dashboard", name="app_dashboard", methods={"GET"})
+     * @Route("/dashboard", name="dashboard", methods={"GET"})
      * @IsGranted("ROLE_USER")
-     * @return     Response A Response instance
      */
     public function dashboard(): Response
     {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr-FR" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -201,6 +201,18 @@
         <source>form.reduction.description.placeholder</source>
         <target>__form.reduction.description.placeholder</target>
       </trans-unit>
+      <trans-unit id="Fzn_XXM" resname="form.reduction.region.label">
+        <source>form.reduction.region.label</source>
+        <target>__form.reduction.region.label</target>
+      </trans-unit>
+      <trans-unit id="t2XlxSI" resname="form.reduction.region.help">
+        <source>form.reduction.region.help</source>
+        <target>__form.reduction.region.help</target>
+      </trans-unit>
+      <trans-unit id="1jbTXBx" resname="form.reduction.region.placeholder">
+        <source>form.reduction.region.placeholder</source>
+        <target>__form.reduction.region.placeholder</target>
+      </trans-unit>
       <trans-unit id="ROwJeYW" resname="form.reduction.department.label">
         <source>form.reduction.department.label</source>
         <target>__form.reduction.department.label</target>
@@ -209,13 +221,21 @@
         <source>form.reduction.department.help</source>
         <target>__form.reduction.department.help</target>
       </trans-unit>
-      <trans-unit id="wcE8VXa" resname="form.reduction.city.label">
-        <source>form.reduction.city.label</source>
-        <target>__form.reduction.city.label</target>
+      <trans-unit id="j8K1FVG" resname="form.reduction.department.placeholder">
+        <source>form.reduction.department.placeholder</source>
+        <target>__form.reduction.department.placeholder</target>
       </trans-unit>
-      <trans-unit id="KazyteE" resname="form.reduction.city.help">
-        <source>form.reduction.city.help</source>
-        <target>__form.reduction.city.help</target>
+      <trans-unit id="N.J0B9E" resname="form.reduction.municipality.label">
+        <source>form.reduction.municipality.label</source>
+        <target>__form.reduction.municipality.label</target>
+      </trans-unit>
+      <trans-unit id="dDH63fY" resname="form.reduction.municipality.help">
+        <source>form.reduction.municipality.help</source>
+        <target>__form.reduction.municipality.help</target>
+      </trans-unit>
+      <trans-unit id="sj.mKU_" resname="form.reduction.municipality.placeholder">
+        <source>form.reduction.municipality.placeholder</source>
+        <target>__form.reduction.municipality.placeholder</target>
       </trans-unit>
       <trans-unit id="4ijzt0h" resname="form.reduction.categories.label">
         <source>form.reduction.categories.label</source>

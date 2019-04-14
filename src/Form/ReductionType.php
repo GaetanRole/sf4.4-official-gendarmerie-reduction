@@ -1,17 +1,12 @@
 <?php
 
-/**
- * Reduction FormType File
- *
- * @category    Reduction
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Form;
 
+use App\Api\GeoApiGouv\GeoClient;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Entity\Brand;
+use App\Form\EventListener\GeoApiFieldsSubscriber;
 use App\Form\InheritedForm\UserIdentityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,16 +15,39 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ */
 class ReductionType extends AbstractType
 {
+    /** @var GeoClient */
+    private $geoClient;
+
+    /** @var RouterInterface */
+    private $router;
+
     /**
-     * Building form
-     *
+     * @required
+     */
+    public function setGeoApiGouvClient(GeoClient $geoClient): ReductionType
+    {
+        $this->geoClient = $geoClient;
+        return $this;
+    }
+
+    /**
+     * @required
+     */
+    public function setRouter(RouterInterface $router): ReductionType
+    {
+        $this->router = $router;
+        return $this;
+    }
+
+    /**
      * @todo Is CollectionType a better choice ?
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -85,32 +103,6 @@ class ReductionType extends AbstractType
                 ]
             )
             ->add(
-                'department',
-                TextType::class,
-                [
-                    'required' => true,
-                    'label' => 'form.reduction.department.label',
-                    'help' => 'form.reduction.department.help',
-                    'attr' => [
-                        'minLength' => '3',
-                        'maxLength' => '32',
-                    ],
-                ]
-            )
-            ->add(
-                'city',
-                TextType::class,
-                [
-                    'required' => true,
-                    'label' => 'form.reduction.city.label',
-                    'help' => 'form.reduction.city.help',
-                    'attr' => [
-                        'minLength' => '2',
-                        'maxLength' => '64',
-                    ],
-                ]
-            )
-            ->add(
                 'categories',
                 EntityType::class,
                 [
@@ -119,7 +111,7 @@ class ReductionType extends AbstractType
                     'choice_label' => 'name',
                     'label' => 'form.reduction.categories.label',
                     'help' => 'form.reduction.categories.help',
-                    'query_builder' => function (EntityRepository $er) {
+                    'query_builder' => static function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
                             ->orderBy('c.name', 'ASC');
                     },
@@ -128,13 +120,9 @@ class ReductionType extends AbstractType
                 ]
             )
         ;
+        $builder->addEventSubscriber(new GeoApiFieldsSubscriber($this->router, $this->geoClient));
     }
 
-    /**
-     * Set Reduction class
-     *
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

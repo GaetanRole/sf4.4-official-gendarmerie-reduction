@@ -120,6 +120,15 @@
     "fzaninotto/faker": {
         "version": "1.9-dev"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
+    },
     "innmind/time-continuum": {
         "version": "dev-master"
     },
@@ -156,6 +165,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -164,6 +176,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
     },
     "ramsey/uuid": {
         "version": "3.8.0"
@@ -517,9 +532,10 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.1",
-            "ref": "0cdc982334f45d554957a6167e030482795bf9d7"
+            "ref": "9a285e4ff3915c7cd086e9945f30591a926baf83"
         },
         "files": [
+            "config/packages/test/validator.yaml",
             "config/packages/validator.yaml"
         ]
     },
