@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr-FR" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -296,6 +296,10 @@
       <trans-unit id="Wo1Ohv3" resname="opinion.new.body.h1">
         <source>opinion.new.body.h1</source>
         <target>__opinion.new.body.h1</target>
+      </trans-unit>
+      <trans-unit id="VIlVVGv" resname="region.form.geo.select.option">
+        <source>region.form.geo.select.option</source>
+        <target>__region.form.geo.select.option</target>
       </trans-unit>
     </body>
   </file>

@@ -1,17 +1,11 @@
 <?php
 
-/**
- * ReductionFixture file
- *
- * @category    Reduction
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\DataFixtures;
 
 use App\Entity\Reduction;
 use App\Utils\Slugger;
 use Faker;
+use Exception;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -19,40 +13,31 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ReductionFixture extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @var int public CONST for Reductions number in DB
-     */
+    /** @var int public CONST for Reductions number in DB */
     public const REDUCTION_NB_TUPLE = 20;
 
-    /**
-     * @var string public CONST for reference, concat to an int [0-REDUCTION_NB_TUPLE]
-     */
+    /** @var string public CONST for reference, concat to an int [0-REDUCTION_NB_TUPLE] */
     public const REDUCTION_REFERENCE = 'reduction-';
 
     /**
      * Global project's clock
-     *
      * @var GlobalClock
      */
     private $clock;
 
     /**
      * Injecting Container Interface
-     *
      * @var ContainerInterface
      */
     private $container;
 
     /**
-     * ReductionFixture constructor.
-     *
      * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param GlobalClock $clock Global project's clock
-     * @param ContainerInterface $container Container Interface
      */
     public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
@@ -61,14 +46,10 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Load REDUCTION_NB_TUPLE reductions to DB
-     *
+     * Load REDUCTION_NB_TUPLE reductions to DB.
      * @link https://github.com/fzaninotto/Faker
      * @see 3 Loop iterator depends on const REDUCTION_NB_TUPLE
-     * @param ObjectManager $manager Doctrine Manager
-     *
-     * @return void
-     * @throws \Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -88,7 +69,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
             $reduction->setDescription($faker->realText(300));
             $reduction->setRegion($this->getRandomRegion());
             $reduction->setDepartment($this->getRandomDepartment());
-            $reduction->setCity($faker->city);
+            $reduction->setMunicipality($faker->city);
             $reduction->setCreationDate($this->clock->getNowInDateTime());
             $reduction->setIsBigDeal((bool)random_int(0, 1));
             $reduction->setIsActive((bool)random_int(0, 1));
@@ -102,17 +83,15 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get a random Region
-     *
-     * @return string
      */
     private function getRandomRegion(): string
     {
         $regions = [
-            'Hauts-de-France',
-            'Île-de-France',
-            'La Réunion',
-            'Bourgogne-Franche-Comté',
-            'Provence-Alpes-Côte d\'Azur',
+            '01',
+            '93',
+            '52',
+            '76',
+            '32',
         ];
 
         return $regions[array_rand($regions)];
@@ -120,17 +99,15 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get a random Department
-     *
-     * @return string
      */
     private function getRandomDepartment(): string
     {
         $departments = [
-            'Seine-Maritime',
-            'Calvados',
-            'Eure',
-            'Nord',
-            'Pas-de-Calais',
+            '59',
+            '976',
+            '64',
+            '93',
+            '06',
         ];
 
         return $departments[array_rand($departments)];
@@ -138,11 +115,8 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get an array of references useful for Reduction instances
-     *
      * @see 7 See UserFixture::USER_NB_TUPLE - 1 for index 0
-     *
-     * @return array
-     * @throws \Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getReductionData(): array
     {
@@ -164,9 +138,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get a random Brand from BrandFixture
-     *
-     * @return string
-     * @throws \Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getRandomBrand(): string
     {
@@ -181,9 +153,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get an array of random Category references
-     *
-     * @return array
-     * @throws \Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getRandomCategories(): array
     {
@@ -201,8 +171,6 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Get dependencies from entity relations
-     *
-     * @return array
      */
     public function getDependencies(): array
     {

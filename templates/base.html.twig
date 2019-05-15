@@ -1,13 +1,12 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Gaëtan Rolé-Dubruille">
     <meta name="description" content="{% block description 'base.head.meta.description'|trans %}">
-    <meta name="keywords" content="">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
     <title>Gendarmerie - {% block title 'base.head.meta.title'|trans %}</title>
@@ -33,6 +32,7 @@
     {% endblock %}
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {% block javascripts %}
 {% endblock %}
 </body>

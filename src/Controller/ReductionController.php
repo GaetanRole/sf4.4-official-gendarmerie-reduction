@@ -1,14 +1,8 @@
 <?php
 
-/**
- * Reduction Controller File
- *
- * @category    Reduction
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
 use App\Repository\ReductionRepository;
@@ -24,24 +18,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @todo Add patterns on each methods (mediator, adapter...)
+ * @todo    Add patterns on each methods (mediator, adapter...).
  *
  * @Route("/reduction")
  * @IsGranted("ROLE_USER")
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class ReductionController extends AbstractController
 {
     /**
-     * Reduction home page
-     *
-     * @todo Add paginator PagerFanta
-     * @todo Add search bar and filters
-     *
-     * @param ReductionRepository $reductionRepository Reduction manager
+     * @todo Add paginator PagerFanta.
+     * @todo Add search bar and filters.
      *
      * @Route("/", methods={"GET"})
-     * @return Response A Response instance
-     * @throws \Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function index(ReductionRepository $reductionRepository): Response
     {
@@ -51,33 +41,24 @@ class ReductionController extends AbstractController
     }
 
     /**
-     * Adding one Reduction
-     *
      * @todo Add Image Upload ?
-     *
      * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param Request $request POST'ed data
-     * @param EntityManagerInterface $em Entity Manager
-     * @param TranslatorInterface $translator Translator injection
-     * @param GlobalClock $clock Global project's clock
      *
      * @Route("/new", methods={"GET","POST"})
      * @return RedirectResponse|Response A Response instance
-     * @throws \Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function new(
         Request $request,
         EntityManagerInterface $em,
         TranslatorInterface $translator,
         GlobalClock $clock
-    ): Response {
+    ) {
         $reduction = new Reduction();
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Call api geo gouv
-            $reduction->setRegion('');
             $reduction->setSlug(Slugger::slugify($reduction->getTitle()));
             $reduction->setClientIp($request->getClientIp());
             $reduction->setCreationDate($clock->getNowInDateTime());
@@ -98,15 +79,9 @@ class ReductionController extends AbstractController
     }
 
     /**
-     * Find and display a Reduction and all Opinions
+     * @todo Add all related Opinions and PagerFanta.
      *
-     * @todo Add all related Opinions and PagerFanta
-     *
-     * @param Reduction $reduction Reduction given by an id
-     *
-     * @see https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
      * @Route("/{slug}", methods={"GET"})
-     * @return     Response A Response instance
      */
     public function show(Reduction $reduction): Response
     {

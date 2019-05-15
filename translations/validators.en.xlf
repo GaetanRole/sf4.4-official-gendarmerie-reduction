@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr-FR" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -93,33 +93,29 @@
         <source>validator.reduction.description.max_length</source>
         <target>__validator.reduction.description.max_length</target>
       </trans-unit>
-      <trans-unit id="Bkcpc3Y" resname="validator.reduction.department.not_blank">
-        <source>validator.reduction.department.not_blank</source>
-        <target>__validator.reduction.department.not_blank</target>
+      <trans-unit id="IMoh4bT" resname="validator.reduction.region.not_blank">
+        <source>validator.reduction.region.not_blank</source>
+        <target>__validator.reduction.region.not_blank</target>
       </trans-unit>
-      <trans-unit id="K_vDwUf" resname="validator.reduction.department.min_length">
-        <source>validator.reduction.department.min_length</source>
-        <target>__validator.reduction.department.min_length</target>
+      <trans-unit id="Rrp1HYE" resname="validator.reduction.region.regex">
+        <source>validator.reduction.region.regex</source>
+        <target>__validator.reduction.region.regex</target>
       </trans-unit>
-      <trans-unit id="S8pfxPX" resname="validator.reduction.department.max_length">
-        <source>validator.reduction.department.max_length</source>
-        <target>__validator.reduction.department.max_length</target>
+      <trans-unit id="yXrRIBV" resname="validator.reduction.department.regex">
+        <source>validator.reduction.department.regex</source>
+        <target>__validator.reduction.department.regex</target>
       </trans-unit>
-      <trans-unit id="ugiyao1" resname="validator.reduction.city.regex">
-        <source>validator.reduction.city.regex</source>
-        <target>__validator.reduction.city.regex</target>
+      <trans-unit id="zEdkqA5" resname="validator.reduction.municipality.regex">
+        <source>validator.reduction.municipality.regex</source>
+        <target>__validator.reduction.municipality.regex</target>
       </trans-unit>
-      <trans-unit id="itGved3" resname="validator.reduction.city.not_blank">
-        <source>validator.reduction.city.not_blank</source>
-        <target>__validator.reduction.city.not_blank</target>
+      <trans-unit id="REBRsnb" resname="validator.reduction.municipality.min_length">
+        <source>validator.reduction.municipality.min_length</source>
+        <target>__validator.reduction.municipality.min_length</target>
       </trans-unit>
-      <trans-unit id="LTunMtx" resname="validator.reduction.city.min_length">
-        <source>validator.reduction.city.min_length</source>
-        <target>__validator.reduction.city.min_length</target>
-      </trans-unit>
-      <trans-unit id="P3xOsu6" resname="validator.reduction.city.max_length">
-        <source>validator.reduction.city.max_length</source>
-        <target>__validator.reduction.city.max_length</target>
+      <trans-unit id="rAKb17R" resname="validator.reduction.municipality.max_length">
+        <source>validator.reduction.municipality.max_length</source>
+        <target>__validator.reduction.municipality.max_length</target>
       </trans-unit>
       <trans-unit id="fyQdvKq" resname="valitor.user.unique.message">
         <source>valitor.user.unique.message</source>

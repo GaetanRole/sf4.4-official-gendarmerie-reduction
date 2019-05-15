@@ -1,16 +1,5 @@
 <?php
 
-/**
- * Reduction Entity File
- *
- * PHP Version 7.2
- *
- * @category    Reduction
- * @package     App\Entity
- * @version     1.0
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Entity;
 
 use App\Entity\Traits\UserIdentityTrait;
@@ -22,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @see         Notice UserIdentityTrait
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
+ * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Reduction
 {
@@ -120,40 +110,43 @@ class Reduction
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=2)
+     * @Assert\NotBlank(message="validator.reduction.region.not_blank")
+     * @Assert\Regex(
+     *     pattern="/^[0-9]{2}$/",
+     *     message="validator.reduction.region.regex"
+     * )
      */
     private $region;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string", length=32)
-     * @Assert\NotBlank(message="validator.reduction.department.not_blank")
-     * @Assert\Length(
-     *     min=3,
-     *     minMessage="validator.reduction.department.min_length",
-     *     max=32,
-     *     maxMessage="validator.reduction.department.max_length"
+     * @ORM\Column(type="string", length=3, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^[0-9]{2,3}$/",
+     *     message="validator.reduction.department.regex"
      * )
      */
     private $department;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     * @Assert\Regex(
-     *     pattern="(^none$)",
-     *     match=false,
-     *     message="validator.reduction.city.regex"
-     * )
-     * @Assert\NotBlank(message="validator.reduction.city.not_blank")
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Length(
-     *     min=2,
-     *     minMessage="validator.reduction.city.min_length",
+     *     min=1,
+     *     minMessage="validator.reduction.municipality.min_length",
      *     max=64,
-     *     maxMessage="validator.reduction.city.max_length"
+     *     maxMessage="validator.reduction.municipality.max_length"
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="validator.reduction.municipality.regex"
      * )
      */
-    private $city;
+    private $municipality;
 
     /**
      * @var \DateTime
@@ -331,18 +324,11 @@ class Reduction
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRegion(): ?string
     {
         return $this->region;
     }
 
-    /**
-     * @param string $region
-     * @return Reduction
-     */
     public function setRegion(string $region): self
     {
         $this->region = $region;
@@ -350,40 +336,26 @@ class Reduction
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDepartment(): ?string
     {
         return $this->department;
     }
 
-    /**
-     * @param string $department
-     * @return Reduction
-     */
-    public function setDepartment(string $department): self
+    public function setDepartment(?string $department): self
     {
         $this->department = $department;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCity(): ?string
+    public function getMunicipality(): ?string
     {
-        return $this->city;
+        return $this->municipality;
     }
 
-    /**
-     * @param string $city
-     * @return Reduction
-     */
-    public function setCity(string $city): self
+    public function setMunicipality(?string $municipality): self
     {
-        $this->city = $city;
+        $this->municipality = $municipality;
 
         return $this;
     }

@@ -297,6 +297,10 @@
         <source>opinion.new.body.h1</source>
         <target>Créer un commentaire !</target>
       </trans-unit>
+      <trans-unit id="VIlVVGv" resname="region.form.geo.select.option">
+        <source>region.form.geo.select.option</source>
+        <target>Augmentez la précision pour la recherche</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

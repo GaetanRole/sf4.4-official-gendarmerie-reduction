@@ -27,7 +27,7 @@
                             <th>Catégorie</th>
                             <th>Region</th>
                             <th>Department</th>
-                            <th>City</th>
+                            <th>Municipality</th>
                             <th>CreationDate</th>
                             <th>IsBigDeal</th>
                             <th>IsActive</th>
@@ -51,7 +51,7 @@
                                 </td>
                                 <td>{{ reduction.region }}</td>
                                 <td>{{ reduction.department }}</td>
-                                <td>{{ reduction.city }}</td>
+                                <td>{{ reduction.municipality }}</td>
                                 <td>{{ reduction.creationDate ? reduction.creationDate|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ reduction.isBigDeal? 'Yes' : 'No' }}</td>
                                 <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
@@ -62,7 +62,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="9">{{ 'table.empty'|trans }}</td>
+                                <td colspan="15">{{ 'table.empty'|trans }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

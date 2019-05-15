@@ -7,20 +7,23 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
+        bind:
+            $httpClient: '@app.client'
 
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
-
+    app.client:
+        class: GuzzleHttp\Client
     app.earth:
         class: Innmind\TimeContinuum\TimeContinuum\Earth
     app.format:
         class: Innmind\TimeContinuum\Format\ISO8601
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
 
     App\Service\GlobalClock:
         arguments:
