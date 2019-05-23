@@ -8,16 +8,18 @@ Webpack is not intentionally implanted in this Github repository.
 
 ## Requirements
 
-  * Php ^7.1.3    http://php.net/manual/fr/install.php;
+  * Php ^7.1.3      http://php.net/manual/fr/install.php;
   * Composer        https://getcomposer.org/download/;
+  * SQL ^5.7        https://www.mysql.com/fr/downloads/;
   * and the [usual Symfony application requirements][1].
 
 ## Installation
 
 ```bash
-$ make                  # Self documented Makefile
-$ make install          # Install all Symfony dependencies
-$ make start            # Start Symfony webserver
+$ make                          # Self documented Makefile
+$ make install                  # Install all Symfony dependencies
+$ make sf-console:server:run    # Start Symfony web server
+$ make tests                    # Start PHPUnit tests and code coverage
 ```
 
 > Take a look on Makefile rules to know which commands to use.
@@ -26,10 +28,10 @@ $ make start            # Start Symfony webserver
 
 For [translation][2] to XLIFF files (`app_locales: en|fr`) :
 ```bash
-$ bin/console translation:update --output-format xlf --dump-messages --force en
-$ bin/console translation:update --output-format xlf --dump-messages --force fr
+$ make sf-console:translation:update --output-format xlf --dump-messages --force en
+$ make sf-console:translation:update --output-format xlf --dump-messages --force fr
 ```
-You can use [Loco][3] to manage all your translations. 5 domains are presents : exceptions, flashes, forms, messages and validators.
+You can use [Loco][3] to manage all your translations. 5 domains are present : exceptions, flashes, forms, messages and validators.
 <br>Two _locales: fr|en, fallbacks: en.
 
 ### Personal commands
@@ -37,8 +39,8 @@ You can use [Loco][3] to manage all your translations. 5 domains are presents : 
 To use a personal sample [command][4] (displaying all users from DB) :
 
 ```bash
-$ bin/console app:list-users --help
-$ bin/console app:list-users
+$ make sf-console:app:list-users --help
+$ make sf-console:app:list-users
 ```
 
 Do not hesitate to create other commands useful for this project.
