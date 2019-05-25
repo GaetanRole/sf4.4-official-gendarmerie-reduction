@@ -192,7 +192,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
             return new RedirectResponse($this->router->generate('app_admin_index'));
         }
-        return new RedirectResponse($this->router->generate('app_dashboard'));
+        return new RedirectResponse($this->router->generate('app_default_dashboard'));
     }
 
     /**

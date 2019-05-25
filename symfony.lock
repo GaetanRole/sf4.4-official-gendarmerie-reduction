@@ -35,7 +35,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.6",
-            "ref": "453e89b78ded666f351617baca5ae40d20622351"
+            "ref": "02bc9e7994b70f4fda004131a0c78b7b1bf09789"
         },
         "files": [
             "config/packages/doctrine.yaml",
@@ -131,6 +131,9 @@
     },
     "innmind/time-continuum": {
         "version": "1.3.0"
+    },
+    "javiereguiluz/easyslugger": {
+        "version": "v1.0.0"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"

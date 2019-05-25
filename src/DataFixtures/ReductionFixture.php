@@ -2,10 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Reduction;
-use App\Utils\Slugger;
 use Faker;
 use Exception;
+use App\Entity\Reduction;
+use EasySlugger\SluggerInterface;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -18,38 +18,41 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class ReductionFixture extends Fixture implements DependentFixtureInterface
 {
-    /** @var int public CONST for Reductions number in DB */
+    /** @var int public CONST for Reductions number in DB. */
     public const REDUCTION_NB_TUPLE = 20;
 
-    /** @var string public CONST for reference, concat to an int [0-REDUCTION_NB_TUPLE] */
+    /** @var string public CONST for reference, concat to an int [0-REDUCTION_NB_TUPLE]. */
     public const REDUCTION_REFERENCE = 'reduction-';
 
     /**
-     * Global project's clock
+     * Global project's clock.
+     *
      * @var GlobalClock
      */
     private $clock;
 
-    /**
-     * Injecting Container Interface
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
+    /** @var SluggerInterface */
+    private $slugger;
+
     /**
-     * @link https://github.com/Innmind/TimeContinuum Global clock
+     * @link    https://github.com/Innmind/TimeContinuum Global clock
      */
-    public function __construct(GlobalClock $clock, ContainerInterface $container)
+    public function __construct(GlobalClock $clock, ContainerInterface $container, SluggerInterface $slugger)
     {
         $this->clock = $clock;
         $this->container = $container;
+        $this->slugger = $slugger;
     }
 
     /**
      * Load REDUCTION_NB_TUPLE reductions to DB.
-     * @link https://github.com/fzaninotto/Faker
-     * @see 3 Loop iterator depends on const REDUCTION_NB_TUPLE
-     * @throws Exception Datetime Exception
+     *
+     * @see     3 Loop iterator depends on const REDUCTION_NB_TUPLE
+     * @link    https://github.com/fzaninotto/Faker
+     * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -63,9 +66,9 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
             $reduction->setEmail($faker->email);
             $reduction->setBrand($brand);
             $reduction->addCategory(...$categories);
-            $reductionTitle = $index . ' ' . $faker->text(16);
+            $reductionTitle = $index.' '.$faker->text(16);
             $reduction->setTitle($reductionTitle);
-            $reduction->setSlug(Slugger::slugify($reductionTitle));
+            $reduction->setSlug($this->slugger::uniqueSlugify($reductionTitle));
             $reduction->setDescription($faker->realText(300));
             $reduction->setRegion($this->getRandomRegion());
             $reduction->setDepartment($this->getRandomDepartment());
@@ -82,41 +85,30 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Get a random Region
+     * Get a random Region.
      */
     private function getRandomRegion(): string
     {
-        $regions = [
-            '01',
-            '93',
-            '52',
-            '76',
-            '32',
-        ];
+        $regions = ['01', '93', '52', '76', '32'];
 
         return $regions[array_rand($regions)];
     }
 
     /**
-     * Get a random Department
+     * Get a random Department.
      */
     private function getRandomDepartment(): string
     {
-        $departments = [
-            '59',
-            '976',
-            '64',
-            '93',
-            '06',
-        ];
+        $departments = ['59', '976', '64', '93', '06'];
 
         return $departments[array_rand($departments)];
     }
 
     /**
-     * Get an array of references useful for Reduction instances
-     * @see 7 See UserFixture::USER_NB_TUPLE - 1 for index 0
-     * @throws Exception Random Exception
+     * Get an array of references useful for Reduction instances.
+     *
+     * @see     7 See UserFixture::USER_NB_TUPLE - 1 for index 0
+     * @throws  Exception Random Exception
      */
     private function getReductionData(): array
     {
@@ -125,9 +117,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
             // $reduction = [$index, $author, $brand, $categories, $reference];
             $reductions[] = [
                 $index,
-                $this->getReference(
-                    UserFixture::USER_REFERENCE.random_int(0, UserFixture::USER_NB_TUPLE - 1)
-                ),
+                $this->getReference(UserFixture::USER_REFERENCE.random_int(0, UserFixture::USER_NB_TUPLE - 1)),
                 $this->getReference($this->getRandomBrand()),
                 $this->getRandomCategories(),
             ];
@@ -137,8 +127,9 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Get a random Brand from BrandFixture
-     * @throws Exception Random Exception
+     * Get a random Brand from BrandFixture.
+     *
+     * @throws  Exception Random Exception
      */
     private function getRandomBrand(): string
     {
@@ -152,8 +143,9 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Get an array of random Category references
-     * @throws Exception Random Exception
+     * Get an array of random Category references.
+     *
+     * @throws  Exception Random Exception
      */
     private function getRandomCategories(): array
     {
@@ -170,14 +162,10 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Get dependencies from entity relations
+     * Get dependencies from entity relations.
      */
     public function getDependencies(): array
     {
-        return [
-            UserFixture::class,
-            BrandFixture::class,
-            CategoryFixture::class,
-        ];
+        return [UserFixture::class, BrandFixture::class, CategoryFixture::class];
     }
 }

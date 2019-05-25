@@ -65,7 +65,7 @@ trait UserIdentityTrait
      */
     public function __toString(): string
     {
-        return $this->getName() . ' : ' .  $this->clientIp;
+        return $this->getName().' : '.$this->clientIp;
     }
 
     /**

@@ -49,7 +49,7 @@ class Municipality extends GeoClient
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI . self::ENDPOINT;
+        $this->url = parent::BASE_URI.self::ENDPOINT;
     }
 
     /**
@@ -58,8 +58,8 @@ class Municipality extends GeoClient
     public function getAllMunicipalitiesByDepartment(string $department): array
     {
         $municipalities = [];
-        foreach ($this->fields(['codesPostaux', 'nom'])->search('codeDepartement', $department) as $key => $item) {
-            $municipalities[implode(' / ', $item['codesPostaux']) . ' - ' . $item['nom']] = $item['nom'];
+        foreach ($this->fields(['codesPostaux', 'nom'])->search('codeDepartement', $department) as $item) {
+            $municipalities[implode(' / ', $item['codesPostaux']).' - '.$item['nom']] = $item['nom'];
         }
 
         return $municipalities;

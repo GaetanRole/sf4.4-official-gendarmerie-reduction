@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe38861ac31f91fd2f04307289124ead",
+    "content-hash": "9e5b2e46869d1aaa1d452f0cf92bec6d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1535,6 +1535,36 @@
                 "time"
             ],
             "time": "2018-12-01T13:51:25+00:00"
+        },
+        {
+            "name": "javiereguiluz/easyslugger",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/javiereguiluz/EasySlugger.git",
+                "reference": "11524a3fd70e3f0c98043755a0ffa228f2529211"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/javiereguiluz/EasySlugger/zipball/11524a3fd70e3f0c98043755a0ffa228f2529211",
+                "reference": "11524a3fd70e3f0c98043755a0ffa228f2529211",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasySlugger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fast and easy to use slugger with full UTF-8 support.",
+            "time": "2015-04-12T19:57:10+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -6580,12 +6610,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "89f6e0f30ef66bfb06008d6d6ae6e7cc66a2e0f5"
+                "reference": "4c0ba8a35f1f12dd9236452e9fae4346b0bf2a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/89f6e0f30ef66bfb06008d6d6ae6e7cc66a2e0f5",
-                "reference": "89f6e0f30ef66bfb06008d6d6ae6e7cc66a2e0f5",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4c0ba8a35f1f12dd9236452e9fae4346b0bf2a56",
+                "reference": "4c0ba8a35f1f12dd9236452e9fae4346b0bf2a56",
                 "shasum": ""
             },
             "conflict": {
@@ -6783,7 +6813,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-05-22T09:34:58+00:00"
+            "time": "2019-05-23T20:42:12+00:00"
         },
         {
             "name": "sebastian/finder-facade",

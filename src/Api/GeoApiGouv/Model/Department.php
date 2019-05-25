@@ -38,7 +38,7 @@ class Department extends GeoClient
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI . self::ENDPOINT;
+        $this->url = parent::BASE_URI.self::ENDPOINT;
     }
 
     /**
@@ -47,7 +47,7 @@ class Department extends GeoClient
     public function getAllDepartmentsByRegion(string $region): array
     {
         $departments = [];
-        foreach ($this->fields(['code', 'nom'])->search('codeRegion', $region) as $key => $item) {
+        foreach ($this->fields(['code', 'nom'])->search('codeRegion', $region) as $item) {
             $departments[$item['code'].' - '.$item['nom']] = $item['code'];
         }
 

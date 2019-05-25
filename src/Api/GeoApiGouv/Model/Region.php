@@ -36,7 +36,7 @@ class Region extends GeoClient
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI . self::ENDPOINT;
+        $this->url = parent::BASE_URI.self::ENDPOINT;
     }
 
     /**
@@ -45,7 +45,7 @@ class Region extends GeoClient
     public function getAllRegions(): array
     {
         $regions = [];
-        foreach ($this->fields(['code', 'nom'])->search() as $key => $item) {
+        foreach ($this->fields(['code', 'nom'])->search() as $item) {
             $regions[$item['nom']] = $item['code'];
         }
 

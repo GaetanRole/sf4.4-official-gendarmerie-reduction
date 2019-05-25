@@ -1,14 +1,8 @@
 <?php
 
-/**
- * Opinion Controller File
- *
- * @category    Opinion
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
@@ -23,51 +17,54 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @todo Add patterns on new() method (mediator, adapter...)
+ * @todo    Add patterns on new() method (mediator, adapter...).
  *
- * @Route("/opinion")
+ * @Route("/opinion", name="app_opinion_")
  * @IsGranted("ROLE_USER")
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class OpinionController extends AbstractController
 {
+    /** @var EntityManagerInterface */
+    private $em;
+
+    /** @var GlobalClock */
+    private $clock;
+
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(EntityManagerInterface $em, GlobalClock $clock, TranslatorInterface $translator)
+    {
+        $this->em = $em;
+        $this->clock = $clock;
+        $this->translator = $translator;
+    }
+
     /**
-     * Adding one Opinion on a existing Reduction
+     * Adding one Opinion on an existing Reduction.
+     * @todo    Probably have to add a dynamic form below a Reduction.
      *
-     * @todo Probably have to add a dynamic form below a Reduction
-     *
-     * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param Request $request POST'ed data
-     * @param Reduction $reduction According to one reduction
-     * @param EntityManagerInterface $em Entity Manager
-     * @param TranslatorInterface $translator Translator injection
-     * @param GlobalClock $clock Global project's clock
-     *
-     * @Route("/new/{slug}", methods={"GET","POST"})
-     * @return RedirectResponse|Response A Response instance
-     * @throws \Exception Datetime Exception
+     * @Route("/new/{slug}", name="new", methods={"GET","POST"})
+     * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function new(
-        Request $request,
-        Reduction $reduction,
-        EntityManagerInterface $em,
-        TranslatorInterface $translator,
-        GlobalClock $clock
-    ): Response {
+    public function new(Request $request, Reduction $reduction)
+    {
         $opinion = new Opinion();
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);
 
         if ($reduction && $form->isSubmitted() && $form->isValid()) {
             $opinion->setClientIp($request->getClientIp());
-            $opinion->setCreationDate($clock->getNowInDateTime());
+            $opinion->setCreationDate($this->clock->getNowInDateTime());
             $opinion->setUser($this->getUser());
             $opinion->setReduction($reduction);
 
-            $em->persist($opinion);
-            $em->flush();
+            $this->em->persist($opinion);
+            $this->em->flush();
 
-            $this->addFlash('success', $translator->trans('opinion.new.flash.success', [], 'flashes'));
-
+            $this->addFlash('success', $this->translator->trans('opinion.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_reduction_show', ['slug' => $reduction->getSlug()]);
         }
 

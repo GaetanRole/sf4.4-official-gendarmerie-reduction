@@ -1,16 +1,10 @@
 <?php
 
-/**
- * CategoryFixture file
- *
- * @category    Category
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use Faker;
+use Exception;
+use App\Entity\Category;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,35 +12,26 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class CategoryFixture extends Fixture implements FixtureGroupInterface
 {
-    /**
-     * @var string public CONST for reference used in ReductionFixture, concat to an int [0-4]
-     */
+    /** @var string public CONST for reference used in ReductionFixture, concat to an int [0-4]. */
     public const CATEGORY_REFERENCE = 'category-';
 
     /**
-     * Global project's clock
+     * Global project's clock.
      *
      * @var GlobalClock
      */
     private $clock;
 
-    /**
-     * Injecting Container Interface
-     *
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     /**
-     * CategoryFixture constructor.
-     *
-     * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param GlobalClock $clock Global project's clock
-     * @param ContainerInterface $container Container Interface
+     * @link    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
@@ -55,14 +40,11 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * Load three types of Categories to DB
+     * Load three types of Categories to DB.
      *
-     * @link https://github.com/fzaninotto/Faker
-     * @see 3 $categories[5] to use its references in ReductionFixture
-     * @param ObjectManager $manager Doctrine Manager
-     *
-     * @return void
-     * @throws \Exception Datetime Exception
+     * @see     3 $categories[5] to use its references in ReductionFixture
+     * @link    https://github.com/fzaninotto/Faker
+     * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -71,7 +53,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
         foreach ($this->getCategories() as $index => $name) {
             $category = new Category();
             $category->setName(ucfirst($name));
-            $category->setDescription($faker->text);
+            $category->setDescription($faker->realText(100));
             $category->setCreationDate($this->clock->getNowInDateTime());
 
             $manager->persist($category);
@@ -82,9 +64,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * Get an array of Category names
-     *
-     * @return array
+     * Get an array of Category names.
      */
     private function getCategories(): array
     {
@@ -93,14 +73,12 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
             'au quotidien',
             'réduction immédiate',
             'soldes',
-            'meilleure réduction',
+            'meilleure réduction'
         ];
     }
 
     /**
-     * Get User / Brand / Category fixtures
-     *
-     * @return array
+     * Get User / Brand / Category fixtures.
      */
     public static function getGroups(): array
     {

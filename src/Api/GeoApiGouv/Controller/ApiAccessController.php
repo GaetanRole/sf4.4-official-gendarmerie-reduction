@@ -16,8 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiAccessController extends AbstractController
 {
     /**
-     * @internal Check AJAX request from views
-     * @return JsonResponse|string Return an error response or the searchField
+     * @internal    Check AJAX request from views.
+     * @return      JsonResponse|string Return an error response or the searchField
      */
     private function isQueryStringInvalid(string $searchQuery, string $searchField)
     {
@@ -37,11 +37,8 @@ class ApiAccessController extends AbstractController
      * @api Ajax calls from reduction/new and reduction/edit views.
      * @Route("/get-municipalities-from-department", name="get_municipalities", methods={"GET"})
      */
-    public function getMunicipalitiesAccordingToOneDepartment(
-        Request $request,
-        GeoClient $client
-    ): JsonResponse {
-
+    public function getMunicipalitiesAccordingToOneDepartment(Request $request, GeoClient $client): JsonResponse
+    {
         $queryValue = $request->query->get('search');
         $response = $this->isQueryStringInvalid($queryValue, 'Department');
         return ($response === 'Department') ?
@@ -52,11 +49,8 @@ class ApiAccessController extends AbstractController
      * @api Ajax calls from reduction/new and reduction/edit views.
      * @Route("/get-departments-from-region", name="get_departments", methods={"GET"})
      */
-    public function getDepartmentsAccordingToOneRegion(
-        Request $request,
-        GeoClient $client
-    ): JsonResponse {
-
+    public function getDepartmentsAccordingToOneRegion(Request $request, GeoClient $client): JsonResponse
+    {
         $queryValue = $request->query->get('search');
         $response = $this->isQueryStringInvalid($queryValue, 'Region');
         return ($response === 'Region') ?
