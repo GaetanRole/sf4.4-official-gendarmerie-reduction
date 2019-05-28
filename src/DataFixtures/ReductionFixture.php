@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Entity\Reduction;
 use EasySlugger\SluggerInterface;
 use App\Service\GlobalClock;
@@ -60,22 +61,26 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
         foreach ($this->getReductionData() as [$index, $author, $brand, $categories]) {
             $reduction = new Reduction();
-            $reduction->setUser($author);
+
+            $reduction->setUuid(Uuid::uuid4());
             $reduction->setClientIp($faker->ipv4);
             $reduction->setName($faker->userName);
             $reduction->setEmail($faker->email);
-            $reduction->setBrand($brand);
-            $reduction->addCategory(...$categories);
+            $reduction->setCreatedAt($this->clock->getNowInDateTime());
+            $reduction->setUpdatedAt(null);
+
             $reductionTitle = $index.' '.$faker->text(16);
-            $reduction->setTitle($reductionTitle);
-            $reduction->setSlug($this->slugger::uniqueSlugify($reductionTitle));
-            $reduction->setDescription($faker->realText(300));
-            $reduction->setRegion($this->getRandomRegion());
-            $reduction->setDepartment($this->getRandomDepartment());
-            $reduction->setMunicipality($faker->city);
-            $reduction->setCreationDate($this->clock->getNowInDateTime());
-            $reduction->setIsBigDeal((bool)random_int(0, 1));
-            $reduction->setIsActive((bool)random_int(0, 1));
+            $reduction->setUser($author)
+                ->setBrand($brand)
+                ->addCategory(...$categories)
+                ->setTitle($reductionTitle)
+                ->setSlug($this->slugger::uniqueSlugify($reductionTitle))
+                ->setDescription($faker->realText(300))
+                ->setRegion($this->getRandomRegion())
+                ->setDepartment($this->getRandomDepartment())
+                ->setMunicipality($faker->city)
+                ->setIsBigDeal((bool)random_int(0, 1))
+                ->setIsActive((bool)random_int(0, 1));
 
             $manager->persist($reduction);
             $this->addReference(self::REDUCTION_REFERENCE.$index, $reduction);

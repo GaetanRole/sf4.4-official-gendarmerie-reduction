@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Entity\Brand;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -81,9 +82,13 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
     {
         foreach ($brandData as $index => $name) {
             $brand = new Brand();
-            $brand->setName($name);
-            $brand->setDescription($faker->realText(100));
-            $brand->setCreationDate($this->clock->getNowInDateTime());
+
+            $brand->setUuid(Uuid::uuid4());
+            $brand->setCreatedAt($this->clock->getNowInDateTime());
+            $brand->setUpdatedAt(null);
+
+            $brand->setName($name)
+                ->setDescription($faker->realText(100));
 
             $this->manager->persist($brand);
             $this->addReference($brandReference.$index, $brand);

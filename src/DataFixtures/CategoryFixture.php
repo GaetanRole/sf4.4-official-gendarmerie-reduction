@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Entity\Category;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -52,9 +53,13 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
 
         foreach ($this->getCategories() as $index => $name) {
             $category = new Category();
-            $category->setName(ucfirst($name));
-            $category->setDescription($faker->realText(100));
-            $category->setCreationDate($this->clock->getNowInDateTime());
+
+            $category->setUuid(Uuid::uuid4());
+            $category->setCreatedAt($this->clock->getNowInDateTime());
+            $category->setUpdatedAt(null);
+
+            $category->setName(ucfirst($name))
+                ->setDescription($faker->realText(100));
 
             $manager->persist($category);
             $this->addReference(self::CATEGORY_REFERENCE.$index, $category);

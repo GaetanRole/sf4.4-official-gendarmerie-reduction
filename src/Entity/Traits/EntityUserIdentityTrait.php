@@ -1,28 +1,22 @@
 <?php
 
-/**
- * Entity Trait File
- *
- * @category    Trait
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Entity\Traits;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait Class
- *
+ * A trait for User identity in Opinion and Reduction entities.
  * You can also use mappedsuperclass but not recommended.
- * @link        https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html
- * @link        https://stackoverflow.com/questions/25749418/symfony2-mappedsuperclass-and-doctrinegenerateentities
+ *
+ * @link    https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html
+ * @link    https://stackoverflow.com/questions/25749418/symfony2-mappedsuperclass-and-doctrinegenerateentities
  *
  * Private instead of Protected because of a well know behaviour from Doctrine --regenerate.
  *
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-trait UserIdentityTrait
+trait EntityUserIdentityTrait
 {
     /**
      * @var string|null
@@ -56,62 +50,41 @@ trait UserIdentityTrait
      */
     private $clientIp;
 
-    /*
-     * Personal methods
-     */
+    /* Personal methods */
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getName().' : '.$this->clientIp;
     }
 
-    /**
-     * @return string|null
-     */
+    /* Auto generated methods */
+
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClientIp(): ?string
     {
         return $this->clientIp;
     }
 
-    /**
-     * @param string $clientIp
-     */
-    public function setClientIp(string $clientIp): void
+    public function setClientIp(?string $clientIp): void
     {
         $this->clientIp = $clientIp;
     }

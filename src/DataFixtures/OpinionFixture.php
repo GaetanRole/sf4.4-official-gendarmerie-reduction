@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -52,13 +53,17 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
 
         foreach ($this->getOpinionReferenceData() as [$index, $author, $reduction]) {
             $opinion = new Opinion();
-            $opinion->setUser($author);
-            $opinion->setReduction($reduction);
+
+            $opinion->setUuid(Uuid::uuid4());
             $opinion->setName($faker->userName);
             $opinion->setEmail($faker->email);
             $opinion->setClientIp($faker->ipv4);
-            $opinion->setComment($faker->realText(100));
-            $opinion->setCreationDate($this->clock->getNowInDateTime());
+            $opinion->setCreatedAt($this->clock->getNowInDateTime());
+            $opinion->setUpdatedAt(null);
+
+            $opinion->setUser($author)
+                ->setReduction($reduction)
+                ->setComment($faker->realText(100));
 
             $manager->persist($opinion);
         }

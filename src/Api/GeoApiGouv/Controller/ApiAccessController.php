@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/api/geo", name="api_geo_")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class ApiAccessController extends AbstractController
+final class ApiAccessController extends AbstractController
 {
     /**
      * @internal    Check AJAX request from views.

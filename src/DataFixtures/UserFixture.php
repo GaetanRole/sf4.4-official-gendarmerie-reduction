@@ -4,11 +4,11 @@ namespace App\DataFixtures;
 
 use Faker;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Entity\User;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -74,9 +74,12 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
 
         for ($index = 0; $index < self::USER_NB_TUPLE; $index++) {
             $user = new User();
-            $user
-                ->setUuid(Uuid::uuid4())
-                ->setUsername($faker->userName)
+
+            $user->setUuid(Uuid::uuid4());
+            $user->setCreatedAt($this->clock->getNowInDateTime());
+            $user->setUpdatedAt(null);
+
+            $user->setUsername($faker->userName)
                 ->setIdentity($this->getRandomIdentity())
                 ->setEmail($faker->email)
                 ->setPassword(
@@ -87,8 +90,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
                 )
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setIsActive(true)
-                ->setCreationDate($this->clock->getNowInDateTime());
-            $user->setRoles([$roles[array_rand($roles)]]);
+                ->setRoles([$roles[array_rand($roles)]]);
 
             $manager->persist($user);
             $this->addReference(self::USER_REFERENCE.$index, $user);
