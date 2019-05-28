@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use Exception;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
+use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,15 +39,18 @@ class AdminOpinionController extends AbstractController
     /**
      * @todo    Probably have to add a dynamic edit below a Reduction.
      *
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Opinion $opinion)
+    public function edit(Request $request, Opinion $opinion, GlobalClock $clock)
     {
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $opinion->setUpdatedAt($clock->getNowInDateTime());
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('opinion.edit.flash.success', [], 'flashes'));
@@ -56,7 +61,7 @@ class AdminOpinionController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Opinion $opinion): RedirectResponse
     {

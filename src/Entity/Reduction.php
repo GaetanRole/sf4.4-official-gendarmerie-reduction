@@ -159,7 +159,7 @@ class Reduction
      *     orphanRemoval=true,
      *     cascade={"persist"}
      * )
-     * @ORM\OrderBy({"creationDate": "DESC"})
+     * @ORM\OrderBy({"createdAt": "DESC"})
      */
     private $opinions;
 

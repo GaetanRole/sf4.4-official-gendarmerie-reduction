@@ -18,9 +18,11 @@
                         <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Uuid</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>CreationDate</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
                             <th>actions</th>
                         </tr>
                         </thead>
@@ -28,22 +30,24 @@
                         {% for category in categories %}
                             <tr>
                                 <td>{{ category.id }}</td>
+                                <td>{{ category.uuid }}</td>
                                 <td>{{ category.name }}</td>
                                 <td>{{ category.description }}</td>
-                                <td>{{ category.creationDate ? category.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>
-                                    <a href="{{ path('app_admin_admincategory_edit', {'id': category.id}) }}">{{ 'link.admin.category.edit'|trans }}</a>
+                                    <a href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}">{{ 'link.admin.category.edit'|trans }}</a>
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="5">{{ 'table.empty'|trans }}</td>
+                                <td colspan="7">{{ 'table.empty'|trans }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
-                    <a href="{{ path('app_admin_admincategory_new') }}">{{ 'link.admin.category.new'|trans }}</a>
+                    <a href="{{ path('app_admin_category_new') }}">{{ 'link.admin.category.new'|trans }}</a>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminController extends AbstractController
+final class AdminController extends AbstractController
 {
     /**
      * @todo    Add all useful data for admin index.

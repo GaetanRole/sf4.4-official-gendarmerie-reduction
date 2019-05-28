@@ -78,7 +78,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
             'au quotidien',
             'réduction immédiate',
             'soldes',
-            'meilleure réduction'
+            'meilleure réduction',
         ];
     }
 

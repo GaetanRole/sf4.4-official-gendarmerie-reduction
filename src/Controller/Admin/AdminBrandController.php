@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Service\GlobalClock;
 use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Repository\BrandRepository;
-use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +62,9 @@ class AdminBrandController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $brand->setCreationDate($clock->getNowInDateTime());
+            $brand->setUuid(Uuid::uuid4());
+            $brand->setCreatedAt($clock->getNowInDateTime());
+
             $this->em->persist($brand);
             $this->em->flush();
 
@@ -73,15 +76,18 @@ class AdminBrandController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Brand $brand)
+    public function edit(Request $request, Brand $brand, GlobalClock $clock)
     {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $brand->setUpdatedAt($clock->getNowInDateTime());
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('brand.edit.flash.success', [], 'flashes'));
@@ -92,7 +98,7 @@ class AdminBrandController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Brand $brand): RedirectResponse
     {

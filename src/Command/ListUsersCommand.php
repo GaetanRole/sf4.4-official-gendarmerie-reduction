@@ -92,6 +92,7 @@ class ListUsersCommand extends Command
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
+        $io->title('Current Users present in DB :');
         $io->table(['ID', 'Username', 'Roles'], $usersAsPlainArrays);
 
         $usersAsATable = $bufferedOutput->fetch();

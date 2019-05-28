@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
+use App\Service\GlobalClock;
 use EasySlugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,15 +31,20 @@ class AdminReductionController extends AbstractController
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    /** @var GlobalClock */
+    private $clock;
+
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, GlobalClock $clock)
     {
         $this->em = $em;
         $this->translator = $translator;
+        $this->clock = $clock;
     }
 
     /**
      * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
     public function edit(Request $request, Reduction $reduction, SluggerInterface $slugger)
     {
@@ -45,7 +52,9 @@ class AdminReductionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reduction->setUpdatedAt($this->clock->getNowInDateTime());
             $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('reduction.edit.flash.success', [], 'flashes'));

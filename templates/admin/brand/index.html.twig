@@ -18,9 +18,11 @@
                         <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Uuid</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>CreationDate</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
                             <th>actions</th>
                         </tr>
                         </thead>
@@ -28,22 +30,24 @@
                         {% for brand in brands %}
                             <tr>
                                 <td>{{ brand.id }}</td>
+                                <td>{{ brand.uuid }}</td>
                                 <td>{{ brand.name }}</td>
                                 <td>{{ brand.description }}</td>
-                                <td>{{ brand.creationDate ? brand.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ brand.createdAt ? brand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ brand.updatedAt ? brand.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>
-                                    <a href="{{ path('app_admin_adminbrand_edit', {'id': brand.id}) }}">{{ 'link.admin.brand.edit'|trans }}</a>
+                                    <a href="{{ path('app_admin_brand_edit', {'uuid': brand.uuid}) }}">{{ 'link.admin.brand.edit'|trans }}</a>
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="5">{{ 'table.empty'|trans }}</td>
+                                <td colspan="7">{{ 'table.empty'|trans }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
-                    <a href="{{ path('app_admin_adminbrand_new') }}">{{ 'link.admin.brand.new'|trans }}</a>
+                    <a href="{{ path('app_admin_brand_new') }}">{{ 'link.admin.brand.new'|trans }}</a>
                 </div>
             </div>
         </div>

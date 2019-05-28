@@ -52,8 +52,8 @@ class OpinionRepository extends ServiceEntityRepository
             ->addSelect('u', 'r')
             ->innerJoin('o.user', 'u')
             ->innerJoin('o.reduction', 'r')
-            ->where('o.creationDate <= :now')
-            ->orderBy('o.creationDate', 'DESC')
+            ->where('o.createdAt <= :now')
+            ->orderBy('o.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime());
 
         return $qb->getQuery()->execute();

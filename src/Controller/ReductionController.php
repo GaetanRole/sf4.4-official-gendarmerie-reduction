@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Service\GlobalClock;
+use EasySlugger\SluggerInterface;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
 use App\Repository\ReductionRepository;
@@ -10,8 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use EasySlugger\SluggerInterface;
-use App\Service\GlobalClock;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -29,7 +30,7 @@ class ReductionController extends AbstractController
     /** @var GlobalClock */
     private $clock;
 
-    /** @var GlobalClock */
+    /** @var TranslatorInterface */
     private $translator;
 
     public function __construct(GlobalClock $clock, TranslatorInterface $translator)
@@ -64,9 +65,10 @@ class ReductionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
+            $reduction->setUuid(Uuid::uuid4());
             $reduction->setClientIp($request->getClientIp());
-            $reduction->setCreationDate($this->clock->getNowInDateTime());
+            $reduction->setCreatedAt($this->clock->getNowInDateTime());
+            $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
             $reduction->setUser($this->getUser());
 
             $em->persist($reduction);

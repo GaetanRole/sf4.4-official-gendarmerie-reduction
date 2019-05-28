@@ -156,7 +156,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     {
         $randomCategoryReferences = [];
         // * @Assert\Count(max="3")
-        $maxIndex = random_int(1, 4);
+        $maxIndex = random_int(1, 3);
 
         for ($index = 0; $index < $maxIndex; $index++) {
             $randomCategoryReferences[]

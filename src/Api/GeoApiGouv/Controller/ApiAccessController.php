@@ -24,7 +24,7 @@ final class ApiAccessController extends AbstractController
         if (!$searchQuery || $searchQuery === '') {
             $response = new JsonResponse(
                 "$searchField query string can't be empty.",
-                Response::HTTP_UNPROCESSABLE_ENTITY
+                Response::HTTP_UNPROCESSABLE_ENTITY,
             );
             $response->headers->set('Content-Type', 'application/problem+json');
             return $response;

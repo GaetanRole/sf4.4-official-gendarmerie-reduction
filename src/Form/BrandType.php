@@ -37,7 +37,7 @@ class BrandType extends AbstractType
                     'attr' => [
                         'placeholder' => 'form.brand.name.placeholder',
                         'minLength' => '2',
-                        'maxLength' => '128',
+                        'maxLength' => '64',
                     ],
                 ]
             )

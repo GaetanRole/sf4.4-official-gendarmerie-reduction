@@ -18,11 +18,15 @@
                         <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Uuid</th>
                             <th>Username</th>
                             <th>Identity</th>
                             <th>Email</th>
-                            <th>CreationDate</th>
+                            <th>PhoneNumber</th>
+                            <th>isActive</th>
                             <th>Roles</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
                             <th>actions</th>
                         </tr>
                         </thead>
@@ -34,26 +38,29 @@
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.identity }}</td>
                                 <td>{{ user.email }}</td>
-                                <td>{{ user.creationDate ? user.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ user.phoneNumber }}</td>
+                                <td>{{ user.isActive}}</td>
                                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>
                                     {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
                                         <p>{{ 'admin.user.index.table.p.same_acl'|trans }}</p>
                                     {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
-                                        <a href="{{ path('app_admin_adminuser_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
+                                        <a href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
                                     {% endif %}
                                     <a href="{{ path('app_user_show', {'uuid': user.uuid}) }}">{{ 'link.user.show'|trans }}</a>
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="7">{{ 'table.empty'|trans }}</td>
+                                <td colspan="11">{{ 'table.empty'|trans }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
-                    <a href="{{ path('app_admin_adminuser_new') }}">{{ 'link.admin.user.new'|trans }}</a>
+                    <a href="{{ path('app_admin_user_new') }}">{{ 'link.admin.user.new'|trans }}</a>
                 </div>
             </div>
         </div>

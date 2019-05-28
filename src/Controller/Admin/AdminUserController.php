@@ -3,12 +3,13 @@
 namespace App\Controller\Admin;
 
 use Exception;
+use App\Service\GlobalClock;
 use App\Entity\User;
 use App\Form\Type\ChangePasswordType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
-use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +34,14 @@ class AdminUserController extends AbstractController
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    /** @var GlobalClock */
+    private $clock;
+
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, GlobalClock $clock)
     {
         $this->em = $em;
         $this->translator = $translator;
+        $this->clock = $clock;
     }
 
     /**
@@ -44,7 +49,9 @@ class AdminUserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('admin/user/index.html.twig', ['users' => $userRepository->findAll()]);
+        return $this->render('admin/user/index.html.twig', [
+            'users' => $userRepository->findBy([], ['username' => 'ASC'])
+        ]);
     }
 
     /**
@@ -52,15 +59,16 @@ class AdminUserController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, GlobalClock $clock)
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUuid(Uuid::uuid4());
+            $user->setCreatedAt($this->clock->getNowInDateTime());
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPlainPassword()));
-            $user->setCreationDate($clock->getNowInDateTime());
 
             $this->em->persist($user);
             $this->em->flush();
@@ -76,6 +84,7 @@ class AdminUserController extends AbstractController
      * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
      * @IsGranted("edit", subject="user", message="An admin can only be edited by a super admin account.")
      * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder)
     {
@@ -86,6 +95,8 @@ class AdminUserController extends AbstractController
         $formChangePassword->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUpdatedAt($this->clock->getNowInDateTime());
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('user.edit.account.flash.success', [], 'flashes'));
@@ -93,7 +104,9 @@ class AdminUserController extends AbstractController
         }
 
         if ($formChangePassword->isSubmitted() && $formChangePassword->isValid()) {
+            $user->setUpdatedAt($this->clock->getNowInDateTime());
             $user->setPassword($encoder->encodePassword($user, $formChangePassword->get('plainPassword')->getData()));
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('user.edit.password.flash.success', [], 'flashes'));

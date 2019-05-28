@@ -57,8 +57,8 @@ class ReductionRepository extends ServiceEntityRepository
             ->addSelect('u', 'c')
             ->innerJoin('r.user', 'u')
             ->leftJoin('r.categories', 'c')
-            ->where('r.creationDate <= :now')
-            ->orderBy('r.creationDate', 'DESC')
+            ->where('r.createdAt <= :now')
+            ->orderBy('r.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime());
 
         if (null !== $category) {
@@ -92,7 +92,7 @@ class ReductionRepository extends ServiceEntityRepository
             ;
         }
         return $queryBuilder
-            ->orderBy('r.creationDate', 'DESC')
+            ->orderBy('r.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
@@ -118,7 +118,7 @@ class ReductionRepository extends ServiceEntityRepository
     private function extractSearchTerms(string $searchQuery): array
     {
         $terms = array_unique(explode(' ', $searchQuery));
-        return array_filter($terms, function ($term) {
+        return array_filter($terms, static function ($term) {
             return 2 <= mb_strlen($term);
         });
     }

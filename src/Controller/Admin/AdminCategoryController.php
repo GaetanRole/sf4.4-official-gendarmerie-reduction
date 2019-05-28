@@ -3,9 +3,10 @@
 namespace App\Controller\Admin;
 
 use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Service\GlobalClock;
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +46,7 @@ class AdminCategoryController extends AbstractController
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('admin/category/index.html.twig', [
-            'categories' => $categoryRepository->findBy([], ['name' => 'ASC']),
+            'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
         ]);
     }
 
@@ -61,7 +62,9 @@ class AdminCategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setCreationDate($clock->getNowInDateTime());
+            $category->setUuid(Uuid::uuid4());
+            $category->setCreatedAt($clock->getNowInDateTime());
+
             $this->em->persist($category);
             $this->em->flush();
 
@@ -73,15 +76,18 @@ class AdminCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Category $category)
+    public function edit(Request $request, Category $category, GlobalClock $clock)
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setUpdatedAt($clock->getNowInDateTime());
+
             $this->em->flush();
 
             $this->addFlash('success', $this->translator->trans('category.edit.flash.success', [], 'flashes'));
@@ -92,7 +98,7 @@ class AdminCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Category $category): RedirectResponse
     {

@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Service\GlobalClock;
 use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
-use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,8 +57,9 @@ class OpinionController extends AbstractController
         $form->handleRequest($request);
 
         if ($reduction && $form->isSubmitted() && $form->isValid()) {
+            $opinion->setUuid(Uuid::uuid4());
             $opinion->setClientIp($request->getClientIp());
-            $opinion->setCreationDate($this->clock->getNowInDateTime());
+            $opinion->setCreatedAt($this->clock->getNowInDateTime());
             $opinion->setUser($this->getUser());
             $opinion->setReduction($reduction);
 
