@@ -1,18 +1,12 @@
 <?php
 
-/**
- * LoginFormAuthenticator File
- *
- * @category    Login
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -27,52 +21,32 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ */
 final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
-    /**
-     * Trait to get (and set) the URL the user last visited before being forced to authenticate.
-     */
+    /** Trait to get (and set) the URL the user last visited before being forced to authenticate. */
     use TargetPathTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /**
-     * @var TranslatorInterface
-     */
+    /** @var TranslatorInterface */
     private $translator;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @var CsrfTokenManagerInterface
-     */
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
 
-    /**
-     * @var UserPasswordEncoderInterface
-     */
+    /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
-    /**
-     * @var User
-     */
+    /** @var User */
     private $user;
 
-    /**
-     * LoginFormAuthenticator constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     * @param TranslatorInterface $translator Translator injection
-     * @param RouterInterface $router
-     * @param CsrfTokenManagerInterface $csrfTokenManager
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
     public function __construct(
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator,
@@ -87,44 +61,25 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    /**
-     * @param Request $request
-     * @return bool
-     */
     public function supports(Request $request): bool
     {
-        return 'app_login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
-    /**
-     * Get form input
-     *
-     * @param Request $request
-     *
-     * @return array|mixed
-     */
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('username'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['username']
-        );
+
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials['username']);
 
         return $credentials;
     }
 
     /**
-     * Get current User with login
-     *
-     * @param mixed $credentials
-     * @param UserProviderInterface $userProvider
-     *
      * @return User|object|UserInterface|null
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -151,14 +106,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
-    /**
-     * Check if User's password is valid
-     *
-     * @param mixed $credentials
-     * @param UserInterface $user
-     *
-     * @return bool
-     */
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         $state = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
@@ -171,12 +118,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * Switch between two routes according to User's role
-     *
-     * @param Request $request
-     * @param TokenInterface $token
-     * @param string $providerKey
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
+     * @return RedirectResponse|Response|null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -184,7 +126,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $roles = array_map(function ($role) {
+        $roles = array_map(static function ($role) {
             return $role->getRole();
         }, $token->getRoles());
 
@@ -195,11 +137,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->router->generate('app_default_dashboard'));
     }
 
-    /**
-     * Getting login URL
-     *
-     * @return string The generated URL
-     */
     protected function getLoginUrl(): string
     {
         return $this->router->generate('app_login');
