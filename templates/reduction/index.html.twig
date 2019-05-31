@@ -14,6 +14,8 @@
                 <div class="col">
                     <h1>{{ 'reduction.index.body.h1'|trans }}</h1>
 
+                    <a href="{{ path('app_reduction_new') }}">{{ 'link.reduction.new'|trans }}</a>
+
                     <table class="table">
                         <thead>
                         <tr>
@@ -71,8 +73,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
-                    <a href="{{ path('app_reduction_new') }}">{{ 'link.reduction.new'|trans }}</a>
                 </div>
             </div>
         </div>

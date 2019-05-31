@@ -52,7 +52,9 @@ class ReductionType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'class' => Brand::class,
+                'placeholder' => 'form.reduction.brand.placeholder',
                 'choice_label' => 'name',
+                'attr' => ['data-select' => true],
                 'label' => 'form.reduction.brand.label',
                 'help' => 'form.reduction.brand.help',
             ])

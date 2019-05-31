@@ -100,10 +100,10 @@ class Reduction
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=2)
+     * @ORM\Column(type="string", length=13)
      * @Assert\NotBlank(message="validator.reduction.region.not_blank")
      * @Assert\Regex(
-     *     pattern="/^[0-9]{2}$/",
+     *     pattern="/^[0-9]{2}$|(\bInternational\b|\bNational\b)/",
      *     message="validator.reduction.region.regex"
      * )
      */

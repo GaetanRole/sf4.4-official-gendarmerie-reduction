@@ -14,6 +14,8 @@
                 <div class="col">
                     <h1>{{ 'admin.category.index.body.h1'|trans }}</h1>
 
+                    <a href="{{ path('app_admin_category_new') }}">{{ 'link.admin.category.new'|trans }}</a>
+
                     <table class="table">
                         <thead>
                         <tr>
@@ -46,8 +48,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-
-                    <a href="{{ path('app_admin_category_new') }}">{{ 'link.admin.category.new'|trans }}</a>
                 </div>
             </div>
         </div>

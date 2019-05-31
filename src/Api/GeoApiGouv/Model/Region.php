@@ -47,6 +47,12 @@ class Region extends GeoClient
     public function getAllRegions(): array
     {
         $regions = [];
+
+        // Hardcoded values for international and national reductions
+        // Added in Regex constraint into Reduction entity
+        $regions['International'] = 'International';
+        $regions['National'] = 'National';
+
         foreach ($this->fields(['code', 'nom'])->search() as $item) {
             $regions[$item['nom']] = $item['code'];
         }

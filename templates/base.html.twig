@@ -21,6 +21,11 @@
 <body>
 <header>
     {{ i18n_links(['fr', 'en'], app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+            <li><a href="{{ path('app_admin_index') }}">{{ 'link.admin.index'|trans }}</a></li>
+        </ul>
+    {% endif %}
     {% block header %}
     {% endblock %}
 </header>

@@ -127,7 +127,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $roles = array_map(static function ($role) {
-            return $role->getRole();
+            return $role;
         }, $token->getRoleNames());
 
         if (in_array('ROLE_ADMIN', $roles, true)

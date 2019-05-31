@@ -3,7 +3,10 @@
 {% block title %}{{ 'admin.reduction.edit.head.meta.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
+    <style>
+        form {margin-bottom: 150px;}
+    </style>
 {% endblock %}
 
 {% block body_id 'admin-reduction-edit' %}
@@ -34,20 +37,33 @@
         const regionSelect = $('#reduction_region');
         const departmentSelect = $('#reduction_department');
         const municipalitySelect = $('#reduction_municipality');
+        const departmentDivSelect = $('#reduction div:nth-child(7)');
+        const municipalityDivSelect = $('#reduction div:nth-child(8)');
+
+        let hideDepartmentAndMunicipalitySelectField = () => {
+            departmentDivSelect.fadeOut('slow');
+            municipalityDivSelect.fadeOut('slow');
+            municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+            departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+        };
+
+        let showDepartmentAndMunicipalitySelectField = () => {
+            departmentDivSelect.fadeIn('slow');
+            municipalityDivSelect.fadeIn('slow');
+        };
 
         let setDataAccordingToOneField = (name, currentSelector, data) => {
             if (currentSelector === departmentSelect) {
-                municipalitySelect.html('');
-                municipalitySelect.append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+                municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
             }
-            currentSelector.html('');
-            currentSelector.append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+            currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
             $.each(data, (key, value) => {
                 currentSelector.append('<option value="' + value + '">' + key + '</option>');
             });
         };
 
         let ajaxCallback = (name, selector, dataValue) => {
+            showDepartmentAndMunicipalitySelectField();
             $.ajax({
                 url: selector.data('autocomplete-' + name + '-url'),
                 type: "GET",
@@ -57,7 +73,11 @@
             });
         };
 
-        regionSelect.change(function () { ajaxCallback('department', departmentSelect, $(this).val()); });
+        regionSelect.change(function () {
+            // If International or National is selected, hide others select fields
+            ($(this).val() === 'International' || $(this).val() === 'National') ?
+                hideDepartmentAndMunicipalitySelectField() : ajaxCallback('department', departmentSelect, $(this).val());
+        });
         departmentSelect.change(function () { ajaxCallback('municipality', municipalitySelect, $(this).val()); });
     </script>
 {% endblock %}
