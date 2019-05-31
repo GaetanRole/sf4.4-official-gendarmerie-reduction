@@ -518,7 +518,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "2.5",
-            "ref": "62dbd4422d8ba6cbcb8964ca558c7f352eae955e"
+            "ref": "3db029c03e452b4a23f7fc45cec7c922c2247eb8"
         },
         "files": [
             "config/packages/dev/swiftmailer.yaml",
@@ -614,7 +614,7 @@
         "version": "1.6.6"
     },
     "twig/twig": {
-        "version": "v2.10.0"
+        "version": "v2.11.0"
     },
     "webmozart/assert": {
         "version": "1.4.0"

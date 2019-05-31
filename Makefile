@@ -9,6 +9,11 @@ COMPOSER			= composer
 
 install:			.env.local vendor db-init ## Set up the project : copy the env and start the project with vendors and DB
 
+install-prod:		.env.local
+					sed -i -E s/APP_ENV=[a-zA-Z]+/APP_ENV=prod/ .env.local
+					$(COMPOSER) install --no-dev --optimize-autoloader
+					$(CONSOLE) cache:clear --env=prod
+
 sf-console\:%:		## Calling Symfony console
 					$(CONSOLE) $* $(ARGS)
 
@@ -34,6 +39,7 @@ db-migrate:			## Execute doctrine:migrations:migrate
 
 db-fixtures: 		## Execute doctrine:fixtures:load
 					$(CONSOLE) doctrine:fixtures:load --no-interaction
+					$(CONSOLE) app:list-users
 
 db-diff:			## Execute doctrine:migration:diff
 					$(CONSOLE) doctrine:migrations:diff --formatted
@@ -70,6 +76,9 @@ vendor:				./composer.json ## Install dependencies (vendor) (might be slow)
 cc:					## Clear cache
 					$(CONSOLE) cache:clear
 
+cc-prod:			## Clear cache for prod
+					$(CONSOLE) cache:clear --env=prod
+
 clean:				qa-clean-conf cc ## Remove all generated files
 					rm -rvf ./vendor ./var
 					rm -rvf ./.env.local
@@ -78,6 +87,13 @@ clear:				db-destroy clean ## Remove all generated files and db
 
 update:				## Update dependencies
 					$(COMPOSER) update --lock --no-interaction
+
+update-prod:		## Update dependencies for prod
+					$(COMPOSER) update --no-dev --optimize-autoloader
+					$(CONSOLE) cache:clear --env=prod
+					$(COMPOSER) dump-autoload --optimize --no-dev --classmap-authoritative
+					# sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
+                    # sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
 
 .PHONY:				cc clean clear update
 
