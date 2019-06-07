@@ -5,18 +5,17 @@ namespace App\Controller\Admin;
 use Exception;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
-use App\Service\GlobalClock;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Adapter\EntityRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/admin/opinion", name="app_admin_opinion_")
  * @IsGranted("ROLE_ADMIN")
@@ -24,15 +23,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AdminOpinionController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
     }
 
@@ -43,16 +42,13 @@ class AdminOpinionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Opinion $opinion, GlobalClock $clock)
+    public function edit(Request $request, Opinion $opinion)
     {
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $opinion->setUpdatedAt($clock->getNowInDateTime());
-
-            $this->em->flush();
-
+            $this->entityRepository->update($opinion);
             $this->addFlash('success', $this->translator->trans('opinion.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_index');
         }
@@ -66,9 +62,7 @@ class AdminOpinionController extends AbstractController
     public function delete(Request $request, Opinion $opinion): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
-            $this->em->remove($opinion);
-            $this->em->flush();
-
+            $this->entityRepository->delete($opinion);
             $this->addFlash('success', $this->translator->trans('opinion.delete.flash.success', [], 'flashes'));
         }
 

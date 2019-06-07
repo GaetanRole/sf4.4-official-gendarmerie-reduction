@@ -3,23 +3,20 @@
 namespace App\Controller;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
-use EasySlugger\SluggerInterface;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
-use App\Repository\ReductionRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasySlugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Adapter\EntityRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/reduction", name="app_reduction_")
  * @IsGranted("ROLE_USER")
@@ -27,28 +24,29 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ReductionController extends AbstractController
 {
-    /** @var GlobalClock */
-    private $clock;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(GlobalClock $clock, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->clock = $clock;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
     }
 
     /**
-     * @todo    Add paginator PagerFanta.
-     * @todo    Add search bar and filters.
+     * @todo    Add paginator PagerFanta and search bar with filters.
      *
      * @Route("/", name="index", methods={"GET"})
      * @throws  Exception Datetime Exception
      */
-    public function index(ReductionRepository $reductionRepository): Response
+    public function index(): Response
     {
-        return $this->render('reduction/index.html.twig', ['reductions' => $reductionRepository->findLatest()]);
+        return $this->render('reduction/index.html.twig', [
+            'reductions' => $this->entityRepository->getRepository(Reduction::class)->findLatest()
+        ]);
     }
 
     /**
@@ -58,22 +56,18 @@ class ReductionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, EntityManagerInterface $em, SluggerInterface $slugger)
+    public function new(Request $request, SluggerInterface $slugger)
     {
         $reduction = new Reduction();
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reduction->setUuid(Uuid::uuid4());
             $reduction->setClientIp($request->getClientIp());
-            $reduction->setCreatedAt($this->clock->getNowInDateTime());
             $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
             $reduction->setUser($this->getUser());
 
-            $em->persist($reduction);
-            $em->flush();
-
+            $this->entityRepository->save($reduction);
             $this->addFlash('success', $this->translator->trans('reduction.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_reduction_index');
         }

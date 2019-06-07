@@ -3,22 +3,20 @@
 namespace App\Controller;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
 use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\Adapter\EntityRepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on new() method (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/opinion", name="app_opinion_")
  * @IsGranted("ROLE_USER")
@@ -26,19 +24,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class OpinionController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
-
-    /** @var GlobalClock */
-    private $clock;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, GlobalClock $clock, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
-        $this->clock = $clock;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
     }
 
@@ -57,22 +51,15 @@ class OpinionController extends AbstractController
         $form->handleRequest($request);
 
         if ($reduction && $form->isSubmitted() && $form->isValid()) {
-            $opinion->setUuid(Uuid::uuid4());
             $opinion->setClientIp($request->getClientIp());
-            $opinion->setCreatedAt($this->clock->getNowInDateTime());
             $opinion->setUser($this->getUser());
             $opinion->setReduction($reduction);
 
-            $this->em->persist($opinion);
-            $this->em->flush();
-
+            $this->entityRepository->save($opinion);
             $this->addFlash('success', $this->translator->trans('opinion.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_reduction_show', ['slug' => $reduction->getSlug()]);
         }
 
-        return $this->render('opinion/new.html.twig', [
-            'opinion' => $opinion,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('opinion/new.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
     }
 }

@@ -3,22 +3,19 @@
 namespace App\Controller\Admin;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
 use App\Entity\Brand;
 use App\Form\BrandType;
-use App\Repository\BrandRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Adapter\EntityRepositoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/admin/brand", name="app_admin_brand_")
  * @IsGranted("ROLE_ADMIN")
@@ -26,15 +23,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AdminBrandController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
     }
 
@@ -43,10 +40,10 @@ class AdminBrandController extends AbstractController
      *
      * @Route("/", name="index", methods={"GET"})
      */
-    public function index(BrandRepository $brandRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/brand/index.html.twig', [
-            'brands' => $brandRepository->findBy([], ['name' => 'ASC']),
+            'brands' => $this->entityRepository->getRepository(Brand::class)->findBy([], ['name' => 'ASC']),
         ]);
     }
 
@@ -55,19 +52,14 @@ class AdminBrandController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, GlobalClock $clock)
+    public function new(Request $request)
     {
         $brand = new Brand();
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $brand->setUuid(Uuid::uuid4());
-            $brand->setCreatedAt($clock->getNowInDateTime());
-
-            $this->em->persist($brand);
-            $this->em->flush();
-
+            $this->entityRepository->save($brand);
             $this->addFlash('success', $this->translator->trans('brand.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_brand_index');
         }
@@ -80,16 +72,13 @@ class AdminBrandController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Brand $brand, GlobalClock $clock)
+    public function edit(Request $request, Brand $brand)
     {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $brand->setUpdatedAt($clock->getNowInDateTime());
-
-            $this->em->flush();
-
+            $this->entityRepository->update($brand);
             $this->addFlash('success', $this->translator->trans('brand.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_brand_index');
         }
@@ -107,10 +96,8 @@ class AdminBrandController extends AbstractController
                 $this->addFlash('danger', $this->translator->trans('brand.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_brand_index');
             }
-
+            $this->entityRepository->delete($brand);
             $this->addFlash('success', $this->translator->trans('brand.delete.flash.success', [], 'flashes'));
-            $this->em->remove($brand);
-            $this->em->flush();
         }
 
         return $this->redirectToRoute('app_admin_brand_index');

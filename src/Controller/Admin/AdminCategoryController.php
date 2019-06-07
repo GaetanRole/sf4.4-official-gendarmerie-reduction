@@ -3,22 +3,19 @@
 namespace App\Controller\Admin;
 
 use Exception;
-use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
 use App\Entity\Category;
 use App\Form\CategoryType;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\Adapter\EntityRepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/admin/category", name="app_admin_category_")
  * @IsGranted("ROLE_ADMIN")
@@ -26,15 +23,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AdminCategoryController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
     }
 
@@ -43,10 +40,10 @@ class AdminCategoryController extends AbstractController
      *
      * @Route("/", name="index", methods={"GET"})
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/category/index.html.twig', [
-            'categories' => $categoryRepository->findBy([], ['name' => 'ASC'])
+            'categories' => $this->entityRepository->getRepository(Category::class)->findBy([], ['name' => 'ASC']),
         ]);
     }
 
@@ -55,19 +52,14 @@ class AdminCategoryController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, GlobalClock $clock)
+    public function new(Request $request)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setUuid(Uuid::uuid4());
-            $category->setCreatedAt($clock->getNowInDateTime());
-
-            $this->em->persist($category);
-            $this->em->flush();
-
+            $this->entityRepository->save($category);
             $this->addFlash('success', $this->translator->trans('category.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_category_index');
         }
@@ -80,16 +72,13 @@ class AdminCategoryController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Category $category, GlobalClock $clock)
+    public function edit(Request $request, Category $category)
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setUpdatedAt($clock->getNowInDateTime());
-
-            $this->em->flush();
-
+            $this->entityRepository->update($category);
             $this->addFlash('success', $this->translator->trans('category.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_category_index');
         }
@@ -107,10 +96,8 @@ class AdminCategoryController extends AbstractController
                 $this->addFlash('danger', $this->translator->trans('category.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_category_index');
             }
-
+            $this->entityRepository->delete($category);
             $this->addFlash('success', $this->translator->trans('category.delete.flash.success', [], 'flashes'));
-            $this->em->remove($category);
-            $this->em->flush();
         }
 
         return $this->redirectToRoute('app_admin_category_index');

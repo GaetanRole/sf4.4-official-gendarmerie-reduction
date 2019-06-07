@@ -531,7 +531,7 @@
       </trans-unit>
       <trans-unit id="BQ4RhbO" resname="validator.user.plain_password.regex">
         <source>validator.user.plain_password.regex</source>
-        <target>Votre mot de passe doit contenir plus de 8 caractères et contenir des lettres.</target>
+        <target>Votre mot de passe doit contenir plus de 8 caractères et contenir au moins 1 chiffre.</target>
       </trans-unit>
     </body>
   </file>

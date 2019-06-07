@@ -5,19 +5,18 @@ namespace App\Controller\Admin;
 use Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
-use App\Service\GlobalClock;
 use EasySlugger\SluggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Adapter\EntityRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/admin/reduction", name="app_admin_reduction_")
  * @IsGranted("ROLE_ADMIN")
@@ -25,20 +24,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AdminReductionController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var GlobalClock */
-    private $clock;
-
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, GlobalClock $clock)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
-        $this->clock = $clock;
     }
 
     /**
@@ -52,11 +47,9 @@ class AdminReductionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reduction->setUpdatedAt($this->clock->getNowInDateTime());
             $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
 
-            $this->em->flush();
-
+            $this->entityRepository->update($reduction);
             $this->addFlash('success', $this->translator->trans('reduction.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_reduction_index');
         }
@@ -73,9 +66,7 @@ class AdminReductionController extends AbstractController
     public function delete(Request $request, Reduction $reduction): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete'.$reduction->getId(), $request->request->get('_token'))) {
-            $this->em->remove($reduction);
-            $this->em->flush();
-
+            $this->entityRepository->delete($reduction);
             $this->addFlash('success', $this->translator->trans('reduction.delete.flash.success', [], 'flashes'));
         }
 

@@ -3,24 +3,21 @@
 namespace App\Controller\Admin;
 
 use Exception;
-use App\Service\GlobalClock;
 use App\Entity\User;
-use App\Form\Type\ChangePasswordType;
 use App\Form\UserType;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\Type\ChangePasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\Adapter\EntityRepositoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
+ * @todo    Add mediator pattern.
  *
  * @Route("/admin/user", name="app_admin_user_")
  * @IsGranted("ROLE_ADMIN")
@@ -28,29 +25,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class AdminUserController extends AbstractController
 {
-    /** @var EntityManagerInterface */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var GlobalClock */
-    private $clock;
-
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, GlobalClock $clock)
+    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
     {
-        $this->em = $em;
+        $this->entityRepository = $entityRepository;
         $this->translator = $translator;
-        $this->clock = $clock;
     }
 
     /**
      * @Route("/", name="index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findBy([], ['username' => 'ASC'])
+            'users' => $this->entityRepository->getRepository(User::class)->findBy([], ['username' => 'ASC'])
         ]);
     }
 
@@ -66,13 +59,9 @@ class AdminUserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setUuid(Uuid::uuid4());
-            $user->setCreatedAt($this->clock->getNowInDateTime());
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPlainPassword()));
 
-            $this->em->persist($user);
-            $this->em->flush();
-
+            $this->entityRepository->save($user);
             $this->addFlash('success', $this->translator->trans('user.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
@@ -95,20 +84,15 @@ class AdminUserController extends AbstractController
         $formChangePassword->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setUpdatedAt($this->clock->getNowInDateTime());
-
-            $this->em->flush();
-
+            $this->entityRepository->update($user);
             $this->addFlash('success', $this->translator->trans('user.edit.account.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
 
         if ($formChangePassword->isSubmitted() && $formChangePassword->isValid()) {
-            $user->setUpdatedAt($this->clock->getNowInDateTime());
             $user->setPassword($encoder->encodePassword($user, $formChangePassword->get('plainPassword')->getData()));
 
-            $this->em->flush();
-
+            $this->entityRepository->update($user);
             $this->addFlash('success', $this->translator->trans('user.edit.password.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
@@ -131,10 +115,8 @@ class AdminUserController extends AbstractController
                 $this->addFlash('danger', $this->translator->trans('user.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_user_index');
             }
-
+            $this->entityRepository->delete($user);
             $this->addFlash('success', $this->translator->trans('user.delete.flash.success', [], 'flashes'));
-            $this->em->remove($user);
-            $this->em->flush();
         }
 
         return $this->redirectToRoute('app_admin_user_index');
