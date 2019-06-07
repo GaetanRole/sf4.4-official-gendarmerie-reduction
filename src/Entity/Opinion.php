@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class Opinion implements JsonSerializable
+class Opinion implements JsonSerializable, EntityInterface
 {
     use EntityIdTrait;
     use EntityTimeTrait;

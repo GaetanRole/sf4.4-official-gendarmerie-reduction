@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class User implements UserInterface, Serializable
+class User implements UserInterface, Serializable, EntityInterface
 {
     use EntityIdTrait;
     use EntityTimeTrait;

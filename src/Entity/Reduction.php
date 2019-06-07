@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class Reduction
+class Reduction implements EntityInterface
 {
     use EntityIdTrait;
     use EntityTimeTrait;

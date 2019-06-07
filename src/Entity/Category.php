@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class Category implements JsonSerializable
+class Category implements JsonSerializable, EntityInterface
 {
     use EntityIdTrait;
     use EntityTimeTrait;

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class Brand
+class Brand implements EntityInterface
 {
     use EntityIdTrait;
     use EntityTimeTrait;
