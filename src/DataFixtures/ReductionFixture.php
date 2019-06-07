@@ -94,7 +94,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      */
     private function getRandomRegion(): string
     {
-        $regions = ['01', '93', '52', '76', '32'];
+        $regions = ['01', '93', '52', '76', 'International'];
 
         return $regions[array_rand($regions)];
     }
