@@ -2,6 +2,7 @@
 
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/config/bootstrap.php';
@@ -10,7 +11,7 @@ if (!isset($_SERVER['APP_ENV'])) {
     if (!class_exists(Dotenv::class)) {
         throw new RuntimeException('APP_ENV environment variable is not defined.');
     }
-    (new Dotenv())->load(__DIR__.'/../.env');
+    (new Dotenv(false))->load(__DIR__.'/../.env');
 }
 
 if ($_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev'))) {
