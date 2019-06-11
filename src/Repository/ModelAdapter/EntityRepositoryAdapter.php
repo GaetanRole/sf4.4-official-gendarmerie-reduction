@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Adapter;
+namespace App\Repository\ModelAdapter;
 
 use Exception;
 use Ramsey\Uuid\Uuid;
