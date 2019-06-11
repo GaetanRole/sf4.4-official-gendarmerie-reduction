@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Api\GeoApiGouv\Model;
 
 use App\Api\GeoApiGouv\GeoClient;
@@ -36,7 +38,7 @@ class Region extends GeoClient
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI . self::ENDPOINT;
+        $this->url = parent::BASE_URI.self::ENDPOINT;
     }
 
     /**
@@ -45,7 +47,13 @@ class Region extends GeoClient
     public function getAllRegions(): array
     {
         $regions = [];
-        foreach ($this->fields(['code', 'nom'])->search() as $key => $item) {
+
+        // Hardcoded values for international and national reductions
+        // Added in Regex constraint into Reduction entity
+        $regions['International'] = 'International';
+        $regions['National'] = 'National';
+
+        foreach ($this->fields(['code', 'nom'])->search() as $item) {
             $regions[$item['nom']] = $item['code'];
         }
 

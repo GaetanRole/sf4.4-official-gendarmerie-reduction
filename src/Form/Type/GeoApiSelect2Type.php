@@ -9,9 +9,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class GeoApiSelect2Type extends AbstractType
+final class GeoApiSelect2Type extends AbstractType
 {
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
@@ -25,10 +25,6 @@ class GeoApiSelect2Type extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'attr' => [
-                'data-autocomplete-url' => null
-            ]
-        ]);
+        $resolver->setDefaults(['attr' => ['data-autocomplete-url' => null]]);
     }
 }

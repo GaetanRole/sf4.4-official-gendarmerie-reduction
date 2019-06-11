@@ -12,10 +12,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Subscribe to two FormEvents to fill all GeoApiGouv fields such as: Régions, Départements, Communes.
- * @see         https://geo.api.gouv.fr/
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @see     https://geo.api.gouv.fr/
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class GeoApiFieldsSubscriber implements EventSubscriberInterface
+final class GeoApiFieldsSubscriber implements EventSubscriberInterface
 {
     /** @var RouterInterface */
     private $router;
@@ -33,19 +33,17 @@ class GeoApiFieldsSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'onPreSetData',
-            FormEvents::PRE_SUBMIT => 'onPreSetSubmit',
+            FormEvents::PRE_SUBMIT => 'onPreSetSubmit'
         ];
     }
 
     private function formModifier(FormInterface $form, string $region = null, string $department = null): void
     {
         $form->add('region', GeoApiSelect2Type::class, [
-            'required' => true,
             'label' => 'form.reduction.region.label',
             'help' => 'form.reduction.region.help',
             'placeholder' => 'form.reduction.region.placeholder',
-            'choices' =>
-                $this->geoClient->Region()->getAllRegions(),
+            'choices' => $this->geoClient->Region()->getAllRegions(),
         ]);
 
         $form->add('department', GeoApiSelect2Type::class, [
@@ -53,11 +51,8 @@ class GeoApiFieldsSubscriber implements EventSubscriberInterface
             'label' => 'form.reduction.department.label',
             'help' => 'form.reduction.department.help',
             'placeholder' => 'form.reduction.department.placeholder',
-            'choices' =>
-                $region ? $this->geoClient->Department()->getAllDepartmentsByRegion($region) : [],
-            'attr' => [
-                'data-autocomplete-department-url' => $this->router->generate('api_geo_get_departments'),
-            ]
+            'choices' => $region ? $this->geoClient->Department()->getAllDepartmentsByRegion($region) : [],
+            'attr' => ['data-autocomplete-department-url' => $this->router->generate('api_geo_get_departments')],
         ]);
 
         $form->add('municipality', GeoApiSelect2Type::class, [
@@ -67,9 +62,7 @@ class GeoApiFieldsSubscriber implements EventSubscriberInterface
             'placeholder' => 'form.reduction.municipality.placeholder',
             'choices' =>
                 $department ? $this->geoClient->Municipality()->getAllMunicipalitiesByDepartment($department) : [],
-            'attr' => [
-                'data-autocomplete-municipality-url' => $this->router->generate('api_geo_get_municipalities'),
-            ]
+            'attr' => ['data-autocomplete-municipality-url' => $this->router->generate('api_geo_get_municipalities')],
         ]);
     }
 

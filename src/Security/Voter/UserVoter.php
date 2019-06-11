@@ -1,12 +1,5 @@
 <?php
 
-/**
- * User Voter File
- *
- * @category    User
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Security\Voter;
 
 use App\Entity\User;
@@ -15,35 +8,20 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * @see         https://symfony.com/doc/current/security/voters.html
+ * @see     https://symfony.com/doc/current/security/voters.html
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class UserVoter extends Voter
 {
-    /**
-     * Voter action
-     */
-    private const EDIT = 'edit';
+    /** Voter actions */
+    private const
+        EDIT = 'edit',
+        DELETE = 'delete',
+        BANISH = 'banish';
 
-    /**
-     * Voter action
-     */
-    private const DELETE = 'delete';
-
-    /**
-     * Voter action
-     */
-    private const BANISH = 'banish';
-
-    /**
-     * @var Security
-     */
+    /** @var Security */
     private $security;
 
-    /**
-     * UserVoter constructor.
-     *
-     * @param Security $security
-     */
     public function __construct(Security $security)
     {
         $this->security = $security;
@@ -54,7 +32,7 @@ class UserVoter extends Voter
      */
     protected function supports($attribute, $subject): bool
     {
-        return $subject instanceof User && \in_array($attribute, [self::EDIT, self::DELETE, self::BANISH], true);
+        return $subject instanceof User && in_array($attribute, [self::EDIT, self::DELETE, self::BANISH], true);
     }
 
     /**

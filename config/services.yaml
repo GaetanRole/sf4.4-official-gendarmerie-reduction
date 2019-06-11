@@ -9,9 +9,12 @@ services:
         autoconfigure: true
         bind:
             $httpClient: '@app.client'
+            $slugger: '@app.slugger'
 
     app.client:
         class: GuzzleHttp\Client
+    app.slugger:
+        class: EasySlugger\SeoSlugger
     app.earth:
         class: Innmind\TimeContinuum\TimeContinuum\Earth
     app.format:

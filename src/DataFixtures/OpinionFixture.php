@@ -1,16 +1,11 @@
 <?php
 
-/**
- * OpinionFixture file
- *
- * @category    Opinion
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\DataFixtures;
 
-use App\Entity\Opinion;
 use Faker;
+use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -18,35 +13,26 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class OpinionFixture extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @var int public CONST for Opinions number in DB
-     */
+    /** @var int public CONST for Opinions number in DB. */
     public const OPINION_NB_TUPLE = 40;
 
     /**
-     * Global project's clock
+     * Global project's clock.
      *
      * @var GlobalClock
      */
     private $clock;
 
-    /**
-     * Injecting Container Interface
-     *
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     /**
-     * ReductionFixture constructor.
-     *
-     * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param GlobalClock $clock Global project's clock
-     * @param ContainerInterface $container Container Interface
+     * @link    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
@@ -55,14 +41,11 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * Load OPINION_NB_TUPLE opinions to DB
+     * Load OPINION_NB_TUPLE opinions to DB.
      *
-     * @link https://github.com/fzaninotto/Faker
-     * @see 3 Loop iterator depends on const OPINION_NB_TUPLE
-     * @param ObjectManager $manager Doctrine Manager
-     *
-     * @return void
-     * @throws \Exception Datetime Exception
+     * @see     3 Loop iterator depends on const OPINION_NB_TUPLE
+     * @link    https://github.com/fzaninotto/Faker
+     * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -70,13 +53,17 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
 
         foreach ($this->getOpinionReferenceData() as [$index, $author, $reduction]) {
             $opinion = new Opinion();
-            $opinion->setUser($author);
-            $opinion->setReduction($reduction);
+
+            $opinion->setUuid(Uuid::uuid4());
             $opinion->setName($faker->userName);
             $opinion->setEmail($faker->email);
             $opinion->setClientIp($faker->ipv4);
-            $opinion->setComment($faker->realText(100));
-            $opinion->setCreationDate($this->clock->getNowInDateTime());
+            $opinion->setCreatedAt($this->clock->getNowInDateTime());
+            $opinion->setUpdatedAt(null);
+
+            $opinion->setUser($author)
+                ->setReduction($reduction)
+                ->setComment($faker->realText(100));
 
             $manager->persist($opinion);
         }
@@ -85,13 +72,11 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * Get an array of references useful for Opinion instances
+     * Get an array of references useful for Opinion instances.
      *
-     * @see 9 See UserFixture::USER_NB_TUPLE - 1 for index 0
-     * @see 15 See ReductionFixture::REDUCTION_NB_TUPLE - 1 for index 0
-     *
-     * @return array
-     * @throws \Exception Random Exception
+     * @see     9 See UserFixture::USER_NB_TUPLE - 1 for index 0
+     * @see     15 See ReductionFixture::REDUCTION_NB_TUPLE - 1 for index 0
+     * @throws  Exception Random Exception
      */
     private function getOpinionReferenceData(): array
     {
@@ -119,14 +104,10 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * Get one dependency to create Opinion data
-     *
-     * @return array
+     * Get one dependency to create Opinion data.
      */
     public function getDependencies(): array
     {
-        return [
-            ReductionFixture::class,
-        ];
+        return [ReductionFixture::class];
     }
 }

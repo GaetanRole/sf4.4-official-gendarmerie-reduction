@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class ReductionType extends AbstractType
 {
@@ -29,21 +29,13 @@ class ReductionType extends AbstractType
     private $router;
 
     /**
-     * @required
+     * @see GeoClient To get departments and municipalities autocompletion
+     * @see RouterInterface To get API data-autocomplete-url for GeoApiFieldsSubscriber
      */
-    public function setGeoApiGouvClient(GeoClient $geoClient): ReductionType
+    public function __construct(GeoClient $geoClient, RouterInterface $router)
     {
         $this->geoClient = $geoClient;
-        return $this;
-    }
-
-    /**
-     * @required
-     */
-    public function setRouter(RouterInterface $router): ReductionType
-    {
         $this->router = $router;
-        return $this;
     }
 
     /**
@@ -52,82 +44,57 @@ class ReductionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add(
-                'userIdentity',
-                UserIdentityType::class,
-                [
-                    'data_class' => Reduction::class,
-                    'label' => false,
-                ]
-            )
-            ->add(
-                'brand',
-                EntityType::class,
-                [
-                    'label' => 'form.reduction.brand.label',
-                    'help' => 'form.reduction.brand.help',
-                    'class' => Brand::class,
-                    'choice_label' => 'name',
-                    'required' => true,
-                    'expanded' => false,
-                    'multiple' => false,
-                ]
-            )
-            ->add(
-                'title',
-                TextType::class,
-                [
-                    'label' => 'form.reduction.title.label',
-                    'help' => 'form.reduction.title.help',
-                    'required' => true,
-                    'attr' => [
-                        'placeholder' => 'form.reduction.title.placeholder',
-                        'minLength' => '5',
-                        'maxLength' => '64',
-                    ],
-                ]
-            )
-            ->add(
-                'description',
-                TextareaType::class,
-                [
-                    'required' => true,
-                    'label' => 'form.reduction.description.label',
-                    'help' => 'form.reduction.description.help',
-                    'attr' => [
-                        'placeholder' => 'form.reduction.description.placeholder',
-                        'minLength' => '10',
-                        'maxLength' => '10000',
-                        'rows' => 50,
-                    ],
-                ]
-            )
-            ->add(
-                'categories',
-                EntityType::class,
-                [
-                    'required' => true,
-                    'class' => Category::class,
-                    'choice_label' => 'name',
-                    'label' => 'form.reduction.categories.label',
-                    'help' => 'form.reduction.categories.help',
-                    'query_builder' => static function (EntityRepository $er) {
-                        return $er->createQueryBuilder('c')
-                            ->orderBy('c.name', 'ASC');
-                    },
-                    'expanded'  => false,
-                    'multiple'  => true,
-                ]
-            )
-        ;
+            ->add('userIdentity', UserIdentityType::class, [
+                'data_class' => Reduction::class,
+                'label' => false,
+            ])
+            ->add('brand', EntityType::class, [
+                'expanded' => false,
+                'multiple' => false,
+                'class' => Brand::class,
+                'placeholder' => 'form.reduction.brand.placeholder',
+                'choice_label' => 'name',
+                'attr' => ['data-select' => true],
+                'label' => 'form.reduction.brand.label',
+                'help' => 'form.reduction.brand.help',
+            ])
+            ->add('title', TextType::class, [
+                'label' => 'form.reduction.title.label',
+                'help' => 'form.reduction.title.help',
+                'attr' => [
+                    'placeholder' => 'form.reduction.title.placeholder',
+                    'minLength' => '5',
+                    'maxLength' => '64',
+                ],
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'form.reduction.description.label',
+                'help' => 'form.reduction.description.help',
+                'attr' => [
+                    'placeholder' => 'form.reduction.description.placeholder',
+                    'minLength' => '10',
+                    'maxLength' => '10000',
+                    'rows' => 50,
+                ],
+            ])
+            ->add('categories', EntityType::class, [
+                'expanded'  => false,
+                'multiple'  => true,
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'label' => 'form.reduction.categories.label',
+                'help' => 'form.reduction.categories.help',
+                'query_builder' => static function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.name', 'ASC');
+                },
+            ]);
+
         $builder->addEventSubscriber(new GeoApiFieldsSubscriber($this->router, $this->geoClient));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Reduction::class,
-            'translation_domain' => 'forms',
-        ]);
+        $resolver->setDefaults(['data_class' => Reduction::class, 'translation_domain' => 'forms']);
     }
 }

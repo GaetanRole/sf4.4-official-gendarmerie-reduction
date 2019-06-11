@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Api\GeoApiGouv;
 
 use GuzzleHttp\Client;
@@ -19,9 +21,9 @@ class GeoClient
 
     protected $url = self::BASE_URI;
 
-    protected $user_param = '';
-    protected $user_search = '';
-    protected $user_fields = [];
+    protected $userParam = '';
+    protected $userSearch = '';
+    protected $userFields = [];
 
     protected $availableParams = [];
     protected $availableFields = [];
@@ -29,7 +31,7 @@ class GeoClient
     /** @var Client */
     protected $httpClient;
 
-    /** @param Client $httpClient A Guzzle client which will be replaced by Symfony\HttpClient. */
+    /** @param  Client $httpClient A Guzzle client which will be replaced by Symfony\HttpClient. */
     public function __construct(Client $httpClient)
     {
         $this->httpClient = $httpClient;
@@ -38,18 +40,18 @@ class GeoClient
     public function __call(string $className, array $arguments)
     {
         if (in_array($className, ['Municipality', 'Department', 'Region'])) {
-            $className = self::MODEL_API_NAMESPACE . $className;
+            $className = self::MODEL_API_NAMESPACE.$className;
             return new $className($this->httpClient);
         }
 
-        throw new InvalidArgumentException('Class : ' . self::MODEL_API_NAMESPACE . $className . ' doesn\'t exist.');
+        throw new InvalidArgumentException('Class : '.self::MODEL_API_NAMESPACE.$className.' doesn\'t exist.');
     }
 
     public function fields(array $fields): GeoClient
     {
         foreach ($fields as $field) {
             if (in_array($field, $this->availableFields, false)) {
-                $this->user_fields[] = $field;
+                $this->userFields[] = $field;
             }
         }
 
@@ -62,14 +64,14 @@ class GeoClient
     public function search(string $key = '', string $value = ''): array
     {
         if (in_array($key, $this->availableParams, false)) {
-            $this->user_param = $key;
-            $this->user_search = $value;
+            $this->userParam = $key;
+            $this->userSearch = $value;
         }
 
-        $url = $this->url . '?' . $this->user_param . '=' . $this->user_search;
+        $url = $this->url.'?'.$this->userParam.'='.$this->userSearch;
 
-        if (count($this->user_fields) > 0) {
-            $url .= '&fields=' . implode(',', $this->user_fields);
+        if (count($this->userFields) > 0) {
+            $url .= '&fields='.implode(',', $this->userFields);
         }
 
         return $this->doRequest('GET', $url);

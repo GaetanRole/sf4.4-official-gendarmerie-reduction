@@ -5,88 +5,75 @@ namespace App\Controller;
 use Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
-use App\Repository\ReductionRepository;
-use App\Utils\Slugger;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasySlugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\GlobalClock;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add patterns on each methods (mediator, adapter...).
- *
- * @Route("/reduction")
+ * @Route("/reduction", name="app_reduction_")
  * @IsGranted("ROLE_USER")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class ReductionController extends AbstractController
 {
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
+
+    public function __construct(EntityRepositoryInterface $entityRepository)
+    {
+        $this->entityRepository = $entityRepository;
+    }
+
     /**
-     * @todo Add paginator PagerFanta.
-     * @todo Add search bar and filters.
+     * @todo    Add paginator PagerFanta and search bar with filters.
      *
-     * @Route("/", methods={"GET"})
-     * @throws Exception Datetime Exception
+     * @Route("/", name="index", methods={"GET"})
+     * @throws  Exception Datetime Exception
      */
-    public function index(ReductionRepository $reductionRepository): Response
+    public function index(): Response
     {
         return $this->render('reduction/index.html.twig', [
-            'reductions' => $reductionRepository->findLatest(),
+            'reductions' => $this->entityRepository->getRepository(Reduction::class)->findLatest()
         ]);
     }
 
     /**
-     * @todo Add Image Upload ?
-     * @link https://github.com/Innmind/TimeContinuum Global clock
+     * @todo    Add Image Upload ?
      *
-     * @Route("/new", methods={"GET","POST"})
-     * @return RedirectResponse|Response A Response instance
-     * @throws Exception Datetime Exception
+     * @Route("/new", name="new", methods={"GET","POST"})
+     * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function new(
-        Request $request,
-        EntityManagerInterface $em,
-        TranslatorInterface $translator,
-        GlobalClock $clock
-    ) {
+    public function new(Request $request, SluggerInterface $slugger)
+    {
         $reduction = new Reduction();
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reduction->setSlug(Slugger::slugify($reduction->getTitle()));
             $reduction->setClientIp($request->getClientIp());
-            $reduction->setCreationDate($clock->getNowInDateTime());
+            $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
             $reduction->setUser($this->getUser());
 
-            $em->persist($reduction);
-            $em->flush();
-
-            $this->addFlash('success', $translator->trans('reduction.new.flash.success', [], 'flashes'));
-
+            $this->entityRepository->save($reduction);
             return $this->redirectToRoute('app_reduction_index');
         }
 
-        return $this->render('reduction/new.html.twig', [
-            'reduction' => $reduction,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('reduction/new.html.twig', ['reduction' => $reduction, 'form' => $form->createView()]);
     }
 
     /**
-     * @todo Add all related Opinions and PagerFanta.
+     * @todo    Add all related Opinions and PagerFanta.
      *
-     * @Route("/{slug}", methods={"GET"})
+     * @Route("/{slug}", name="show", methods={"GET"})
      */
     public function show(Reduction $reduction): Response
     {
-        return $this->render('reduction/show.html.twig', [
-            'reduction' => $reduction,
-        ]);
+        return $this->render('reduction/show.html.twig', ['reduction' => $reduction]);
     }
 }

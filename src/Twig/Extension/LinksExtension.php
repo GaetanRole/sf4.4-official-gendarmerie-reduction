@@ -1,41 +1,25 @@
 <?php
 
-/**
- * Twig Extension file
- *
- * @category    Internationalisation
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Twig\Extension;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class LinksExtension extends AbstractExtension
+/**
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ */
+final class LinksExtension extends AbstractExtension
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
+    /** @var UrlGeneratorInterface */
     private $router;
 
-    /**
-     * LinksExtension constructor.
-     *
-     * @param UrlGeneratorInterface $router Router injection
-     */
     public function __construct(UrlGeneratorInterface $router)
     {
         $this->router = $router;
     }
 
-    /**
-     * Twig filter
-     *
-     * @return array
-     */
     public function getFilters(): array
     {
         return [
@@ -43,11 +27,6 @@ class LinksExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * Twig function
-     *
-     * @return array
-     */
     public function getFunctions(): array
     {
         return [
@@ -55,16 +34,6 @@ class LinksExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * Generate one link according to locale
-     *
-     * @param string $label
-     * @param string $locale
-     * @param string $routeName
-     * @param array $parameters
-     *
-     * @return string
-     */
     public function generateLink(string $label, string $locale, string $routeName, array $parameters): string
     {
         $url = $this->router->generate($routeName, array_merge($parameters, ['_locale' => $locale]));
@@ -72,15 +41,6 @@ class LinksExtension extends AbstractExtension
         return sprintf('<a href="%s">%s</a>', $url, $label);
     }
 
-    /**
-     * Generate all links according to locales
-     *
-     * @param array $locales
-     * @param string $routeName
-     * @param array $routeParameters
-     *
-     * @return string
-     */
     public function generateLinks(array $locales, string $routeName, array $routeParameters): string
     {
         $labels = ['en' => 'English', 'fr' => 'French'];

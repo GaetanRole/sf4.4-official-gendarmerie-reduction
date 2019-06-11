@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\User:
-            algorithm: argon2i
+            algorithm: auto
 
     providers:
         app_user_provider:
@@ -18,7 +18,7 @@ security:
             anonymous: true
             logout:
                 path: app_logout
-                target: app_index
+                target: app_default_index
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block description %}{{ 'index.head.meta.description'|trans }}{% endblock %}
+
 {% block title %}{{ 'index.head.meta.title'|trans }}{% endblock %}
 
 {% block body_id 'index' %}
@@ -20,7 +21,7 @@
                         </ul>
                     {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
                         <ul>
-                            <li><a href="{{ path('app_dashboard') }}">{{ 'link.dashboard'|trans }}</a></li>
+                            <li><a href="{{ path('app_default_dashboard') }}">{{ 'link.dashboard'|trans }}</a></li>
                         </ul>
                     {% else %}
                         <ul>

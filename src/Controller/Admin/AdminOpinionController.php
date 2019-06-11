@@ -1,107 +1,60 @@
 <?php
 
-/**
- * AdminOpinion Controller File
- *
- * @category    Opinion
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Controller\Admin;
 
+use Exception;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo Add patterns on each methods (mediator, adapter...)
- *
- * @Route("/admin/opinion")
+ * @Route("/admin/opinion", name="app_admin_opinion_")
  * @IsGranted("ROLE_ADMIN")
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class AdminOpinionController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * AdminOpinionController constructor.
-     *
-     * @param EntityManagerInterface $em Entity Manager injection
-     * @param TranslatorInterface $translator Translator injection
-     */
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
-        $this->em = $em;
-        $this->translator = $translator;
+        $this->entityRepository = $entityRepository;
     }
 
     /**
-     * Displays a form to edit an existing Opinion entity
+     * @todo    Probably have to add a dynamic edit below a Reduction.
      *
-     * @todo Probably have to add a dynamic edit below a Reduction
-     *
-     * @param Request $request POST'ed data
-     * @param Opinion $opinion Opinion given by an id
-     *
-     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
-     * @return RedirectResponse|Response A Response instance
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
+     * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function edit(
-        Request $request,
-        Opinion $opinion
-    ): Response {
+    public function edit(Request $request, Opinion $opinion)
+    {
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->flush();
-
-            $this->addFlash('success', $this->translator->trans('opinion.edit.flash.success', [], 'flashes'));
-
-            return $this->redirectToRoute('app_admin_index', [
-                'id' => $opinion->getId(),
-            ]);
+            $this->entityRepository->update($opinion);
+            return $this->redirectToRoute('app_admin_index');
         }
 
-        return $this->render('admin/opinion/edit.html.twig', [
-            'opinion' => $opinion,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('admin/opinion/edit.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
     }
 
     /**
-     * Deletes an Opinion object
-     *
-     * @param Request $request POST'ed data
-     * @param Opinion $opinion Opinion given by an id
-     *
-     * @Route("/{id<\d+>}", methods={"DELETE"})
-     * @return RedirectResponse A Response instance
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
-    public function delete(
-        Request $request,
-        Opinion $opinion
-    ): RedirectResponse {
+    public function delete(Request $request, Opinion $opinion): RedirectResponse
+    {
         if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
-            $this->em->remove($opinion);
-            $this->em->flush();
-
-            $this->addFlash('success', $this->translator->trans('opinion.delete.flash.success', [], 'flashes'));
+            $this->entityRepository->delete($opinion);
         }
 
         return $this->redirectToRoute('app_admin_index');

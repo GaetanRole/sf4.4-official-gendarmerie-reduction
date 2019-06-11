@@ -1,45 +1,36 @@
 <?php
 
-/**
- * ArrayToStringTransformer File
- *
- * @category    DataTransformer
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class ArrayToStringTransformer implements DataTransformerInterface
+/**
+ * @see     DataTransformerInterface
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ */
+final class ArrayToStringTransformer implements DataTransformerInterface
 {
+    public const DELIMITER = ', ';
+
     /**
-     * Transforms an array to a string
+     * Transforms an array to a string.
      *
-     * @param mixed $array
-     * @return string
+     * @param   mixed $array The value in the original representation
+     * @return  string|null The value in the transformed representation
      */
     public function transform($array): ?string
     {
-        if (empty($array) || null === $array) {
-            return '';
-        }
-
-        return implode(', ', $array);
+        return (null === $array || empty($array)) ? '' : implode(self::DELIMITER, $array);
     }
 
     /**
-     * Reverse transform a string to an array
+     * Reverse transform a string to an array.
      *
-     * @param mixed $string
-     * @return array|null
+     * @param   mixed $string The value in the transformed representation
+     * @return  array|null The value in the original representation
      */
     public function reverseTransform($string): ?array
     {
-        if ('' === $string || null === $string) {
-            return [];
-        }
-
-        return explode(', ', $string);
+        return ('' === $string || null === $string) ? [] : explode(self::DELIMITER, $string);
     }
 }

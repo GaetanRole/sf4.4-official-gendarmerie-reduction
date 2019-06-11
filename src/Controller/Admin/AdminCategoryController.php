@@ -1,166 +1,96 @@
 <?php
 
-/**
- * AdminCategory Controller File
- *
- * @category    Category
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Controller\Admin;
 
+use Exception;
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Service\GlobalClock;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo Add patterns on each methods (mediator, adapter...)
- *
- * @Route("/admin/category")
+ * @Route("/admin/category", name="app_admin_category_")
  * @IsGranted("ROLE_ADMIN")
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class AdminCategoryController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+    /** @var EntityRepositoryInterface */
+    private $entityRepository;
 
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * AdminCategoryController constructor.
-     *
-     * @param EntityManagerInterface $em Entity Manager injection
-     * @param TranslatorInterface $translator Translator injection
-     */
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
-        $this->em = $em;
-        $this->translator = $translator;
+        $this->entityRepository = $entityRepository;
     }
 
     /**
-     * AdminCategory home page listing all categories
+     * @todo    Add paginator PagerFanta.
      *
-     * @todo Add paginator PagerFanta
-     *
-     * @param CategoryRepository $categoryRepository Category manager
-     *
-     * @Route("/", methods={"GET"})
-     * @return     Response A Response instance
+     * @Route("/", name="index", methods={"GET"})
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/category/index.html.twig', [
-            'categories' => $categoryRepository->findBy([], ['name' => 'ASC']),
+            'categories' => $this->entityRepository->getRepository(Category::class)->findBy([], ['name' => 'ASC']),
         ]);
     }
 
     /**
-     * Adding one Category
-     *
-     * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param Request $request POST'ed data
-     * @param GlobalClock $clock Global project's clock
-     *
-     * @Route("/new", methods={"GET","POST"})
-     * @return RedirectResponse|Response A Response instance
-     * @throws \Exception Datetime Exception
+     * @Route("/new", name="new", methods={"GET","POST"})
+     * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function new(
-        Request $request,
-        GlobalClock $clock
-    ): Response {
+    public function new(Request $request)
+    {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setCreationDate($clock->getNowInDateTime());
-            $this->em->persist($category);
-            $this->em->flush();
-
-            $this->addFlash('success', $this->translator->trans('category.new.flash.success', [], 'flashes'));
-
-            return $this->redirectToRoute('app_admin_admincategory_index');
+            $this->entityRepository->save($category);
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
-        return $this->render('admin/category/new.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('admin/category/new.html.twig', ['category' => $category, 'form' => $form->createView()]);
     }
 
     /**
-     * Displays a form to edit a existing Category entity
-     *
-     * @param Request $request POST'ed data
-     * @param Category $category Category given by an id
-     *
-     * @Route("/{id<\d+>}/edit", methods={"GET","POST"})
-     * @return RedirectResponse|Response A Response instance
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
+     * @return  RedirectResponse|Response A Response instance
+     * @throws  Exception Datetime Exception
      */
-    public function edit(
-        Request $request,
-        Category $category
-    ): Response {
+    public function edit(Request $request, Category $category)
+    {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->flush();
-
-            $this->addFlash('success', $this->translator->trans('category.edit.flash.success', [], 'flashes'));
-
-            return $this->redirectToRoute('app_admin_admincategory_index', [
-                'id' => $category->getId(),
-            ]);
+            $this->entityRepository->update($category);
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
-        return $this->render('admin/category/edit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('admin/category/edit.html.twig', ['category' => $category, 'form' => $form->createView()]);
     }
 
     /**
-     * Deletes a Category object
-     *
-     * @param Request $request POST'ed data
-     * @param Category $category Category given by an id
-     *
-     * @Route("/{id<\d+>}", methods={"DELETE"})
-     * @return RedirectResponse A Response instance
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
-    public function delete(
-        Request $request,
-        Category $category
-    ): RedirectResponse {
+    public function delete(Request $request, Category $category, TranslatorInterface $translator): RedirectResponse
+    {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             if ($category->getReductions()->count() > 0) {
-                $this->addFlash('danger', $this->translator->trans('category.delete.flash.danger', [], 'flashes'));
-                return $this->redirectToRoute('app_admin_admincategory_index');
+                $this->addFlash('danger', $translator->trans('category.delete.flash.danger', [], 'flashes'));
+                return $this->redirectToRoute('app_admin_category_index');
             }
-
-            $this->addFlash('success', $this->translator->trans('category.delete.flash.success', [], 'flashes'));
-
-            $this->em->remove($category);
-            $this->em->flush();
+            $this->entityRepository->delete($category);
         }
 
-        return $this->redirectToRoute('app_admin_admincategory_index');
+        return $this->redirectToRoute('app_admin_category_index');
     }
 }

@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/", name="app_", methods={"GET"})
+ * @Route("/", name="app_default_")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class DefaultController extends AbstractController
+final class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="index", methods={"GET"})
@@ -23,7 +23,7 @@ class DefaultController extends AbstractController
 
     /**
      * Dashboard page after connexion.
-     * @todo Add all useful data for a dashboard index (only for users).
+     * @todo    Add all useful data for a dashboard index (only for users).
      *
      * @Route("/dashboard", name="dashboard", methods={"GET"})
      * @IsGranted("ROLE_USER")

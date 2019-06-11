@@ -1,14 +1,5 @@
 <?php
 
-/**
- * User Command File
- *
- * PHP Version 7.2
- *
- * @category    User
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\Command;
 
 use App\Entity\User;
@@ -30,31 +21,24 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * See https://symfony.com/doc/current/cookbook/console/console_command.html
  * For more advanced uses, commands can be defined as services too. See
  * https://symfony.com/doc/current/console/commands_as_services.html
- *
- * @category    User
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class ListUsersCommand extends Command
+class ListUsersCommand extends Command
 {
     /**
-     * Command used in console
+     * Command used in console.
      *
      * @var string
      */
     protected static $defaultName = 'app:list-users';
 
     /**
-     * All given users
+     * All given users.
      *
      * @var UserRepository
      */
     private $users;
 
-    /**
-     * ListUsersCommand constructor
-     *
-     * @param UserRepository $users Given entity
-     */
     public function __construct(UserRepository $users)
     {
         parent::__construct();
@@ -92,9 +76,6 @@ final class ListUsersCommand extends Command
      * This method is executed after initialize(). It usually contains the logic
      * to execute to complete this command task.
      *
-     * @param InputInterface  $input  Command option
-     * @param OutputInterface $output Standard print
-     *
      * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -103,22 +84,16 @@ final class ListUsersCommand extends Command
         $allUsers = $this->users->findBy([], ['id' => 'DESC'], $maxResults);
 
         $usersAsPlainArrays = array_map(
-            function (User $user) {
-                return [
-                    $user->getId(),
-                    $user->getUsername(),
-                    implode(', ', $user->getRoles()),
-                ];
+            static function (User $user) {
+                return [$user->getId(), $user->getUsername(), implode(', ', $user->getRoles())];
             },
             $allUsers
         );
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
-        $io->table(
-            ['ID', 'Username', 'Roles'],
-            $usersAsPlainArrays
-        );
+        $io->title('Current Users present in DB :');
+        $io->table(['ID', 'Username', 'Roles'], $usersAsPlainArrays);
 
         $usersAsATable = $bufferedOutput->fetch();
         $output->write($usersAsATable);

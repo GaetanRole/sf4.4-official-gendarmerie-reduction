@@ -1,82 +1,59 @@
-Gendarmerie reduction website
-=============================
+# Gendarmerie reduction website
 
 This website is the official reduction website for all Gendarmerie employees.
-This one is composed of few entities allowing to post some reductions, comments and search them by filters.
-User auth is based on Symfony form login authentication.
+<br>This one is composed of few entities allowing to post some reductions, comments and search them by filters.
+<br>User auth is based on Symfony form login authentication.
 
-Webpack is not intentionally implanted in this Github repository. 
+Webpack is not intentionally implanted in this Github repository.
 
-Requirements
-------------
+## Requirements
 
-  * Php ^7.1.3    http://php.net/manual/fr/install.php;
+  * Php ^7.1.3      http://php.net/manual/fr/install.php;
   * Composer        https://getcomposer.org/download/;
+  * SQL ^5.7        https://www.mysql.com/fr/downloads/;
   * and the [usual Symfony application requirements][1].
 
-Installation
-------------
-
-1 . Clone the current repository.
-
-2 . Move in and create few `.env.{environment}.local` files according to your environments with your default configuration
-or only one global `.env.local`. **This one is not committed to the shared repository.**
- 
-> `.env` equals to the last `.env.dist` file before [november 2018][2].
-
-3 .a. Execute commands below into your working folder to install the project :
+## Installation
 
 ```bash
-$ composer install
-$ composer update
-$ bin/console d:d:c
-$ bin/console d:m:m
-$ bin/console d:m:s
-```
-3 .b. Or execute a simple shell script :
-
-```bash
-$ ./install.sh
+$ make                          # Self documented Makefile
+$ make install                  # Install all Symfony dependencies
+$ make sf-console:server:run    # Start Symfony web server
+$ make tests                    # Start PHPUnit tests and code coverage
 ```
 
-Usage
------
+> Take a look on Makefile rules to know which commands to use.
 
+## Others
+
+For [translation][2] to XLIFF files (`app_locales: en|fr`) :
 ```bash
-$ bin/console s:r
-$ bin/console c:c --env=dev
+$ make sf-console:translation:update ARGS='--output-format xlf --dump-messages --force en'
+$ make sf-console:translation:update ARGS='--output-format xlf --dump-messages --force fr'
 ```
+You can use [Loco][3] to manage all your translations. 5 domains are present : exceptions, flashes, forms, messages and validators.
+<br>Two _locales: fr|en, fallbacks: en.
 
-For loading fixtures [fixture][3] :
-```bash
-$ bin/console d:f:l
-```
+### Personal commands
 
-For [translation][4] to XLIFF files (`app_locales: en|fr`) :
-```bash
-$ bin/console translation:update --output-format xlf --dump-messages --force en
-$ bin/console translation:update --output-format xlf --dump-messages --force fr
-```
-You can use [Loco][5] to manage all your translations. 5 domains are presents : exceptions, flashes, forms, messages and validators. Two _locales: fr|en, fallbacks: en.
-
-Personal commands
------------------
-To use a personal sample [command][6] (displaying all users from DB) :
+To use a personal sample [command][4] (displaying all users from DB) :
 
 ```bash
-$ bin/console app:list-users --help
-$ bin/console app:list-users
+$ make sf-console:app:list-users --help
+$ make sf-console:app:list-users
 ```
 
 Do not hesitate to create other commands useful for this project.
 
-This project is based on symfony4-starter-kit : [https://github.com/GaetanRole/symfony4-website-starter-kit].
+This project is based on symfony-website-skeleton-starter : [https://github.com/GaetanRole/symfony-website-skeleton-starter].
+
+## Contributing
+
+Do not hesitate to improve this repository, creating your PR on GitHub with a description which explains it.
+
+Ask your question on `gaetan.role-dubruille@sensiolabs.com`.
 
 [1]: https://symfony.com/doc/current/reference/requirements.html
-[2]: https://symfony.com/doc/current/configuration.html#the-env-file-environment-variables
-[3]: https://symfony.com/doc/current/doctrine.html#doctrine-fixtures
-[4]: https://symfony.com/doc/current/translation.html
-[5]: https://localise.biz/
-[6]: https://symfony.com/doc/current/console.html
-
-30/03/2019 gaetan.role@gmail.com
+[2]: https://symfony.com/doc/current/translation.html
+[3]: https://localise.biz/
+[4]: https://symfony.com/doc/current/console.html

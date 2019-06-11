@@ -1,67 +1,49 @@
 <?php
 
-/**
- * UserFixture file
- *
- * @category    User
- * @author      Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
- */
-
 namespace App\DataFixtures;
 
-use App\Entity\User;
 use Faker;
+use Exception;
+use Ramsey\Uuid\Uuid;
+use App\Entity\User;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @see         https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserFixture extends Fixture implements FixtureGroupInterface
 {
-    /**
-     * @var int public CONST for Users number in DB
-     */
+    /** @var int public CONST for Users number in DB */
     public const USER_NB_TUPLE = 20;
 
-    /**
-     * @var string public CONST for reference used in ReductionFixture, concat to an int [0-USER_NB_TUPLE]
-     */
+    /** @var string public CONST for reference used in ReductionFixture, concat to an int [0-USER_NB_TUPLE] */
     public const USER_REFERENCE = 'user-';
 
     /**
-     * To encode password with injected service
+     * To encode password with injected service.
      *
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
     /**
-     * Global project's clock
+     * Global project's clock.
      *
      * @var GlobalClock
      */
     private $clock;
 
-    /**
-     * Injecting Container Interface
-     *
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
     /**
-     * UserFixture constructor.
-     *
-     * @link https://github.com/Innmind/TimeContinuum Global clock
-     * @param UserPasswordEncoderInterface $passwordEncoder Var to encode password
-     * @param GlobalClock $clock Global project's clock
-     * @param ContainerInterface $container Container Interface
+     * @link    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(
         UserPasswordEncoderInterface $passwordEncoder,
@@ -74,14 +56,11 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * Load USER_NB_TUPLE Users to DB
+     * Load USER_NB_TUPLE Users to DB.
      *
-     * @link https://github.com/fzaninotto/Faker
-     * @see 10 See USER_NB_TUPLE to know iterator value
-     * @param ObjectManager $manager Doctrine Manager
-     *
-     * @return void
-     * @throws \Exception Datetime Exception
+     * @see     10 See USER_NB_TUPLE to know iterator value
+     * @link    https://github.com/fzaninotto/Faker
+     * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -95,21 +74,23 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
 
         for ($index = 0; $index < self::USER_NB_TUPLE; $index++) {
             $user = new User();
-            $user
-                ->setUuid(Uuid::uuid4())
-                ->setUsername($faker->userName)
+
+            $user->setUuid(Uuid::uuid4());
+            $user->setCreatedAt($this->clock->getNowInDateTime());
+            $user->setUpdatedAt(null);
+
+            $user->setUsername($faker->userName)
                 ->setIdentity($this->getRandomIdentity())
                 ->setEmail($faker->email)
                 ->setPassword(
                     $this->passwordEncoder->encodePassword(
                         $user,
-                        'password' . $index
+                        'password'.$index
                     )
                 )
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setIsActive(true)
-                ->setCreationDate($this->clock->getNowInDateTime());
-            $user->setRoles([$roles[array_rand($roles)]]);
+                ->setRoles([$roles[array_rand($roles)]]);
 
             $manager->persist($user);
             $this->addReference(self::USER_REFERENCE.$index, $user);
@@ -119,9 +100,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * Get a random identity
-     *
-     * @return string
+     * Get a random identity.
      */
     private function getRandomIdentity(): string
     {
@@ -137,9 +116,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
     }
 
     /**
-     * Get User / Brand / Category fixtures
-     *
-     * @return array
+     * Get User / Brand / Category fixtures.
      */
     public static function getGroups(): array
     {

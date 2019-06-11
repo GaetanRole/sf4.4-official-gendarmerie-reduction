@@ -169,6 +169,10 @@
         <source>form.opinion.comment.placeholder</source>
         <target>Ex: Merci pour cette réduction de 15% !</target>
       </trans-unit>
+      <trans-unit id="_Q_7FXI" resname="form.reduction.brand.placeholder">
+        <source>form.reduction.brand.placeholder</source>
+        <target>Sélectionnez l'entreprise liée à votre réduction</target>
+      </trans-unit>
       <trans-unit id="Y5kg5Am" resname="form.reduction.brand.label">
         <source>form.reduction.brand.label</source>
         <target>Choisissez l'enseigne proposant une réduction *</target>
