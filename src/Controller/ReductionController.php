@@ -9,15 +9,12 @@ use EasySlugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add mediator pattern.
- *
  * @Route("/reduction", name="app_reduction_")
  * @IsGranted("ROLE_USER")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -27,13 +24,9 @@ class ReductionController extends AbstractController
     /** @var EntityRepositoryInterface */
     private $entityRepository;
 
-    /** @var TranslatorInterface */
-    private $translator;
-
-    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
         $this->entityRepository = $entityRepository;
-        $this->translator = $translator;
     }
 
     /**
@@ -68,7 +61,6 @@ class ReductionController extends AbstractController
             $reduction->setUser($this->getUser());
 
             $this->entityRepository->save($reduction);
-            $this->addFlash('success', $this->translator->trans('reduction.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_reduction_index');
         }
 

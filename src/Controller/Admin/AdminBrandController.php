@@ -8,15 +8,13 @@ use App\Form\BrandType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add mediator pattern.
- *
  * @Route("/admin/brand", name="app_admin_brand_")
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -26,13 +24,9 @@ class AdminBrandController extends AbstractController
     /** @var EntityRepositoryInterface */
     private $entityRepository;
 
-    /** @var TranslatorInterface */
-    private $translator;
-
-    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
         $this->entityRepository = $entityRepository;
-        $this->translator = $translator;
     }
 
     /**
@@ -60,7 +54,6 @@ class AdminBrandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityRepository->save($brand);
-            $this->addFlash('success', $this->translator->trans('brand.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_brand_index');
         }
 
@@ -79,7 +72,6 @@ class AdminBrandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityRepository->update($brand);
-            $this->addFlash('success', $this->translator->trans('brand.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_brand_index');
         }
 
@@ -89,15 +81,14 @@ class AdminBrandController extends AbstractController
     /**
      * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Brand $brand): RedirectResponse
+    public function delete(Request $request, Brand $brand, TranslatorInterface $translator): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete'.$brand->getId(), $request->request->get('_token'))) {
             if ($brand->getReductions()->count() > 0) {
-                $this->addFlash('danger', $this->translator->trans('brand.delete.flash.danger', [], 'flashes'));
+                $this->addFlash('danger', $translator->trans('brand.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_brand_index');
             }
             $this->entityRepository->delete($brand);
-            $this->addFlash('success', $this->translator->trans('brand.delete.flash.success', [], 'flashes'));
         }
 
         return $this->redirectToRoute('app_admin_brand_index');

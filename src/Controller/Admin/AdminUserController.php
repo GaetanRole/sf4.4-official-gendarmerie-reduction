@@ -9,16 +9,14 @@ use App\Form\Type\ChangePasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @todo    Add mediator pattern.
- *
  * @Route("/admin/user", name="app_admin_user_")
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -28,13 +26,9 @@ class AdminUserController extends AbstractController
     /** @var EntityRepositoryInterface */
     private $entityRepository;
 
-    /** @var TranslatorInterface */
-    private $translator;
-
-    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
         $this->entityRepository = $entityRepository;
-        $this->translator = $translator;
     }
 
     /**
@@ -62,7 +56,6 @@ class AdminUserController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPlainPassword()));
 
             $this->entityRepository->save($user);
-            $this->addFlash('success', $this->translator->trans('user.new.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -85,7 +78,6 @@ class AdminUserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityRepository->update($user);
-            $this->addFlash('success', $this->translator->trans('user.edit.account.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -93,7 +85,6 @@ class AdminUserController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $formChangePassword->get('plainPassword')->getData()));
 
             $this->entityRepository->update($user);
-            $this->addFlash('success', $this->translator->trans('user.edit.password.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -108,15 +99,14 @@ class AdminUserController extends AbstractController
      * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      * @IsGranted("delete", subject="user", message="An admin can only be deleted by a super admin account.")
      */
-    public function delete(Request $request, User $user): RedirectResponse
+    public function delete(Request $request, User $user, TranslatorInterface $translator): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             if ($user->getOpinions()->count() > 0 || $user->getReductions()->count() > 0) {
-                $this->addFlash('danger', $this->translator->trans('user.delete.flash.danger', [], 'flashes'));
+                $this->addFlash('danger', $translator->trans('user.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_user_index');
             }
             $this->entityRepository->delete($user);
-            $this->addFlash('success', $this->translator->trans('user.delete.flash.success', [], 'flashes'));
         }
 
         return $this->redirectToRoute('app_admin_user_index');

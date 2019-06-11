@@ -8,6 +8,8 @@ use App\Service\GlobalClock;
 use App\Entity\EntityInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
+use App\Event\SuccessPersistenceNotificationEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * This interface signals that all repositories needs a save method according to the business logic.
@@ -18,12 +20,19 @@ final class EntityRepositoryAdapter implements EntityRepositoryInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
     /** @var GlobalClock */
     private $clock;
 
-    public function __construct(EntityManagerInterface $entityManager, GlobalClock $clock)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher,
+        GlobalClock $clock
+    ) {
         $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
         $this->clock = $clock;
     }
 
@@ -43,6 +52,7 @@ final class EntityRepositoryAdapter implements EntityRepositoryInterface
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('save.flash.success'));
         return $entity;
     }
 
@@ -54,6 +64,8 @@ final class EntityRepositoryAdapter implements EntityRepositoryInterface
         $entity->setUpdatedAt($this->clock->getNowInDateTime());
 
         $this->entityManager->flush();
+
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('update.flash.success'));
         return $entity;
     }
 
@@ -61,5 +73,7 @@ final class EntityRepositoryAdapter implements EntityRepositoryInterface
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
+
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('delete.flash.success'));
     }
 }

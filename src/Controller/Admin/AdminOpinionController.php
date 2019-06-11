@@ -8,15 +8,12 @@ use App\Form\OpinionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Repository\ModelAdapter\EntityRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @todo    Add mediator pattern.
- *
  * @Route("/admin/opinion", name="app_admin_opinion_")
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -26,13 +23,9 @@ class AdminOpinionController extends AbstractController
     /** @var EntityRepositoryInterface */
     private $entityRepository;
 
-    /** @var TranslatorInterface */
-    private $translator;
-
-    public function __construct(EntityRepositoryInterface $entityRepository, TranslatorInterface $translator)
+    public function __construct(EntityRepositoryInterface $entityRepository)
     {
         $this->entityRepository = $entityRepository;
-        $this->translator = $translator;
     }
 
     /**
@@ -49,7 +42,6 @@ class AdminOpinionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityRepository->update($opinion);
-            $this->addFlash('success', $this->translator->trans('opinion.edit.flash.success', [], 'flashes'));
             return $this->redirectToRoute('app_admin_index');
         }
 
@@ -63,7 +55,6 @@ class AdminOpinionController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
             $this->entityRepository->delete($opinion);
-            $this->addFlash('success', $this->translator->trans('opinion.delete.flash.success', [], 'flashes'));
         }
 
         return $this->redirectToRoute('app_admin_index');
