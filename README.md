@@ -31,7 +31,7 @@ For [translation][2] to XLIFF files (`app_locales: en|fr`) :
 $ make sf-console:translation:update ARGS='--output-format xlf --dump-messages --force en'
 $ make sf-console:translation:update ARGS='--output-format xlf --dump-messages --force fr'
 ```
-You can use [Loco][3] to manage all your translations. 5 domains are present : exceptions, flashes, forms, messages and validators.
+You can use [Loco][3] to manage all your translations. 6 domains are present : exceptions, flashes, forms, messages, security and validators.
 <br>Two _locales: fr|en, fallbacks: en.
 
 ### Personal commands
