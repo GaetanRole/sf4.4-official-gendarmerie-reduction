@@ -114,7 +114,7 @@ class Reduction implements EntityInterface
      *
      * @ORM\Column(type="string", length=3, nullable=true)
      * @Assert\Regex(
-     *     pattern="/^[0-9]{2,3}$/",
+     *     pattern="/^[0-9A-Za-z]{2,3}$/",
      *     message="validator.reduction.department.regex"
      * )
      */
