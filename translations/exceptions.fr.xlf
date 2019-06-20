@@ -13,6 +13,10 @@
         <source>security.authenticator.user.authentication.exception</source>
         <target>Aucun compte ne correspond à cet identifiant et ce mot de passe. Veuillez vérifier vos informations et les entrer à nouveau.</target>
       </trans-unit>
+      <trans-unit id="RxAW4LT" resname="security.authenticator.user.banish.exception">
+        <source>security.authenticator.user.banish.exception</source>
+        <target>Votre compte a été désactivé par un administrateur.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

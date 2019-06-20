@@ -84,17 +84,14 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $credentials['csrf_token']))) {
             throw new InvalidCsrfTokenException(
                 $this->translator->trans('security.authenticator.user.csrf_token.exception', [], 'exceptions')
             );
         }
 
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->findOneBy(['username' => $credentials['username']]);
+        /** @var User $user */
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
 
         if (!$user) {
             throw new CustomUserMessageAuthenticationException(
@@ -102,8 +99,13 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             );
         }
 
-        $this->user = $user;
-        return $user;
+        if (!$user->getIsActive()) {
+            throw new CustomUserMessageAuthenticationException(
+                $this->translator->trans('security.authenticator.user.banish.exception', [], 'exceptions')
+            );
+        }
+
+        return $this->user = $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool
@@ -114,6 +116,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                 $this->translator->trans('security.authenticator.user.authentication.exception', [], 'exceptions')
             );
         }
+
         return $state;
     }
 
@@ -134,6 +137,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
             return new RedirectResponse($this->router->generate('app_admin_index'));
         }
+
         return new RedirectResponse($this->router->generate('app_default_dashboard'));
     }
 
