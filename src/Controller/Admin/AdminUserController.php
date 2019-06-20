@@ -64,7 +64,7 @@ class AdminUserController extends AbstractController
 
     /**
      * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
-     * @IsGranted("edit", subject="user", message="An admin can only be edited by a super admin account.")
+     * @IsGranted("edit", subject="user", message="You do not have rights to do so.")
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
@@ -96,8 +96,22 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * @Route("/{uuid<^.{36}$>}/status", name="change_status", methods={"PUT"})
+     * @IsGranted("status", subject="user", message="You do not have rights to do so.")
+     */
+    public function changeStatus(Request $request, User $user): RedirectResponse
+    {
+        if ($this->isCsrfTokenValid('status'.$user->getId(), $request->request->get('_token'))) {
+            $user->getIsActive() ? $user->setIsActive(false) : $user->setIsActive(true);
+            $this->entityRepository->update($user);
+        }
+
+        return $this->redirectToRoute('app_admin_user_index');
+    }
+
+    /**
      * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
-     * @IsGranted("delete", subject="user", message="An admin can only be deleted by a super admin account.")
+     * @IsGranted("delete", subject="user", message="You do not have rights to do so.")
      */
     public function delete(Request $request, User $user, TranslatorInterface $translator): RedirectResponse
     {

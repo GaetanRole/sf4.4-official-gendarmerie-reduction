@@ -301,6 +301,18 @@
         <source>region.form.geo.select.option</source>
         <target>__region.form.geo.select.option</target>
       </trans-unit>
+      <trans-unit id="nhwSJu1" resname="btn.status">
+        <source>btn.status</source>
+        <target>__btn.status</target>
+      </trans-unit>
+      <trans-unit id="bS2.s9A" resname="user.is_active">
+        <source>user.is_active</source>
+        <target>__user.is_active</target>
+      </trans-unit>
+      <trans-unit id="0Jkt2gn" resname="user.is_not_active">
+        <source>user.is_not_active</source>
+        <target>__user.is_not_active</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

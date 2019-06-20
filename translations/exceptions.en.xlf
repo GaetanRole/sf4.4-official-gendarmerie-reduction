@@ -13,6 +13,10 @@
         <source>security.authenticator.user.authentication.exception</source>
         <target>__security.authenticator.user.authentication.exception</target>
       </trans-unit>
+      <trans-unit id="RxAW4LT" resname="security.authenticator.user.banish.exception">
+        <source>security.authenticator.user.banish.exception</source>
+        <target>__security.authenticator.user.banish.exception</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

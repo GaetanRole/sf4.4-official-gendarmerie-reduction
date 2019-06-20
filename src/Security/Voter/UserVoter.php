@@ -16,8 +16,8 @@ class UserVoter extends Voter
     /** Voter actions */
     private const
         EDIT = 'edit',
-        DELETE = 'delete',
-        BANISH = 'banish';
+        STATUS = 'status',
+        DELETE = 'delete';
 
     /** @var Security */
     private $security;
@@ -32,7 +32,7 @@ class UserVoter extends Voter
      */
     protected function supports($attribute, $subject): bool
     {
-        return $subject instanceof User && in_array($attribute, [self::EDIT, self::DELETE, self::BANISH], true);
+        return $subject instanceof User && in_array($attribute, [self::EDIT, self::DELETE, self::STATUS], true);
     }
 
     /**
@@ -40,13 +40,11 @@ class UserVoter extends Voter
      */
     protected function voteOnAttribute($attribute, $user, TokenInterface $token): bool
     {
-        $connectedUser = $token->getUser();
-
-        if (!$connectedUser instanceof User) {
+        if (!$token->getUser() instanceof User || $user->hasRole('ROLE_SUPER_ADMIN')) {
             return false;
         }
 
-        if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
+        if ($user->hasRole('ROLE_ADMIN')) {
             return $this->security->isGranted('ROLE_SUPER_ADMIN');
         }
 
