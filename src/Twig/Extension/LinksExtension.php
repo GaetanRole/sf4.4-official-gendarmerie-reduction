@@ -12,6 +12,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final class LinksExtension extends AbstractExtension
 {
+    /** @var array CONST for locale labels, useful to create Twig links. */
+    public const LOCALE_LABELS = ['en' => 'English', 'fr' => 'French'];
+
     /** @var UrlGeneratorInterface */
     private $router;
 
@@ -22,35 +25,29 @@ final class LinksExtension extends AbstractExtension
 
     public function getFilters(): array
     {
-        return [
-            new TwigFilter('i18n_link', [$this, 'generateLink'], ['is_safe' => ['html']]),
-        ];
+        return [new TwigFilter('i18n_link', [$this, 'generateLink'], ['is_safe' => ['html']])];
     }
 
     public function getFunctions(): array
     {
-        return [
-            new TwigFunction('i18n_links', [$this, 'generateLinks'], ['is_safe' => ['html']]),
-        ];
+        return [new TwigFunction('i18n_links', [$this, 'generateLinks'], ['is_safe' => ['html']])];
     }
 
     public function generateLink(string $label, string $locale, string $routeName, array $parameters): string
     {
         $url = $this->router->generate($routeName, array_merge($parameters, ['_locale' => $locale]));
-
         return sprintf('<a href="%s">%s</a>', $url, $label);
     }
 
     public function generateLinks(array $locales, string $routeName, array $routeParameters): string
     {
-        $labels = ['en' => 'English', 'fr' => 'French'];
-        $html = '';
+        $html = '<ul>';
 
         foreach ($locales as $locale) {
-            $label = $labels[$locale];
+            $label = self::LOCALE_LABELS[$locale];
             $html .= '<li>'.$this->generateLink($label, $locale, $routeName, $routeParameters).'</li>';
         }
 
-        return $html;
+        return $html . '</ul>';
     }
 }

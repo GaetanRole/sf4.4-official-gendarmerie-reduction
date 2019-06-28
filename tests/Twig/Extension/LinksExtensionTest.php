@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Tests\Twig\Extension;
+
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use PHPUnit\Framework\TestCase;
+use App\Twig\Extension\LinksExtension;
+use Symfony\Component\Routing\Generator\UrlGenerator;
+
+/**
+ * @group Unit
+ */
+final class LinksExtensionTest extends TestCase
+{
+    /** @var LinksExtension */
+    private $linksExtension;
+
+    protected function setUp(): void
+    {
+        $urlGenerator = $this->getMockBuilder(UrlGenerator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['generate'])
+            ->getMock();
+
+        $urlGenerator->expects($this->atMost(2))
+            ->method('generate')
+            ->withConsecutive(['app_index', ['_locale' => 'en']], ['app_index', ['_locale' => 'fr']])
+            ->willReturnOnConsecutiveCalls('/en/login', '/fr/login');
+
+        $this->linksExtension = new LinksExtension($urlGenerator);
+    }
+
+    public function testGetFiltersReturningAnArrayContainingOnlyTwigFilters(): void
+    {
+        $this->assertContainsOnlyInstancesOf(TwigFilter::class, $this->linksExtension->getFilters());
+    }
+
+    public function testGetFunctionsReturningAnArrayContainingOnlyTwigFunctions(): void
+    {
+        $this->assertContainsOnlyInstancesOf(TwigFunction::class, $this->linksExtension->getFunctions());
+    }
+
+    public function testGenerateLinkWithOneValidLocaleAndRoute(): void
+    {
+        $this->assertSame(
+            '<a href="/en/login">English</a>',
+            $this->linksExtension->generateLink('English', 'en', 'app_index', [])
+        );
+    }
+
+    public function testGenerateLinksWithFewValidLocales(): void
+    {
+        $this->assertSame(
+            '<ul><li><a href="/en/login">English</a></li><li><a href="/fr/login">French</a></li></ul>',
+            $this->linksExtension->generateLinks(['en', 'fr'], 'app_index', [])
+        );
+    }
+}
