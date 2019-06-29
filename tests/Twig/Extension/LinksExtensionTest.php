@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Tests\Twig\Extension;
 
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use PHPUnit\Framework\TestCase;
 use App\Twig\Extension\LinksExtension;
+use Twig\Extension\AbstractExtension;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 /**
- * @group Unit
+ * @group   Unit
+ * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class LinksExtensionTest extends TestCase
 {
@@ -29,6 +33,11 @@ final class LinksExtensionTest extends TestCase
             ->willReturnOnConsecutiveCalls('/en/login', '/fr/login');
 
         $this->linksExtension = new LinksExtension($urlGenerator);
+    }
+
+    public function testLinksExtensionExtendingAbstractExtension(): void
+    {
+        $this->assertInstanceOf(AbstractExtension::class, $this->linksExtension);
     }
 
     public function testGetFiltersReturningAnArrayContainingOnlyTwigFilters(): void

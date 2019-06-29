@@ -6,6 +6,7 @@ namespace App\Service;
 
 use DateTime;
 use Exception;
+use DateTimeInterface;
 use Innmind\TimeContinuum\Format\ISO8601;
 use Innmind\TimeContinuum\TimeContinuum\Earth;
 use Innmind\TimeContinuum\Timezone\Earth\Europe\Paris;
@@ -40,13 +41,10 @@ final class GlobalClock
     /**
      * Returning a DateTime obj based on timeZone.
      *
-     * @return  DateTime DateTime at now
-     * @throws  Exception Datetime Exception
+     * @throws  Exception DateTime Emits Exception in case of an error.
      */
-    public function getNowInDateTime(): DateTime
+    public function getNowInDateTime(): DateTimeInterface
     {
-        $now = $this->clock->now()->changeTimezone(new Paris())->format($this->format);
-
-        return new DateTime($now);
+        return new DateTime($this->clock->now()->changeTimezone(new Paris())->format($this->format));
     }
 }

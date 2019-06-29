@@ -2,9 +2,9 @@
 
 namespace App\Twig\Extension;
 
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
