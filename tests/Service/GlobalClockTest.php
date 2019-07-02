@@ -8,8 +8,8 @@ use \DateTime;
 use \Exception;
 use App\Service\GlobalClock;
 use PHPUnit\Framework\TestCase;
-use Innmind\TimeContinuum\TimeContinuum\Earth;
 use Innmind\TimeContinuum\Format\ISO8601;
+use Innmind\TimeContinuum\TimeContinuum\Earth;
 
 /**
  * @group   Unit

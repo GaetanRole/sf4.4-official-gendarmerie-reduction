@@ -15,7 +15,7 @@ use Innmind\TimeContinuum\Timezone\Earth\Europe\Paris;
  * @see     https://github.com/Innmind/TimeContinuum
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class GlobalClock
+class GlobalClock
 {
     /** @var Earth */
     private $clock;
