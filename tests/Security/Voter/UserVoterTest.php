@@ -23,15 +23,14 @@ final class UserVoterTest extends TestCase
         bool $isGrantedFirstExpectation,
         bool $isGrantedSecondExpectation
     ): User {
-
-        $user = $this->createMock(User::class);
-        $user
+        $userStub = $this->createMock(User::class);
+        $userStub
             ->method('getRoles')
             ->willReturn([$role]);
-        $user
+        $userStub
             ->method('hasRole')
             ->willReturnOnConsecutiveCalls($isGrantedFirstExpectation, $isGrantedSecondExpectation);
-        return $user;
+        return $userStub;
     }
 
     public function provideVoteCasesWithDifferentUserData(): Generator

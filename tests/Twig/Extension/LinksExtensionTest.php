@@ -22,17 +22,17 @@ final class LinksExtensionTest extends TestCase
 
     protected function setUp(): void
     {
-        $urlGenerator = $this->getMockBuilder(UrlGenerator::class)
+        $urlGeneratorMock = $this->getMockBuilder(UrlGenerator::class)
             ->disableOriginalConstructor()
             ->setMethods(['generate'])
             ->getMock();
 
-        $urlGenerator->expects($this->atMost(2))
+        $urlGeneratorMock->expects($this->atMost(2))
             ->method('generate')
             ->withConsecutive(['app_index', ['_locale' => 'en']], ['app_index', ['_locale' => 'fr']])
             ->willReturnOnConsecutiveCalls('/en/login', '/fr/login');
 
-        $this->linksExtension = new LinksExtension($urlGenerator);
+        $this->linksExtension = new LinksExtension($urlGeneratorMock);
     }
 
     public function testLinksExtensionExtendingAbstractExtension(): void
