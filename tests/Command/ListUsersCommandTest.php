@@ -25,8 +25,7 @@ final class ListUsersCommandTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $kernel = static::createKernel();
-        $application = new Application($kernel);
+        $application = new Application(static::createKernel());
 
         $this->command = $application->find('app:list-users');
         $this->commandTester = new CommandTester($this->command);
@@ -48,7 +47,7 @@ final class ListUsersCommandTest extends KernelTestCase
     }
 
     /**
-     * Tested with the standard output and its line numbers
+     * Tested with the standard output and its line numbers.
      */
     public function testExecuteWithMaxResultsLimitedToFiveUsers(): void
     {
