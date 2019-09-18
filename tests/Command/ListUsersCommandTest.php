@@ -31,19 +31,30 @@ final class ListUsersCommandTest extends KernelTestCase
         $this->commandTester = new CommandTester($this->command);
     }
 
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->command = null;
+        $this->commandTester = null;
+    }
+
     public function testExecuteMethodReturningAZeroStatus(): void
     {
         $this->commandTester->execute(['command' => $this->command->getName()]);
+
         $this->assertSame(0, $this->commandTester->getStatusCode());
     }
 
     public function testExecuteMethodReturningGoodOutputHeaderAndColumns(): void
     {
         $this->commandTester->execute(['command' => $this->command->getName()]);
-        $this->assertContains('Current Users present in DB :', $this->commandTester->getDisplay());
-        $this->assertContains('ID', $this->commandTester->getDisplay());
-        $this->assertContains('Username', $this->commandTester->getDisplay());
-        $this->assertContains('Roles', $this->commandTester->getDisplay());
+        $standardOutput = $this->commandTester->getDisplay();
+
+        $this->assertContains('Current Users present in DB :', $standardOutput);
+        $this->assertContains('ID', $standardOutput);
+        $this->assertContains('Username', $standardOutput);
+        $this->assertContains('Roles', $standardOutput);
     }
 
     /**

@@ -29,6 +29,13 @@ final class GlobalClockTest extends TestCase
         $this->clock = new GlobalClock($earth, $isoFormat);
     }
 
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->clock = null;
+    }
+
     public function testGetClockMethodReturningAnEarthInstance(): void
     {
         $this->assertInstanceOf(Earth::class, $this->clock->getClock());
@@ -40,6 +47,6 @@ final class GlobalClockTest extends TestCase
     public function testGetNowInDateTimeMethodReturningACurrentDateTime(): void
     {
         $this->assertInstanceOf('Datetime', $this->clock->getNowInDateTime());
-        $this->assertEquals(new DateTime('now'), $this->clock->getNowInDateTime());
+        $this->assertEquals(new DateTime('now'), $this->clock->getNowInDateTime(), '', '5');
     }
 }

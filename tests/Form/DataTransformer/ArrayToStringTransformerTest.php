@@ -21,6 +21,13 @@ final class ArrayToStringTransformerTest extends TestCase
         $this->transformer = new ArrayToStringTransformer();
     }
 
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->transformer = null;
+    }
+
     public function testTransformMethodReturningTheRightStringAccordingToThePassedArray(): void
     {
         $this->assertSame(

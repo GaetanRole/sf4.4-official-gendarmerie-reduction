@@ -7,9 +7,9 @@ namespace App\Tests\Twig\Extension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use PHPUnit\Framework\TestCase;
-use App\Twig\Extension\LinksExtension;
 use Twig\Extension\AbstractExtension;
-use Symfony\Component\Routing\Generator\UrlGenerator;
+use App\Twig\Extension\LinksExtension;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @group   Unit
@@ -22,10 +22,7 @@ final class LinksExtensionTest extends TestCase
 
     protected function setUp(): void
     {
-        $urlGeneratorMock = $this->getMockBuilder(UrlGenerator::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generate'])
-            ->getMock();
+        $urlGeneratorMock = $this->createMock(UrlGeneratorInterface::class);
 
         $urlGeneratorMock->expects($this->atMost(2))
             ->method('generate')
@@ -33,6 +30,13 @@ final class LinksExtensionTest extends TestCase
             ->willReturnOnConsecutiveCalls('/en/login', '/fr/login');
 
         $this->linksExtension = new LinksExtension($urlGeneratorMock);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->linksExtension = null;
     }
 
     public function testLinksExtensionExtendingAbstractExtension(): void
