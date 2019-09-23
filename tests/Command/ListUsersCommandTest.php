@@ -60,7 +60,7 @@ final class ListUsersCommandTest extends KernelTestCase
     /**
      * Tested with the standard output and its line numbers.
      */
-    public function testExecuteWithMaxResultsLimitedToFiveUsers(): void
+    public function testExecuteMethodWithMaxResultsLimitedToFiveUsers(): void
     {
         $this->commandTester->execute(['command' => $this->command->getName(), '--max-results' => 5]);
         // Eight lines composed of headers and one ending line + six user rows

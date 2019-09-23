@@ -39,7 +39,7 @@ final class EntityRepositoryAdapterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->entityManagerMock    = $this->createMock(EntityManagerInterface::class);
+        $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
         $this->eventDispatcherMock  = $this->createMock(EventDispatcherInterface::class);
 
         $this->entityRepositoryAdapter = new EntityRepositoryAdapter(

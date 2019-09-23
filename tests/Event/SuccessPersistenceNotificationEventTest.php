@@ -28,6 +28,8 @@ final class SuccessPersistenceNotificationEventTest extends TestCase
         $reflectedEvent = new ReflectionClass(SuccessPersistenceNotificationEvent::class);
         $this->assertArrayHasKey('TYPE', $reflectedEvent->getConstants());
         $this->assertArrayHasKey('DOMAIN', $reflectedEvent->getConstants());
+        $this->assertEquals('success', $reflectedEvent->getConstant('TYPE'));
+        $this->assertEquals('flashes', $reflectedEvent->getConstant('DOMAIN'));
     }
 
     public function testGetTranslationKeyMethodReturningAGoodTranslationKey(): void

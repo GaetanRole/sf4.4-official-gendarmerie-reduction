@@ -7,7 +7,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class SuccessPersistenceNotificationEvent extends Event
+class SuccessPersistenceNotificationEvent extends Event
 {
     public const
         /** @var string FlashBag type for FlashBagInterface::add() */

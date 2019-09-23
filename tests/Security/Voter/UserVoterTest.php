@@ -30,6 +30,7 @@ final class UserVoterTest extends TestCase
         $userStub
             ->method('hasRole')
             ->willReturnOnConsecutiveCalls($isGrantedFirstExpectation, $isGrantedSecondExpectation);
+
         return $userStub;
     }
 
