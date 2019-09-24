@@ -1,31 +1,24 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Security\Voter;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @see     https://symfony.com/doc/current/security/voters.html
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class UserVoter extends Voter
+final class UserVoter extends Voter
 {
     /** Voter actions */
     private const
         EDIT = 'edit',
         STATUS = 'status',
         DELETE = 'delete';
-
-    /** @var Security */
-    private $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
 
     /**
      * {@inheritdoc}
@@ -45,7 +38,7 @@ class UserVoter extends Voter
         }
 
         if ($user->hasRole('ROLE_ADMIN')) {
-            return $this->security->isGranted('ROLE_SUPER_ADMIN');
+            return $token->getUser()->hasRole('ROLE_SUPER_ADMIN');
         }
 
         return true;
