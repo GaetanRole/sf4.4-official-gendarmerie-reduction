@@ -17,7 +17,7 @@ install-prod:		.env.local
 sf-console\:%:		## Calling Symfony console
 					$(CONSOLE) $* $(ARGS)
 
-.PHONY:				install
+.PHONY:				install install-prod
 
 ##
 ###-------------------------#
@@ -41,17 +41,22 @@ db-fixtures: 		## Execute doctrine:fixtures:load
 					$(CONSOLE) doctrine:fixtures:load --no-interaction
 					$(CONSOLE) app:list-users
 
+db-fixtures-test: 	## Execute doctrine:fixtures:load fo test env
+					$(CONSOLE) doctrine:database:create --if-not-exists -vvv --env=test
+					$(CONSOLE) doctrine:migrations:migrate --allow-no-migration --no-interaction --all-or-nothing --env=test
+					$(CONSOLE) doctrine:fixtures:load --no-interaction --env=test
+
 db-diff:			## Execute doctrine:migration:diff
 					$(CONSOLE) doctrine:migrations:diff --formatted
 
 db-validate:		## Validate the doctrine ORM mapping
 					$(CONSOLE) doctrine:schema:validate
 
-db-init: 			vendor db-wait db-create db-migrate db-fixtures ## Initialize database e.g : wait, create database and migrations
+db-init: 			vendor db-wait db-create db-migrate db-fixtures db-fixtures-test ## Initialize database e.g : wait, create database and migrations
 
 db-update: 			vendor db-diff db-migrate ## Alias coupling db-diff and db-migrate
 
-.PHONY: 			db-wait db-destroy db-create db-migrate db-fixtures db-diff db-validate db-init db-update
+.PHONY: 			db-wait db-destroy db-create db-migrate db-fixtures db-fixtures-test db-diff db-validate db-init db-update
 
 ##
 ###----------------------------#
@@ -95,7 +100,7 @@ update-prod:		## Update dependencies for prod
 					# sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
                     # sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
 
-.PHONY:				cc clean clear update
+.PHONY:				cc cc-prod clean clear update update-prod
 
 ##
 ###-------------------#
@@ -104,10 +109,10 @@ update-prod:		## Update dependencies for prod
 ##
 
 tu:					vendor ## Run unit tests (might be slow for the first time)
-					./bin/phpunit --exclude-group functional
+					./bin/phpunit --exclude-group Functional
 
 tf:					vendor ## Run functional tests
-					./bin/phpunit --group functional
+					./bin/phpunit --group Functional
 
 tw:					vendor ## Run wip tests
 					./bin/phpunit --group wip

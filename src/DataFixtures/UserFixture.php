@@ -79,7 +79,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
             $user->setCreatedAt($this->clock->getNowInDateTime());
             $user->setUpdatedAt(null);
 
-            $user->setUsername($faker->userName)
+            $user->setUsername('user'.$index)
                 ->setIdentity($this->getRandomIdentity())
                 ->setEmail($faker->email)
                 ->setPassword(

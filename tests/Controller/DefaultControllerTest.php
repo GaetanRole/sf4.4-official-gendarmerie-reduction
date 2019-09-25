@@ -25,6 +25,20 @@ final class DefaultControllerTest extends InheritedWebTestCase
         $this->assertSame(Response::HTTP_OK, $this->webClient->getResponse()->getStatusCode());
     }
 
+    public function testDashboardMethodIsSuccessfulForAIdentifiedClient(): void
+    {
+        $this->webClient->followRedirects(false);
+
+        // See credentials in src/DataFixtures/UserFixture or in sf_test_gendarmerie_reduction
+        $this->webClient->setServerParameters([
+            'PHP_AUTH_USER' => 'user0',
+            'PHP_AUTH_PW'   => 'password0',
+        ]);
+
+        $this->webClient->request('GET', '/en/dashboard');
+        $this->assertTrue($this->webClient->getResponse()->isSuccessful());
+    }
+
     /**
      * This tests ensures that whenever a user tries to
      * access one of those pages, a redirection to the login form is performed.
@@ -44,7 +58,7 @@ final class DefaultControllerTest extends InheritedWebTestCase
 
     /**
      * _locale secured by LinksExtensionsTest.
-     * Test prepared for later asserts.
+     * Prepared test for later assertions.
      */
     public function getPublicUrls(): Generator
     {
