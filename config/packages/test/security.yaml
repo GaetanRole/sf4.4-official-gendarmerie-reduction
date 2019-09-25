@@ -1,4 +1,8 @@
 security:
+    firewalls:
+        main:
+            http_basic: ~
+
     encoders:
         App\Entity\User:
             algorithm: md5
