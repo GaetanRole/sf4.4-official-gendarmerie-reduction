@@ -243,7 +243,7 @@
       </trans-unit>
       <trans-unit id="Q5ha4LM" resname="link.login">
         <source>link.login</source>
-        <target>__link.login</target>
+        <target>Log In !</target>
       </trans-unit>
       <trans-unit id="j7mtFaM" resname="base.head.meta.description">
         <source>base.head.meta.description</source>
@@ -255,39 +255,51 @@
       </trans-unit>
       <trans-unit id="CGYkr95" resname="login.head.meta.description">
         <source>login.head.meta.description</source>
-        <target>__login.head.meta.description</target>
+        <target>Connect to your Gendarmerie account to enjoy cool reductions and offers.</target>
       </trans-unit>
       <trans-unit id="BQkzFUH" resname="login.head.meta.title">
         <source>login.head.meta.title</source>
-        <target>__login.head.meta.title</target>
+        <target>Log In !</target>
       </trans-unit>
       <trans-unit id="ppRfupw" resname="login.body.h1">
         <source>login.body.h1</source>
-        <target>__login.body.h1</target>
+        <target>See Gendarmerie reductions in your surroundings</target>
       </trans-unit>
       <trans-unit id="UVnEemT" resname="login.form.username.label">
         <source>login.form.username.label</source>
-        <target>__login.form.username.label</target>
+        <target>Username</target>
       </trans-unit>
       <trans-unit id="NRUZzJu" resname="login.form.username.placeholder">
         <source>login.form.username.placeholder</source>
-        <target>__login.form.username.placeholder</target>
+        <target>Username</target>
       </trans-unit>
       <trans-unit id="OyhW8sn" resname="login.form.password.label">
         <source>login.form.password.label</source>
-        <target>__login.form.password.label</target>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="h4HMw0h" resname="login.form.password.placeholder">
         <source>login.form.password.placeholder</source>
-        <target>__login.form.password.placeholder</target>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="8emu4Yy" resname="login.form.remember_me">
         <source>login.form.remember_me</source>
-        <target>__login.form.remember_me</target>
+        <target>Remember me</target>
       </trans-unit>
       <trans-unit id="KXSzZJt" resname="login.form.submit">
         <source>login.form.submit</source>
-        <target>__login.form.submit</target>
+        <target>Log In !</target>
+      </trans-unit>
+      <trans-unit id="GBOW1we" resname="login.form.subtitle">
+        <source>login.form.subtitle</source>
+        <target>You can not create an account on this website. You need to have access on the Facebook page related to PromoGend and ask for an account.</target>
+      </trans-unit>
+      <trans-unit id="7uVqVXu" resname="login.link.back.title">
+        <source>login.link.back.title</source>
+        <target>Click to back on the homepage and have all website contents</target>
+      </trans-unit>
+      <trans-unit id="xm_ratj" resname="login.link.back">
+        <source>login.link.back</source>
+        <target>Back to the homepage</target>
       </trans-unit>
       <trans-unit id="lVBST_h" resname="opinion.new.head.meta.title">
         <source>opinion.new.head.meta.title</source>

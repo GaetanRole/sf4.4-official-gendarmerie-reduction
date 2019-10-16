@@ -1,0 +1,74 @@
+/**** GLOBAL CSS ****/
+
+/* -- Table of contents -- */
+/* - Tags */
+/* - General classes */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
+
+/* Tags */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: #f2f2f2;
+    height: 100%;
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size: 1.3em;
+    color: #555;
+    line-height: 1.2;
+    word-break: break-word;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    display: block;
+}
+
+a {
+    color: #0258a1;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #4e99d8;
+}
+
+/* General classes */
+
+.alert {
+    font-size: 0.9em;
+}
+
+.btn {
+    border-radius: 30px;
+    padding: 5px 50px 5px 50px;
+}
+
+.fas {
+    font-size: 0.9em;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+.vertical-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}

@@ -1,0 +1,29 @@
+/**** LOGIN CSS ****/
+
+#login {
+    height: inherit;
+    padding: 50px 40px 100px 40px;
+}
+
+#login img {
+    width: 70px;
+}
+
+#login .container {
+    background-color: white;
+    box-shadow: 1px 1px 3px #eaeaea;
+    border-radius: 30px;
+    overflow: hidden;
+    height: inherit;
+}
+
+#login .row {
+    height: inherit;
+}
+
+#login .gendarmerie-background {
+    background-image: url('../images/login-form-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}

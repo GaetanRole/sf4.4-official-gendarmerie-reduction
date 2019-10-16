@@ -1,7 +1,8 @@
 parameters:
     locale: 'fr'
     faker_locale: 'fr_FR'
-    app_locales: fr|en
+    app_locales: ['en', '%locale%']
+    app_locales_string_type: 'en|%locale%'
 
 services:
     _defaults:

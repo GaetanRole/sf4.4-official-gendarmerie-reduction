@@ -4,14 +4,17 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="author" content="Gaëtan Rolé-Dubruille">
     <meta name="description" content="{% block description 'base.head.meta.description'|trans %}">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
-    <title>Gendarmerie - {% block title 'base.head.meta.title'|trans %}</title>
+    <title>PromoGend - {% block title 'base.head.meta.title'|trans %}</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
@@ -20,24 +23,29 @@
 </head>
 <body>
 <header>
-    {{ i18n_links(['fr', 'en'], app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}
-    {% if is_granted('ROLE_ADMIN') %}
-        <ul>
-            <li><a href="{{ path('app_admin_index') }}">{{ 'link.admin.index'|trans }}</a></li>
-        </ul>
-    {% endif %}
-    {% block header %}
-    {% endblock %}
+    {%- block header -%}
+        {{ i18n_links(['fr', 'en'], app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}
+        {%- if is_granted('ROLE_ADMIN') -%}
+            <ul>
+                <li><a href="{{ path('app_admin_index') }}">{{ 'link.admin.index'|trans }}</a></li>
+            </ul>
+        {%- endif -%}
+    {%- endblock -%}
 </header>
-<div id="{% block body_id 'base'%}">
+<main id="{% block body_id 'base' %}">
     {% block body %}{% endblock %}
-</div>
-<footer>
-    {% block footer %}
-    {% endblock %}
+</main>
+<footer class="footer bg-dark">
+    {%- block footer -%}
+        <div class="container"><span class="text-white">Sticky footer content here.</span></div>
+    {%- endblock -%}
 </footer>
 
+<!-- Kit's code from Font Awesome with unique ID -->
+<script src="https://kit.fontawesome.com/8d75946265.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 {% block javascripts %}
 {% endblock %}
 </body>

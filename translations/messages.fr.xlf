@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="ppRfupw" resname="login.body.h1">
         <source>login.body.h1</source>
-        <target>Se connecter !</target>
+        <target>Connectez vous et découvrez les réductions militaires autour de chez vous</target>
       </trans-unit>
       <trans-unit id="UVnEemT" resname="login.form.username.label">
         <source>login.form.username.label</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="NRUZzJu" resname="login.form.username.placeholder">
         <source>login.form.username.placeholder</source>
-        <target>Veuillez entrer votre identifiant de compte.</target>
+        <target>Identifiant de compte</target>
       </trans-unit>
       <trans-unit id="OyhW8sn" resname="login.form.password.label">
         <source>login.form.password.label</source>
@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="h4HMw0h" resname="login.form.password.placeholder">
         <source>login.form.password.placeholder</source>
-        <target>Veuillez entrer le mot de passe relatif à votre compte.</target>
+        <target>Mot de passe</target>
       </trans-unit>
       <trans-unit id="8emu4Yy" resname="login.form.remember_me">
         <source>login.form.remember_me</source>
@@ -288,6 +288,18 @@
       <trans-unit id="KXSzZJt" resname="login.form.submit">
         <source>login.form.submit</source>
         <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="GBOW1we" resname="login.form.subtitle">
+        <source>login.form.subtitle</source>
+        <target>Vous ne pouvez pas créer de compte sur le site. Il vous faut accèder à la page Facebook du groupe PromoGend pour avoir un compte.</target>
+      </trans-unit>
+      <trans-unit id="7uVqVXu" resname="login.link.back.title">
+        <source>login.link.back.title</source>
+        <target>Revenir à l'accueil et profitez de tous les contenus</target>
+      </trans-unit>
+      <trans-unit id="xm_ratj" resname="login.link.back">
+        <source>login.link.back</source>
+        <target>Revenir à l'accueil</target>
       </trans-unit>
       <trans-unit id="lVBST_h" resname="opinion.new.head.meta.title">
         <source>opinion.new.head.meta.title</source>

@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="BT9L16I" resname="security.authenticator.user.authentication.exception">
         <source>security.authenticator.user.authentication.exception</source>
-        <target>__security.authenticator.user.authentication.exception</target>
+        <target>The username and password you entered did not match any account. Try again.</target>
       </trans-unit>
       <trans-unit id="RxAW4LT" resname="security.authenticator.user.banish.exception">
         <source>security.authenticator.user.banish.exception</source>
