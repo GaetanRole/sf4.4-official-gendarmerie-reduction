@@ -22,6 +22,14 @@ final class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/contact", name="contact", methods={"GET","POST"})
+     */
+    public function contact(): Response
+    {
+        return $this->render('default/contact.html.twig');
+    }
+
+    /**
      * Dashboard page after connexion.
      * @todo    Add all useful data for a dashboard index (only for users).
      *

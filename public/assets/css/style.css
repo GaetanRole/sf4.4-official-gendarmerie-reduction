@@ -2,6 +2,7 @@
 
 /* -- Table of contents -- */
 /* - Tags */
+/* - Bootstrap classes */
 /* - General classes */
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
@@ -45,7 +46,11 @@ a:hover {
     color: #4e99d8;
 }
 
-/* General classes */
+li {
+    list-style: none;
+}
+
+/* Bootstrap classes */
 
 .alert {
     font-size: 0.9em;
@@ -55,6 +60,39 @@ a:hover {
     border-radius: 30px;
     padding: 5px 50px 5px 50px;
 }
+
+.bg-dark {
+    background-color: #252b31 !important;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: rgb(180, 180, 180);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 3px rgba(21, 21, 21, 0.6);
+    outline: 0 none;
+}
+
+.dropdown-menu > ul > li > a:hover {
+    background-color: #252b31;
+    color: white;
+    background-image: none;
+}
+
+/* General classes */
 
 .fas {
     font-size: 0.9em;

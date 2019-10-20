@@ -293,12 +293,12 @@
         <source>login.form.subtitle</source>
         <target>Vous ne pouvez pas créer de compte sur le site. Il vous faut accèder à la page Facebook du groupe PromoGend pour avoir un compte.</target>
       </trans-unit>
-      <trans-unit id="7uVqVXu" resname="login.link.back.title">
-        <source>login.link.back.title</source>
-        <target>Revenir à l'accueil et profitez de tous les contenus</target>
+      <trans-unit id=".rnzqWA" resname="home.link.back.title">
+        <source>home.link.back.title</source>
+        <target>Revenir à l'accueil et profiter de tous les contenus</target>
       </trans-unit>
-      <trans-unit id="xm_ratj" resname="login.link.back">
-        <source>login.link.back</source>
+      <trans-unit id="A1h_z03" resname="home.link.back">
+        <source>home.link.back</source>
         <target>Revenir à l'accueil</target>
       </trans-unit>
       <trans-unit id="lVBST_h" resname="opinion.new.head.meta.title">
@@ -324,6 +324,58 @@
       <trans-unit id="0Jkt2gn" resname="user.is_not_active">
         <source>user.is_not_active</source>
         <target>Utilisateur désactivé</target>
+      </trans-unit>
+      <trans-unit id="f7yIsiI" resname="contact.head.meta.description">
+        <source>contact.head.meta.description</source>
+        <target>Contactez-nous et laissez nous un petit message nous vous répondrons rapidement.</target>
+      </trans-unit>
+      <trans-unit id="RR2W4zn" resname="contact.head.meta.title">
+        <source>contact.head.meta.title</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="Cu.X9ZB" resname="base.header.nav.home.link.title">
+        <source>base.header.nav.home.link.title</source>
+        <target>Retour sur la page d'accueil avec tout son contenu</target>
+      </trans-unit>
+      <trans-unit id="MQBP.KL" resname="base.header.nav.home.link">
+        <source>base.header.nav.home.link</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="k0W.9rP" resname="base.header.nav.current">
+        <source>base.header.nav.current</source>
+        <target>Courant</target>
+      </trans-unit>
+      <trans-unit id="QI.DsXo" resname="base.header.nav.admin.link.title">
+        <source>base.header.nav.admin.link.title</source>
+        <target>Tableau de bord administrateur pour gérer les réductions et utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="0LR5.tW" resname="base.header.nav.admin.link">
+        <source>base.header.nav.admin.link</source>
+        <target>Administrateur</target>
+      </trans-unit>
+      <trans-unit id="IWLen9X" resname="base.header.nav.contact.link.title">
+        <source>base.header.nav.contact.link.title</source>
+        <target>Laissez-nous un petit message sur notre formulaire de contact</target>
+      </trans-unit>
+      <trans-unit id="Ij_63nW" resname="base.header.nav.contact.link">
+        <source>base.header.nav.contact.link</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="J9aBLz7" resname="base.header.nav.logout.link.title">
+        <source>base.header.nav.logout.link.title</source>
+        <target>Déconnectez-vous et soyez redirigé sur la page d'accueil</target>
+      </trans-unit>
+      <trans-unit id="IrDLaUb" resname="base.header.nav.logout.link">
+        <source>base.header.nav.logout.link</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="._htYRY" resname="base.header.nav.login.link.title">
+        <source>base.header.nav.login.link.title</source>
+        <target>Connectez-vous et accédez aux réductions Gendarmerie</target>
+      </trans-unit>
+      <trans-unit id="eRBEx0C" resname="base.header.nav.login.link">
+        <source>base.header.nav.login.link</source>
+        <target>Se connecter</target>
       </trans-unit>
     </body>
   </file>
