@@ -11,7 +11,7 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|scss|images|js)/
+            pattern: ^/(_(profiler|wdt)|images|js)/
             security: false
         main:
             pattern: ^/
@@ -32,9 +32,9 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
 
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }

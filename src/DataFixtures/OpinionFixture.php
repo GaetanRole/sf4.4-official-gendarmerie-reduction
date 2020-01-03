@@ -51,7 +51,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
 
-        foreach ($this->getOpinionReferenceData() as [$index, $author, $reduction]) {
+        foreach ($this->getOpinionReferenceData() as [$author, $reduction]) {
             $opinion = new Opinion();
 
             $opinion->setUuid(Uuid::uuid4());
@@ -84,7 +84,6 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
         for ($index = 0; $index < self::OPINION_NB_TUPLE; $index++) {
             // $opinionData = [$index, $author, $reduction];
             $opinionData[] = [
-                $index,
                 $this->getReference(
                     UserFixture::USER_REFERENCE.random_int(
                         0,

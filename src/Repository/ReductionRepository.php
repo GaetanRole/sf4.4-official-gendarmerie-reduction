@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method  Reduction|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,7 +22,7 @@ class ReductionRepository extends ServiceEntityRepository
     /** @var GlobalClock */
     private $clock;
 
-    public function __construct(RegistryInterface $registry, GlobalClock $clock)
+    public function __construct(ManagerRegistry $registry, GlobalClock $clock)
     {
         parent::__construct($registry, Reduction::class);
 

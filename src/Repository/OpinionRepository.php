@@ -2,11 +2,11 @@
 
 namespace App\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method  Opinion|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,7 +21,7 @@ class OpinionRepository extends ServiceEntityRepository
     /** @var GlobalClock */
     private $clock;
 
-    public function __construct(RegistryInterface $registry, GlobalClock $clock)
+    public function __construct(ManagerRegistry $registry, GlobalClock $clock)
     {
         parent::__construct($registry, Opinion::class);
 

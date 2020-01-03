@@ -57,16 +57,19 @@ final class LinksExtensionTest extends TestCase
     public function testGenerateLinkWithOneValidLocaleAndRoute(): void
     {
         $this->assertSame(
-            '<a href="/en/login">English</a>',
+            '<a href="/en/login" class="dropdown-item">English</a>',
             $this->linksExtension->generateLink('English', 'en', 'app_index', [])
         );
     }
 
     public function testGenerateLinksWithFewValidLocales(): void
     {
+        $enExpectedValue = '<li><a href="/en/login" class="dropdown-item">English</a></li>';
+        $frExpectedValue = '<li><a href="/fr/login" class="dropdown-item">French</a></li>';
+
         $this->assertSame(
-            '<ul><li><a href="/en/login">English</a></li><li><a href="/fr/login">French</a></li></ul>',
-            $this->linksExtension->generateLinks(['en', 'fr'], 'app_index', [])
+            '<ul>'.$enExpectedValue.$frExpectedValue.'</ul>',
+            $this->linksExtension->generateLinks(['en', 'fr'], 'app_index', [], 'en')
         );
     }
 }
