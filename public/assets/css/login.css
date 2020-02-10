@@ -1,24 +1,15 @@
-/**** LOGIN CSS ****/
+/* Login Style
+-------------------------------------------------- */
 
 #login {
     height: inherit;
     padding: 50px 40px 100px 40px;
 }
 
-#login img {
-    width: 70px;
-}
-
 #login .container {
-    background-color: white;
-    box-shadow: 1px 1px 3px #eaeaea;
+    background-color: var(--white);
+    box-shadow: 1px 1px 3px var(--white-medium);
     border-radius: 30px;
-    overflow: hidden;
-    height: inherit;
-}
-
-#login .row {
-    height: inherit;
 }
 
 #login .gendarmerie-background {
@@ -26,4 +17,8 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+#login img {
+    width: 70px;
 }
