@@ -1,27 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'admin.index.head.meta.title'|trans }}{% endblock %}
+{% block title 'admin.index.head.meta.title'|trans %}
+
+{% block og_title 'admin.index.head.meta.title'|trans %}
+{% block og_description 'admin.index.head.meta.description'|trans %}
 
 {% block body_id 'admin-index' %}
 
 {% block body %}
-    <section>
-
-        {% include 'default/_flash_messages.html.twig' %}
-
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1><i class="fab fa-galactic-republic"></i> {{ 'admin.index.body.h1'|trans }}</h1>
-                    <ul>
-                        <li><a href="{{ path('app_logout') }}">{{ 'link.logout'|trans }}</a></li>
-                        <li><a href="{{ path('app_admin_user_index') }}">{{ 'link.admin.user.index'|trans }}</a></li>
-                        <li><a href="{{ path('app_admin_brand_index') }}">{{ 'link.admin.brand.index'|trans }}</a></li>
-                        <li><a href="{{ path('app_admin_category_index') }}">{{ 'link.admin.category.index'|trans }}</a></li>
-                        <li><a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a></li>
-                    </ul>
-                </div>
+    <div class="container p-5 mt-5 mb-5">
+        <div class="row">
+            <div class="col">
+                <h1><i class="fab fa-galactic-republic"></i> {{ 'admin.index.body.h1'|trans }}</h1>
+                <ul>
+                    <li><a href="{{ path('app_logout') }}">{{ 'link.logout'|trans }}</a></li>
+                    <li><a href="{{ path('app_admin_user_index') }}">{{ 'link.admin.user.index'|trans }}</a></li>
+                    <li><a href="{{ path('app_admin_brand_index') }}">{{ 'link.admin.brand.index'|trans }}</a></li>
+                    <li><a href="{{ path('app_admin_category_index') }}">{{ 'link.admin.category.index'|trans }}</a></li>
+                    <li><a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a></li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

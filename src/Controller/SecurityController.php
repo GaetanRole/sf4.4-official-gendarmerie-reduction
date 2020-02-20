@@ -27,7 +27,7 @@ final class SecurityController extends AbstractController
                 'danger',
                 $translator->trans('is_authenticated_fully.flash.redirection', [], 'flashes')
             );
-            return $this->redirectToRoute('app_default_index');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('security/login.html.twig', [

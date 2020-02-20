@@ -533,9 +533,37 @@
         <source>validator.user.phone_number.regex</source>
         <target>__validator.user.phone_number.regex</target>
       </trans-unit>
+      <trans-unit id="sLmQ15Z" resname="form.change_password.plain_password.not_blank">
+        <source>form.change_password.plain_password.not_blank</source>
+        <target>__form.change_password.plain_password.not_blank</target>
+      </trans-unit>
+      <trans-unit id="WojBVRs" resname="form.change_password.plain_password.invalid">
+        <source>form.change_password.plain_password.invalid</source>
+        <target>__form.change_password.plain_password.invalid</target>
+      </trans-unit>
       <trans-unit id="BQ4RhbO" resname="validator.user.plain_password.regex">
         <source>validator.user.plain_password.regex</source>
         <target>__validator.user.plain_password.regex</target>
+      </trans-unit>
+      <trans-unit id="jTdE3lO" resname="form.contact.name.not_blank">
+        <source>form.contact.name.not_blank</source>
+        <target>__form.contact.name.not_blank</target>
+      </trans-unit>
+      <trans-unit id="cbH3R61" resname="form.contact.email.not_blank">
+        <source>form.contact.email.not_blank</source>
+        <target>__form.contact.email.not_blank</target>
+      </trans-unit>
+      <trans-unit id="lLEv2gG" resname="form.contact.email.email">
+        <source>form.contact.email.email</source>
+        <target>__form.contact.email.email</target>
+      </trans-unit>
+      <trans-unit id="rooOpmX" resname="form.contact.subject.not_blank">
+        <source>form.contact.subject.not_blank</source>
+        <target>__form.contact.subject.not_blank</target>
+      </trans-unit>
+      <trans-unit id="eVz.GE0" resname="form.contact.message.not_blank">
+        <source>form.contact.message.not_blank</source>
+        <target>__form.contact.message.not_blank</target>
       </trans-unit>
     </body>
   </file>

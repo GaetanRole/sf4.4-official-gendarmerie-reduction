@@ -83,7 +83,7 @@ class AdminCategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category, TranslatorInterface $translator): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$category->getUuid()->toString(), $request->request->get('_token'))) {
             if ($category->getReductions()->count() > 0) {
                 $this->addFlash('danger', $translator->trans('category.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_category_index');

@@ -533,9 +533,37 @@
         <source>validator.user.phone_number.regex</source>
         <target>Le numéro n'est pas valide. Veuillez vérifier celui-ci. Ex: 0610101010.</target>
       </trans-unit>
+      <trans-unit id="sLmQ15Z" resname="form.change_password.plain_password.not_blank">
+        <source>form.change_password.plain_password.not_blank</source>
+        <target>Vous devez renseigner un mot de passe valide.</target>
+      </trans-unit>
+      <trans-unit id="WojBVRs" resname="form.change_password.plain_password.invalid">
+        <source>form.change_password.plain_password.invalid</source>
+        <target>Les mots de passe ne concordent pas.</target>
+      </trans-unit>
       <trans-unit id="BQ4RhbO" resname="validator.user.plain_password.regex">
         <source>validator.user.plain_password.regex</source>
         <target>Votre mot de passe doit contenir plus de 8 caractères et contenir au moins 1 chiffre.</target>
+      </trans-unit>
+      <trans-unit id="jTdE3lO" resname="form.contact.name.not_blank">
+        <source>form.contact.name.not_blank</source>
+        <target>Vous devez renseigner un nom pour nous écrire.</target>
+      </trans-unit>
+      <trans-unit id="rooOpmX" resname="form.contact.subject.not_blank">
+        <source>form.contact.subject.not_blank</source>
+        <target>Veuillez entrer un sujet de mail.</target>
+      </trans-unit>
+      <trans-unit id="cbH3R61" resname="form.contact.email.not_blank">
+        <source>form.contact.email.not_blank</source>
+        <target>Il est obligatoire de renseigner une adresse email pour pouvoir vous répondre.</target>
+      </trans-unit>
+      <trans-unit id="lLEv2gG" resname="form.contact.email.email">
+        <source>form.contact.email.email</source>
+        <target>Veuillez corriger la syntaxe de votre email.</target>
+      </trans-unit>
+      <trans-unit id="eVz.GE0" resname="form.contact.message.not_blank">
+        <source>form.contact.message.not_blank</source>
+        <target>Veuillez écrire un message à votre mail.</target>
       </trans-unit>
     </body>
   </file>

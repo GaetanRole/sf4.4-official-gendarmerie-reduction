@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/", name="app_default_")
+ * @Route("/", name="app_")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class DefaultController extends AbstractController
@@ -22,11 +24,20 @@ final class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact", methods={"GET","POST"})
+     * @Route("/contact", name="contact", methods={"GET", "POST"})
      */
-    public function contact(): Response
+    public function contact(Request $request): Response
     {
-        return $this->render('default/contact.html.twig');
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', $form->getData()['name'].' your email has been sent.');
+
+            return $this->redirectToRoute('app_index');
+        }
+
+        return $this->render('default/contact.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -38,6 +49,6 @@ final class DefaultController extends AbstractController
      */
     public function dashboard(): Response
     {
-        return $this->render('default/dashboard.html.twig');
+        return $this->render('user/dashboard.html.twig');
     }
 }

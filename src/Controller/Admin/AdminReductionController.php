@@ -57,7 +57,7 @@ class AdminReductionController extends AbstractController
      */
     public function delete(Request $request, Reduction $reduction): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$reduction->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$reduction->getSlug(), $request->request->get('_token'))) {
             $this->entityRepository->delete($reduction);
         }
 

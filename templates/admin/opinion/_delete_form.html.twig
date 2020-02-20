@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('app_admin_opinion_delete', {'uuid': opinion.uuid}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ opinion.id) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ opinion.uuid) }}">
     <button class="btn">{{ 'btn.delete'|trans }}</button>
 </form>

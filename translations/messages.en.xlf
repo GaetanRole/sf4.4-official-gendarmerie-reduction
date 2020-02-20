@@ -377,6 +377,46 @@
         <source>base.header.nav.login.link</source>
         <target>Log In</target>
       </trans-unit>
+      <trans-unit id="Yvpqc8_" resname="admin.index.head.meta.description">
+        <source>admin.index.head.meta.description</source>
+        <target>__admin.index.head.meta.description</target>
+      </trans-unit>
+      <trans-unit id="Jd_qITE" resname="btn.close">
+        <source>btn.close</source>
+        <target>__btn.close</target>
+      </trans-unit>
+      <trans-unit id="eV0CfMM" resname="base.header.nav.user.link.title">
+        <source>base.header.nav.user.link.title</source>
+        <target>__base.header.nav.user.link.title</target>
+      </trans-unit>
+      <trans-unit id="wFcHzqY" resname="base.header.nav.user.link">
+        <source>base.header.nav.user.link</source>
+        <target>__base.header.nav.user.link</target>
+      </trans-unit>
+      <trans-unit id="lljdQoE" resname="index.header.head.title">
+        <source>index.header.head.title</source>
+        <target>__index.header.head.title</target>
+      </trans-unit>
+      <trans-unit id="dk32p1v" resname="index.header.head.description">
+        <source>index.header.head.description</source>
+        <target>__index.header.head.description</target>
+      </trans-unit>
+      <trans-unit id="XHqjztk" resname="btn.learn-more">
+        <source>btn.learn-more</source>
+        <target>__btn.learn-more</target>
+      </trans-unit>
+      <trans-unit id="9ATrwqT" resname="footer.services.title">
+        <source>footer.services.title</source>
+        <target>__footer.services.title</target>
+      </trans-unit>
+      <trans-unit id="8Ug5f1j" resname="contact.body.head.title">
+        <source>contact.body.head.title</source>
+        <target>__contact.body.head.title</target>
+      </trans-unit>
+      <trans-unit id="AOq3SIW" resname="btn.send">
+        <source>btn.send</source>
+        <target>__btn.send</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

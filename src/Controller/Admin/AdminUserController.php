@@ -101,7 +101,7 @@ class AdminUserController extends AbstractController
      */
     public function changeStatus(Request $request, User $user): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('status'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('status'.$user->getUuid()->toString(), $request->request->get('_token'))) {
             $user->getIsActive() ? $user->setIsActive(false) : $user->setIsActive(true);
             $this->entityRepository->update($user);
         }
@@ -115,7 +115,7 @@ class AdminUserController extends AbstractController
      */
     public function delete(Request $request, User $user, TranslatorInterface $translator): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$user->getUuid()->toString(), $request->request->get('_token'))) {
             if ($user->getOpinions()->count() > 0 || $user->getReductions()->count() > 0) {
                 $this->addFlash('danger', $translator->trans('user.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_user_index');

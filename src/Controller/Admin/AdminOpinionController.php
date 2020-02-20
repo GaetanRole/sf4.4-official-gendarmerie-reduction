@@ -53,7 +53,7 @@ class AdminOpinionController extends AbstractController
      */
     public function delete(Request $request, Opinion $opinion): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$opinion->getUuid()->toString(), $request->request->get('_token'))) {
             $this->entityRepository->delete($opinion);
         }
 

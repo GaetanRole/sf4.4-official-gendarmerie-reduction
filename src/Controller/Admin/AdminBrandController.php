@@ -83,7 +83,7 @@ class AdminBrandController extends AbstractController
      */
     public function delete(Request $request, Brand $brand, TranslatorInterface $translator): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$brand->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$brand->getUuid()->toString(), $request->request->get('_token'))) {
             if ($brand->getReductions()->count() > 0) {
                 $this->addFlash('danger', $translator->trans('brand.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_brand_index');

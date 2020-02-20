@@ -1,35 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block description %}{{ 'index.head.meta.description'|trans }}{% endblock %}
+{% block description 'index.head.meta.description'|trans %}
 
-{% block title %}{{ 'index.head.meta.title'|trans }}{% endblock %}
+{% block og_title 'index.head.meta.title'|trans %}
+{% block og_description 'index.head.meta.description'|trans %}
+
+{% block title 'index.head.meta.title'|trans %}
+
+{% block header -%}
+    {{ parent() }}
+
+    <div class="index-header-background background-gradient">
+        <div class="container p-5 mt-5">
+            <div class="row mt-5">
+                <h1 class="font-weight-bold text-white">{{ 'index.header.head.title'|trans }}</h1>
+                <p class="lead text-white">{{ 'index.header.head.description'|trans }}</p>
+                <p>
+                    <a href="#" class="btn btn-primary my-2">{{ 'btn.learn-more'|trans }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block body_id 'index' %}
 
 {% block body %}
-    <section>
-
-        {% include 'default/_flash_messages.html.twig' %}
-
+    <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1><i class="fab fa-galactic-republic"></i> {{ 'index.body.h1'|trans }}</h1>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <ul>
-                            <li><a href="{{ path('app_admin_index') }}">{{ 'link.admin.index'|trans }}</a></li>
-                        </ul>
-                    {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <ul>
-                            <li><a href="{{ path('app_default_dashboard') }}">{{ 'link.dashboard'|trans }}</a></li>
-                        </ul>
-                    {% else %}
-                        <ul>
-                            <li><a href="{{ path('app_login') }}">{{ 'link.login'|trans }}</a></li>
-                        </ul>
-                    {% endif %}
-                </div>
+            <div class="row">
+                {% for number in 0..5 %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="38%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button type="button" class="btn btn-sm btn-dark text-white">View</button>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

@@ -85,14 +85,6 @@
         <source>form.user_identity.email.placeholder</source>
         <target>Indiquez votre e-mail. Ex: email@email.fr.</target>
       </trans-unit>
-      <trans-unit id="sLmQ15Z" resname="form.change_password.plain_password.not_blank">
-        <source>form.change_password.plain_password.not_blank</source>
-        <target>Vous devez renseigner un mot de passe valide.</target>
-      </trans-unit>
-      <trans-unit id="WojBVRs" resname="form.change_password.plain_password.invalid">
-        <source>form.change_password.plain_password.invalid</source>
-        <target>Les mots de passe ne concordent pas.</target>
-      </trans-unit>
       <trans-unit id="IJkJmVj" resname="form.change_password.plain_password.first.label">
         <source>form.change_password.plain_password.first.label</source>
         <target>Entrez un mot de passe</target>
@@ -268,6 +260,38 @@
       <trans-unit id="Ptfaj3G" resname="form.user.identity.help">
         <source>form.user.identity.help</source>
         <target>L'identité sera visible par tout le monde. Vous pouvez indiquer le rôle du compte (savoir s'il s'agit d'un admin ou utilisateur simple).</target>
+      </trans-unit>
+      <trans-unit id="wl4_Hgl" resname="form.contact.name.label">
+        <source>form.contact.name.label</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="js8nczW" resname="form.contact.name.placeholder">
+        <source>form.contact.name.placeholder</source>
+        <target>Entrez votre nom ici</target>
+      </trans-unit>
+      <trans-unit id="bibyztz" resname="form.contact.email.label">
+        <source>form.contact.email.label</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="LofhQaY" resname="form.contact.email.placeholder">
+        <source>form.contact.email.placeholder</source>
+        <target>Entrez votre adresse email ici</target>
+      </trans-unit>
+      <trans-unit id="trj1IcR" resname="form.contact.subject.label">
+        <source>form.contact.subject.label</source>
+        <target>Sujet</target>
+      </trans-unit>
+      <trans-unit id="gUP3Ujt" resname="form.contact.subject.placeholder">
+        <source>form.contact.subject.placeholder</source>
+        <target>Entrez votre sujet</target>
+      </trans-unit>
+      <trans-unit id="J1GaKcz" resname="form.contact.message.label">
+        <source>form.contact.message.label</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="fZ22Gxp" resname="form.contact.message.placeholder">
+        <source>form.contact.message.placeholder</source>
+        <target>Écrivez-nous un petit message, nous y répondrons dès que possible.</target>
       </trans-unit>
     </body>
   </file>

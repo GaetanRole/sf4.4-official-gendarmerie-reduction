@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'reduction.show.head.meta.title'|trans }}{% endblock %}
+{% block title 'reduction.show.head.meta.title'|trans %}
+
+{% block og_title 'reduction.show.head.meta.title'|trans %}
 
 {% block body_id 'reduction-show' %}
 
 {% block body %}
     <section>
 
-        {% include 'default/_flash_messages.html.twig' %}
+        {% include '_flash_messages.html.twig' %}
 
         <div class="container">
             <div class="row mb-4">
