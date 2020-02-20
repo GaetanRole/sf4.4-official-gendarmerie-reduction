@@ -12,10 +12,10 @@
     --white: #FFFFFF;
     --white-medium: #F2F2F2;
     --grey: #f8f9faab;
-    --grey-medium: #555;
-    --grey-dark: #202427;
+    --grey-medium: #2a3a48;
+    --grey-dark: #12191f;
     --blue: #0258a1;
-    --blue-light: #4e99d8;
+    --blue-light: #3b6f9b;
     --black: #000;
     --font-family-sans-serif: 'Open Sans', sans-serif;
 }
@@ -33,13 +33,9 @@ body, html {
     height: 100%;
 }
 
-#main {
-    height: inherit;
-}
-
 h1 {
     color: var(--grey-medium);
-    font-size: 1.3em;
+    font-size: 1.4em;
     line-height: 1.2;
     letter-spacing: 2px;
     word-break: break-word;
@@ -77,6 +73,14 @@ li {
 .btn {
     border-radius: 30px;
     padding: 5px 50px 5px 50px;
+}
+
+.btn-dark {
+    background-color: var(--grey-dark) !important;
+}
+
+.btn-dark:hover {
+    background-color: var(--grey-medium) !important;
 }
 
 .bg-dark {
@@ -122,4 +126,23 @@ input[type="color"]:focus,
 .vertical-center {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.index-header-background {
+    min-height: 600px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.background-gradient {
+    background: rgb(19,28,35);
+    background: -moz-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
+    background: linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131c23",endColorstr="#001424",GradientType=1);
 }

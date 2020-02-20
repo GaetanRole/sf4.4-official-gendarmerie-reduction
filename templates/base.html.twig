@@ -8,78 +8,52 @@
     <meta name="description" content="{% block description 'base.head.meta.description'|trans %}">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
+    <meta property="og:image" content="{% block og_image 'https://raw.githubusercontent.com/GaetanRole/sf4.4-official-gendarmerie-reduction/master/public/assets/images/gendarmerie-logo.png' %}">
+    <meta property="og:title" content="PromoGend - {% block og_title 'base.head.meta.title'|trans %}">
+    <meta property="og:description" content="{% block og_description 'base.head.meta.description'|trans %}">
+
     <title>PromoGend - {% block title 'base.head.meta.title'|trans %}</title>
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS Vendors -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {% block stylesheets -%}
     {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
-    <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
+    {%- include '_favicons.html.twig' only %}
 </head>
 <body>
 <header>
-    {%- block header -%}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ path('app_default_index') }}" title="{{ 'home.link.back.title'|trans }}">
-                <img src="{{ asset('assets/images/gendarmerie-logo.png') }}" width="26" height="30" class="d-inline-block align-top m-1 mr-2" alt="Gendarmerie Logo">
-                <img src="{{ asset('assets/images/promogend-logo.png') }}" alt="PromoGend Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_default_index') }}" title="{{ 'base.header.nav.home.link.title'|trans }}">{{ 'base.header.nav.home.link'|trans }} <span class="sr-only">{{ 'base.header.nav.current'|trans }}</span></a>
-                    </li>
-                    {%- if is_granted('ROLE_ADMIN') -%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_admin_index') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
-                        </li>
-                    {%- endif -%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_default_contact') }}" title="{{ 'base.header.nav.contact.link.title'|trans }}">{{ 'base.header.nav.contact.link'|trans }}</a>
-                    </li>
-                    {%- if is_granted('ROLE_USER') -%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_logout') }}" title="{{ 'base.header.nav.logout.link.title'|trans }}">{{ 'base.header.nav.logout.link'|trans }}</a>
-                        </li>
-                    {%- else -%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_login') }}" title="{{ 'base.header.nav.login.link.title'|trans }}">{{ 'base.header.nav.login.link'|trans }}</a>
-                        </li>
-                    {%- endif -%}
-                    <li class="nav-item dropdown dropleft">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe-americas fa-1x"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{ i18n_links(['fr', 'en'], app.request.attributes.get('_route'), app.request.attributes.get('_route_params'), app.request.locale) }}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    {%- endblock -%}
+    {% block header -%}
+        {% include '_navbar.html.twig' with {'currentRoute': app.request.attributes.get('_route')} only %}
+    {%- endblock %}
 </header>
-<main id="{% block body_id 'base' %}">
-    {% block body %}{% endblock %}
+
+<main id="main">
+    {% include '_flash_messages.html.twig' only %}
+
+    <section id="{% block body_id '' %}">
+        {% block body %}
+        {% endblock %}
+    </section>
 </main>
-<footer class="footer bg-dark">
-    {%- block footer -%}
-        <div class="container"><div class="row text-center"><span class="text-white">Sticky footer content here.</span></div></div>
+
+<footer class="bg-dark p-3">
+    {% block footer -%}
+        {% include '_footer.html.twig' only %}
     {%- endblock -%}
 </footer>
 
 <!-- Kit's code from Font Awesome with unique ID -->
 <script src="https://kit.fontawesome.com/8d75946265.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- JS Vendors -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{ asset('assets/js/app.min.js') }}"></script>
 
-{% block javascripts %}
+{% block javascripts -%}
 {% endblock %}
 </body>
 </html>

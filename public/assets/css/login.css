@@ -2,14 +2,19 @@
 -------------------------------------------------- */
 
 #login {
-    height: inherit;
+    height: 950px;
     padding: 50px 40px 100px 40px;
 }
 
 #login .container {
+    height: 100%;
     background-color: var(--white);
     box-shadow: 1px 1px 3px var(--white-medium);
     border-radius: 30px;
+}
+
+#login .row {
+    height: inherit;
 }
 
 #login .gendarmerie-background {
@@ -17,6 +22,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    border-radius: 30px 0 0 30px;
 }
 
 #login img {
