@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Form;
 
 use App\Entity\Opinion;
@@ -12,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class OpinionType extends AbstractType
+final class OpinionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

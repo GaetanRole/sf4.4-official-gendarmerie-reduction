@@ -105,7 +105,7 @@ final class EntityRepositoryAdapterTest extends TestCase
 
         $this->assertInstanceOf(Category::class, $category);
         // Expected value on DateTime now, not GlobalClock (to check if GlobalClock is async)
-        $this->assertEquals(new DateTime(self::DATETIME_NOW), $category->getCreatedAt(), '', '5');
+        $this->assertEqualsWithDelta(new DateTime(self::DATETIME_NOW), $category->getCreatedAt(), 5.0);
         $this->assertTrue(Uuid::isValid($category->getUuid()));
     }
 
@@ -129,7 +129,7 @@ final class EntityRepositoryAdapterTest extends TestCase
         $category = $this->entityRepositoryAdapter->update($category);
 
         $this->assertInstanceOf(Category::class, $category);
-        $this->assertEquals(new DateTime(self::DATETIME_NOW), $category->getUpdatedAt(), '', '5');
+        $this->assertEqualsWithDelta(new DateTime(self::DATETIME_NOW), $category->getUpdatedAt(), 5.0);
     }
 
     public function testDeleteMethodAnObjectInstanceAndFlushing(): void

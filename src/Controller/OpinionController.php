@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
-use Exception;
+use \Exception;
 use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_USER")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class OpinionController extends AbstractController
+final class OpinionController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -37,7 +39,7 @@ class OpinionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, Reduction $reduction)
+    public function new(Request $request, Reduction $reduction): Response
     {
         $opinion = new Opinion();
         $form = $this->createForm(OpinionType::class, $opinion);

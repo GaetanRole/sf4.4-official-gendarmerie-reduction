@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\DataFixtures;
 
 use Faker;
-use Exception;
+use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Brand;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Api\GeoApiGouv\Model;
+namespace App\Api\GeoGouvApi\Model;
 
-use App\Api\GeoApiGouv\GeoClient;
-use GuzzleHttp\Client;
+use App\Api\GeoGouvApi\GeoClient;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -14,31 +14,30 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class Region extends GeoClient
 {
-    public const ENDPOINT = 'regions';
-
+    /** @var string */
     protected $url = '';
 
-    /** Available parameters for searching. */
+    /** @var array Available parameters for searching. */
     protected static $params = [
         'code',
-        'nom'
+        'nom',
     ];
 
-    /** Available fields in return. */
+    /** @var array Available fields in return. */
     protected static $fields = [
         'code',
         'nom',
-        'codeDepartement'
+        'codeDepartement',
     ];
 
-    public function __construct(Client $httpClient)
+    public function __construct(ClientInterface $httpClient)
     {
         parent::__construct($httpClient);
 
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI.self::ENDPOINT;
+        $this->url = parent::BASE_URI.ModelEnum::REGION_ENDPOINT;
     }
 
     /**
@@ -50,8 +49,8 @@ class Region extends GeoClient
 
         // Hardcoded values for international and national reductions
         // Added in Regex constraint into Reduction entity
-        $regions['International'] = 'International';
-        $regions['National'] = 'National';
+        $regions[ModelEnum::REGION_INTERNATIONAL_ENDPOINT] = ModelEnum::REGION_INTERNATIONAL_ENDPOINT;
+        $regions[ModelEnum::REGION_NATIONAL_ENDPOINT] = ModelEnum::REGION_NATIONAL_ENDPOINT;
 
         foreach ($this->fields(['code', 'nom'])->search() as $item) {
             $regions[$item['nom']] = $item['code'];

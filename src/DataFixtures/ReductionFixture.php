@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\DataFixtures;
 
 use Faker;
-use Exception;
+use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Reduction;
 use EasySlugger\SluggerInterface;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

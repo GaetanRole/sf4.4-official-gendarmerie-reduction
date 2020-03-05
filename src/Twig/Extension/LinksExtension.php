@@ -38,8 +38,11 @@ final class LinksExtension extends AbstractExtension
 
     public function generateLink(string $label, string $locale, string $routeName, array $parameters): string
     {
-        $url = $this->router->generate($routeName, array_merge($parameters, ['_locale' => $locale]));
-        return sprintf('<a href="%s" class="dropdown-item">%s</a>', $url, $label);
+        return sprintf(
+            '<a href="%s" class="dropdown-item">%s</a>',
+            $this->router->generate($routeName, array_merge($parameters, ['_locale' => $locale])),
+            $label
+        );
     }
 
     public function generateLinks(array $locales, string $routeName, array $routeParameters, string $country): string

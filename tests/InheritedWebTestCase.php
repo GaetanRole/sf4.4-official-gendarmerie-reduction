@@ -20,7 +20,7 @@ abstract class InheritedWebTestCase extends WebTestCase
      */
     protected function setUp(): void
     {
-        $this->webClient = static::createClient();
+        $this->webClient = self::createClient();
         $this->webClient->followRedirects();
     }
 }

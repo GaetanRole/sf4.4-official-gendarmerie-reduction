@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Entity\Traits;
 
-use DateTimeInterface;
+use \DateTime;
+use \DateTimeImmutable;
+use \DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,36 +17,37 @@ use Doctrine\ORM\Mapping as ORM;
  * @link    https://stackoverflow.com/questions/25749418/symfony2-mappedsuperclass-and-doctrinegenerateentities
  *
  * I am not using https://packagist.org/packages/gedmo/doctrine-extensionsbecause of TimeContinuum dependency.
- * Private methods instead of Protected because of a well know behaviour from Doctrine --regenerate.
+ * Private instead of Protected because of a well know behaviour from Doctrine --regenerate.
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 trait EntityTimeTrait
 {
     /**
-     * @var DateTimeInterface
+     * @var DateTimeImmutable
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
      * @var DateTimeInterface|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $updatedAt;
+    private $updatedAt;
 
     /* Auto generated methods */
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     public function setCreatedAt(DateTimeInterface $createdAt): void
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt
+            = $createdAt instanceof DateTime ? DateTimeImmutable::createFromMutable($createdAt) : $createdAt;
     }
 
     public function getUpdatedAt(): ?DateTimeInterface

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\Admin;
 
-use Exception;
+use \Exception;
 use App\Entity\Brand;
 use App\Form\BrandType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminBrandController extends AbstractController
+final class AdminBrandController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -46,7 +48,7 @@ class AdminBrandController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
         $brand = new Brand();
         $form = $this->createForm(BrandType::class, $brand);
@@ -65,7 +67,7 @@ class AdminBrandController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Brand $brand)
+    public function edit(Request $request, Brand $brand): Response
     {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);

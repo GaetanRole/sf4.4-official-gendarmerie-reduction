@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Api\GeoApiGouv\Controller;
+declare(strict_types = 1);
 
-use App\Api\GeoApiGouv\GeoClient;
+namespace App\Api\GeoGouvApi\Controller;
+
+use App\Api\GeoGouvApi\GeoClient;
+use App\Api\GeoGouvApi\Model\ModelEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +24,7 @@ final class ApiAccessController extends AbstractController
      */
     private function isQueryStringInvalid(string $searchQuery, string $searchField)
     {
-        if (!$searchQuery || $searchQuery === '') {
+        if (!$searchQuery || '' === $searchQuery) {
             $response = new JsonResponse(
                 "$searchField query string can't be empty.",
                 Response::HTTP_UNPROCESSABLE_ENTITY,
@@ -40,8 +43,8 @@ final class ApiAccessController extends AbstractController
     public function getMunicipalitiesAccordingToOneDepartment(Request $request, GeoClient $client): JsonResponse
     {
         $queryValue = $request->query->get('search');
-        $response = $this->isQueryStringInvalid($queryValue, 'Department');
-        return ($response === 'Department') ?
+        $response = $this->isQueryStringInvalid($queryValue, ModelEnum::DEPARTMENT_CLASS_NAME);
+        return (ModelEnum::DEPARTMENT_CLASS_NAME === $response) ?
             new JsonResponse($client->Municipality()->getAllMunicipalitiesByDepartment($queryValue)) : $response;
     }
 
@@ -52,8 +55,8 @@ final class ApiAccessController extends AbstractController
     public function getDepartmentsAccordingToOneRegion(Request $request, GeoClient $client): JsonResponse
     {
         $queryValue = $request->query->get('search');
-        $response = $this->isQueryStringInvalid($queryValue, 'Region');
-        return ($response === 'Region') ?
+        $response = $this->isQueryStringInvalid($queryValue, ModelEnum::REGION_CLASS_NAME);
+        return (ModelEnum::REGION_CLASS_NAME === $response) ?
             new JsonResponse($client->Department()->getAllDepartmentsByRegion($queryValue)) : $response;
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App;
 
-use Exception;
+use \Exception;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;

@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 final class DefaultControllerTest extends InheritedWebTestCase
 {
     /**
-     * @dataProvider getPublicUrls
+     * @dataProvider providePublicUrls
      */
-    public function testDefaultControllerMethodsAreSuccessful(string $url): void
+    public function testPublicUrlsAreSuccessful(string $url): void
     {
         $this->webClient->followRedirects(false);
 
@@ -43,7 +43,7 @@ final class DefaultControllerTest extends InheritedWebTestCase
      * This tests ensures that whenever a user tries to
      * access one of those pages, a redirection to the login form is performed.
      *
-     * @dataProvider getSecureUrls
+     * @dataProvider provideSecureUrls
      */
     public function testSecureUrlsRedirectingWellOnLoginForm(string $url): void
     {
@@ -60,15 +60,16 @@ final class DefaultControllerTest extends InheritedWebTestCase
      * _locale secured by LinksExtensionsTest.
      * Prepared test for later assertions.
      */
-    public function getPublicUrls(): Generator
+    public function providePublicUrls(): Generator
     {
         yield ['/en/'];
+        yield ['/en/contact'];
     }
 
     /**
      * _locale secured by LinksExtensionsTest.
      */
-    public function getSecureUrls(): Generator
+    public function provideSecureUrls(): Generator
     {
         // Locale secured by LinksExtensionTest
 

@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Api\GeoApiGouv\Model;
+namespace App\Api\GeoGouvApi\Model;
 
-use App\Api\GeoApiGouv\GeoClient;
-use GuzzleHttp\Client;
+use App\Api\GeoGouvApi\GeoClient;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -14,33 +14,32 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class Department extends GeoClient
 {
-    public const ENDPOINT = 'departements';
-
+    /** @var string */
     protected $url = '';
 
-    /** Available parameters for searching. */
+    /** @var array Available parameters for searching. */
     protected static $params = [
         'code',
         'codeRegion',
-        'nom'
+        'nom',
     ];
 
-    /** Available fields in return. */
+    /** @var array Available fields in return. */
     protected static $fields = [
         'code',
         'nom',
         'codeRegion',
-        'region'
+        'region',
     ];
 
-    public function __construct(Client $httpClient)
+    public function __construct(ClientInterface $httpClient)
     {
         parent::__construct($httpClient);
 
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI.self::ENDPOINT;
+        $this->url = parent::BASE_URI.ModelEnum::DEPARTMENT_ENDPOINT;
     }
 
     /**

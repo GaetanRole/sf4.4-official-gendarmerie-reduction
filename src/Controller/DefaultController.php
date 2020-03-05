@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
 use App\Form\ContactType;
@@ -10,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/", name="app_")
+ * @Route(name="app_")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class DefaultController extends AbstractController
@@ -32,6 +34,7 @@ final class DefaultController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // @TODO Calling Emailing service here
             $this->addFlash('success', $form->getData()['name'].' your email has been sent.');
 
             return $this->redirectToRoute('app_index');

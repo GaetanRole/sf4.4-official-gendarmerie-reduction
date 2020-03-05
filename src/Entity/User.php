@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Entity;
 
-use Serializable;
+use \Serializable;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -127,7 +129,7 @@ class User implements UserInterface, Serializable, EntityInterface
 
     public function __toString(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     /* Auto generated methods */
@@ -201,7 +203,7 @@ class User implements UserInterface, Serializable, EntityInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -308,7 +310,7 @@ class User implements UserInterface, Serializable, EntityInterface
     {
         if ($this->reductions->contains($reduction)) {
             $this->reductions->removeElement($reduction);
-            if ($reduction->getUser() === $this) {
+            if ($this === $reduction->getUser()) {
                 $reduction->setUser(null);
             }
         }
@@ -338,7 +340,7 @@ class User implements UserInterface, Serializable, EntityInterface
     {
         if ($this->opinions->contains($opinion)) {
             $this->opinions->removeElement($opinion);
-            if ($opinion->getUser() === $this) {
+            if ($this === $opinion->getUser()) {
                 $opinion->setUser(null);
             }
         }

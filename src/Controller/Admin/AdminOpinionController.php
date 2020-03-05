@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\Admin;
 
-use Exception;
+use \Exception;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminOpinionController extends AbstractController
+final class AdminOpinionController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -35,7 +37,7 @@ class AdminOpinionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Opinion $opinion)
+    public function edit(Request $request, Opinion $opinion): Response
     {
         $form = $this->createForm(OpinionType::class, $opinion);
         $form->handleRequest($request);

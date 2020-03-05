@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -17,7 +19,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class UserType extends AbstractType
+final class UserType extends AbstractType
 {
     /** @var AuthorizationCheckerInterface */
     protected $auth;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
@@ -7,11 +9,13 @@ use App\Entity\Traits\EntityTimeTrait;
 use App\Entity\Traits\EntityUserIdentityTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
+ * @UniqueEntity(fields={"title"})
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Reduction implements EntityInterface
@@ -334,7 +338,7 @@ class Reduction implements EntityInterface
     {
         if ($this->opinions->contains($opinion)) {
             $this->opinions->removeElement($opinion);
-            if ($opinion->getReduction() === $this) {
+            if ($this === $opinion->getReduction()) {
                 $opinion->setReduction(null);
             }
         }

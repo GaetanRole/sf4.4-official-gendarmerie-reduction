@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Form;
 
-use App\Api\GeoApiGouv\GeoClient;
+use App\Api\GeoGouvApi\GeoClient;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Entity\Brand;
@@ -20,7 +22,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class ReductionType extends AbstractType
+final class ReductionType extends AbstractType
 {
     /** @var GeoClient */
     private $geoClient;

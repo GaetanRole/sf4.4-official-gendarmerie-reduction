@@ -69,7 +69,7 @@ This project is based on sf4.4-website-skeleton-starter : [https://github.com/Ga
 
 Do not hesitate to improve this repository, creating your PR on GitHub with a description which explains it.
 
-Ask your question on `gaetan.role-dubruille@sensiolabs.com`.
+Ask your question on `gaetan.role@gmail.com`.
 
 [1]: https://symfony.com/doc/current/reference/requirements.html
 [2]: https://symfony.com/doc/current/setup/symfony_server.html

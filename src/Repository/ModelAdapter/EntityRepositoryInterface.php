@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace App\Repository\ModelAdapter;
 
 use App\Entity\EntityInterface;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 
 /**
  * This interface signals that all repositories needs a save method according to the business logic.

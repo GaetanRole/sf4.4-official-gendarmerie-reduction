@@ -1,16 +1,20 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
+ * @UniqueEntity(fields={"name"})
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Brand implements EntityInterface
@@ -106,7 +110,7 @@ class Brand implements EntityInterface
     {
         if ($this->reductions->contains($reduction)) {
             $this->reductions->removeElement($reduction);
-            if ($reduction->getBrand() === $this) {
+            if ($this === $reduction->getBrand()) {
                 $reduction->setBrand(null);
             }
         }

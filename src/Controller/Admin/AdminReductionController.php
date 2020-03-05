@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\Admin;
 
-use Exception;
+use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
 use EasySlugger\SluggerInterface;
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminReductionController extends AbstractController
+final class AdminReductionController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -34,7 +36,7 @@ class AdminReductionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Reduction $reduction, SluggerInterface $slugger)
+    public function edit(Request $request, Reduction $reduction, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);

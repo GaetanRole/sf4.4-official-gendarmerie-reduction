@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
+use \Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Service\GlobalClock;

@@ -6,5 +6,5 @@ controllers:
         _locale: '%app_locales_string_type%'
 
 geo_api:
-    resource: '../../src/Api/GeoApiGouv/Controller'
+    resource: '../../src/Api/GeoGouvApi/Controller'
     type: annotation

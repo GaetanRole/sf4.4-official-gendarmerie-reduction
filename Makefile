@@ -29,6 +29,7 @@ db-wait: 			## Wait for database to be up. Looking DATABASE_URL
 					php -r 'echo "Wait database... Be sure of your DATABASE_URL config, if not, rerun make install.\n"; set_time_limit(15); require __DIR__."/vendor/autoload.php"; (new \Symfony\Component\Dotenv\Dotenv())->load(__DIR__."/.env"); $$u = parse_url(getenv("DATABASE_URL")); for(;;) { if(@fsockopen($$u["host"].":".($$u["port"] ?? 3306))) { break; }}'
 
 db-destroy: 		## Execute doctrine:database:drop --force command
+					$(CONSOLE) doctrine:database:drop --force --if-exists --env=test
 					$(CONSOLE) doctrine:database:drop --force --if-exists
 
 db-create:			## Execute doctrine:database:create
@@ -52,7 +53,7 @@ db-diff:			## Execute doctrine:migration:diff
 db-validate:		## Validate the doctrine ORM mapping
 					$(CONSOLE) doctrine:schema:validate
 
-db-init: 			vendor db-wait db-create db-migrate db-fixtures db-fixtures-test ## Initialize database e.g : wait, create database and migrations
+db-init: 			vendor db-wait db-create db-migrate db-fixtures-test db-fixtures ## Initialize database e.g : wait, create database and migrations
 
 db-update: 			vendor db-diff db-migrate ## Alias coupling db-diff and db-migrate
 
@@ -147,7 +148,7 @@ security:			vendor ## Check security of your dependencies (https://security.sens
 qa-clean-conf:		## Erasing all quality assurance conf files
 					rm -rvf ./.php_cs ./phpcs.xml ./.phpcs-cache ./phpmd.xml ./.phpunit.result.cache
 
-qa: 				lint phpcs phpcbf phploc phpcpd phpmd ## Alias to run/apply Q&A tools
+qa: 				phpcs phpcbf phploc phpcpd phpmd ## Alias to run/apply Q&A tools
 
 .PHONY:				lt ly lc lint security qa qa-clean-conf
 

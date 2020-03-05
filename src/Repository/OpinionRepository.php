@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
+use \Exception;
 use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

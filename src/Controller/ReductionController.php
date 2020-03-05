@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
-use Exception;
+use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
 use EasySlugger\SluggerInterface;
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_USER")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class ReductionController extends AbstractController
+final class ReductionController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -49,7 +51,7 @@ class ReductionController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, SluggerInterface $slugger)
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $reduction = new Reduction();
         $form = $this->createForm(ReductionType::class, $reduction);

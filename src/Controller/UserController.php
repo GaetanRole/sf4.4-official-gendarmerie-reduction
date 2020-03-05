@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -13,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_USER")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class UserController extends AbstractController
+final class UserController extends AbstractController
 {
     /**
      * @Route("/{uuid<^.{36}$>}", name="show", methods={"GET"})

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -21,10 +23,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * See https://symfony.com/doc/current/cookbook/console/console_command.html
  * For more advanced uses, commands can be defined as services too. See
  * https://symfony.com/doc/current/console/commands_as_services.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class ListUsersCommand extends Command
 {
+    /** @var int */
+    private const MAX_USER_RESULT = 50;
+
     /**
      * Command used in console.
      *
@@ -68,8 +74,9 @@ class ListUsersCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Limits the number of users listed',
-                50
-            );
+                self::MAX_USER_RESULT
+            )
+        ;
     }
 
     /**
@@ -80,14 +87,11 @@ class ListUsersCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $maxResults = $input->getOption('max-results');
-        $allUsers = $this->users->findBy([], ['id' => 'DESC'], $maxResults);
-
         $usersAsPlainArrays = array_map(
             static function (User $user) {
                 return [$user->getId(), $user->getUsername(), implode(', ', $user->getRoles())];
             },
-            $allUsers
+            $this->users->findBy([], ['id' => 'DESC'], $input->getOption('max-results'))
         );
 
         $bufferedOutput = new BufferedOutput();
@@ -95,7 +99,6 @@ class ListUsersCommand extends Command
         $io->title('Current Users present in DB :');
         $io->table(['ID', 'Username', 'Roles'], $usersAsPlainArrays);
 
-        $usersAsATable = $bufferedOutput->fetch();
-        $output->write($usersAsATable);
+        $output->write($bufferedOutput->fetch());
     }
 }

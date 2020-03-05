@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +22,11 @@ final class SecurityController extends AbstractController
      * @Route("/login", name="app_login")
      * @return  RedirectResponse|Response A Response instance
      */
-    public function login(AuthenticationUtils $authenticationUtils, Security $security, TranslatorInterface $translator)
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        Security $security,
+        TranslatorInterface $translator
+    ): Response {
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash(
                 'danger',

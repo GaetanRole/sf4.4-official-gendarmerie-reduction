@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Form\EventListener;
 
-use App\Api\GeoApiGouv\GeoClient;
+use App\Api\GeoGouvApi\GeoClient;
 use App\Form\Type\GeoApiSelect2Type;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;

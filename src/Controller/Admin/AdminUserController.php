@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\Admin;
 
-use Exception;
+use \Exception;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\Type\ChangePasswordType;
@@ -21,7 +23,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminUserController extends AbstractController
+final class AdminUserController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -46,7 +48,7 @@ class AdminUserController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -68,7 +70,7 @@ class AdminUserController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder)
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $formChangePassword = $this->createForm(ChangePasswordType::class, $user);

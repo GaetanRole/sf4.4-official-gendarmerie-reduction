@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\DataFixtures;
 
 use Faker;
-use Exception;
+use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\User;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -82,12 +84,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
             $user->setUsername('user'.$index)
                 ->setIdentity($this->getRandomIdentity())
                 ->setEmail($faker->email)
-                ->setPassword(
-                    $this->passwordEncoder->encodePassword(
-                        $user,
-                        'password'.$index
-                    )
-                )
+                ->setPassword($this->passwordEncoder->encodePassword($user, 'password'.$index))
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setIsActive(true)
                 ->setRoles([$roles[array_rand($roles)]]);

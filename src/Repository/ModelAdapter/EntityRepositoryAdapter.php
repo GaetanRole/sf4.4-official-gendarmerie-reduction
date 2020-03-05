@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Repository\ModelAdapter;
 
-use Exception;
+use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Service\GlobalClock;
 use App\Entity\EntityInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use App\Event\SuccessPersistenceNotificationEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\Admin;
 
-use Exception;
+use \Exception;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-class AdminCategoryController extends AbstractController
+final class AdminCategoryController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -46,7 +48,7 @@ class AdminCategoryController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -65,7 +67,7 @@ class AdminCategoryController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Category $category)
+    public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);

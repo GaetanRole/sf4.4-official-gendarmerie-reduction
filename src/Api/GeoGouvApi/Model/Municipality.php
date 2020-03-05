@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Api\GeoApiGouv\Model;
+namespace App\Api\GeoGouvApi\Model;
 
-use App\Api\GeoApiGouv\GeoClient;
-use GuzzleHttp\Client;
+use App\Api\GeoGouvApi\GeoClient;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -14,11 +14,10 @@ use GuzzleHttp\Exception\GuzzleException;
  */
 class Municipality extends GeoClient
 {
-    public const ENDPOINT = 'communes';
-
+    /** @var string */
     protected $url = '';
 
-    /** Available parameters for searching. */
+    /** @var array Available parameters for searching. */
     protected static $params = [
         'codePostal',
         'lon',
@@ -26,10 +25,10 @@ class Municipality extends GeoClient
         'nom',
         'code',
         'codeDepartement',
-        'codeRegion'
+        'codeRegion',
     ];
 
-    /** Available fields in return. */
+    /** @var array Available fields in return. */
     protected static $fields = [
         'code',
         'nom',
@@ -41,17 +40,17 @@ class Municipality extends GeoClient
         'region',
         'surface',
         'centre',
-        'contour'
+        'contour',
     ];
 
-    public function __construct(Client $httpClient)
+    public function __construct(ClientInterface $httpClient)
     {
         parent::__construct($httpClient);
 
         $this->availableParams = self::$params;
         $this->availableFields = self::$fields;
 
-        $this->url = parent::BASE_URI.self::ENDPOINT;
+        $this->url = parent::BASE_URI.ModelEnum::MUNICIPALITY_ENDPOINT;
     }
 
     /**

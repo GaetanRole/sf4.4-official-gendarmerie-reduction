@@ -2,13 +2,15 @@
 
 declare(strict_types = 1);
 
-namespace App\Api\GeoApiGouv;
+namespace App\Api\GeoGouvApi;
 
+use App\Api\GeoGouvApi\Model\ModelEnum;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
-use InvalidArgumentException;
+use \InvalidArgumentException;
 
 /**
  * Class GeoClient consuming https://geo.api.gouv.fr/ API.
@@ -17,29 +19,35 @@ use InvalidArgumentException;
 class GeoClient
 {
     public const BASE_URI = 'https://geo.api.gouv.fr/';
-    public const MODEL_API_NAMESPACE = 'App\Api\GeoApiGouv\Model\\';
+    public const MODEL_API_NAMESPACE = 'App\Api\GeoGouvApi\Model\\';
 
+    /** @var string */
     protected $url = self::BASE_URI;
 
+    /** @var string */
     protected $userParam = '';
+    /** @var string */
     protected $userSearch = '';
+    /** @var array */
     protected $userFields = [];
 
+    /** @var array */
     protected $availableParams = [];
+    /** @var array */
     protected $availableFields = [];
 
     /** @var Client */
     protected $httpClient;
 
-    /** @param  Client $httpClient A Guzzle client which will be replaced by Symfony\HttpClient. */
-    public function __construct(Client $httpClient)
+    /** @param  ClientInterface $httpClient A Guzzle client which will be replaced by Symfony\HttpClient. */
+    public function __construct(ClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }
 
     public function __call(string $className, array $arguments)
     {
-        if (in_array($className, ['Municipality', 'Department', 'Region'])) {
+        if (in_array($className, ModelEnum::MODEL_CLASSES, true)) {
             $className = self::MODEL_API_NAMESPACE.$className;
             return new $className($this->httpClient);
         }
@@ -89,7 +97,7 @@ class GeoClient
         }
 
         if (Response::HTTP_OK === $response->getStatusCode()) {
-            return json_decode($response->getBody()->getContents(), true);
+            return json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         }
 
         return [$response->getStatusCode() => $response->getReasonPhrase()];
