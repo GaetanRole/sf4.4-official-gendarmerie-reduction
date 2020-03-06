@@ -8,7 +8,7 @@ use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\User;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

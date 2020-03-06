@@ -5,6 +5,7 @@
   "description": "A Symfony 4.4 app for Gendarmerie employees to find cool reductions.",
   "require": {
     "php": "^7.3",
+    "ext-intl": "*",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-json": "*",

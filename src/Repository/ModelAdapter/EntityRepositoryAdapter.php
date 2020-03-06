@@ -6,7 +6,7 @@ namespace App\Repository\ModelAdapter;
 
 use \Exception;
 use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use App\Entity\EntityInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;

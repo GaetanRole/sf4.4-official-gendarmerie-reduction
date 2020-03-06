@@ -29,7 +29,7 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Service\GlobalClock:
+    App\Services\GlobalClock:
         arguments:
             $clock: '@app.earth'
             $format: '@app.format'

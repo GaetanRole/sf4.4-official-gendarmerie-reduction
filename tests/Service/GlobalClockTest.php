@@ -6,7 +6,7 @@ namespace App\Tests\Service;
 
 use \DateTime;
 use \Exception;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use PHPUnit\Framework\TestCase;
 use Innmind\TimeContinuum\Format\ISO8601;
 use Innmind\TimeContinuum\TimeContinuum\Earth;

@@ -40,12 +40,12 @@ db-migrate:			## Execute doctrine:migrations:migrate
 
 db-fixtures: 		## Execute doctrine:fixtures:load
 					$(CONSOLE) doctrine:fixtures:load --no-interaction
-					$(CONSOLE) app:list-users
 
 db-fixtures-test: 	## Execute doctrine:fixtures:load fo test env
 					$(CONSOLE) doctrine:database:create --if-not-exists -vvv --env=test
 					$(CONSOLE) doctrine:migrations:migrate --allow-no-migration --no-interaction --all-or-nothing --env=test
 					$(CONSOLE) doctrine:fixtures:load --no-interaction --env=test
+					$(CONSOLE) app:list-users
 
 db-diff:			## Execute doctrine:migration:diff
 					$(CONSOLE) doctrine:migrations:diff --formatted
@@ -53,7 +53,7 @@ db-diff:			## Execute doctrine:migration:diff
 db-validate:		## Validate the doctrine ORM mapping
 					$(CONSOLE) doctrine:schema:validate
 
-db-init: 			vendor db-wait db-create db-migrate db-fixtures-test db-fixtures ## Initialize database e.g : wait, create database and migrations
+db-init: 			vendor db-wait db-create db-migrate db-fixtures db-fixtures-test ## Initialize database e.g : wait, create database and migrations
 
 db-update: 			vendor db-diff db-migrate ## Alias coupling db-diff and db-migrate
 

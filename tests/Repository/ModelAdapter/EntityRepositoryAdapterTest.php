@@ -8,7 +8,7 @@ use \DateTime;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Category;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use PHPUnit\Framework\TestCase;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;

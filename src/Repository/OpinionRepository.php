@@ -7,7 +7,7 @@ namespace App\Repository;
 use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Opinion;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**

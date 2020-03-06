@@ -8,7 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
-use App\Service\GlobalClock;
+use App\Services\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
