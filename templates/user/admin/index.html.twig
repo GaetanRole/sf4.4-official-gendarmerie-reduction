@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'user.admin.index.head.meta.title'|trans %}
+
+{% block og_title 'user.admin.index.head.meta.title'|trans %}
+
+{% block body_id 'user-admin-index' %}
+
+{% block body %}
+    {% include '_flash_messages.html.twig' %}
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'user.admin.index.body.h1'|trans }}</h1>
+
+                <a href="{{ path('app_admin_user_new') }}">{{ 'link.user.admin.new'|trans }}</a>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Uuid</th>
+                        <th>Username</th>
+                        <th>Identity</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>isActive</th>
+                        <th>Roles</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.uuid }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.identity }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+                            <td>{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</td>
+                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
+                                    <p>{{ 'user.admin.index.table.p.same_acl'|trans }}</p>
+                                {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
+                                    <a href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}">{{ 'link.user.admin.edit'|trans }} {{ user.roles|json_encode }}.</a>
+                                {% endif %}
+                                <a href="{{ path('app_user_show', {'uuid': user.uuid}) }}">{{ 'link.user.show'|trans }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="11">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

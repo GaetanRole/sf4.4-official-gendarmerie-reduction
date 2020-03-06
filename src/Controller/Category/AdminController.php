@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Category;
 
 use \Exception;
-use App\Entity\Brand;
-use App\Form\BrandType;
+use App\Entity\Category;
+use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,11 +17,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/admin/brand", name="app_admin_brand_")
+ * @Route("/admin/category", name="app_admin_category_")
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class AdminBrandController extends AbstractController
+final class AdminController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -38,8 +38,8 @@ final class AdminBrandController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('admin/brand/index.html.twig', [
-            'brands' => $this->entityRepository->getRepository(Brand::class)->findBy([], ['name' => 'ASC']),
+        return $this->render('category/admin/index.html.twig', [
+            'categories' => $this->entityRepository->getRepository(Category::class)->findBy([], ['name' => 'ASC']),
         ]);
     }
 
@@ -50,16 +50,16 @@ final class AdminBrandController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $brand = new Brand();
-        $form = $this->createForm(BrandType::class, $brand);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityRepository->save($brand);
-            return $this->redirectToRoute('app_admin_brand_index');
+            $this->entityRepository->save($category);
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
-        return $this->render('admin/brand/new.html.twig', ['brand' => $brand, 'form' => $form->createView()]);
+        return $this->render('category/admin/new.html.twig', ['category' => $category, 'form' => $form->createView()]);
     }
 
     /**
@@ -67,32 +67,32 @@ final class AdminBrandController extends AbstractController
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Brand $brand): Response
+    public function edit(Request $request, Category $category): Response
     {
-        $form = $this->createForm(BrandType::class, $brand);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityRepository->update($brand);
-            return $this->redirectToRoute('app_admin_brand_index');
+            $this->entityRepository->update($category);
+            return $this->redirectToRoute('app_admin_category_index');
         }
 
-        return $this->render('admin/brand/edit.html.twig', ['brand' => $brand, 'form' => $form->createView()]);
+        return $this->render('category/admin/edit.html.twig', ['category' => $category, 'form' => $form->createView()]);
     }
 
     /**
      * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Brand $brand, TranslatorInterface $translator): RedirectResponse
+    public function delete(Request $request, Category $category, TranslatorInterface $translator): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$brand->getUuid()->toString(), $request->request->get('_token'))) {
-            if ($brand->getReductions()->count() > 0) {
-                $this->addFlash('danger', $translator->trans('brand.delete.flash.danger', [], 'flashes'));
-                return $this->redirectToRoute('app_admin_brand_index');
+        if ($this->isCsrfTokenValid('delete'.$category->getUuid()->toString(), $request->request->get('_token'))) {
+            if ($category->getReductions()->count() > 0) {
+                $this->addFlash('danger', $translator->trans('category.delete.flash.danger', [], 'flashes'));
+                return $this->redirectToRoute('app_admin_category_index');
             }
-            $this->entityRepository->delete($brand);
+            $this->entityRepository->delete($category);
         }
 
-        return $this->redirectToRoute('app_admin_brand_index');
+        return $this->redirectToRoute('app_admin_category_index');
     }
 }

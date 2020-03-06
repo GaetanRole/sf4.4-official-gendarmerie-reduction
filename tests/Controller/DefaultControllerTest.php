@@ -25,7 +25,7 @@ final class DefaultControllerTest extends InheritedWebTestCase
         $this->assertSame(Response::HTTP_OK, $this->webClient->getResponse()->getStatusCode());
     }
 
-    public function testDashboardMethodIsSuccessfulForAIdentifiedClient(): void
+    public function testUserDashboardMethodIsValidForAUserOrAAdminClient(): void
     {
         $this->webClient->followRedirects(false);
 
@@ -35,8 +35,10 @@ final class DefaultControllerTest extends InheritedWebTestCase
             'PHP_AUTH_PW'   => 'password0',
         ]);
 
-        $this->webClient->request('GET', '/en/dashboard');
-        $this->assertTrue($this->webClient->getResponse()->isSuccessful());
+        $this->webClient->request('GET', '/en/user/dashboard');
+        $this->assertTrue(
+            $this->webClient->getResponse()->isSuccessful() || $this->webClient->getResponse()->isRedirection()
+        );
     }
 
     /**
@@ -73,11 +75,11 @@ final class DefaultControllerTest extends InheritedWebTestCase
     {
         // Locale secured by LinksExtensionTest
 
-        yield ['/en/admin/'];
+        yield ['/en/user/dashboard'];
+        yield ['/en/admin/dashboard'];
         yield ['/en/admin/brand/'];
         yield ['/en/admin/category/'];
         yield ['/en/admin/user/'];
         yield ['/en/reduction/'];
-        yield ['/en/dashboard'];
     }
 }

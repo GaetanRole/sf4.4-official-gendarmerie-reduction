@@ -65,7 +65,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+        return 'app_security_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request): array
@@ -139,14 +139,14 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (in_array('ROLE_ADMIN', $roles, true)
             || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
-            return new RedirectResponse($this->router->generate('app_admin_index'));
+            return new RedirectResponse($this->router->generate('app_admin_dashboard'));
         }
 
-        return new RedirectResponse($this->router->generate('app_dashboard'));
+        return new RedirectResponse($this->router->generate('app_user_dashboard'));
     }
 
     protected function getLoginUrl(): string
     {
-        return $this->router->generate('app_login');
+        return $this->router->generate('app_security_login');
     }
 }

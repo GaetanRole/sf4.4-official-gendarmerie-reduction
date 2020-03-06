@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'category.admin.new.head.meta.title'|trans %}
+
+{% block og_title 'category.admin.new.head.meta.title'|trans %}
+
+{% block body_id 'category-admin-new' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'category.admin.new.body.h1'|trans }}</h1>
+
+                {{ include('category/admin/_form.html.twig') }}
+
+                <a href="{{ path('app_admin_category_index') }}">{{ 'link.category.admin.index'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

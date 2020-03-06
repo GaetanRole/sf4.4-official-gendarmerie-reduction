@@ -7,87 +7,84 @@
 {% block body_id 'reduction-show' %}
 
 {% block body %}
-    <section>
+    {% include '_flash_messages.html.twig' %}
 
-        {% include '_flash_messages.html.twig' %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'reduction.show.body.h1'|trans }}</h1>
 
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'reduction.show.body.h1'|trans }}</h1>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ reduction.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Uuid</th>
+                        <td>{{ reduction.uuid }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ reduction.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ reduction.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>ClientIp</th>
+                        <td>{{ reduction.clientIp }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ reduction.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Slug</th>
+                        <td>{{ reduction.slug }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ reduction.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Region</th>
+                        <td>{{ reduction.region }}</td>
+                    </tr>
+                    <tr>
+                        <th>Department</th>
+                        <td>{{ reduction.department }}</td>
+                    </tr>
+                    <tr>
+                        <th>Municipality</th>
+                        <td>{{ reduction.municipality }}</td>
+                    </tr>
+                    <tr>
+                        <th>IsBigDeal</th>
+                        <td>{{ reduction.isBigDeal ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <th>IsActive</th>
+                        <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <td>{{ reduction.createdAt ? reduction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>UpdatedAt</th>
+                        <td>{{ reduction.updatedAt ? reduction.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ reduction.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Uuid</th>
-                            <td>{{ reduction.uuid }}</td>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <td>{{ reduction.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>{{ reduction.email }}</td>
-                        </tr>
-                        <tr>
-                            <th>ClientIp</th>
-                            <td>{{ reduction.clientIp }}</td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <td>{{ reduction.title }}</td>
-                        </tr>
-                        <tr>
-                            <th>Slug</th>
-                            <td>{{ reduction.slug }}</td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>{{ reduction.description }}</td>
-                        </tr>
-                        <tr>
-                            <th>Region</th>
-                            <td>{{ reduction.region }}</td>
-                        </tr>
-                        <tr>
-                            <th>Department</th>
-                            <td>{{ reduction.department }}</td>
-                        </tr>
-                        <tr>
-                            <th>Municipality</th>
-                            <td>{{ reduction.municipality }}</td>
-                        </tr>
-                        <tr>
-                            <th>IsBigDeal</th>
-                            <td>{{ reduction.isBigDeal ? 'Yes' : 'No' }}</td>
-                        </tr>
-                        <tr>
-                            <th>IsActive</th>
-                            <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
-                        </tr>
-                        <tr>
-                            <th>CreatedAt</th>
-                            <td>{{ reduction.createdAt ? reduction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>UpdatedAt</th>
-                            <td>{{ reduction.updatedAt ? reduction.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
 
-                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
+                <a href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}">{{ 'link.reduction.admin.edit'|trans }}</a>
 
-                    <a href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
-
-                    {{ include('admin/reduction/_delete_form.html.twig') }}
-                </div>
+                {{ include('reduction/admin/_delete_form.html.twig') }}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

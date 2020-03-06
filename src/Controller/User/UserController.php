@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller;
+namespace App\Controller\User;
 
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +17,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 final class UserController extends AbstractController
 {
+    /**
+     * Dashboard page after connexion.
+     * @todo    Add all useful data for a dashboard index (only for users).
+     *
+     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     */
+    public function dashboard(): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_admin_dashboard');
+        }
+
+        return $this->render('user/dashboard.html.twig');
+    }
+
     /**
      * @Route("/{uuid<^.{36}$>}", name="show", methods={"GET"})
      */

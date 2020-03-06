@@ -17,15 +17,15 @@ security:
             pattern: ^/
             anonymous: true
             logout:
-                path: app_logout
+                path: app_security_logout
                 target: app_index
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
             form_login:
-                check_path: app_login
-                login_path: app_login
+                check_path: app_security_login
+                login_path: app_security_login
                 csrf_token_generator: security.csrf.token_manager
                 default_target_path: index
             guard:

@@ -19,10 +19,10 @@ final class AdminController extends AbstractController
     /**
      * @todo    Add all useful data for admin index.
      *
-     * @Route("/", name="index", methods={"GET"})
+     * @Route("/dashboard", name="dashboard", methods={"GET"})
      */
-    public function index(): Response
+    public function dashboard(): Response
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/dashboard.html.twig');
     }
 }

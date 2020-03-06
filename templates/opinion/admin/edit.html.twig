@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'opinion.admin.edit.head.meta.title'|trans %}
+
+{% block og_title 'opinion.admin.edit.head.meta.title'|trans %}
+
+{% block body_id 'opinion-admin-edit' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'opinion.admin.edit.body.h1'|trans }}</h1>
+
+                {{ include('opinion/_form.html.twig', {'button_label': 'Update'}) }}
+
+                {{ include('opinion/admin/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

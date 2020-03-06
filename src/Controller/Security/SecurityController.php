@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +14,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * @todo    Check best practices on this one.
+ * @Route(name="app_security_")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="login")
      * @return  RedirectResponse|Response A Response instance
      */
     public function login(
@@ -42,7 +43,7 @@ final class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="logout")
      */
     public function logout(): void
     {

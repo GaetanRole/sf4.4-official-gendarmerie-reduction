@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'user.admin.new.head.meta.title'|trans %}
+
+{% block og_title 'user.admin.new.head.meta.title'|trans %}
+
+{% block body_id 'user-admin-new' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'user.admin.new.body.h1'|trans }}</h1>
+
+                {{ include('user/admin/_form.html.twig') }}
+
+                <a href="{{ path('app_admin_user_index') }}">{{ 'link.user.admin.index'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

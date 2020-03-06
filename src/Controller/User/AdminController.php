@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\User;
 
 use \Exception;
 use App\Entity\User;
@@ -19,11 +19,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
+ * @todo See voter exception translation message
  * @Route("/admin/user", name="app_admin_user_")
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class AdminUserController extends AbstractController
+final class AdminController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -38,7 +39,7 @@ final class AdminUserController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('admin/user/index.html.twig', [
+        return $this->render('user/admin/index.html.twig', [
             'users' => $this->entityRepository->getRepository(User::class)->findBy([], ['username' => 'ASC'])
         ]);
     }
@@ -61,7 +62,7 @@ final class AdminUserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index');
         }
 
-        return $this->render('admin/user/new.html.twig', ['user' => $user, 'form' => $form->createView()]);
+        return $this->render('user/admin/new.html.twig', ['user' => $user, 'form' => $form->createView()]);
     }
 
     /**
@@ -90,7 +91,7 @@ final class AdminUserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index');
         }
 
-        return $this->render('admin/user/edit.html.twig', [
+        return $this->render('user/admin/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'formChangePassword' => $formChangePassword->createView()

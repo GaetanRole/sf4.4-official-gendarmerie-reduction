@@ -12,12 +12,12 @@
                 <a class="nav-link" href="{{ path('app_index') }}" title="{{ 'base.header.nav.home.link.title'|trans }}">{{ 'base.header.nav.home.link'|trans }} <span class="sr-only">{{ 'base.header.nav.current'|trans }}</span></a>
             </li>
             {%- if is_granted('ROLE_ADMIN') -%}
-                <li class="nav-item" {{ currentRoute is same as('app_admin_index') ? 'active' }}>
-                    <a class="nav-link" href="{{ path('app_admin_index') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
+                <li class="nav-item" {{ currentRoute is same as('app_admin_dashboard') ? 'active' }}>
+                    <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
                 </li>
             {%- elseif is_granted('IS_AUTHENTICATED_FULLY') -%}
-                <li class="nav-item" {{ currentRoute is same as('app_admin_index') ? 'active' }}>
-                    <a class="nav-link" href="{{ path('app_dashboard') }}" title="{{ 'base.header.nav.user.link.title'|trans }}">{{ 'base.header.nav.user.link'|trans }}</a>
+                <li class="nav-item" {{ currentRoute is same as('app_user_dashboard') ? 'active' }}>
+                    <a class="nav-link" href="{{ path('app_user_dashboard') }}" title="{{ 'base.header.nav.user.link.title'|trans }}">{{ 'base.header.nav.user.link'|trans }}</a>
                 </li>
             {% endif %}
             <li class="nav-item {{ currentRoute is same as('app_contact') ? 'active' }}">
@@ -27,11 +27,11 @@
         <ul class="navbar-nav text-center">
             {%- if is_granted('ROLE_USER') -%}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}" title="{{ 'base.header.nav.logout.link.title'|trans }}">{{ 'base.header.nav.logout.link'|trans }}</a>
+                    <a class="nav-link" href="{{ path('app_security_logout') }}" title="{{ 'base.header.nav.logout.link.title'|trans }}">{{ 'base.header.nav.logout.link'|trans }}</a>
                 </li>
             {%- else -%}
-                <li class="nav-item {{ currentRoute is same as('app_login') ? 'active' }}">
-                    <a class="nav-link" href="{{ path('app_login') }}" title="{{ 'base.header.nav.login.link.title'|trans }}">{{ 'base.header.nav.login.link'|trans }}</a>
+                <li class="nav-item {{ currentRoute is same as('app_security_login') ? 'active' }}">
+                    <a class="nav-link" href="{{ path('app_security_login') }}" title="{{ 'base.header.nav.login.link.title'|trans }}">{{ 'base.header.nav.login.link'|trans }}</a>
                 </li>
             {%- endif -%}
             <li class="nav-item dropdown dropleft">

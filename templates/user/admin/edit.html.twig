@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'user.admin.edit.head.meta.title'|trans %}
+
+{% block og_title 'user.admin.edit.head.meta.title'|trans %}
+
+{% block body_id 'user-admin-edit' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'user.admin.edit.body.h1'|trans }}</h1>
+
+                {{ include('user/admin/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('user/admin/_form_change_password.html.twig') }}
+
+                <a href="{{ path('app_admin_user_index') }}">{{ 'link.user.admin.index'|trans }}</a>
+
+                {{ include('user/admin/_delete_form.html.twig') }}
+                {{ include('user/admin/_status_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

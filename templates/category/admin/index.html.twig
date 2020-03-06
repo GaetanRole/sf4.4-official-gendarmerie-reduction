@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'category.admin.index.head.meta.title'|trans %}
+
+{% block og_title 'category.admin.index.head.meta.title'|trans %}
+
+{% block body_id 'category-admin-index' %}
+
+{% block body %}
+    {% include '_flash_messages.html.twig' %}
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'category.admin.index.body.h1'|trans }}</h1>
+
+                <a href="{{ path('app_admin_category_new') }}">{{ 'link.category.admin.new'|trans }}</a>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Uuid</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.uuid }}</td>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.description }}</td>
+                            <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}">{{ 'link.category.admin.edit'|trans }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

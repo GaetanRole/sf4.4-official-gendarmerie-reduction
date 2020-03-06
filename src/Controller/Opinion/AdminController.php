@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Opinion;
 
 use \Exception;
 use App\Entity\Opinion;
@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class AdminOpinionController extends AbstractController
+final class AdminController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -44,10 +44,10 @@ final class AdminOpinionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityRepository->update($opinion);
-            return $this->redirectToRoute('app_admin_index');
+            return $this->redirectToRoute('app_admin_dashboard');
         }
 
-        return $this->render('admin/opinion/edit.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
+        return $this->render('opinion/admin/edit.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
     }
 
     /**
@@ -59,6 +59,6 @@ final class AdminOpinionController extends AbstractController
             $this->entityRepository->delete($opinion);
         }
 
-        return $this->redirectToRoute('app_admin_index');
+        return $this->redirectToRoute('app_admin_dashboard');
     }
 }

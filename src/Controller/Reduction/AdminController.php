@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Reduction;
 
 use \Exception;
 use App\Entity\Reduction;
@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * @IsGranted("ROLE_ADMIN")
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class AdminReductionController extends AbstractController
+final class AdminController extends AbstractController
 {
     /** @var EntityRepositoryInterface */
     private $entityRepository;
@@ -48,7 +48,7 @@ final class AdminReductionController extends AbstractController
             return $this->redirectToRoute('app_reduction_index');
         }
 
-        return $this->render('admin/reduction/edit.html.twig', [
+        return $this->render('reduction/admin/edit.html.twig', [
             'reduction' => $reduction,
             'form' => $form->createView(),
         ]);

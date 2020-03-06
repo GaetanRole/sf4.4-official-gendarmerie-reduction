@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'admin.reduction.edit.head.meta.title'|trans %}
+{% block title 'reduction.admin.edit.head.meta.title'|trans %}
 
-{% block og_title 'admin.reduction.edit.head.meta.title'|trans %}
+{% block og_title 'reduction.admin.edit.head.meta.title'|trans %}
 
 {% block stylesheets %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
@@ -11,24 +11,22 @@
     </style>
 {% endblock %}
 
-{% block body_id 'admin-reduction-edit' %}
+{% block body_id 'reduction-admin-edit' %}
 
 {% block body %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'admin.reduction.edit.body.h1'|trans }}</h1>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'reduction.admin.edit.body.h1'|trans }}</h1>
 
-                    {{ include('reduction/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('reduction/_form.html.twig', {'button_label': 'Update'}) }}
 
-                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
+                <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
 
-                    {{ include('admin/reduction/_delete_form.html.twig') }}
-                </div>
+                {{ include('reduction/admin/_delete_form.html.twig') }}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

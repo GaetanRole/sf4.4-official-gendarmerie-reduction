@@ -5,48 +5,48 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="rSjFURn" resname="admin.user.new.head.meta.title">
-        <source>admin.user.new.head.meta.title</source>
+      <trans-unit id="bEDILzH" resname="user.admin.new.head.meta.title">
+        <source>user.admin.new.head.meta.title</source>
         <target>Ajouter un utilisateur</target>
       </trans-unit>
-      <trans-unit id="XIkurC9" resname="admin.user.new.body.h1">
-        <source>admin.user.new.body.h1</source>
+      <trans-unit id="HQGKFfy" resname="user.admin.new.body.h1">
+        <source>user.admin.new.body.h1</source>
         <target>Ajouter un utilisateur !</target>
       </trans-unit>
-      <trans-unit id="jGaByO0" resname="link.admin.user.index">
-        <source>link.admin.user.index</source>
+      <trans-unit id="hrRn6VI" resname="link.user.admin.index">
+        <source>link.user.admin.index</source>
         <target>Voir tous les utilisateurs</target>
       </trans-unit>
       <trans-unit id="Kx69suG" resname="btn.delete">
         <source>btn.delete</source>
         <target>Supprimer</target>
       </trans-unit>
-      <trans-unit id="vpiccJo" resname="admin.user.edit.head.meta.title">
-        <source>admin.user.edit.head.meta.title</source>
+      <trans-unit id="OdYaDqk" resname="user.admin.edit.head.meta.title">
+        <source>user.admin.edit.head.meta.title</source>
         <target>Editer un utilisateur</target>
       </trans-unit>
-      <trans-unit id="Stb1Vup" resname="admin.user.edit.body.h1">
-        <source>admin.user.edit.body.h1</source>
+      <trans-unit id="QFPpi8B" resname="user.admin.edit.body.h1">
+        <source>user.admin.edit.body.h1</source>
         <target>Éditer un utilisateur !</target>
       </trans-unit>
       <trans-unit id="6lrCxko" resname="btn.edit">
         <source>btn.edit</source>
         <target>Éditer</target>
       </trans-unit>
-      <trans-unit id="Uq3Pcvm" resname="admin.user.index.head.meta.title">
-        <source>admin.user.index.head.meta.title</source>
+      <trans-unit id="uGTrLR." resname="user.admin.index.head.meta.title">
+        <source>user.admin.index.head.meta.title</source>
         <target>Gérer les utilisateurs</target>
       </trans-unit>
-      <trans-unit id="mcnS221" resname="admin.user.index.body.h1">
-        <source>admin.user.index.body.h1</source>
+      <trans-unit id="Z.dOBNd" resname="user.admin.index.body.h1">
+        <source>user.admin.index.body.h1</source>
         <target>Gérer les utilisateurs !</target>
       </trans-unit>
-      <trans-unit id="o0e9jgI" resname="admin.user.index.table.p.same_acl">
-        <source>admin.user.index.table.p.same_acl</source>
+      <trans-unit id="MjIqR1D" resname="user.admin.index.table.p.same_acl">
+        <source>user.admin.index.table.p.same_acl</source>
         <target>Vous ne pouvez pas modifier un utilisateur ayant les mêmes droits que vous.</target>
       </trans-unit>
-      <trans-unit id="6dY3.B0" resname="link.admin.user.edit">
-        <source>link.admin.user.edit</source>
+      <trans-unit id="fD00oRA" resname="link.user.admin.edit">
+        <source>link.user.admin.edit</source>
         <target>Éditer l'utilisateur</target>
       </trans-unit>
       <trans-unit id="EwWBVkn" resname="link.user.show">
@@ -57,92 +57,92 @@
         <source>table.empty</source>
         <target>Aucune donnée n'est présente pour le moment.</target>
       </trans-unit>
-      <trans-unit id="woC9Hor" resname="link.admin.user.new">
-        <source>link.admin.user.new</source>
+      <trans-unit id="F7VK9YK" resname="link.user.admin.new">
+        <source>link.user.admin.new</source>
         <target>Ajouter un utilisateur</target>
       </trans-unit>
       <trans-unit id="O.Rhoe0" resname="btn.save">
         <source>btn.save</source>
         <target>Enregistrer</target>
       </trans-unit>
-      <trans-unit id="ocD3e_o" resname="admin.brand.new.head.meta.title">
-        <source>admin.brand.new.head.meta.title</source>
+      <trans-unit id="6l4myWZ" resname="brand.admin.new.head.meta.title">
+        <source>brand.admin.new.head.meta.title</source>
         <target>Ajouter une entreprise</target>
       </trans-unit>
-      <trans-unit id="_R3Ocna" resname="admin.brand.new.body.h1">
-        <source>admin.brand.new.body.h1</source>
+      <trans-unit id="WduWX_0" resname="brand.admin.new.body.h1">
+        <source>brand.admin.new.body.h1</source>
         <target>Ajouter une entreprise !</target>
       </trans-unit>
-      <trans-unit id="QECRdmU" resname="link.admin.brand.index">
-        <source>link.admin.brand.index</source>
+      <trans-unit id="hYpi2mq" resname="link.brand.admin.index">
+        <source>link.brand.admin.index</source>
         <target>Voir les entreprises</target>
       </trans-unit>
-      <trans-unit id="rEqKeoq" resname="admin.brand.edit.head.meta.title">
-        <source>admin.brand.edit.head.meta.title</source>
+      <trans-unit id="l_vBp05" resname="brand.admin.edit.head.meta.title">
+        <source>brand.admin.edit.head.meta.title</source>
         <target>Editer une entreprise</target>
       </trans-unit>
-      <trans-unit id="HGyccl8" resname="admin.brand.edit.body.h1">
-        <source>admin.brand.edit.body.h1</source>
+      <trans-unit id="g6O1c9b" resname="brand.admin.edit.body.h1">
+        <source>brand.admin.edit.body.h1</source>
         <target>Éditer l'entreprise !</target>
       </trans-unit>
-      <trans-unit id="yJY1KoN" resname="admin.brand.index.head.meta.title">
-        <source>admin.brand.index.head.meta.title</source>
+      <trans-unit id="pnJL0sq" resname="brand.admin.index.head.meta.title">
+        <source>brand.admin.index.head.meta.title</source>
         <target>Gérer les entreprises</target>
       </trans-unit>
-      <trans-unit id="0nTG2fT" resname="admin.brand.index.body.h1">
-        <source>admin.brand.index.body.h1</source>
+      <trans-unit id="ehn4GYN" resname="brand.admin.index.body.h1">
+        <source>brand.admin.index.body.h1</source>
         <target>Gérer les entreprises !</target>
       </trans-unit>
-      <trans-unit id="mAkopGm" resname="link.admin.brand.edit">
-        <source>link.admin.brand.edit</source>
+      <trans-unit id="jgpC0uN" resname="link.brand.admin.edit">
+        <source>link.brand.admin.edit</source>
         <target>Editer l'entreprise</target>
       </trans-unit>
-      <trans-unit id="FGvLYFS" resname="link.admin.brand.new">
-        <source>link.admin.brand.new</source>
+      <trans-unit id="9UcjVXS" resname="link.brand.admin.new">
+        <source>link.brand.admin.new</source>
         <target>Ajouter une entreprise</target>
       </trans-unit>
-      <trans-unit id="MvOEwKQ" resname="admin.category.new.head.meta.title">
-        <source>admin.category.new.head.meta.title</source>
+      <trans-unit id="oMtPsdg" resname="category.admin.new.head.meta.title">
+        <source>category.admin.new.head.meta.title</source>
         <target>Ajouter une catégorie</target>
       </trans-unit>
-      <trans-unit id="ieusi0F" resname="admin.category.new.body.h1">
-        <source>admin.category.new.body.h1</source>
+      <trans-unit id="7HBghSk" resname="category.admin.new.body.h1">
+        <source>category.admin.new.body.h1</source>
         <target>Ajouter une catégorie !</target>
       </trans-unit>
-      <trans-unit id=".Fhp_cY" resname="link.admin.category.index">
-        <source>link.admin.category.index</source>
+      <trans-unit id="v_eMBM0" resname="link.category.admin.index">
+        <source>link.category.admin.index</source>
         <target>Voir les catégories</target>
       </trans-unit>
-      <trans-unit id="s.YTmDb" resname="admin.category.edit.head.meta.title">
-        <source>admin.category.edit.head.meta.title</source>
+      <trans-unit id="sxtx0qH" resname="category.admin.edit.head.meta.title">
+        <source>category.admin.edit.head.meta.title</source>
         <target>Éditer une catégorie</target>
       </trans-unit>
-      <trans-unit id="M0QmamC" resname="admin.category.edit.body.h1">
-        <source>admin.category.edit.body.h1</source>
+      <trans-unit id="3kP5N9C" resname="category.admin.edit.body.h1">
+        <source>category.admin.edit.body.h1</source>
         <target>Éditer une catégorie !</target>
       </trans-unit>
-      <trans-unit id=".JlfR0S" resname="admin.category.index.head.meta.title">
-        <source>admin.category.index.head.meta.title</source>
+      <trans-unit id="UKzcgqA" resname="category.admin.index.head.meta.title">
+        <source>category.admin.index.head.meta.title</source>
         <target>Gérer les catégories</target>
       </trans-unit>
-      <trans-unit id="ZS1UApq" resname="admin.category.index.body.h1">
-        <source>admin.category.index.body.h1</source>
+      <trans-unit id="EFJrfeI" resname="category.admin.index.body.h1">
+        <source>category.admin.index.body.h1</source>
         <target>Gérer les catégories !</target>
       </trans-unit>
-      <trans-unit id="ao59nhj" resname="link.admin.category.edit">
-        <source>link.admin.category.edit</source>
+      <trans-unit id="6ps86l_" resname="link.category.admin.edit">
+        <source>link.category.admin.edit</source>
         <target>Éditer la catégorie</target>
       </trans-unit>
-      <trans-unit id="o5KWDas" resname="link.admin.category.new">
-        <source>link.admin.category.new</source>
+      <trans-unit id="hrU.Lw1" resname="link.category.admin.new">
+        <source>link.category.admin.new</source>
         <target>Ajouter une catégorie</target>
       </trans-unit>
-      <trans-unit id="osqUyKj" resname="admin.reduction.edit.head.meta.title">
-        <source>admin.reduction.edit.head.meta.title</source>
+      <trans-unit id="MiSddIA" resname="reduction.admin.edit.head.meta.title">
+        <source>reduction.admin.edit.head.meta.title</source>
         <target>Éditer une réduction</target>
       </trans-unit>
-      <trans-unit id="NQHzXQD" resname="admin.reduction.edit.body.h1">
-        <source>admin.reduction.edit.body.h1</source>
+      <trans-unit id="Vym5g2." resname="reduction.admin.edit.body.h1">
+        <source>reduction.admin.edit.body.h1</source>
         <target>Éditer une réduction !</target>
       </trans-unit>
       <trans-unit id="VEghGlV" resname="link.reduction.index">
@@ -161,8 +161,8 @@
         <source>link.logout</source>
         <target>Se déconnecter</target>
       </trans-unit>
-      <trans-unit id="OfqEQQ3" resname="admin.opinion.edit.body.h1">
-        <source>admin.opinion.edit.body.h1</source>
+      <trans-unit id="qTpgwo0" resname="opinion.admin.edit.body.h1">
+        <source>opinion.admin.edit.body.h1</source>
         <target>Éditer le commentaire</target>
       </trans-unit>
       <trans-unit id="_Db4PEN" resname="user.show.head.meta.title">
@@ -189,8 +189,8 @@
         <source>reduction.show.body.h1</source>
         <target>Réduction !</target>
       </trans-unit>
-      <trans-unit id="DD0fyoU" resname="link.admin.reduction.edit">
-        <source>link.admin.reduction.edit</source>
+      <trans-unit id="OYylgIf" resname="link.reduction.admin.edit">
+        <source>link.reduction.admin.edit</source>
         <target>Éditer la réduction</target>
       </trans-unit>
       <trans-unit id="mRDp3Zq" resname="reduction.index.head.meta.title">
@@ -308,6 +308,10 @@
       <trans-unit id="Wo1Ohv3" resname="opinion.new.body.h1">
         <source>opinion.new.body.h1</source>
         <target>Créer un commentaire !</target>
+      </trans-unit>
+      <trans-unit id="qsr6_kA" resname="opinion.admin.edit.head.meta.title">
+        <source>opinion.admin.edit.head.meta.title</source>
+        <target>Éditer le commentaire</target>
       </trans-unit>
       <trans-unit id="VIlVVGv" resname="region.form.geo.select.option">
         <source>region.form.geo.select.option</source>

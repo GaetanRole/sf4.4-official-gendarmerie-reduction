@@ -14,21 +14,18 @@
 {% block body_id 'reduction-new' %}
 
 {% block body %}
-    <section>
+    {% include '_flash_messages.html.twig' %}
 
-        {% include '_flash_messages.html.twig' %}
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h1>{{ 'reduction.new.body.h1'|trans }}</h1>
 
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'reduction.new.body.h1'|trans }}</h1>
-
-                    {{ include('reduction/_form.html.twig') }}
-                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
-                </div>
+                {{ include('reduction/_form.html.twig') }}
+                <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
