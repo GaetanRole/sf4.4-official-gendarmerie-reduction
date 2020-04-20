@@ -2,8 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Reduction;
 
+use App\DataFixtures\BrandFixture;
+use App\DataFixtures\CategoryFixture;
+use App\DataFixtures\UserFixture;
+use App\Entity\Image;
+use App\Utils\FilesystemStaticUtilities;
 use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
@@ -14,6 +19,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
@@ -40,14 +46,22 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     /** @var SluggerInterface */
     private $slugger;
 
+    /** @var string */
+    private $imageUploadDirectory;
+
     /**
      * @link    https://github.com/Innmind/TimeContinuum Global clock
      */
-    public function __construct(GlobalClock $clock, ContainerInterface $container, SluggerInterface $slugger)
-    {
+    public function __construct(
+        GlobalClock $clock,
+        ContainerInterface $container,
+        SluggerInterface $slugger,
+        string $imageUploadDirectory
+    ) {
         $this->clock = $clock;
         $this->container = $container;
         $this->slugger = $slugger;
+        $this->imageUploadDirectory = $imageUploadDirectory;
     }
 
     /**
@@ -61,7 +75,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     {
         $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
 
-        foreach ($this->getReductionData() as [$index, $author, $brand, $categories]) {
+        foreach ($this->getReductionData() as [$index, $author, $brand, $categories, $image]) {
             $reduction = new Reduction();
 
             $reduction->setUuid(Uuid::uuid4());
@@ -78,6 +92,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
                 ->setTitle($reductionTitle)
                 ->setSlug($this->slugger::uniqueSlugify($reductionTitle))
                 ->setDescription($faker->realText(300))
+                ->setImage($image)
                 ->setRegion($this->getRandomRegion())
                 ->setDepartment($this->getRandomDepartment())
                 ->setMunicipality($faker->city)
@@ -121,12 +136,13 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     {
         $reductions = [];
         for ($index = 0; $index < self::REDUCTION_NB_TUPLE; $index++) {
-            // $reduction = [$index, $author, $brand, $categories, $reference];
+            // $reduction = [$index, $author, $brand, $categories, image];
             $reductions[] = [
                 $index,
                 $this->getReference(UserFixture::USER_REFERENCE.random_int(0, UserFixture::USER_NB_TUPLE - 1)),
                 $this->getReference($this->getRandomBrand()),
                 $this->getRandomCategories(),
+                $this->getAStaticImageFixture(),
             ];
         }
 
@@ -166,6 +182,32 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
         }
 
         return $randomCategoryReferences;
+    }
+
+    /**
+     * Create a fake Image object based on a static image fixture
+     *
+     * @throws  Exception Datetime Exception
+     */
+    private function getAStaticImageFixture(): Image
+    {
+        $image = new Image();
+        $image->setUuid(Uuid::uuid4());
+        $image->setCreatedAt($this->clock->getNowInDateTime());
+        $image->setUpdatedAt(null);
+        $image->setExtension('jpeg');
+
+        FilesystemStaticUtilities::forceFileCopying(
+            __DIR__ . '/base-image-fixture.jpeg',
+            $this->imageUploadDirectory,
+            '/'.$image->getUuid()->toString().'.'.$image->getExtension()
+        );
+
+        $image->setFile(
+            new File($this->imageUploadDirectory.'/'.$image->getUuid()->toString().'.'.$image->getExtension())
+        );
+
+        return $image;
     }
 
     /**

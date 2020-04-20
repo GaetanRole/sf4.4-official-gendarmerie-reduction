@@ -1,0 +1,27 @@
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+
+    loaders:
+        default:
+            filesystem:
+                data_root: '%kernel.project_dir%/public'
+
+    driver: gd
+    cache: default
+    data_loader: default
+    filter_sets:
+        cache: ~
+        thumbnail:
+            jpeg_quality: ~
+            png_compression_level: ~
+            png_compression_filter: ~
+            animated: false
+            format: ~
+            cache: ~
+            data_loader: ~
+            quality: 75
+            filters:
+                upscale: { min: [350, 225] }
+                thumbnail: { size: [350, 225], mode: outbound }

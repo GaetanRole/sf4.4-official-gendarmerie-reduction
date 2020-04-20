@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Reduction\ReductionFixture;
 use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;

@@ -79,6 +79,12 @@ final class ReductionType extends AbstractType
                     'rows' => 50,
                 ],
             ])
+            ->add('image', ImageType::class, [
+                'required' => false,
+                'allow_delete' => !empty($options['data']->getImage()),
+                'label' => 'form.reduction.image.label',
+                'help' => 'form.reduction.image.help',
+            ])
             ->add('categories', EntityType::class, [
                 'expanded'  => false,
                 'multiple'  => true,

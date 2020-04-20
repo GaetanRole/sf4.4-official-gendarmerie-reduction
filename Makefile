@@ -2,6 +2,19 @@ CONSOLE				= bin/console
 COMPOSER			= composer
 
 ##
+###------------#
+###    Help    #
+###------------#
+##
+
+.DEFAULT_GOAL := 	help
+
+help:				## Display all help messages
+					@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-20s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+
+.PHONY: 			help
+
+##
 ###---------------------------#
 ###    Project commands (SF)  #
 ###---------------------------#
@@ -85,14 +98,18 @@ cc:					## Clear cache
 cc-prod:			## Clear cache for prod
 					$(CONSOLE) cache:clear --env=prod
 
+assets-clean:		## Erasing all fixture and public files
+					rm -rvf ./public/bundles ./public/media/
+					rm -rvf ./public/uploads/images/
+
 clean:				qa-clean-conf cc ## Remove all generated files
 					rm -rvf ./vendor ./var
 					rm -rvf ./.env.local
 
-clear:				db-destroy clean ## Remove all generated files and db
+clear:				db-destroy assets-clean clean ## Remove all generated files and db
 
 update:				## Update dependencies
-					$(COMPOSER) update --lock --no-interaction
+					$(COMPOSER) update --no-interaction
 
 update-prod:		## Update dependencies for prod
 					$(COMPOSER) update --no-dev --optimize-autoloader
@@ -101,7 +118,7 @@ update-prod:		## Update dependencies for prod
 					# sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
                     # sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/log
 
-.PHONY:				cc cc-prod clean clear update update-prod
+.PHONY:				cc cc-prod assets-clean clean clear update update-prod
 
 ##
 ###-------------------#
@@ -204,16 +221,3 @@ phpmd: 				phpmd.xml vendor ## PHPMD (https://github.com/phpmd/phpmd)
 					./vendor/bin/phpmd ./src text phpmd.xml
 
 .PHONY: 			phpmd
-
-##
-###------------#
-###    Help    #
-###------------#
-##
-
-.DEFAULT_GOAL := 	help
-
-help:				## Display all help messages
-					@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-20s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
-
-.PHONY: 			help

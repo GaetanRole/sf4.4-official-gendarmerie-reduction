@@ -11,6 +11,10 @@ npm-debug.log
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
 /phpcs.xml
@@ -22,7 +26,6 @@ npm-debug.log
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/public/uploads/
 /var/
 /vendor/
 builds

@@ -29,15 +29,17 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                {% for number in 0..5 %}
+                {% for reduction in reductions %}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="38%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            {% if reduction.image and reduction.image.file %}
+                                <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image)|imagine_filter('thumbnail') }}" alt="{{ reduction.title|capitalize }} Image.">
+                            {% endif %}
                             <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text">{{ reduction.description|slice(0, 128) ~ '[...]'}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button type="button" class="btn btn-sm btn-dark text-white">View</button>
-                                    <small class="text-muted">9 mins</small>
+                                    <small class="text-muted">{{ reduction.categories|join(', ', 'index.body.reduction.subtitle.category.join'|trans) }}</small>
                                 </div>
                             </div>
                         </div>

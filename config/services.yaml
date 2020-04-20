@@ -3,6 +3,7 @@ parameters:
     faker_locale: 'fr_FR'
     app_locales: ['en', '%locale%']
     app_locales_string_type: 'en|%locale%'
+    upload_directory: '%kernel.project_dir%/public/uploads'
 
 services:
     _defaults:
@@ -11,6 +12,7 @@ services:
         bind:
             $httpClient: '@app.client'
             $slugger: '@app.slugger'
+            $imageUploadDirectory: '%upload_directory%/images'
 
     app.client:
         class: GuzzleHttp\Client
@@ -33,3 +35,17 @@ services:
         arguments:
             $clock: '@app.earth'
             $format: '@app.format'
+
+    Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
+
+    App\EventListener\ImageStorageListener:
+        arguments: ["@liip_imagine.cache.manager"]
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: preRemove }
+
+    App\EventListener\ImageUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: onFlush }
+            - { name: doctrine.event_listener, event: postLoad }

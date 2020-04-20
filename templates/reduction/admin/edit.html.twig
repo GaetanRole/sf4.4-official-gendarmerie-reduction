@@ -30,6 +30,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        $('.custom-file-input').on('change', function(event) {
+            let inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     <script>
         $('select[data-select]').select2();
@@ -37,8 +45,8 @@
         const regionSelect = $('#reduction_region');
         const departmentSelect = $('#reduction_department');
         const municipalitySelect = $('#reduction_municipality');
-        const departmentDivSelect = $('#reduction div:nth-child(7)');
-        const municipalityDivSelect = $('#reduction div:nth-child(8)');
+        const departmentDivSelect = $('#reduction div:nth-child(8)');
+        const municipalityDivSelect = $('#reduction div:nth-child(9)');
 
         let hideDepartmentAndMunicipalitySelectField = () => {
             departmentDivSelect.fadeOut('slow');

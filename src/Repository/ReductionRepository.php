@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Category;
@@ -36,15 +37,15 @@ class ReductionRepository extends ServiceEntityRepository
      *
      * @todo    Add PagerFanta
      *
-     * @return  Reduction[]
      * @throws  Exception Datetime Exception
      */
-    public function findLatest(Category $category = null): array
+    public function findLatestBy(Category $category = null, $limit = null): Paginator
     {
         $qb = $this->createQueryBuilder('r')
-            ->addSelect('u', 'c')
+            ->addSelect('u', 'c', 'i')
             ->innerJoin('r.user', 'u')
             ->leftJoin('r.categories', 'c')
+            ->leftJoin('r.image', 'i')
             ->where('r.createdAt <= :now')
             ->orderBy('r.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime());
@@ -54,12 +55,14 @@ class ReductionRepository extends ServiceEntityRepository
                 ->setParameter('category', $category);
         }
 
-        return $qb->getQuery()->execute();
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return new Paginator($qb);
     }
 
     /**
-     * Find last articles.
-     *
      * @return  Reduction[]
      */
     public function findBySearchQuery(string $rawQuery, int $limit = Reduction::NUM_ITEMS): array

@@ -40,13 +40,12 @@ final class ReductionController extends AbstractController
     public function index(): Response
     {
         return $this->render('reduction/index.html.twig', [
-            'reductions' => $this->entityRepository->getRepository(Reduction::class)->findLatest()
+            'reductions' => $this->entityRepository->getRepository(Reduction::class)->findLatestBy()
         ]);
     }
 
     /**
-     * @todo    Add Image Upload ?
-     *
+     * @see     ImageUploadListener
      * @Route("/new", name="new", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception

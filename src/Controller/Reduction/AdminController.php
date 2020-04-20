@@ -32,17 +32,22 @@ final class AdminController extends AbstractController
     }
 
     /**
+     * @see     ImageUploadListener
      * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
      * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
     public function edit(Request $request, Reduction $reduction, SluggerInterface $slugger): Response
     {
+        $oldReductionTitle = $reduction->getTitle();
+
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
+            if ($oldReductionTitle !== $form['title']->getData()) {
+                $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
+            }
 
             $this->entityRepository->update($reduction);
             return $this->redirectToRoute('app_reduction_index');

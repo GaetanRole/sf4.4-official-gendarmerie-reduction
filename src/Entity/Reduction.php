@@ -10,6 +10,7 @@ use App\Entity\Traits\EntityUserIdentityTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\Constraints as AppAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -100,6 +101,20 @@ class Reduction implements EntityInterface
      * )
      */
     private $description;
+
+    /**
+     * @var Image|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"all"}, orphanRemoval=true)
+     *
+     * @AppAssert\ImageObject(
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     maxSize="1M",
+     *     maxWidth="960",
+     *     maxHeight="720"
+     * )
+     */
+    private $image;
 
     /**
      * @var string
@@ -257,6 +272,18 @@ class Reduction implements EntityInterface
     public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
+
         return $this;
     }
 
