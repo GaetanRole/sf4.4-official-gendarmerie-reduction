@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Event;
 
@@ -11,6 +11,7 @@ use App\Event\SuccessPersistenceNotificationEvent;
 
 /**
  * @group   Unit
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class SuccessPersistenceNotificationEventTest extends TestCase

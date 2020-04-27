@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Event;
 
@@ -12,9 +12,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 class SuccessPersistenceNotificationEvent extends Event
 {
     public const
-        /** @var string FlashBag type for FlashBagInterface::add() */
+        /** @var string FlashBag type for FlashBagInterface::add(). */
         TYPE   = 'success',
-        /** @var string FlashBag domain for catalog */
+        /** @var string FlashBag domain for catalog. */
         DOMAIN = 'flashes';
 
     /** @var string */

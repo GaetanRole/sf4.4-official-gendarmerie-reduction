@@ -1,15 +1,19 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
 use App\Entity\Image;
+use Liip\ImagineBundle\Templating\FilterExtension;
 use Symfony\Component\Asset\Context\RequestStackContext;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 /**
+ * A Twig extension completed by Imagine filter extension,
+ * to store and get the resolve path with asset versioning.
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UploadedImagesExtension extends AbstractExtension
@@ -20,23 +24,33 @@ final class UploadedImagesExtension extends AbstractExtension
     /** @var RequestStackContext */
     private $requestStackContext;
 
-    public function __construct(RequestStackContext $requestStackContext)
+    /** @var FilterExtension */
+    private $filterExtension;
+
+    public function __construct(RequestStackContext $requestStackContext, FilterExtension $filterExtension)
     {
         $this->requestStackContext = $requestStackContext;
+        $this->filterExtension = $filterExtension;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('uploaded_asset', [$this, 'getUploadedAssetPath'])
+            new TwigFunction('uploaded_asset', [$this, 'getUploadedAndCachedAssetPath'])
         ];
     }
 
-    public function getUploadedAssetPath(?Image $image): string
+    public function getUploadedAndCachedAssetPath(?Image $image, string $filter = 'thumbnail'): string
     {
-        $path = !$image ? self::UPLOAD_DIRECTORY.'/'.self::DEFAULT_IMAGE : $image->getFilePath();
+        // '?v='.time() to constantly refresh the cache and resolve URL to avoid 301 and then 404.
+        // @see https://github.com/liip/LiipImagineBundle/issues/850
+        return $this->filterExtension->filter($this->getDefaultOrRealFilePath($image), $filter).'?v='.time();
+    }
 
-        return $this->requestStackContext
-                ->getBasePath().'/'.self::UPLOAD_DIRECTORY.'/images/'.$path;
+    private function getDefaultOrRealFilePath(?Image $image): string
+    {
+        $file = (!$image || !$image->getFile()) ? '/'.self::DEFAULT_IMAGE : '/images'.$image->getFilePath();
+
+        return $this->requestStackContext->getBasePath().'/'.self::UPLOAD_DIRECTORY.$file;
     }
 }

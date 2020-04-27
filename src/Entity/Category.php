@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @UniqueEntity(fields={"name"})
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Category implements JsonSerializable, EntityInterface
@@ -58,8 +59,6 @@ class Category implements JsonSerializable, EntityInterface
         $this->reductions = new ArrayCollection();
     }
 
-    /* Personal methods */
-
     public function __toString(): string
     {
         return $this->name;
@@ -74,8 +73,6 @@ class Category implements JsonSerializable, EntityInterface
         // e.g. categories|json_encode
         return $this->name;
     }
-
-    /* Auto generated methods */
 
     public function getName(): ?string
     {

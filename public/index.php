@@ -1,21 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Kernel;
-use Symfony\Component\Debug\Debug;
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
-if (!isset($_SERVER['APP_ENV'])) {
-    if (!class_exists(Dotenv::class)) {
-        throw new RuntimeException('APP_ENV environment variable is not defined.');
-    }
-    (new Dotenv(false))->load(__DIR__.'/../.env');
-}
-
-if ($_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev'))) {
+if ($_SERVER['APP_DEBUG']) {
     umask(0000);
+
     Debug::enable();
 }
 
@@ -30,8 +25,7 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false
     Request::setTrustedHosts([$trustedHosts]);
 }
 
-$kernel = new Kernel($_SERVER['APP_ENV'] ?? 'dev', $_SERVER['APP_DEBUG']
-    ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev')));
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

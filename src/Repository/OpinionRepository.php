@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Opinion;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -25,9 +25,9 @@ class OpinionRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry, GlobalClock $clock)
     {
-        parent::__construct($registry, Opinion::class);
-
         $this->clock = $clock;
+
+        parent::__construct($registry, Opinion::class);
     }
 
     /**

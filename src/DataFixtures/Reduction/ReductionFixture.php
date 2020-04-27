@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\DataFixtures\Reduction;
 
@@ -14,7 +14,7 @@ use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Reduction;
 use EasySlugger\SluggerInterface;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ReductionFixture extends Fixture implements DependentFixtureInterface
@@ -35,7 +36,6 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Global project's clock.
-     *
      * @var GlobalClock
      */
     private $clock;
@@ -69,6 +69,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      *
      * @see     3 Loop iterator depends on const REDUCTION_NB_TUPLE
      * @link    https://github.com/fzaninotto/Faker
+     *
      * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
@@ -130,6 +131,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      * Get an array of references useful for Reduction instances.
      *
      * @see     7 See UserFixture::USER_NB_TUPLE - 1 for index 0
+     *
      * @throws  Exception Random Exception
      */
     private function getReductionData(): array

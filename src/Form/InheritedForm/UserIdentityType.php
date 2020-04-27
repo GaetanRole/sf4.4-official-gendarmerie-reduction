@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Form\InheritedForm;
 
@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * UserIdentity FormType Class used by OpinionType and ReductionType.
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserIdentityType extends AbstractType

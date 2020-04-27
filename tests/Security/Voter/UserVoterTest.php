@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Security\Voter;
 
@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 /**
  * @group   Unit
  * @see     https://symfony.com/doc/current/security/voters.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserVoterTest extends TestCase

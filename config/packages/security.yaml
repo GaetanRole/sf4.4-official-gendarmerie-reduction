@@ -11,30 +11,25 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|images|js)/
+            pattern: ^/(_(profiler|wdt)|assets|css|images|js|media|uploads)/
             security: false
         main:
             pattern: ^/
-            anonymous: true
+            anonymous: lazy
             logout:
                 path: app_security_logout
                 target: app_index
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-            form_login:
-                check_path: app_security_login
-                login_path: app_security_login
-                csrf_token_generator: security.csrf.token_manager
-                default_target_path: index
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

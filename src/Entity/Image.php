@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity()
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Image
@@ -36,9 +37,6 @@ class Image
      * @Assert\File(maxSize="1M", binaryFormat=false, mimeTypes={"image/*"})
      */
     private $file;
-
-    /** @var bool */
-    private $deleted = false;
 
     public function getId(): ?int
     {
@@ -70,14 +68,9 @@ class Image
         return $this;
     }
 
-    public function isDeleted(): bool
+    public function isUploaded(): bool
     {
-        return $this->deleted;
-    }
-
-    public function setDeleted(bool $isDeleted): void
-    {
-        $this->deleted = $isDeleted;
+        return (null !== $this->createdAt);
     }
 
     public function getFilePath(string $fromPath = null): string

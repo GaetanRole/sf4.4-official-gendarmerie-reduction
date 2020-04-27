@@ -1,54 +1,40 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\EventListener;
 
+use App\Service\ImageHandler;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use \Exception;
 use App\Entity\Image;
 use App\Entity\Reduction;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use App\Services\Uploader\ImageUploader;
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ImageUploadListener
 {
-    /** @var ImageUploader */
-    private $uploader;
+    /** @var ImageHandler */
+    private $imageHandler;
 
     /** @var GlobalClock */
     private $clock;
 
-    public function __construct(ImageUploader $uploader, GlobalClock $globalClock)
+    public function __construct(ImageHandler $imageHandler, GlobalClock $globalClock)
     {
-        $this->uploader = $uploader;
+        $this->imageHandler = $imageHandler;
         $this->clock = $globalClock;
     }
 
     /**
-     * @throws Exception From DateTime provided by GlobalClock and Uuid::uuid4
-     */
-    public function prePersist(LifecycleEventArgs $args): void
-    {
-        $entity = $args->getEntity();
-
-        if (!$entity instanceof Image && (!$entity instanceof Reduction || !$entity->getImage())) {
-            return;
-        }
-
-        $this->uploadFile(
-            $this->prepareImageEntity($entity instanceof Image ? $entity : $entity->getImage())
-        );
-    }
-
-    /**
+     * On a new and edit, upload the new file and recompute Reduction entity.
+     *
      * @throws Exception From DateTime provided by GlobalClock and Uuid::uuid4
      */
     public function onFlush(OnFlushEventArgs $args): void
@@ -56,12 +42,9 @@ final class ImageUploadListener
         $em = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
 
-        $entities = $uow->getScheduledEntityUpdates();
+        $entities = array_merge($uow->getScheduledEntityInsertions(), $uow->getScheduledEntityUpdates());
 
-        if ($entities) {
-            /** @var Reduction $entity */
-            $entity = $entities[array_key_first($entities)];
-
+        foreach ($entities as $entity) {
             if ($entity instanceof Reduction && $entity->getImage()) {
                 $this->uploadFile($this->prepareImageEntity($entity->getImage()));
 
@@ -71,6 +54,9 @@ final class ImageUploadListener
         }
     }
 
+    /**
+     * Find and set the file to the passed Image entity during a select.
+     */
     public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
@@ -81,7 +67,7 @@ final class ImageUploadListener
 
         $image = $entity->getImage();
         if ($image) {
-            $file = $image->getFilePath($this->uploader->getTargetDirectory());
+            $file = $image->getFilePath($this->imageHandler->getTargetDirectory());
             if (file_exists($file)) {
                 $image->setFile(new File($file));
             }
@@ -89,6 +75,8 @@ final class ImageUploadListener
     }
 
     /**
+     * Prepare the Image entity to receive a new file.
+     *
      * @throws Exception From DateTime provided by GlobalClock and Uuid::uuid4
      */
     private function prepareImageEntity(Image $image): Image
@@ -104,10 +92,13 @@ final class ImageUploadListener
         return $image;
     }
 
+    /**
+     * Set the uploaded file to the Image entity.
+     */
     private function uploadFile(Image $image): void
     {
         $file = $image->getFile();
         $file instanceof UploadedFile ?
-            $image->setFile($this->uploader->upload($file, $image)) : $image->setFile($file);
+            $image->setFile($this->imageHandler->upload($file, $image)) : $image->setFile($file);
     }
 }

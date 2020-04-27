@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -9,7 +9,7 @@ use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Opinion;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class OpinionFixture extends Fixture implements DependentFixtureInterface
@@ -26,7 +27,6 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
 
     /**
      * Global project's clock.
-     *
      * @var GlobalClock
      */
     private $clock;
@@ -47,6 +47,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
      * Load OPINION_NB_TUPLE opinions to DB.
      *
      * @see     3 Loop iterator depends on const OPINION_NB_TUPLE
+     *
      * @link    https://github.com/fzaninotto/Faker
      * @throws  Exception Datetime Exception
      */
@@ -79,6 +80,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
      *
      * @see     9 See UserFixture::USER_NB_TUPLE - 1 for index 0
      * @see     15 See ReductionFixture::REDUCTION_NB_TUPLE - 1 for index 0
+     *
      * @throws  Exception Random Exception
      */
     private function getOpinionReferenceData(): array

@@ -7,28 +7,29 @@
 
 {% block title 'contact.head.meta.title'|trans %}
 
-{% block body_id 'contact' %}
+{% block content_id 'contact' %}
+{% block content %}
+    <section>
+        <div class="bg-light mt-5">
+            <div class="container pb-5 pt-5">
+                <div class="row pb-5 pt-5">
+                    <div class="col-md">
+                        <h1 class="font-weight-bold mb-5">{{ 'contact.body.h1'|trans }}</h1>
+                        {{ form_start(form) }}
 
-{% block body %}
-    <div class="bg-light mt-5">
-        <div class="container pb-5 pt-5">
-            <div class="row pb-5 pt-5">
-                <div class="col-md">
-                    <h1 class="font-weight-bold mb-5">{{ 'contact.body.head.title'|trans }}</h1>
-                    {{ form_start(form) }}
+                        {{ form_row(form.name, { 'attr' : { 'minlength': 2, 'maxlength': 32 } }) }}
+                        {{ form_row(form.email,  { 'attr' : { 'minlength': 6, 'maxlength': 64 } }) }}
+                        {{ form_row(form.subject,  { 'attr' : { 'minlength': 6, 'maxlength': 128 } }) }}
+                        {{ form_row(form.message, { 'attr' : { 'minlength': 12, 'maxlength': 254, 'rows': 5 } }) }}
 
-                    {{ form_row(form.name, { 'attr' : { 'minlength': 2, 'maxlength': 32 } }) }}
-                    {{ form_row(form.email,  { 'attr' : { 'minlength': 6, 'maxlength': 64 } }) }}
-                    {{ form_row(form.subject,  { 'attr' : { 'minlength': 6, 'maxlength': 128 } }) }}
-                    {{ form_row(form.message, { 'attr' : { 'minlength': 12, 'maxlength': 254, 'rows': 5 } }) }}
+                        <div class="mb-3 pt-4">
+                            <button class="btn btn-sm btn-dark text-white" type="submit">{{ 'btn.send'|trans }}</button>
+                        </div>
 
-                    <div class="mb-3 pt-4">
-                        <button class="btn btn-sm btn-dark text-white" type="submit">{{ 'btn.send'|trans }}</button>
+                        {{ form_end(form) }}
                     </div>
-
-                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

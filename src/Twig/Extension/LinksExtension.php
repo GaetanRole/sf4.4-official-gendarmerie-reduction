@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
@@ -19,11 +19,11 @@ final class LinksExtension extends AbstractExtension
     public const LOCALE_FR_LABELS = ['en' => 'Englais', 'fr' => 'Français'];
 
     /** @var UrlGeneratorInterface */
-    private $router;
+    private $urlGenerator;
 
-    public function __construct(UrlGeneratorInterface $router)
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function getFilters(): array
@@ -40,7 +40,7 @@ final class LinksExtension extends AbstractExtension
     {
         return sprintf(
             '<a href="%s" class="dropdown-item">%s</a>',
-            $this->router->generate($routeName, array_merge($parameters, ['_locale' => $locale])),
+            $this->urlGenerator->generate($routeName, array_merge($parameters, ['_locale' => $locale])),
             $label
         );
     }

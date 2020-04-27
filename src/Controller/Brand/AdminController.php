@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controller\Brand;
 
@@ -12,23 +12,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
+use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/brand", name="app_admin_brand_")
  * @IsGranted("ROLE_ADMIN")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class AdminController extends AbstractController
 {
-    /** @var EntityRepositoryInterface */
-    private $entityRepository;
+    /** @var RepositoryAdapterInterface */
+    private $repositoryAdapter;
 
-    public function __construct(EntityRepositoryInterface $entityRepository)
+    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
     {
-        $this->entityRepository = $entityRepository;
+        $this->repositoryAdapter = $repositoryAdapter;
     }
 
     /**
@@ -39,32 +40,29 @@ final class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('brand/admin/index.html.twig', [
-            'brands' => $this->entityRepository->getRepository(Brand::class)->findBy([], ['name' => 'ASC']),
+            'brands' => $this->repositoryAdapter->getRepository(Brand::class)->findBy([], ['name' => 'ASC']),
         ]);
     }
 
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
-     * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
     public function new(Request $request): Response
     {
-        $brand = new Brand();
-        $form = $this->createForm(BrandType::class, $brand);
+        $form = $this->createForm(BrandType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityRepository->save($brand);
+            $this->repositoryAdapter->save($form->getData());
             return $this->redirectToRoute('app_admin_brand_index');
         }
 
-        return $this->render('brand/admin/new.html.twig', ['brand' => $brand, 'form' => $form->createView()]);
+        return $this->render('brand/admin/new.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
-     * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
     public function edit(Request $request, Brand $brand): Response
@@ -73,7 +71,7 @@ final class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityRepository->update($brand);
+            $this->repositoryAdapter->update($brand);
             return $this->redirectToRoute('app_admin_brand_index');
         }
 
@@ -90,7 +88,7 @@ final class AdminController extends AbstractController
                 $this->addFlash('danger', $translator->trans('brand.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_brand_index');
             }
-            $this->entityRepository->delete($brand);
+            $this->repositoryAdapter->delete($brand);
         }
 
         return $this->redirectToRoute('app_admin_brand_index');

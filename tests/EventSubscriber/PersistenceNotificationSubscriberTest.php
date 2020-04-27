@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\EventSubscriber;
 
@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 /**
  * @group   Unit
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class PersistenceNotificationSubscriberTest extends TestCase

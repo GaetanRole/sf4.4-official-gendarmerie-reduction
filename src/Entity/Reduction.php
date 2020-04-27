@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
  * @UniqueEntity(fields={"title"})
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Reduction implements EntityInterface
@@ -331,7 +332,7 @@ class Reduction implements EntityInterface
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    public function isActive(): ?bool
     {
         return $this->isActive;
     }

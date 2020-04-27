@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Form\DataTransformer;
 
@@ -8,10 +8,12 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * @see     DataTransformerInterface
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ArrayToStringTransformer implements DataTransformerInterface
 {
+    /** @var string */
     public const DELIMITER = ', ';
 
     /**

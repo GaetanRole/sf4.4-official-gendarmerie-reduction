@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block og_title 'category.admin.edit.head.meta.title'|trans %}
 {% block title 'category.admin.edit.head.meta.title'|trans %}
 
-{% block og_title 'category.admin.edit.head.meta.title'|trans %}
+{% block content_id 'category-admin-edit' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'category.admin.edit.body.h1'|trans }}</h1>
 
-{% block body_id 'category-admin-edit' %}
+                    {{ include('category/admin/_form.html.twig') }}
 
-{% block body %}
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h1>{{ 'category.admin.edit.body.h1'|trans }}</h1>
+                    <a href="{{ path('app_admin_category_index') }}">{{ 'link.admin.category.index'|trans }}</a>
 
-                {{ include('category/admin/_form.html.twig', {'button_label': 'Update'}) }}
-
-                <a href="{{ path('app_admin_category_index') }}">{{ 'link.category.admin.index'|trans }}</a>
-
-                {{ include('category/admin/_delete_form.html.twig') }}
+                    {{ include('category/admin/_delete_form.html.twig') }}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

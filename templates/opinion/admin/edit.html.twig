@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block og_title 'opinion.admin.edit.head.meta.title'|trans %}
 {% block title 'opinion.admin.edit.head.meta.title'|trans %}
 
-{% block og_title 'opinion.admin.edit.head.meta.title'|trans %}
+{% block content_id 'opinion-admin-edit' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'opinion.admin.edit.body.h1'|trans }}</h1>
 
-{% block body_id 'opinion-admin-edit' %}
+                    {{ include('opinion/_form.html.twig') }}
 
-{% block body %}
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h1>{{ 'opinion.admin.edit.body.h1'|trans }}</h1>
-
-                {{ include('opinion/_form.html.twig', {'button_label': 'Update'}) }}
-
-                {{ include('opinion/admin/_delete_form.html.twig') }}
+                    {{ include('opinion/admin/_delete_form.html.twig') }}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controller\Security;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -15,13 +14,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 /**
  * @todo    Check best practices on this one.
  * @Route(name="app_security_")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="login")
-     * @return  RedirectResponse|Response A Response instance
      */
     public function login(
         AuthenticationUtils $authenticationUtils,

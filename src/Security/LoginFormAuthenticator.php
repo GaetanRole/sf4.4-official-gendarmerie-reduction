@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Security;
 
@@ -8,8 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -37,8 +36,8 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var RouterInterface */
-    private $router;
+    /** @var UrlGeneratorInterface */
+    private $urlGenerator;
 
     /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
@@ -52,13 +51,13 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function __construct(
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator,
-        RouterInterface $router,
+        UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder
     ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -81,10 +80,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    /**
-     * @return User|object|UserInterface|null
-     */
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): User
     {
         if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $credentials['csrf_token']))) {
             throw new InvalidCsrfTokenException(
@@ -101,7 +97,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             );
         }
 
-        if (!$user->getIsActive()) {
+        if (!$user->isActive()) {
             throw new CustomUserMessageAuthenticationException(
                 $this->translator->trans('security.authenticator.user.banish.exception', [], 'exceptions')
             );
@@ -123,9 +119,14 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * @return RedirectResponse|Response|null
+     * Used to upgrade (rehash) the user's password automatically over time.
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function getPassword($credentials): ?string
+    {
+        return $credentials['password'];
+    }
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
 
@@ -139,14 +140,14 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (in_array('ROLE_ADMIN', $roles, true)
             || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
-            return new RedirectResponse($this->router->generate('app_admin_dashboard'));
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_dashboard'));
         }
 
-        return new RedirectResponse($this->router->generate('app_user_dashboard'));
+        return new RedirectResponse($this->urlGenerator->generate('app_reduction_index'));
     }
 
     protected function getLoginUrl(): string
     {
-        return $this->router->generate('app_security_login');
+        return $this->urlGenerator->generate('app_security_login');
     }
 }

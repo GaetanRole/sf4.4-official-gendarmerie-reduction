@@ -21,7 +21,7 @@ liip_imagine:
             format: ~
             cache: ~
             data_loader: ~
-            quality: 75
+            quality: 80
             filters:
-                upscale: { min: [350, 225] }
-                thumbnail: { size: [350, 225], mode: outbound }
+                upscale: { min: [425, 300] }
+                thumbnail: { size: [425, 300], mode: outbound }

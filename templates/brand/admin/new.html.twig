@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title 'brand.admin.new.head.meta.title'|trans %}
-
 {% block og_title 'brand.admin.new.head.meta.title'|trans %}
 
-{% block body_id 'brand-admin-new' %}
+{% block content_id 'brand-admin-new' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'brand.admin.new.body.h1'|trans }}</h1>
 
-{% block body %}
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h1>{{ 'brand.admin.new.body.h1'|trans }}</h1>
+                    {{ include('brand/admin/_form.html.twig') }}
 
-                {{ include('brand/admin/_form.html.twig') }}
-
-                <a href="{{ path('app_admin_brand_index') }}">{{ 'link.brand.admin.index'|trans }}</a>
+                    <a href="{{ path('app_admin_brand_index') }}">{{ 'link.admin.brand.index'|trans }}</a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

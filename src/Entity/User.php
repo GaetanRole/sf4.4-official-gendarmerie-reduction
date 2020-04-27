@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     fields={"username"},
  *     message="valitor.user.unique.message"
  * )
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class User implements UserInterface, Serializable, EntityInterface
@@ -125,18 +126,12 @@ class User implements UserInterface, Serializable, EntityInterface
         $this->opinions = new ArrayCollection();
     }
 
-    /* Personal methods */
-
     public function __toString(): string
     {
         return $this->username;
     }
 
-    /* Auto generated methods */
-
     /**
-     * Login.
-     *
      * @see UserInterface
      */
     public function getUsername(): ?string
@@ -201,7 +196,7 @@ class User implements UserInterface, Serializable, EntityInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -212,7 +207,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    public function isActive(): ?bool
     {
         return $this->isActive;
     }

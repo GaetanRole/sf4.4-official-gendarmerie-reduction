@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
@@ -9,10 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A trait for id and uuid properties in every entities.
- * You can also use mappedsuperclass but not recommended.
- *
- * @link    https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html
- * @link    https://stackoverflow.com/questions/25749418/symfony2-mappedsuperclass-and-doctrinegenerateentities
  *
  * Private instead of Protected because of a well know behaviour from Doctrine --regenerate.
  *
@@ -39,8 +35,6 @@ trait EntityIdTrait
      * @ORM\Column(type="uuid", unique=true)
      */
     private $uuid;
-
-    /* Auto generated methods */
 
     public function getId(): ?int
     {

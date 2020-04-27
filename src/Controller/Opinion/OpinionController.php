@@ -1,59 +1,57 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controller\Opinion;
 
 use \Exception;
-use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
+use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/opinion", name="app_opinion_")
  * @IsGranted("ROLE_USER")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class OpinionController extends AbstractController
 {
-    /** @var EntityRepositoryInterface */
-    private $entityRepository;
+    /** @var RepositoryAdapterInterface */
+    private $repositoryAdapter;
 
-    public function __construct(EntityRepositoryInterface $entityRepository)
+    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
     {
-        $this->entityRepository = $entityRepository;
+        $this->repositoryAdapter = $repositoryAdapter;
     }
 
     /**
-     * Adding one Opinion on an existing Reduction.
+     * Adding one Opinion on an existing Reduction (get by slug).
      * @todo    Probably have to add a dynamic form below a Reduction.
      *
-     * @Route("/new/{slug}", name="new", methods={"GET","POST"})
-     * @return  RedirectResponse|Response A Response instance
+     * @Route("/comment/{slug}", name="comment", methods={"GET","POST"})
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, Reduction $reduction): Response
+    public function comment(Request $request, Reduction $reduction): Response
     {
-        $opinion = new Opinion();
-        $form = $this->createForm(OpinionType::class, $opinion);
+        $form = $this->createForm(OpinionType::class);
         $form->handleRequest($request);
 
         if ($reduction && $form->isSubmitted() && $form->isValid()) {
+            $opinion = $form->getData();
             $opinion->setClientIp($request->getClientIp());
             $opinion->setUser($this->getUser());
             $opinion->setReduction($reduction);
 
-            $this->entityRepository->save($opinion);
+            $this->repositoryAdapter->save($opinion);
             return $this->redirectToRoute('app_reduction_show', ['slug' => $reduction->getSlug()]);
         }
 
-        return $this->render('opinion/new.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
+        return $this->render('opinion/comment.html.twig', ['form' => $form->createView()]);
     }
 }

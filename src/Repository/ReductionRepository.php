@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -9,7 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -27,9 +27,9 @@ class ReductionRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry, GlobalClock $clock)
     {
-        parent::__construct($registry, Reduction::class);
-
         $this->clock = $clock;
+
+        parent::__construct($registry, Reduction::class);
     }
 
     /**

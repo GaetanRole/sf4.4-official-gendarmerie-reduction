@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Form;
 
 use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
@@ -18,18 +17,8 @@ final class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('file', FileType::class, [
-            'label' => false,
-            'attr' => [
-                'placeholder' => 'form.image.file.placeholder'
-            ]
-        ]);
-
-        if (true === $options['allow_delete']) {
-            $builder->add('deleted', CheckboxType::class, [
-                'label' => 'form.image.delete.label',
-            ]);
-        }
+        // Placeholder is dynamically handle by JQuery.
+        $builder->add('file', FileType::class, ['label' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -37,10 +26,8 @@ final class ImageType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => Image::class,
-                'allow_delete' => false,
                 'translation_domain' => 'forms',
             ])
-            ->setAllowedTypes('allow_delete', 'bool')
         ;
     }
 }

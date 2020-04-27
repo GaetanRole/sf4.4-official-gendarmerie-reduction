@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block og_title 'category.admin.new.head.meta.title'|trans %}
 {% block title 'category.admin.new.head.meta.title'|trans %}
 
-{% block og_title 'category.admin.new.head.meta.title'|trans %}
+{% block content_id 'category-admin-new' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'category.admin.new.body.h1'|trans }}</h1>
 
-{% block body_id 'category-admin-new' %}
+                    {{ include('category/admin/_form.html.twig') }}
 
-{% block body %}
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h1>{{ 'category.admin.new.body.h1'|trans }}</h1>
-
-                {{ include('category/admin/_form.html.twig') }}
-
-                <a href="{{ path('app_admin_category_index') }}">{{ 'link.category.admin.index'|trans }}</a>
+                    <a href="{{ path('app_admin_category_index') }}">{{ 'link.admin.category.index'|trans }}</a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

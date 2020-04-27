@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\User;
 use App\Form\DataTransformer\ArrayToStringTransformer;
 use App\Form\Type\ChangePasswordType;
 use Symfony\Component\Form\AbstractType;
@@ -91,6 +90,6 @@ final class UserType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => User::class, 'translation_domain' => 'forms']);
+        $resolver->setDefaults(['translation_domain' => 'forms']);
     }
 }

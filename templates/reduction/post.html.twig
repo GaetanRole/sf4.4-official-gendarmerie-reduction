@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block og_title 'reduction.post.head.meta.title'|trans %}
+{% block title 'reduction.post.head.meta.title'|trans %}
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content_id 'reduction-post' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-5 p-5">
+                <div class="col">
+                    <h1>{{ 'reduction.post.body.h1'|trans }}</h1>
+
+                    {{ include('reduction/_form.html.twig') }}
+                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.custom-file-input').on('change', function (e){$(this).next('.custom-file-label').text(e.target.files[0].name);});
+        $('.custom-file-label').text("{{ 'form.reduction.file.placeholder'|trans }}");
+        $("#reduction-post").submit(function(){if(!$("#reduction_image_file").val()){if(!confirm("{{ 'form.reduction.image.js.check.text'|trans }}"))return!1;this.form.submit()}});
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $('select[data-select]').select2();
+
+        const regionSelect = $('#reduction_region');
+        const departmentSelect = $('#reduction_department');
+        const municipalitySelect = $('#reduction_municipality');
+        const departmentDivSelect = $('#reduction div:nth-child(8)');
+        const municipalityDivSelect = $('#reduction div:nth-child(9)');
+
+        let hideDepartmentAndMunicipalitySelectField = () => {
+            departmentDivSelect.fadeOut('slow');
+            municipalityDivSelect.fadeOut('slow');
+            municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+        };
+
+        let showDepartmentAndMunicipalitySelectField = () => {
+            departmentDivSelect.fadeIn('slow');
+            municipalityDivSelect.fadeIn('slow');
+        };
+
+        let setDataAccordingToOneField = (name, currentSelector, data) => {
+            if (currentSelector === departmentSelect) {
+                municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            }
+            currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            $.each(data, (key, value) => {
+                currentSelector.append('<option value="' + value + '">' + key + '</option>');
+            });
+        };
+
+        let ajaxCallback = (name, selector, dataValue) => {
+            showDepartmentAndMunicipalitySelectField();
+            $.ajax({
+                url: selector.data('autocomplete-' + name + '-url'),
+                type: "GET",
+                dataType: "JSON",
+                data: { search: dataValue },
+                success: (data) => { setDataAccordingToOneField(name, selector, data); },
+            });
+        };
+
+        regionSelect.change(function () {
+            // If International or National is selected, hide others select fields
+            ($(this).val() === 'International' || $(this).val() === 'National') ?
+                hideDepartmentAndMunicipalitySelectField() : ajaxCallback('department', departmentSelect, $(this).val());
+        });
+        departmentSelect.change(function () { ajaxCallback('municipality', municipalitySelect, $(this).val()); });
+    </script>
+{% endblock %}

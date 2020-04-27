@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Security\Voter;
 
@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @see     https://symfony.com/doc/current/security/voters.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserVoter extends Voter
@@ -31,14 +32,16 @@ final class UserVoter extends Voter
     /**
      * {@inheritdoc}
      */
-    protected function voteOnAttribute($attribute, $user, TokenInterface $token): bool
+    protected function voteOnAttribute($attribute, $userSubject, TokenInterface $token): bool
     {
-        if (!$token->getUser() instanceof User || $user->hasRole('ROLE_SUPER_ADMIN')) {
+        $currentUser = $token->getUser();
+
+        if (!$currentUser instanceof User || $userSubject->hasRole('ROLE_SUPER_ADMIN')) {
             return false;
         }
 
-        if ($user->hasRole('ROLE_ADMIN')) {
-            return $token->getUser()->hasRole('ROLE_SUPER_ADMIN');
+        if ($userSubject->hasRole('ROLE_ADMIN')) {
+            return $currentUser->hasRole('ROLE_SUPER_ADMIN');
         }
 
         return true;

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Command;
 
@@ -11,8 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @group   Unit
+ *
  * @see     https://symfony.com/doc/current/console/commands_as_services.html
  * @see     https://symfony.com/doc/current/console.html#testing-commands
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ListUsersCommandTest extends KernelTestCase
@@ -51,10 +53,10 @@ final class ListUsersCommandTest extends KernelTestCase
         $this->commandTester->execute(['command' => $this->command->getName()]);
         $standardOutput = $this->commandTester->getDisplay();
 
-        $this->assertContains('Current Users present in DB :', $standardOutput);
-        $this->assertContains('ID', $standardOutput);
-        $this->assertContains('Username', $standardOutput);
-        $this->assertContains('Roles', $standardOutput);
+        $this->assertStringContainsString('Current Users present in DB:', $standardOutput);
+        $this->assertStringContainsString('ID', $standardOutput);
+        $this->assertStringContainsString('Username', $standardOutput);
+        $this->assertStringContainsString('Roles', $standardOutput);
     }
 
     /**

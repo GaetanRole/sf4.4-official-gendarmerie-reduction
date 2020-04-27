@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class Opinion implements JsonSerializable, EntityInterface
@@ -51,8 +52,6 @@ class Opinion implements JsonSerializable, EntityInterface
      */
     private $comment;
 
-    /* Personal methods */
-
     /**
      * {@inheritdoc}
      */
@@ -62,8 +61,6 @@ class Opinion implements JsonSerializable, EntityInterface
         // e.g. opinions|json_encode
         return $this->comment;
     }
-
-    /* Auto generated methods */
 
     public function getUser(): ?User
     {

@@ -35,6 +35,15 @@ body, html {
 
 h1 {
     color: var(--grey-medium);
+    font-size: 1.5em;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    word-break: break-word;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: var(--grey-medium);
     font-size: 1.4em;
     line-height: 1.2;
     letter-spacing: 2px;
@@ -63,7 +72,7 @@ li {
     list-style: none;
 }
 
-/* Bootstrap overriding
+/* Bootstrap and selec2 overriding
 -------------------------------------------------- */
 
 .alert {
@@ -87,8 +96,14 @@ li {
     background-color: var(--grey-dark) !important;
 }
 
+.custom-file-label::after {
+    opacity: 0;
+}
+
+select:focus,
 textarea:focus,
 input[type="text"]:focus,
+input[type="file"]:focus,
 input[type="password"]:focus,
 input[type="datetime"]:focus,
 input[type="datetime-local"]:focus,
@@ -102,16 +117,26 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
+.custom-file-input:focus~.custom-file-label,
+.select2-container--focus,
 .uneditable-input:focus {
-    border-color: rgb(180, 180, 180);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 3px rgba(21, 21, 21, 0.6);
-    outline: 0 none;
+    border-color: rgb(180, 180, 180) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.055) inset, 0 0 2px rgba(21, 21, 21, 0.4) !important;
+    outline: 0 none !important;
 }
 
 .dropdown-menu > ul > li > a:hover {
     background-color: var(--grey-dark);
     color: white;
     background-image: none;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+span.select2-selection.select2-selection--single {
+    outline: none;
 }
 
 /* General CSS is composed of :

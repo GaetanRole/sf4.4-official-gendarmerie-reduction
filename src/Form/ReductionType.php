@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Api\GeoGouvApi\GeoClient;
+use App\Consumer\GeoGouvApi\GeoClient;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Entity\Brand;
-use App\Form\EventListener\GeoApiFieldsSubscriber;
+use App\Form\EventSubscriber\GeoApiFieldsSubscriber;
 use App\Form\InheritedForm\UserIdentityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -81,7 +81,6 @@ final class ReductionType extends AbstractType
             ])
             ->add('image', ImageType::class, [
                 'required' => false,
-                'allow_delete' => !empty($options['data']->getImage()),
                 'label' => 'form.reduction.image.label',
                 'help' => 'form.reduction.image.help',
             ])
@@ -103,6 +102,6 @@ final class ReductionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Reduction::class, 'translation_domain' => 'forms']);
+        $resolver->setDefaults(['translation_domain' => 'forms']);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\EventListener;
 
 use App\Entity\Image;
 use App\Entity\Reduction;
-use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use App\Service\ImageHandler;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Component\Filesystem\Filesystem;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -18,40 +18,41 @@ final class ImageStorageListener
     /** @var string */
     private const TARGETED_FILTERS = 'thumbnail';
 
-    /** @var CacheManager */
-    private $cacheManager;
+    /** @var ImageHandler */
+    private $imageHandler;
 
-    /** @var Filesystem */
-    private $fileSystem;
-
-    /** @var string */
-    private $uploadDirectory;
-
-    public function __construct(
-        CacheManager $cacheManager,
-        Filesystem $fileSystem,
-        string $imageUploadDirectory
-    ) {
-        $this->cacheManager = $cacheManager;
-        $this->fileSystem = $fileSystem;
-        $this->uploadDirectory = $imageUploadDirectory;
+    public function __construct(ImageHandler $imageHandler)
+    {
+        $this->imageHandler = $imageHandler;
     }
 
     /**
-     * Removing old cached image from liip_imagine.
+     * Removing old cached and real images, before the upload function.
      */
-    public function postUpdate(LifecycleEventArgs $args): void
+    public function onFlush(OnFlushEventArgs $args): void
     {
-        $entity = $args->getEntity();
+        $em = $args->getEntityManager();
+        $uow = $em->getUnitOfWork();
 
-        if (!$entity instanceof Reduction || !$entity->getImage()) {
-            return;
+        $entities = $uow->getScheduledEntityUpdates();
+
+        if ($entities) {
+            /** @var Reduction $entity */
+            $entity = $entities[array_key_first($entities)];
+            if (!$entity instanceof Reduction) {
+                return;
+            }
+
+            /** @var Image $image */
+            $image = $entity->getImage();
+
+            if (!$this->imageHandler->imageCanBeDeleted($image)) {
+                return;
+            }
+
+            $this->imageHandler->cacheRemove($image, self::TARGETED_FILTERS);
+            $this->imageHandler->remove($image);
         }
-
-        $file = $entity->getImage()->getFilePath('uploads/images');
-
-        $this->cacheManager->resolve($file, self::TARGETED_FILTERS);
-        $this->cacheManager->remove($file, self::TARGETED_FILTERS);
     }
 
     /**
@@ -65,14 +66,7 @@ final class ImageStorageListener
             return;
         }
 
-        $file = $entity->getFilePath('uploads/images');
-
-        $this->cacheManager->resolve($file, self::TARGETED_FILTERS);
-        $this->cacheManager->remove($file, self::TARGETED_FILTERS);
-
-        $this->fileSystem->remove($entity->getFilePath($this->uploadDirectory));
-
-        $entity->setFile(null);
-        $entity->setDeleted(true);
+        $this->imageHandler->cacheRemove($entity, self::TARGETED_FILTERS);
+        $this->imageHandler->remove($entity);
     }
 }

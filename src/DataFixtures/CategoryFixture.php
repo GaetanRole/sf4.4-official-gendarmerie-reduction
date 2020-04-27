@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -8,7 +8,7 @@ use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Category;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class CategoryFixture extends Fixture implements FixtureGroupInterface
@@ -25,7 +26,6 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
 
     /**
      * Global project's clock.
-     *
      * @var GlobalClock
      */
     private $clock;
@@ -47,6 +47,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
      *
      * @see     3 $categories[5] to use its references in ReductionFixture
      * @link    https://github.com/fzaninotto/Faker
+     *
      * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void

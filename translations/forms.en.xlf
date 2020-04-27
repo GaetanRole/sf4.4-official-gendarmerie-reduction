@@ -197,6 +197,18 @@
         <source>form.reduction.description.placeholder</source>
         <target>__form.reduction.description.placeholder</target>
       </trans-unit>
+      <trans-unit id="0" resname="form.reduction.image.label">
+        <source>form.reduction.image.label</source>
+        <target>__form.reduction.image.label</target>
+      </trans-unit>
+      <trans-unit id="1" resname="form.reduction.image.help">
+        <source>form.reduction.image.help</source>
+        <target>__form.reduction.image.help</target>
+      </trans-unit>
+      <trans-unit id="3" resname="form.image.delete.label">
+        <source>form.image.delete.label</source>
+        <target>__form.image.delete.label</target>
+      </trans-unit>
       <trans-unit id="Fzn_XXM" resname="form.reduction.region.label">
         <source>form.reduction.region.label</source>
         <target>__form.reduction.region.label</target>

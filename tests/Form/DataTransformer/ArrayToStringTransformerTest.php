@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Form\DataTransformer;
 
@@ -9,6 +9,7 @@ use App\Form\DataTransformer\ArrayToStringTransformer;
 
 /**
  * @group   Unit
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ArrayToStringTransformerTest extends TestCase

@@ -10,9 +10,9 @@ services:
         autowire: true
         autoconfigure: true
         bind:
-            $httpClient: '@app.client'
-            $slugger: '@app.slugger'
-            $imageUploadDirectory: '%upload_directory%/images'
+            GuzzleHttp\ClientInterface $httpClient: '@app.client'
+            EasySlugger\SluggerInterface $slugger: '@app.slugger'
+            string $imageUploadDirectory: '%upload_directory%/images'
 
     app.client:
         class: GuzzleHttp\Client
@@ -23,6 +23,8 @@ services:
     app.format:
         class: Innmind\TimeContinuum\Format\ISO8601
 
+    Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
+
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Kernel.php}'
@@ -31,21 +33,22 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Services\GlobalClock:
-        arguments:
-            $clock: '@app.earth'
-            $format: '@app.format'
-
-    Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
-
     App\EventListener\ImageStorageListener:
-        arguments: ["@liip_imagine.cache.manager"]
         tags:
-            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: onFlush, priority: 100 }
             - { name: doctrine.event_listener, event: preRemove }
 
     App\EventListener\ImageUploadListener:
         tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: onFlush }
+            - { name: doctrine.event_listener, event: onFlush, priority: 50 }
             - { name: doctrine.event_listener, event: postLoad }
+
+    App\Service\GlobalClock:
+        arguments: ['@app.earth', '@app.format']
+
+    App\Service\ImageHandler:
+        arguments: ['@liip_imagine.cache.manager']
+
+    App\Twig\Extension\UploadedImagesExtension:
+        arguments:
+            $filterExtension: '@liip_imagine.templating.filter_extension'

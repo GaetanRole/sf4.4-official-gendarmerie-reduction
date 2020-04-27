@@ -1,5 +1,5 @@
-<form method="post" action="{{ path('app_admin_user_change_status', {'uuid': user.uuid}) }}" onsubmit="return confirm('Are you sure you want to change the user\'s status ?');">
+<form method="post" class="mt-2" action="{{ path('app_admin_user_change_status', {'uuid': user.uuid}) }}" onsubmit="return confirm('Are you sure you want to change the user\'s status ?');">
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="_token" value="{{ csrf_token('status' ~ user.uuid) }}">
-    <button class="btn">{{ 'btn.status'|trans }}</button>
+    <button class="btn btn-sm btn-warning">{{ 'btn.status'|trans }}</button>
 </form>

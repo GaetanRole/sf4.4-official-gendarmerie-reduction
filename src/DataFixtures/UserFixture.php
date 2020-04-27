@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -8,7 +8,7 @@ use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\User;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class UserFixture extends Fixture implements FixtureGroupInterface
@@ -29,14 +30,12 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
 
     /**
      * To encode password with injected service.
-     *
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
     /**
      * Global project's clock.
-     *
      * @var GlobalClock
      */
     private $clock;
@@ -62,13 +61,13 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
      *
      * @see     10 See USER_NB_TUPLE to know iterator value
      * @link    https://github.com/fzaninotto/Faker
+     *
      * @throws  Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
         // Loading USER_NB_TUPLE users with information by concat
-        // Enter a \DateTime(now) by TimeContinuum service
-        // E.g : Login : $faker->userName
+        // E.g : Login : user0
         //     : Password : password0
 
         $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));

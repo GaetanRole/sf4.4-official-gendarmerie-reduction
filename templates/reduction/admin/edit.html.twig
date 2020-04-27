@@ -1,44 +1,39 @@
 {% extends 'base.html.twig' %}
 
+{% block og_title 'reduction.admin.edit.head.meta.title'|trans %}
 {% block title 'reduction.admin.edit.head.meta.title'|trans %}
 
-{% block og_title 'reduction.admin.edit.head.meta.title'|trans %}
-
 {% block stylesheets %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet">
-    <style>
-        form {margin-bottom: 150px;}
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
 {% endblock %}
 
-{% block body_id 'reduction-admin-edit' %}
+{% block content_id 'reduction-admin-edit' %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row mb-5 p-5">
+                <div class="col">
+                    <h1>{{ 'reduction.admin.edit.body.h1'|trans }}</h1>
 
-{% block body %}
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h1>{{ 'reduction.admin.edit.body.h1'|trans }}</h1>
+                    {{ include('reduction/_form.html.twig') }}
 
-                {{ include('reduction/_form.html.twig', {'button_label': 'Update'}) }}
+                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
 
-                <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
-
-                {{ include('reduction/admin/_delete_form.html.twig') }}
+                    {{ include('reduction/admin/_delete_form.html.twig') }}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        $('.custom-file-input').on('change', function(event) {
-            let inputFile = event.currentTarget;
-            $(inputFile).parent()
-                .find('.custom-file-label')
-                .html(inputFile.files[0].name);
-        });
+        $('.custom-file-input').on('change', function (e){$(this).next('.custom-file-label').text(e.target.files[0].name);});
+        $('.custom-file-label').text("{{ 'form.reduction.file.placeholder'|trans }}");
+        $("#reduction-post").submit(function(){if(!$("#reduction_image_file").val()){if(!confirm("{{ 'form.reduction.image.js.check.text'|trans }}"))return!1;this.form.submit()}});
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $('select[data-select]').select2();
 
@@ -51,8 +46,8 @@
         let hideDepartmentAndMunicipalitySelectField = () => {
             departmentDivSelect.fadeOut('slow');
             municipalityDivSelect.fadeOut('slow');
-            municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
-            departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+            municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
         };
 
         let showDepartmentAndMunicipalitySelectField = () => {
@@ -62,9 +57,9 @@
 
         let setDataAccordingToOneField = (name, currentSelector, data) => {
             if (currentSelector === departmentSelect) {
-                municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+                municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
             }
-            currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans() }}</option>');
+            currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
             $.each(data, (key, value) => {
                 currentSelector.append('<option value="' + value + '">' + key + '</option>');
             });

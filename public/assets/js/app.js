@@ -3,5 +3,5 @@ $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 
     // Always show Bootstrap modal for flash messages
-    $('#flash-modal').modal('show');
+    $('.modal').modal('show');
 });

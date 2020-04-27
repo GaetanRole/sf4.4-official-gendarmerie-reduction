@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Service;
 
 use \DateTime;
 use \Exception;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use PHPUnit\Framework\TestCase;
 use Innmind\TimeContinuum\Format\ISO8601;
 use Innmind\TimeContinuum\TimeContinuum\Earth;
@@ -15,6 +15,7 @@ use Innmind\TimeContinuum\TimeContinuum\Earth;
  * @group   Unit
  * @group   Service
  * @see     https://github.com/Innmind/TimeContinuum
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class GlobalClockTest extends TestCase

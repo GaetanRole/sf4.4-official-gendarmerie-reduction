@@ -11,4 +11,4 @@ framework:
     php_errors:
         log: true
     cache:
-        prefix_seed: symfony-official-gendarmerie-reduction
+        prefix_seed: sf-gendarmerie-reduction

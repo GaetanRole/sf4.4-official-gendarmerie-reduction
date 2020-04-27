@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -8,7 +8,7 @@ use Faker;
 use \Exception;
 use Ramsey\Uuid\Uuid;
 use App\Entity\Brand;
-use App\Services\GlobalClock;
+use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @see     https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class BrandFixture extends Fixture implements FixtureGroupInterface
@@ -38,7 +39,6 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
 
     /**
      * Global project's clock.
-     *
      * @var GlobalClock
      */
     private $clock;
@@ -69,18 +69,19 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
         $faker = Faker\Factory::create($this->container->getParameter('faker_locale'));
         $this->manager = $manager;
 
-        $this->loadBrands($faker, self::FOOD_BRAND_REFERENCE, self::FOOD_BRAND_DATA);
-        $this->loadBrands($faker, self::CAR_BRAND_REFERENCE, self::CAR_BRAND_DATA);
-        $this->loadBrands($faker, self::PARK_BRAND_REFERENCE, self::PARK_BRAND_DATA);
+        $this->loadBrand($faker, self::FOOD_BRAND_REFERENCE, self::FOOD_BRAND_DATA);
+        $this->loadBrand($faker, self::CAR_BRAND_REFERENCE, self::CAR_BRAND_DATA);
+        $this->loadBrand($faker, self::PARK_BRAND_REFERENCE, self::PARK_BRAND_DATA);
     }
 
     /**
      * Load five types of food, car and park Brands.
      *
      * @see     See BrandFixture::TYPE_BRAND_REFERENCE and BrandFixture::TYPE_BRAND_DATA values
+     *
      * @throws  Exception Datetime Exception
      */
-    private function loadBrands(Faker\Generator $faker, string $brandReference, array $brandData): void
+    private function loadBrand(Faker\Generator $faker, string $brandReference, array $brandData): void
     {
         foreach ($brandData as $index => $name) {
             $brand = new Brand();

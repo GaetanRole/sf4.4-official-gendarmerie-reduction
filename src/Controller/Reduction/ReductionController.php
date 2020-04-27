@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
@@ -11,24 +11,24 @@ use EasySlugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
+use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/reduction", name="app_reduction_")
  * @IsGranted("ROLE_USER")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ReductionController extends AbstractController
 {
-    /** @var EntityRepositoryInterface */
-    private $entityRepository;
+    /** @var RepositoryAdapterInterface */
+    private $repositoryAdapter;
 
-    public function __construct(EntityRepositoryInterface $entityRepository)
+    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
     {
-        $this->entityRepository = $entityRepository;
+        $this->repositoryAdapter = $repositoryAdapter;
     }
 
     /**
@@ -40,17 +40,17 @@ final class ReductionController extends AbstractController
     public function index(): Response
     {
         return $this->render('reduction/index.html.twig', [
-            'reductions' => $this->entityRepository->getRepository(Reduction::class)->findLatestBy()
+            'reductions' => $this->repositoryAdapter->getRepository(Reduction::class)->findLatestBy()
         ]);
     }
 
     /**
      * @see     ImageUploadListener
-     * @Route("/new", name="new", methods={"GET","POST"})
-     * @return  RedirectResponse|Response A Response instance
+     *
+     * @Route("/post", name="post", methods={"GET","POST"})
      * @throws  Exception Datetime Exception
      */
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function post(Request $request, SluggerInterface $slugger): Response
     {
         $reduction = new Reduction();
         $form = $this->createForm(ReductionType::class, $reduction);
@@ -61,11 +61,11 @@ final class ReductionController extends AbstractController
             $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
             $reduction->setUser($this->getUser());
 
-            $this->entityRepository->save($reduction);
+            $this->repositoryAdapter->save($reduction);
             return $this->redirectToRoute('app_reduction_index');
         }
 
-        return $this->render('reduction/new.html.twig', ['reduction' => $reduction, 'form' => $form->createView()]);
+        return $this->render('reduction/post.html.twig', ['form' => $form->createView()]);
     }
 
     /**

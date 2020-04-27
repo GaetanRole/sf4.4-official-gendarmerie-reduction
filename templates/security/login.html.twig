@@ -11,16 +11,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 {%- endblock -%}
 
-{% block body_id 'login' %}
-
-{%- block body -%}
+{% block content_id 'login' %}
+{%- block content -%}
     <div class="container mt-5">
         <div class="row">
             <div class="col-md d-none d-md-block gendarmerie-background"></div>
             <div class="col-md text-center vertical-center">
                 <div class="p-3">
                     <img class="mb-3" src="{{ asset('assets/images/gendarmerie-logo.png') }}" alt="Gendarmerie Logo">
-                    <h1>{{ 'login.body.h1'|trans }}</h1>
+                    <h1 class="font-weight-bold">{{ 'login.body.h1'|trans }}</h1>
                 </div>
                 <form class="p-md-4" method="post">
                     {% if error %}

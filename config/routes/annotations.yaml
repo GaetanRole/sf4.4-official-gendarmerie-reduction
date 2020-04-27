@@ -4,7 +4,3 @@ controllers:
     prefix: '/{_locale}'
     requirements:
         _locale: '%app_locales_string_type%'
-
-geo_api:
-    resource: '../../src/Api/GeoGouvApi/Controller'
-    type: annotation

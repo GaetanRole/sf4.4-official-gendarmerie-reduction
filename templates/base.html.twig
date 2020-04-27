@@ -15,42 +15,43 @@
     <title>PromoGend - {% block title 'base.head.meta.title'|trans %}</title>
 
     <!-- CSS Vendors -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
     {% block stylesheets -%}
     {% endblock %}
 
-    {%- include '_favicons.html.twig' only %}
+    {{ include('_favicons.html.twig', with_context = false) }}
 </head>
 <body>
 <header>
     {% block header -%}
-        {% include '_navbar.html.twig' with {'currentRoute': app.request.attributes.get('_route')} only %}
+        {{ include('_navbar.html.twig', {'currentRoute': app.request.attributes.get('_route')}, with_context = false) }}
     {%- endblock %}
 </header>
 
 <main id="main">
-    {% include '_flash_messages.html.twig' only %}
+    {{ include('_flash_messages.html.twig', with_context = false) }}
 
-    <section id="{% block body_id '' %}">
-        {% block body %}
+    <div id="{% block content_id '' %}">
+        {% block content %}
         {% endblock %}
-    </section>
+    </div>
 </main>
 
 <footer class="bg-dark p-3">
     {% block footer -%}
-        {% include '_footer.html.twig' only %}
+        {{ include('_footer.html.twig', with_context = false) }}
     {%- endblock -%}
 </footer>
 
 <!-- Kit's code from Font Awesome with unique ID -->
 <script src="https://kit.fontawesome.com/8d75946265.js" crossorigin="anonymous"></script>
 <!-- JS Vendors -->
+<!-- @todo: Up Jquery to 3.5.0 when https://stackoverflow.com/questions/61176484/cannot-convert-object-to-primitive-value-error-in-react-application is fixed.-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/app.min.js') }}"></script>
 
 {% block javascripts -%}

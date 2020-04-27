@@ -13,8 +13,8 @@
     <div class="index-header-background background-gradient">
         <div class="container p-5 mt-5">
             <div class="row mt-5">
-                <h1 class="font-weight-bold text-white">{{ 'index.header.head.title'|trans }}</h1>
-                <p class="lead text-white">{{ 'index.header.head.description'|trans }}</p>
+                <h1 class="font-weight-bold text-white">{{ 'index.header.h1'|trans }}</h1>
+                <p class="lead text-white">{{ 'index.header.description'|trans }}</p>
                 <p>
                     <a href="#" class="btn btn-primary my-2">{{ 'btn.learn-more'|trans }}</a>
                 </p>
@@ -23,29 +23,33 @@
     </div>
 {% endblock %}
 
-{% block body_id 'index' %}
-
-{% block body %}
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                {% for reduction in reductions %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            {% if reduction.image and reduction.image.file %}
-                                <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image)|imagine_filter('thumbnail') }}" alt="{{ reduction.title|capitalize }} Image.">
-                            {% endif %}
-                            <div class="card-body">
-                                <p class="card-text">{{ reduction.description|slice(0, 128) ~ '[...]'}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button type="button" class="btn btn-sm btn-dark text-white">View</button>
-                                    <small class="text-muted">{{ reduction.categories|join(', ', 'index.body.reduction.subtitle.category.join'|trans) }}</small>
+{% block content_id 'index' %}
+{% block content %}
+    <section class="bg-light">
+        <div class="container p-5">
+            <div class="row mt-5 text-center">
+                <h2 class="w-100 text-center font-weight-bold">{{ 'index.body.h2'|trans }}</h2>
+            </div>
+        </div>
+        <div class="album py-5">
+            <div class="container">
+                <div class="row">
+                    {% for reduction in reductions %}
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title|capitalize }} Image.">
+                                <div class="card-body">
+                                    <p class="card-text">{{ reduction.description|slice(0, 64) ~ '[...]'}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="btn btn-sm btn-dark text-white" href="{{ path('app_reduction_show', {'slug': reduction.slug}) }}">{{ 'link.reduction.show'|trans }}</a>
+                                        <small class="text-muted">{{ reduction.categories|join(', ', 'index.body.reduction.subtitle.category.join'|trans) }}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Controller\User;
 
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Repository\ModelAdapter\EntityRepositoryInterface;
+use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -22,16 +22,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  * @todo See voter exception translation message
  * @Route("/admin/user", name="app_admin_user_")
  * @IsGranted("ROLE_ADMIN")
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class AdminController extends AbstractController
 {
-    /** @var EntityRepositoryInterface */
-    private $entityRepository;
+    /** @var RepositoryAdapterInterface */
+    private $repositoryAdapter;
 
-    public function __construct(EntityRepositoryInterface $entityRepository)
+    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
     {
-        $this->entityRepository = $entityRepository;
+        $this->repositoryAdapter = $repositoryAdapter;
     }
 
     /**
@@ -40,13 +41,12 @@ final class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('user/admin/index.html.twig', [
-            'users' => $this->entityRepository->getRepository(User::class)->findBy([], ['username' => 'ASC'])
+            'users' => $this->repositoryAdapter->getRepository(User::class)->findBy([], ['username' => 'ASC'])
         ]);
     }
 
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
-     * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
@@ -58,7 +58,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPlainPassword()));
 
-            $this->entityRepository->save($user);
+            $this->repositoryAdapter->save($user);
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -68,7 +68,6 @@ final class AdminController extends AbstractController
     /**
      * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
      * @IsGranted("edit", subject="user", message="You do not have rights to do so.")
-     * @return  RedirectResponse|Response A Response instance
      * @throws  Exception Datetime Exception
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
@@ -80,14 +79,14 @@ final class AdminController extends AbstractController
         $formChangePassword->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityRepository->update($user);
+            $this->repositoryAdapter->update($user);
             return $this->redirectToRoute('app_admin_user_index');
         }
 
         if ($formChangePassword->isSubmitted() && $formChangePassword->isValid()) {
             $user->setPassword($encoder->encodePassword($user, $formChangePassword->get('plainPassword')->getData()));
 
-            $this->entityRepository->update($user);
+            $this->repositoryAdapter->update($user);
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -105,8 +104,8 @@ final class AdminController extends AbstractController
     public function changeStatus(Request $request, User $user): RedirectResponse
     {
         if ($this->isCsrfTokenValid('status'.$user->getUuid()->toString(), $request->request->get('_token'))) {
-            $user->getIsActive() ? $user->setIsActive(false) : $user->setIsActive(true);
-            $this->entityRepository->update($user);
+            $user->isActive() ? $user->setIsActive(false) : $user->setIsActive(true);
+            $this->repositoryAdapter->update($user);
         }
 
         return $this->redirectToRoute('app_admin_user_index');
@@ -123,7 +122,7 @@ final class AdminController extends AbstractController
                 $this->addFlash('danger', $translator->trans('user.delete.flash.danger', [], 'flashes'));
                 return $this->redirectToRoute('app_admin_user_index');
             }
-            $this->entityRepository->delete($user);
+            $this->repositoryAdapter->delete($user);
         }
 
         return $this->redirectToRoute('app_admin_user_index');
