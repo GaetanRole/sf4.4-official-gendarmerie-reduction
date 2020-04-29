@@ -1,0 +1,92 @@
+/*!
+ * SF Gendarmerie Reduction Email Theme.
+ * Copyright 2019-2020 Gaëtan Rolé-Dubruille.
+ */
+
+/* Tags
+-------------------------------------------------- */
+
+body {
+    /* Reset */
+    margin: 0 auto !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+
+    background-color: #e6e6e6;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    word-break: break-word;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    word-break: break-word;
+    text-transform: uppercase;
+}
+
+table.button a {
+    background-color: white;
+    color: #2a3a48 !important;
+}
+
+table td {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* General CSS
+-------------------------------------------------- */
+
+.container-background {
+    padding: 50px;
+    background-color: #131C23 !important;
+    background: -moz-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%) !important;
+    background: -webkit-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%) !important;
+    background: linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131c23",endColorstr="#001424",GradientType=1) !important;
+}
+
+.header {
+    padding: 50px;
+    text-align: center;
+}
+
+.logo {
+    width: 50px;
+}
+
+.content-title {
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.content p {
+    color: white !important;
+    padding-left: 30px;
+    padding-right: 30px;
+    word-break: break-word;
+}
+
+.footer {
+    background-color: white;
+}
+
+.footer p {
+    text-align: center !important;
+    word-break: break-word;
+}

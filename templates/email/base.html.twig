@@ -1,0 +1,46 @@
+{# @see https://www.campaignmonitor.com/css/email-client/outlook-express/ #}
+{# @see https://mjml.io/api #}
+
+{% apply inky_to_html|inline_css(source('@css/email/foundation-emails.css'), source('@css/email/theme.css')) %}
+    <container class="container-background" bgcolor="#131C23">
+        <spacer size="30"></spacer>
+        <row class="header">
+            <columns>
+                <a href="{{ url('app_index') }}">
+                    <center><img class="logo" src="{{ email.image('@images/gendarmerie-logo.png') }}" alt="PromoGend Logo"></center>
+                </a>
+            </columns>
+        </row>
+        <spacer size="10"></spacer>
+        <row class="content-title">
+            <columns>
+                <spacer size="20"></spacer>
+                <h1><center>PromoGend</center></h1>
+                <spacer size="10"></spacer>
+                <h2><center>Formulaire de contact</center></h2>
+                <spacer size="10"></spacer>
+            </columns>
+        </row>
+        <spacer size="50"></spacer>
+
+        {% block content %}
+        {% endblock %}
+
+        <row>
+            <columns>
+                <center>
+                    <spacer size="15"></spacer>
+                    <button href="{{ url('app_index') }}">Retourner sur PromoGend</button>
+                    <spacer size="10"></spacer>
+                </center>
+            </columns>
+        </row>
+        <row class="footer">
+            <columns>
+                <spacer size="30"></spacer>
+                <p><strong>PromoGend</strong><br> © 2019-2020</p>
+                <spacer size="10"></spacer>
+            </columns>
+        </row>
+    </container>
+{% endapply %}

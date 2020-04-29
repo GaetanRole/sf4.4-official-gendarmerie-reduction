@@ -7,3 +7,7 @@ twig:
     globals:
         # To easily loop supported locales and show alternative links (I18N links for an Twig extension)
         app_locales: '%app_locales%'
+    # Email templates using these paths
+    paths:
+        '%kernel.project_dir%/public/assets/images': images
+        '%kernel.project_dir%/public/assets/css': css
