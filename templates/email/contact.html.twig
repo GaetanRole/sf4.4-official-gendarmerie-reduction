@@ -1,0 +1,15 @@
+{% extends 'email/base.html.twig' %}
+
+{% block content %}
+    <row class="content">
+        <columns>
+            <p>L'utilisateur <strong>{{ sender_name|capitalize }}</strong>,<br> Vous a écrit à l'instant, via le formulaire de contact du site <strong>PromoGend</strong>.</p>
+            <spacer size="20"></spacer>
+            <p><strong><u>Son e-mail :</u></strong><br> <i>{{ sender_email }}</i></p>
+            <spacer size="5"></spacer>
+            <p><strong><u>Sujet :</u></strong><br> <b>"</b> <i>{{ subject }}</i></p>
+            <spacer size="5"></spacer>
+            <p><strong><u>Message :</u></strong><br> <b>"</b> <i>{{ message|nl2br }}</i></p>
+        </columns>
+    </row>
+{% endblock %}

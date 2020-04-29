@@ -20,7 +20,7 @@
                         {{ form_row(form.name, { 'attr' : { 'minlength': 2, 'maxlength': 32 } }) }}
                         {{ form_row(form.email,  { 'attr' : { 'minlength': 6, 'maxlength': 64 } }) }}
                         {{ form_row(form.subject,  { 'attr' : { 'minlength': 6, 'maxlength': 128 } }) }}
-                        {{ form_row(form.message, { 'attr' : { 'minlength': 12, 'maxlength': 254, 'rows': 5 } }) }}
+                        {{ form_row(form.message, { 'attr' : { 'minlength': 12, 'maxlength': 1024, 'rows': 5 } }) }}
 
                         <div class="mb-3 pt-4">
                             <button class="btn btn-sm btn-dark text-white" type="submit">{{ 'btn.send'|trans }}</button>

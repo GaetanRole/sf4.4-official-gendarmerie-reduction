@@ -4,6 +4,8 @@ parameters:
     app_locales: ['en', '%locale%']
     app_locales_string_type: 'en|%locale%'
     upload_directory: '%kernel.project_dir%/public/uploads'
+    router.request_context.scheme: '%env(SITE_BASE_SCHEME)%'
+    router.request_context.host: '%env(SITE_BASE_HOST)%'
 
 services:
     _defaults:
@@ -13,6 +15,8 @@ services:
             GuzzleHttp\ClientInterface $httpClient: '@app.client'
             EasySlugger\SluggerInterface $slugger: '@app.slugger'
             string $imageUploadDirectory: '%upload_directory%/images'
+            string $recipient: 'gaetan.role@gmail.com'
+            string $sender: 'gaetan.role@gmail.com'
 
     app.client:
         class: GuzzleHttp\Client

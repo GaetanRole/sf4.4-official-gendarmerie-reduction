@@ -52,7 +52,7 @@ final class ContactType extends AbstractType
                 'attr' => ['placeholder' => 'form.contact.message.placeholder'],
                 'constraints' => [
                     new NotBlank(['message' => 'form.contact.message.not_blank']),
-                    new Length(['min' => 12, 'max' => 254]),
+                    new Length(['min' => 12, 'max' => 1024]),
                 ],
             ])
         ;
