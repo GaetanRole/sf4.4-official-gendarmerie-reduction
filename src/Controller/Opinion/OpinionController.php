@@ -49,7 +49,7 @@ final class OpinionController extends AbstractController
             $opinion->setReduction($reduction);
 
             $this->repositoryAdapter->save($opinion);
-            return $this->redirectToRoute('app_reduction_show', ['slug' => $reduction->getSlug()]);
+            return $this->redirectToRoute('app_reduction_view', ['slug' => $reduction->getSlug()]);
         }
 
         return $this->render('opinion/comment.html.twig', ['form' => $form->createView()]);

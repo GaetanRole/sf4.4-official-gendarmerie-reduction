@@ -75,6 +75,7 @@ final class SmokeTest extends AbstractWebTestCase
         yield ['/en/admin/brand/'];
         yield ['/en/admin/category/'];
         yield ['/en/admin/user/'];
+        yield ['/en/admin/reduction/waiting-list'];
         yield ['/en/reduction/'];
         yield ['/en/reduction/post'];
     }

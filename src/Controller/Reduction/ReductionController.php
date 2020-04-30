@@ -39,8 +39,10 @@ final class ReductionController extends AbstractController
      */
     public function index(): Response
     {
+        $repository = $this->repositoryAdapter->getRepository(Reduction::class);
+
         return $this->render('reduction/index.html.twig', [
-            'reductions' => $this->repositoryAdapter->getRepository(Reduction::class)->findLatestBy()
+            'reductions' => $repository->findBy(['isActive'=> true], ['createdAt' => 'ASC'])
         ]);
     }
 
@@ -71,10 +73,11 @@ final class ReductionController extends AbstractController
     /**
      * @todo    Add all related Opinions and PagerFanta.
      *
-     * @Route("/{slug}", name="show", methods={"GET"})
+     * @IsGranted("view", subject="reduction", message="You do not have rights to view this unverified reduction.")
+     * @Route("/{slug}", name="view", methods={"GET"})
      */
-    public function show(Reduction $reduction): Response
+    public function view(Reduction $reduction): Response
     {
-        return $this->render('reduction/show.html.twig', ['reduction' => $reduction]);
+        return $this->render('reduction/view.html.twig', ['reduction' => $reduction]);
     }
 }

@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block og_title 'reduction.index.head.meta.title'|trans %}
-{% block title 'reduction.index.head.meta.title'|trans %}
+{% block og_title 'reduction.admin.waiting-list.head.meta.title'|trans %}
+{% block title 'reduction.admin.waiting-list.head.meta.title'|trans %}
 
-{% block content_id 'reduction-index' %}
+{% block content_id 'reduction-admin-waiting-list' %}
 {% block content %}
     <section>
         <div class="container">
             <div class="row mb-4">
                 <div class="col">
-                    <h1>{{ 'reduction.index.body.h1'|trans }}</h1>
+                    <h1>{{ 'reduction.admin.waiting-list.body.h1'|trans }}</h1>
 
                     <a href="{{ path('app_reduction_post') }}">{{ 'link.reduction.post'|trans }}</a>
 

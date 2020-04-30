@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
+ * A Listener handling image upload.
+ * @todo Write unit tests for this listener.
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ImageUploadListener

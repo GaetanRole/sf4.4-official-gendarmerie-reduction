@@ -33,6 +33,18 @@ final class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/waiting-list", name="waiting_list", methods={"GET"})
+     */
+    public function list(): Response
+    {
+        $repository = $this->repositoryAdapter->getRepository(Reduction::class);
+
+        return $this->render('reduction/admin/waiting_list.html.twig', [
+            'reductions' => $repository->findBy(['isActive'=> false], ['createdAt' => 'DESC'])
+        ]);
+    }
+
+    /**
      * @see     ImageUploadListener
      *
      * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
@@ -58,6 +70,19 @@ final class AdminController extends AbstractController
             'reduction' => $reduction,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="change_status", methods={"PUT"})
+     */
+    public function changeStatus(Request $request, Reduction $reduction): RedirectResponse
+    {
+        if ($this->isCsrfTokenValid('status'.$reduction->getSlug(), $request->request->get('_token'))) {
+            $reduction->isActive() ? $reduction->setIsActive(false) : $reduction->setIsActive(true);
+            $this->repositoryAdapter->update($reduction);
+        }
+
+        return $this->redirectToRoute('app_admin_reduction_waiting_list');
     }
 
     /**

@@ -13,6 +13,7 @@
             </li>
             {% if is_granted('ROLE_ADMIN') -%}
                 <li class="nav-item {{ 'admin' in currentRoute ? 'active' }}">
+                    <a class="badge badge-pill badge-info notification-badge" href="{{ path('app_admin_reduction_waiting_list') }}" title="{{ 'link.admin.reduction.waiting-list'|trans }}">{{ unverified_reductions_number() }} <i class="fas fa-search"></i></a>
                     <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
                 </li>
             {% endif %}

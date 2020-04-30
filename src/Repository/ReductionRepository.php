@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
@@ -33,7 +35,7 @@ class ReductionRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find last articles.
+     * Find last active articles.
      *
      * @todo    Add PagerFanta
      *
@@ -46,9 +48,11 @@ class ReductionRepository extends ServiceEntityRepository
             ->innerJoin('r.user', 'u')
             ->leftJoin('r.categories', 'c')
             ->leftJoin('r.image', 'i')
-            ->where('r.createdAt <= :now')
+            ->andWhere('r.createdAt <= :now')
+            ->andWhere('r.isActive = :status')
             ->orderBy('r.createdAt', 'DESC')
-            ->setParameter('now', $this->clock->getNowInDateTime());
+            ->setParameter('now', $this->clock->getNowInDateTime())
+            ->setParameter('status', true);
 
         if (null !== $category) {
             $qb->andWhere(':category MEMBER OF r.categories')
@@ -60,6 +64,24 @@ class ReductionRepository extends ServiceEntityRepository
         }
 
         return new Paginator($qb);
+    }
+
+    /**
+     * Count each Reduction rows with a status parameter.
+     *
+     * @throws NoResultException        If the query returned no result.
+     * @throws NonUniqueResultException If the query result is not unique.
+     */
+    public function countReductionByStatus(bool $status)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere('r.isActive = :status')
+            ->setParameter('status', $status);
+
+        return $qb
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**

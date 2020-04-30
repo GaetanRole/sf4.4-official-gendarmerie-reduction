@@ -171,3 +171,8 @@ span.select2-selection.select2-selection--single {
     background: linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131c23",endColorstr="#001424",GradientType=1);
 }
+
+.notification-badge {
+    float:right;
+    margin-bottom:-20px;
+}

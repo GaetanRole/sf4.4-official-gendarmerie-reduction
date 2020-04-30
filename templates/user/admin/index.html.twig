@@ -47,6 +47,7 @@
                                         <p>{{ 'user.admin.index.table.p.same_acl'|trans }}</p>
                                     {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
                                         <a href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
+                                        {{ include('user/admin/_status_form.html.twig') }}
                                     {% endif %}
                                     <a href="{{ path('app_user_show', {'uuid': user.uuid}) }}">{{ 'link.user.show'|trans }}</a>
                                 </td>

@@ -42,7 +42,7 @@ class OpinionRepository extends ServiceEntityRepository
             ->addSelect('u', 'r')
             ->innerJoin('o.user', 'u')
             ->innerJoin('o.reduction', 'r')
-            ->where('o.createdAt <= :now')
+            ->andWhere('o.createdAt <= :now')
             ->orderBy('o.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime());
 

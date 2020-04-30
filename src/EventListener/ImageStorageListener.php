@@ -11,6 +11,9 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
+ * A Listener handling cached and real image storage.
+ * @todo Write unit tests for this listener.
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 final class ImageStorageListener
