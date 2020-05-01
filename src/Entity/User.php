@@ -246,6 +246,12 @@ class User implements UserInterface, Serializable, EntityInterface
         return false;
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('ROLE_ADMIN')
+            || $this->hasRole('ROLE_SUPER_ADMIN');
+    }
+
     /**
      * Returns the salt that was originally used to encode the password.
      *

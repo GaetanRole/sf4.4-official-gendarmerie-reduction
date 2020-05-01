@@ -47,7 +47,7 @@ final class ReductionVoter extends Voter
      */
     private function canView(Reduction $reduction, User $user): bool
     {
-        if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
+        if ($user->isAdmin()) {
             return true;
         }
 

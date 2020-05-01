@@ -10,61 +10,50 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     /** Trait to get (and set) the URL the user last visited before being forced to authenticate. */
     use TargetPathTrait;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    /** @var string Login route. */
+    public const LOGIN_ROUTE = 'app_security_login';
 
-    /** @var TranslatorInterface */
-    private $translator;
+    /** @var LoginFormValidator */
+    private $validator;
 
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
-
-    /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
     /** @var User */
     private $user;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        TranslatorInterface $translator,
+        LoginFormValidator $validator,
         UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        EntityManagerInterface $entityManager
     ) {
+        $this->validator = $validator;
         $this->entityManager = $entityManager;
-        $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request): bool
     {
-        return 'app_security_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+        return self::LOGIN_ROUTE === $request->attributes->get('_route')
+            && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request): array
@@ -82,40 +71,23 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider): User
     {
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $credentials['csrf_token']))) {
-            throw new InvalidCsrfTokenException(
-                $this->translator->trans('security.authenticator.user.csrf_token.exception', [], 'exceptions')
-            );
-        }
+        $this->validator->checkCsrfToken($credentials);
 
         /** @var User $user */
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $credentials['username']]);
 
-        if (!$user) {
-            throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('security.authenticator.user.authentication.exception', [], 'exceptions')
-            );
-        }
-
-        if (!$user->isActive()) {
-            throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('security.authenticator.user.banish.exception', [], 'exceptions')
-            );
-        }
+        $this->validator->checkUser($user);
 
         return $this->user = $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        $state = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
-        if (false === $state) {
-            throw new CustomUserMessageAuthenticationException(
-                $this->translator->trans('security.authenticator.user.authentication.exception', [], 'exceptions')
-            );
-        }
+        $this->validator->checkPassword($credentials, $user);
 
-        return $state;
+        return true;
     }
 
     /**
@@ -134,12 +106,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $roles = array_map(static function ($role) {
-            return $role;
-        }, $token->getRoleNames());
-
-        if (in_array('ROLE_ADMIN', $roles, true)
-            || in_array('ROLE_SUPER_ADMIN', $roles, true)) {
+        if ($token->getUser()->isAdmin()) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin_dashboard'));
         }
 
@@ -148,6 +115,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl(): string
     {
-        return $this->urlGenerator->generate('app_security_login');
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }
