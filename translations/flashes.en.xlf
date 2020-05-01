@@ -33,6 +33,10 @@
         <source>delete.flash.success</source>
         <target>__delete.flash.success</target>
       </trans-unit>
+      <trans-unit id="7" resname="send.flash.success">
+        <source>send.flash.success</source>
+        <target>__send.flash.success</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

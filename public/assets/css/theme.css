@@ -10,7 +10,7 @@
 
 :root {
     --white: #FFFFFF;
-    --white-medium: #F2F2F2;
+    --white-medium: #f5f5f7;
     --grey: #f8f9faab;
     --grey-medium: #2a3a48;
     --grey-dark: #12191f;
@@ -35,7 +35,7 @@ body, html {
 
 h1 {
     color: var(--grey-medium);
-    font-size: 1.5em;
+    font-size: 2em;
     line-height: 1.2;
     letter-spacing: 2px;
     word-break: break-word;
@@ -44,7 +44,7 @@ h1 {
 
 h2 {
     color: var(--grey-medium);
-    font-size: 1.4em;
+    font-size: 1.7em;
     line-height: 1.2;
     letter-spacing: 2px;
     word-break: break-word;
@@ -72,34 +72,6 @@ li {
     list-style: none;
 }
 
-/* Bootstrap and selec2 overriding
--------------------------------------------------- */
-
-.alert {
-    font-size: 0.9em;
-}
-
-.btn {
-    border-radius: 30px;
-    padding: 5px 50px 5px 50px;
-}
-
-.btn-dark {
-    background-color: var(--grey-dark) !important;
-}
-
-.btn-dark:hover {
-    background-color: var(--grey-medium) !important;
-}
-
-.bg-dark {
-    background-color: var(--grey-dark) !important;
-}
-
-.custom-file-label::after {
-    opacity: 0;
-}
-
 select:focus,
 textarea:focus,
 input[type="text"]:focus,
@@ -125,11 +97,50 @@ input[type="color"]:focus,
     outline: 0 none !important;
 }
 
+/* Bootstrap overriding
+-------------------------------------------------- */
+
+.alert {
+    font-size: 0.9em;
+}
+
+.btn {
+    border-radius: 30px;
+    padding: 5px 50px 5px 50px;
+}
+
+.btn-dark {
+    background-color: var(--grey-dark) !important;
+}
+
+.btn-dark:hover {
+    background-color: var(--grey-medium) !important;
+}
+
+.bg-dark {
+    background-color: var(--grey-dark) !important;
+}
+
+.navbar {
+    padding: .2rem 0.8rem !important;
+}
+
 .dropdown-menu > ul > li > a:hover {
     background-color: var(--grey-dark);
     color: white;
     background-image: none;
 }
+
+.img-thumbnail {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--grey);
+    border-radius: 0;
+}
+
+/* Select2 overriding
+-------------------------------------------------- */
 
 .select2-container {
     width: 100% !important;
@@ -139,18 +150,20 @@ span.select2-selection.select2-selection--single {
     outline: none;
 }
 
-/* General CSS is composed of :
+/* Header
 -------------------------------------------------- */
 
-/** Global styles **/
-
-.fas {
-    font-size: 0.9em;
+.notification-badge {
+    float:right;
+    margin-bottom:-20px;
 }
 
-.vertical-center {
-    margin-top: auto;
-    margin-bottom: auto;
+.background-gradient {
+    background: rgb(19,28,35);
+    background: -moz-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgba(22, 41, 56, 0.93) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgba(22, 41, 56, 0.93) 100%);
+    background: linear-gradient(270deg, rgba(19,28,35,1) 52%, rgba(22, 41, 56, 0.93) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131c23",endColorstr="#001424",GradientType=1);
 }
 
 .index-header-background {
@@ -164,15 +177,59 @@ span.select2-selection.select2-selection--single {
     align-items: center;
 }
 
-.background-gradient {
-    background: rgb(19,28,35);
-    background: -moz-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
-    background: -webkit-linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
-    background: linear-gradient(270deg, rgba(19,28,35,1) 52%, rgb(22, 41, 56) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131c23",endColorstr="#001424",GradientType=1);
+/* Body and global styles
+-------------------------------------------------- */
+
+/** Global styles **/
+
+.vertical-center {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.notification-badge {
-    float:right;
-    margin-bottom:-20px;
+.fas {
+    font-size: 0.9em;
+}
+
+/* Index */
+
+.card-title {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Login */
+
+#login {
+    height: 950px;
+    padding: 50px 40px 100px 40px;
+}
+
+#login .container {
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: 1px 1px 3px var(--white-medium);
+    border-radius: 30px;
+}
+
+#login .row {
+    height: inherit;
+}
+
+#login .gendarmerie-background {
+    background-image: url('../images/login-form-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 30px 0 0 30px;
+}
+
+#login img {
+    width: 70px;
+}
+
+/* Reduction */
+
+.custom-file-label::after {
+    opacity: 0;
 }

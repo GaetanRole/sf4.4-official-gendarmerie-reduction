@@ -13,7 +13,7 @@ class SuccessPersistenceNotificationEvent extends Event
 {
     public const
         /** @var string FlashBag type for FlashBagInterface::add(). */
-        TYPE   = 'success',
+        TYPE   = 'info',
         /** @var string FlashBag domain for catalog. */
         DOMAIN = 'flashes';
 

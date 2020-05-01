@@ -14,6 +14,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route(name="app_")
@@ -28,7 +29,9 @@ final class DefaultController extends AbstractController
      */
     public function index(ReductionRepository $reductionRepository): Response
     {
-        return $this->render('default/index.html.twig', ['reductions' => $reductionRepository->findLatestBy(null, 6)]);
+        return $this->render('default/index.html.twig', [
+            'reductions' => $reductionRepository->findLatestBy(null, 6)
+        ]);
     }
 
     /**
@@ -37,8 +40,11 @@ final class DefaultController extends AbstractController
      * @throws TransportExceptionInterface
      * @Route("/contact", name="contact", methods={"GET", "POST"})
      */
-    public function contact(Request $request, PromoGendMailer $mailer): Response
-    {
+    public function contact(
+        Request $request,
+        PromoGendMailer $mailer,
+        TranslatorInterface $translator
+    ): Response {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
@@ -50,7 +56,12 @@ final class DefaultController extends AbstractController
                 Email::PRIORITY_HIGH
             );
 
-            $this->addFlash('success', $form->getData()['name'].' your email has been sent.');
+            $sender = ucfirst($form->getData()['name']);
+            $this->addFlash(
+                'info',
+                $translator->trans('send.flash.success', ['%name%' => $sender], 'flashes')
+            );
+
             return $this->redirectToRoute('app_index');
         }
 

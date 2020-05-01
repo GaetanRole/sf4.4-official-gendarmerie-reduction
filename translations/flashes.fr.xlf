@@ -33,6 +33,10 @@
         <source>delete.flash.success</source>
         <target>Votre suppression a bien été effectuée.</target>
       </trans-unit>
+      <trans-unit id="7" resname="send.flash.success">
+        <source>send.flash.success</source>
+        <target>%name% votre email a bien été envoyé. Nous vous répondrons dès que possible !</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
