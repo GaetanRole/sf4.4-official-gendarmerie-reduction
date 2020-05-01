@@ -10,6 +10,8 @@ use Symfony\Component\Validator\Constraints\ImageValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
+ * @todo Add unit test on this validator, e.g: symfony/demo/tests/Utils/ValidatorTest.php
+ *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
 class ImageObjectValidator extends ImageValidator
