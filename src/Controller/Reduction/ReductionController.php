@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
+use App\Form\SearchType;
 use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
@@ -32,17 +33,22 @@ final class ReductionController extends AbstractController
     }
 
     /**
-     * @todo    Add paginator PagerFanta and search bar with filters.
+     * Array instance to receive form data related to GeoApiFieldsSubscriber.
      *
-     * @Route("/", name="index", methods={"GET"})
-     * @throws  Exception Datetime Exception
+     * @see GeoApiFieldsSubscriber
+     *
+     * @Route(name="index", methods={"GET"})
      */
     public function index(): Response
     {
-        $repository = $this->repositoryAdapter->getRepository(Reduction::class);
+        $form = $this->createForm(
+            SearchType::class,
+            ['region' => null, 'department' => null, 'municipality' => null],
+            ['action' => $this->generateUrl('app_reduction_search_handle'), 'method' => 'GET'],
+        );
 
         return $this->render('reduction/index.html.twig', [
-            'reductions' => $repository->findBy(['isActive'=> true], ['createdAt' => 'ASC'])
+            'form' => $form->createView(),
         ]);
     }
 
@@ -74,7 +80,7 @@ final class ReductionController extends AbstractController
      * @todo    Add all related Opinions and PagerFanta.
      *
      * @IsGranted("view", subject="reduction", message="You do not have rights to view this unverified reduction.")
-     * @Route("/{slug}", name="view", methods={"GET"})
+     * @Route("/{slug}/view", name="view", methods={"GET"})
      */
     public function view(Reduction $reduction): Response
     {

@@ -253,6 +253,14 @@
         <source>form.reduction.categories.help</source>
         <target>__form.reduction.categories.help</target>
       </trans-unit>
+      <trans-unit id="10" resname="form.search.method.label.location">
+        <source>form.search.method.label.location</source>
+        <target>__form.search.method.label.location</target>
+      </trans-unit>
+      <trans-unit id="11" resname="form.search.method.label.brand">
+        <source>form.search.method.label.brand</source>
+        <target>__form.search.method.label.brand</target>
+      </trans-unit>
       <trans-unit id="VstnuES" resname="form.user.username.label">
         <source>form.user.username.label</source>
         <target>__form.user.username.label</target>

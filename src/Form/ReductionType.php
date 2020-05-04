@@ -76,7 +76,7 @@ final class ReductionType extends AbstractType
                     'placeholder' => 'form.reduction.description.placeholder',
                     'minLength' => '10',
                     'maxLength' => '10000',
-                    'rows' => 50,
+                    'rows' => 10,
                 ],
             ])
             ->add('image', ImageType::class, [

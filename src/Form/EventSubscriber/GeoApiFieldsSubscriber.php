@@ -73,9 +73,16 @@ final class GeoApiFieldsSubscriber implements EventSubscriberInterface
         ]);
     }
 
+    /**
+     * Check if passed data is an array or an object to use these fields everywhere.
+     */
     public function onPreSetData(FormEvent $event): void
     {
-        $this->formModifier($event->getForm(), $event->getData()->getRegion(), $event->getData()->getDepartment());
+        $this->formModifier(
+            $event->getForm(),
+            is_array($event->getData()) ? $event->getData()['region'] : $event->getData()->getRegion(),
+            is_array($event->getData()) ? $event->getData()['department'] : $event->getData()->getDepartment()
+        );
     }
 
     public function onPreSetSubmit(FormEvent $event): void

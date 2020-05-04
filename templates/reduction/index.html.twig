@@ -3,76 +3,100 @@
 {% block og_title 'reduction.index.head.meta.title'|trans %}
 {% block title 'reduction.index.head.meta.title'|trans %}
 
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block content_id 'reduction-index' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'reduction.index.body.h1'|trans }}</h1>
+{%- block content -%}
+    <section class="container-fluid bg-white box-shadow text-center mt-5 p-5">
+        <h1 class="sr-only">{{ 'reduction.index.body.h1'|trans }}</h1>
+        {{ form_start(form) }}
+        <div class="row text-dark lead font-weight-light p-5">
+            <div class="col-lg-3 offset-lg-3">
+                {{ form_row(form.method[0]) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(form.method[1]) }}
+            </div>
+        </div>
+        <div class="search-bar row p-4 mb-5">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form_row(form.region, { 'help': '' }) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(form.department, { 'help': '' }) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(form.municipality, { 'help': '' }) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 vertical-center">
+                <button type="submit" class="search-btn"><i class="fas fa-search"></i> {{ 'btn.search'|trans }}</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <a class="btn btn-sm btn-dark" href="{{ path('app_reduction_post') }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.reduction.post'|trans }}</a>
+    </section>
 
-                    <a href="{{ path('app_reduction_post') }}">{{ 'link.reduction.post'|trans }}</a>
-
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>ClientIp</th>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Description</th>
-                            <th>Categories</th>
-                            <th>Region</th>
-                            <th>Department</th>
-                            <th>Municipality</th>
-                            <th>IsBigDeal</th>
-                            <th>IsActive</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for reduction in reductions %}
-                            <tr>
-                                <td>{{ reduction.id }}</td>
-                                <td>{{ reduction.uuid }}</td>
-                                <td>{{ reduction.name }}</td>
-                                <td>{{ reduction.email }}</td>
-                                <td>{{ reduction.clientIp }}</td>
-                                <td>{{ reduction.title }}</td>
-                                <td>{{ reduction.slug }}</td>
-                                <td>{{ reduction.description }}</td>
-                                <td>
-                                    {% for category in reduction.categories %}
-                                        {{ category }}
-                                    {% endfor %}
-                                </td>
-                                <td>{{ reduction.region }}</td>
-                                <td>{{ reduction.department }}</td>
-                                <td>{{ reduction.municipality }}</td>
-                                <td>{{ reduction.isBigDeal? 'Yes' : 'No' }}</td>
-                                <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
-                                <td>{{ reduction.createdAt ? reduction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ reduction.updatedAt ? reduction.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>
-                                    <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">{{ 'link.reduction.view'|trans }}</a>
-                                    <a href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
-                                    {{ include('reduction/admin/_status_form.html.twig') }}
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="17">{{ 'table.empty'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+    <section class="bg-grey p-5">
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mb-5 font-weight-light">0 réduction trouvée.</h2>
+                    <div class="bg-white card text-center p-5">
+                        <p>
+                            {{ 'table.empty'|trans }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $('select[data-select]').select2();
+
+        const regionSelect = $('#search_region');
+        const departmentSelect = $('#search_department');
+        const municipalitySelect = $('#search_municipality');
+
+        let hideDepartmentAndMunicipalitySelectField = () => {
+            municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+        };
+
+        let setDataAccordingToOneField = (name, currentSelector, data) => {
+            if (currentSelector === departmentSelect) {
+                municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            }
+            currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            $.each(data, (key, value) => {
+                currentSelector.append('<option value="' + value + '">' + key + '</option>');
+            });
+        };
+
+        let ajaxCallback = (name, selector, dataValue) => {
+            $.ajax({
+                url: selector.data('autocomplete-' + name + '-url'),
+                type: "GET",
+                dataType: "JSON",
+                data: { search: dataValue },
+                success: (data) => { setDataAccordingToOneField(name, selector, data); },
+            });
+        };
+
+        regionSelect.change(function () {
+            // If International or National is selected, hide others select fields
+            ($(this).val() === 'International' || $(this).val() === 'National') ?
+                hideDepartmentAndMunicipalitySelectField() : ajaxCallback('department', departmentSelect, $(this).val());
+        });
+        departmentSelect.change(function () { ajaxCallback('municipality', municipalitySelect, $(this).val()); });
+    </script>
 {% endblock %}

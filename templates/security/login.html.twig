@@ -23,13 +23,11 @@
                     {% endif %}
 
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-user"></i></span></div>
                         <label for="inputUsername" class="d-none">{{ 'login.form.username.label'|trans }}</label>
                         <input type="text" class="form-control" value="{{ last_username }}" name="username" id="inputUsername" placeholder="{{ 'login.form.username.placeholder'|trans }}" required autofocus>
                     </div>
 
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-lock"></i></span></div>
                         <label for="inputPassword" class="d-none">{{ 'login.form.password.label'|trans }}</label>
                         <input type="password" class="form-control" name="password" id="inputPassword" placeholder="{{ 'login.form.password.placeholder'|trans }}" required>
                     </div>
@@ -41,7 +39,7 @@
                         <label for="remember_me" class="form-check-label text-muted">{{ 'login.form.remember_me'|trans }}</label>
                     </div>
 
-                    <button class="btn btn-dark" type="submit">{{ 'login.form.submit'|trans }}</button>
+                    <button class="btn btn-sm btn-dark" type="submit">{{ 'login.form.submit'|trans }}</button>
 
                     <div class="pt-3">
                         <small class="text-muted">{{ 'login.form.subtitle'|trans }}</small>

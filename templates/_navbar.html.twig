@@ -3,7 +3,7 @@
         <img src="{{ asset('assets/images/gendarmerie-logo.png') }}" width="26" height="30" class="d-inline-block align-top m-1 mr-2" alt="Gendarmerie Logo">
         <img src="{{ asset('assets/images/promogend-logo.png') }}" alt="PromoGend Logo">
     </a>
-    <button class="navbar-toggler ml-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler ml-2 ml-sm-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -13,12 +13,12 @@
             </li>
             {% if is_granted('ROLE_ADMIN') -%}
                 <li class="nav-item {{ 'admin' in currentRoute ? 'active' }}">
-                    <a class="badge badge-pill badge-info notification-badge" href="{{ path('app_admin_reduction_waiting_list') }}" title="{{ 'link.admin.reduction.waiting-list'|trans }}">{{ unverified_reductions_number() }} <i class="fas fa-search"></i></a>
+                    <a class="badge badge-pill badge-info notification-badge" href="{{ path('app_admin_reduction_waiting_list') }}" title="{{ 'link.admin.reduction.waiting-list.link.title'|trans }}">{{ unverified_reductions_number() }} <i class="fas fa-search"></i></a>
                     <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
                 </li>
             {% endif %}
-            <li class="nav-item" {{ currentRoute is same as('app_reduction_index') ? 'active' }}>
-                <a class="nav-link" href="{{ path('app_reduction_index') }}" title="{{ 'base.header.nav.reduction.link.title'|trans }}">{{ 'base.header.nav.reduction.link.title'|trans }}</a>
+            <li class="nav-item {{ currentRoute is same as('app_reduction_index') ? 'active' }}">
+                <a class="nav-link" href="{{ path('app_reduction_index') }}" title="{{ 'base.header.nav.reduction.link.title'|trans }}">{{ 'base.header.nav.reduction.link'|trans }}</a>
             </li>
             <li class="nav-item {{ currentRoute is same as('app_contact') ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_contact') }}" title="{{ 'base.header.nav.contact.link.title'|trans }}">{{ 'base.header.nav.contact.link'|trans }}</a>
