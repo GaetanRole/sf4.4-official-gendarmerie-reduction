@@ -288,6 +288,16 @@ class Reduction implements EntityInterface
         return $this;
     }
 
+    /**
+     * To avoid listener and subscriber handle the file (update/delete).
+     */
+    public function setImageOutOfContext(): self
+    {
+        $this->image->setFile(null);
+
+        return $this;
+    }
+
     public function getRegion(): ?string
     {
         return $this->region;

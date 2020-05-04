@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Service\ImageHandler;
+use App\Service\EntityManager\ImageManager;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use \Exception;
 use App\Entity\Image;
 use App\Entity\Reduction;
-use App\Service\GlobalClock;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -23,16 +21,12 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  */
 final class ImageUploadListener
 {
-    /** @var ImageHandler */
-    private $imageHandler;
+    /** @var ImageManager */
+    private $imageManager;
 
-    /** @var GlobalClock */
-    private $clock;
-
-    public function __construct(ImageHandler $imageHandler, GlobalClock $globalClock)
+    public function __construct(ImageManager $imageManager)
     {
-        $this->imageHandler = $imageHandler;
-        $this->clock = $globalClock;
+        $this->imageManager = $imageManager;
     }
 
     /**
@@ -45,11 +39,14 @@ final class ImageUploadListener
         $em = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
 
-        $entities = array_merge($uow->getScheduledEntityInsertions(), $uow->getScheduledEntityUpdates());
+        $entities = array_merge(
+            $uow->getScheduledEntityInsertions(),
+            $uow->getScheduledEntityUpdates()
+        );
 
         foreach ($entities as $entity) {
             if ($entity instanceof Reduction && $entity->getImage()) {
-                $this->uploadFile($this->prepareImageEntity($entity->getImage()));
+                $this->uploadFile($this->imageManager->prepareImageEntity($entity->getImage()));
 
                 $classMetadata = $em->getClassMetadata(Image::class);
                 $uow->recomputeSingleEntityChangeSet($classMetadata, $entity->getImage());
@@ -63,36 +60,17 @@ final class ImageUploadListener
     public function postLoad(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
-
         if (!$entity instanceof Reduction) {
             return;
         }
 
         $image = $entity->getImage();
         if ($image) {
-            $file = $image->getFilePath($this->imageHandler->getTargetDirectory());
+            $file = $image->getFilePath($this->imageManager->getTargetDirectory());
             if (file_exists($file)) {
                 $image->setFile(new File($file));
             }
         }
-    }
-
-    /**
-     * Prepare the Image entity to receive a new file.
-     *
-     * @throws Exception From DateTime provided by GlobalClock and Uuid::uuid4
-     */
-    private function prepareImageEntity(Image $image): Image
-    {
-        if ($image->getCreatedAt()) {
-            $image->setUpdatedAt($this->clock->getNowInDateTime());
-            return $image;
-        }
-
-        $image->setUuid(Uuid::uuid4());
-        $image->setCreatedAt($this->clock->getNowInDateTime());
-
-        return $image;
     }
 
     /**
@@ -102,6 +80,6 @@ final class ImageUploadListener
     {
         $file = $image->getFile();
         $file instanceof UploadedFile ?
-            $image->setFile($this->imageHandler->upload($file, $image)) : $image->setFile($file);
+            $image->setFile($this->imageManager->upload($file, $image)) : $image->setFile($file);
     }
 }

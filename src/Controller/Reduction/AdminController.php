@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
+use App\Service\EntityManager\ReductionManager;
 use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
-use EasySlugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +27,13 @@ final class AdminController extends AbstractController
     /** @var RepositoryAdapterInterface */
     private $repositoryAdapter;
 
-    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
+    /** @var ReductionManager */
+    private $reductionManager;
+
+    public function __construct(RepositoryAdapterInterface $repositoryAdapter, ReductionManager $reductionManager)
     {
         $this->repositoryAdapter = $repositoryAdapter;
+        $this->reductionManager = $reductionManager;
     }
 
     /**
@@ -50,19 +54,18 @@ final class AdminController extends AbstractController
      * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
      * @throws  Exception Datetime Exception
      */
-    public function edit(Request $request, Reduction $reduction, SluggerInterface $slugger): Response
+    public function edit(Request $request, Reduction $reduction): Response
     {
-        $oldReductionTitle = $reduction->getTitle();
+        /** @var string $previousTitle Keep the same title between updates. */
+        $previousTitle = $reduction->getTitle();
 
         $form = $this->createForm(ReductionType::class, $reduction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($oldReductionTitle !== $form['title']->getData()) {
-                $reduction->setSlug($slugger->uniqueSlugify($reduction->getTitle()));
-            }
-
-            $this->repositoryAdapter->update($reduction);
+            $this->repositoryAdapter->update(
+                $this->reductionManager->prepareAnUpdatedReduction($reduction, $previousTitle)
+            );
             return $this->redirectToRoute('app_reduction_index');
         }
 
@@ -78,8 +81,10 @@ final class AdminController extends AbstractController
     public function changeStatus(Request $request, Reduction $reduction): RedirectResponse
     {
         if ($this->isCsrfTokenValid('status'.$reduction->getSlug(), $request->request->get('_token'))) {
-            $reduction->isActive() ? $reduction->setIsActive(false) : $reduction->setIsActive(true);
-            $this->repositoryAdapter->update($reduction);
+            $this->repositoryAdapter->update(
+                $this->reductionManager->prepareAReductionValidation($reduction),
+                'reduction.validation.flash.success'
+            );
         }
 
         return $this->redirectToRoute('app_admin_reduction_waiting_list');

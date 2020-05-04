@@ -37,6 +37,14 @@
         <source>send.flash.success</source>
         <target>%name% votre email a bien été envoyé. Nous vous répondrons dès que possible !</target>
       </trans-unit>
+      <trans-unit id="20" resname="reduction.save.flash.success">
+        <source>reduction.save.flash.success</source>
+        <target>La réduction a bien été ajoutée. Celle-ci sera vérifiée par les administrateurs et affichée par la suite. Merci camarade !</target>
+      </trans-unit>
+      <trans-unit id="21" resname="reduction.validation.flash.success">
+        <source>reduction.validation.flash.success</source>
+        <target>Le statut de la réduction a bien été modifié. Vous pouvez le changer à tout moment depuis la page des réductions.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

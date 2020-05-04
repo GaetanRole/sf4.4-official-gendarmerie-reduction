@@ -49,7 +49,7 @@ final class RepositoryAdapter implements RepositoryAdapterInterface
     /**
      * @throws  Exception Datetime Exception
      */
-    public function save(EntityInterface $entity): EntityInterface
+    public function save(EntityInterface $entity, string $notificationKey = 'save.flash.success'): EntityInterface
     {
         $entity->setUuid(Uuid::uuid4());
         $entity->setCreatedAt($this->clock->getNowInDateTime());
@@ -57,28 +57,28 @@ final class RepositoryAdapter implements RepositoryAdapterInterface
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
-        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('save.flash.success'));
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent($notificationKey));
         return $entity;
     }
 
     /**
      * @throws  Exception Datetime Exception
      */
-    public function update(EntityInterface $entity): EntityInterface
+    public function update(EntityInterface $entity, string $notificationKey = 'update.flash.success'): EntityInterface
     {
         $entity->setUpdatedAt($this->clock->getNowInDateTime());
 
         $this->entityManager->flush();
 
-        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('update.flash.success'));
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent($notificationKey));
         return $entity;
     }
 
-    public function delete(EntityInterface $entity): void
+    public function delete(EntityInterface $entity, string $notificationKey = 'delete.flash.success'): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
 
-        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent('delete.flash.success'));
+        $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent($notificationKey));
     }
 }

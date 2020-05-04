@@ -6,7 +6,7 @@ namespace App\EventListener;
 
 use App\Entity\Image;
 use App\Entity\Reduction;
-use App\Service\ImageHandler;
+use App\Service\EntityManager\ImageManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
@@ -21,12 +21,12 @@ final class ImageStorageListener
     /** @var string */
     private const TARGETED_FILTERS = 'thumbnail';
 
-    /** @var ImageHandler */
-    private $imageHandler;
+    /** @var ImageManager */
+    private $imageManager;
 
-    public function __construct(ImageHandler $imageHandler)
+    public function __construct(ImageManager $imageManager)
     {
-        $this->imageHandler = $imageHandler;
+        $this->imageManager = $imageManager;
     }
 
     /**
@@ -49,12 +49,12 @@ final class ImageStorageListener
             /** @var Image $image */
             $image = $entity->getImage();
 
-            if (!$this->imageHandler->imageCanBeDeleted($image)) {
+            if (!$this->imageManager->imageCanBeDeleted($image)) {
                 return;
             }
 
-            $this->imageHandler->cacheRemove($image, self::TARGETED_FILTERS);
-            $this->imageHandler->remove($image);
+            $this->imageManager->cacheRemove($image, self::TARGETED_FILTERS);
+            $this->imageManager->remove($image);
         }
     }
 
@@ -69,7 +69,7 @@ final class ImageStorageListener
             return;
         }
 
-        $this->imageHandler->cacheRemove($entity, self::TARGETED_FILTERS);
-        $this->imageHandler->remove($entity);
+        $this->imageManager->cacheRemove($entity, self::TARGETED_FILTERS);
+        $this->imageManager->remove($entity);
     }
 }

@@ -50,7 +50,7 @@ services:
     App\Service\GlobalClock:
         arguments: ['@app.earth', '@app.format']
 
-    App\Service\ImageHandler:
+    App\Service\EntityManager\ImageManager:
         arguments: ['@liip_imagine.cache.manager']
 
     App\Twig\Extension\UploadedImagesExtension:
