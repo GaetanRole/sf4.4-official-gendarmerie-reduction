@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Form\DataTransformer;
 
-use PHPUnit\Framework\TestCase;
 use App\Form\DataTransformer\ArrayToStringTransformer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group   Unit

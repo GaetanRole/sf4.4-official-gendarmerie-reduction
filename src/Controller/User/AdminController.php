@@ -6,17 +6,17 @@ namespace App\Controller\User;
 
 use \Exception;
 use App\Entity\User;
-use App\Form\UserType;
 use App\Form\Type\ChangePasswordType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Form\UserType;
 use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @todo See voter exception translation message
@@ -36,18 +36,19 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/", name="index", methods={"GET"})
+     * @Route(name="index", methods={"GET"})
      */
     public function index(): Response
     {
         return $this->render('user/admin/index.html.twig', [
-            'users' => $this->repositoryAdapter->getRepository(User::class)->findBy([], ['username' => 'ASC'])
+            'users' => $this->repositoryAdapter->getRepository(User::class)->findBy([], ['username' => 'ASC']),
         ]);
     }
 
     /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     * @throws  Exception Datetime Exception
+     * @Route("/new", name="new", methods={"GET", "POST"})
+     *
+     * @throws Exception Datetime Exception
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -59,6 +60,7 @@ final class AdminController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPlainPassword()));
 
             $this->repositoryAdapter->save($user);
+
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -66,9 +68,10 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET", "POST"})
      * @IsGranted("edit", subject="user", message="You do not have rights to do so.")
-     * @throws  Exception Datetime Exception
+     *
+     * @throws Exception Datetime Exception
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
@@ -80,6 +83,7 @@ final class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repositoryAdapter->update($user);
+
             return $this->redirectToRoute('app_admin_user_index');
         }
 
@@ -87,13 +91,14 @@ final class AdminController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $formChangePassword->get('plainPassword')->getData()));
 
             $this->repositoryAdapter->update($user);
+
             return $this->redirectToRoute('app_admin_user_index');
         }
 
         return $this->render('user/admin/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'formChangePassword' => $formChangePassword->createView()
+            'formChangePassword' => $formChangePassword->createView(),
         ]);
     }
 
@@ -120,6 +125,7 @@ final class AdminController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$user->getUuid()->toString(), $request->request->get('_token'))) {
             if ($user->getOpinions()->count() > 0 || $user->getReductions()->count() > 0) {
                 $this->addFlash('danger', $translator->trans('user.delete.flash.danger', [], 'flashes'));
+
                 return $this->redirectToRoute('app_admin_user_index');
             }
             $this->repositoryAdapter->delete($user);

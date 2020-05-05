@@ -46,7 +46,7 @@ final class SmokeTest extends AbstractWebTestCase
     {
         self::$webClient->setServerParameters([
             'PHP_AUTH_USER' => 'user0',
-            'PHP_AUTH_PW'   => 'password0',
+            'PHP_AUTH_PW' => 'password0',
         ]);
 
         self::$webClient->request('GET', $url);
@@ -72,11 +72,11 @@ final class SmokeTest extends AbstractWebTestCase
     public function provideSecureUrls(): Generator
     {
         yield ['/en/admin/dashboard'];
-        yield ['/en/admin/brand/'];
-        yield ['/en/admin/category/'];
-        yield ['/en/admin/user/'];
+        yield ['/en/admin/brand'];
+        yield ['/en/admin/category'];
+        yield ['/en/admin/user'];
         yield ['/en/admin/reduction/waiting-list'];
-        yield ['/en/reduction/'];
+        yield ['/en/reduction'];
         yield ['/en/reduction/post'];
     }
 
@@ -85,7 +85,7 @@ final class SmokeTest extends AbstractWebTestCase
      */
     public function provideUserUrls(): Generator
     {
-        yield ['/en/reduction/'];
+        yield ['/en/reduction'];
         yield ['/en/reduction/post'];
     }
 }

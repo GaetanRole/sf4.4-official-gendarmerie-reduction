@@ -7,13 +7,14 @@ namespace App\Tests\Service;
 use \DateTime;
 use \Exception;
 use App\Service\GlobalClock;
-use PHPUnit\Framework\TestCase;
 use Innmind\TimeContinuum\Format\ISO8601;
 use Innmind\TimeContinuum\TimeContinuum\Earth;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group   Unit
  * @group   Service
+ *
  * @see     https://github.com/Innmind/TimeContinuum
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

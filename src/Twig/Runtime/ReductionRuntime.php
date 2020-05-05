@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Twig\Runtime;
 
+use App\Repository\ReductionRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use App\Repository\ReductionRepository;
 use Twig\Extension\RuntimeExtensionInterface;
 
 /**
@@ -25,8 +25,8 @@ final class ReductionRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @throws NoResultException        If the query returned no result.
-     * @throws NonUniqueResultException If the query result is not unique.
+     * @throws NoResultException        if the query returned no result
+     * @throws NonUniqueResultException if the query result is not unique
      */
     public function countUnverifiedReductions()
     {

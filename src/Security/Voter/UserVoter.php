@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Security\Voter;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * @see     https://symfony.com/doc/current/security/voters.html
@@ -16,17 +16,16 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 final class UserVoter extends Voter
 {
     /** Voter actions */
-    private const
-        EDIT = 'edit',
-        STATUS = 'status',
-        DELETE = 'delete';
+    private const EDIT = 'edit';
+    private const STATUS = 'status';
+    private const DELETE = 'delete';
 
     /**
      * {@inheritdoc}
      */
     protected function supports($attribute, $subject): bool
     {
-        return $subject instanceof User && in_array($attribute, [self::EDIT, self::DELETE, self::STATUS], true);
+        return $subject instanceof User && \in_array($attribute, [self::EDIT, self::DELETE, self::STATUS], true);
     }
 
     /**

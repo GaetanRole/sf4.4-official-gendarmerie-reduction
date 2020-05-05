@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-use \RuntimeException;
 use \RecursiveDirectoryIterator;
 use \RecursiveIteratorIterator;
+use \RuntimeException;
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Service\PromoGendMailer;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Event\MessageEvent;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Override the "from" field for each mail.
+ *
  * @todo Write unit tests for this subscriber.
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

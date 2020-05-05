@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Consumer\GeoGouvApi\GeoClient;
+use App\Entity\Brand;
 use App\Entity\Category;
 use App\Entity\Reduction;
-use App\Entity\Brand;
 use App\Form\EventSubscriber\GeoApiFieldsSubscriber;
 use App\Form\InheritedForm\UserIdentityType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -85,17 +85,19 @@ final class ReductionType extends AbstractType
                 'help' => 'form.reduction.image.help',
             ])
             ->add('categories', EntityType::class, [
-                'expanded'  => false,
-                'multiple'  => true,
+                'expanded' => false,
+                'multiple' => true,
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'label' => 'form.reduction.categories.label',
                 'help' => 'form.reduction.categories.help',
                 'query_builder' => static function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->orderBy('c.name', 'ASC');
+                        ->orderBy('c.name', 'ASC')
+                    ;
                 },
-            ]);
+            ])
+        ;
 
         $builder->addEventSubscriber(new GeoApiFieldsSubscriber($this->router, $this->geoClient));
     }

@@ -24,7 +24,7 @@ abstract class AbstractBasicEnum
 
         $calledClass = static::class;
 
-        if (!array_key_exists($calledClass, self::$constCacheArray)) {
+        if (!\array_key_exists($calledClass, self::$constCacheArray)) {
             $reflect = new ReflectionClass($calledClass);
             self::$constCacheArray[$calledClass] = $reflect->getConstants();
         }
@@ -37,7 +37,7 @@ abstract class AbstractBasicEnum
      */
     public static function isValidName(string $name): bool
     {
-        return in_array(
+        return \in_array(
             strtolower($name),
             array_map('strtolower', array_keys(self::getConstants())),
             true
@@ -49,6 +49,6 @@ abstract class AbstractBasicEnum
      */
     public static function isValidValue(string $value): bool
     {
-        return in_array($value, array_values(self::getConstants()), true);
+        return \in_array($value, array_values(self::getConstants()), true);
     }
 }

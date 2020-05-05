@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * A trait for User identity in Opinion and Reduction entities.

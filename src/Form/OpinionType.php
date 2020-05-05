@@ -30,7 +30,8 @@ final class OpinionType extends AbstractType
                     'maxLength' => '10000',
                     'rows' => 30,
                 ],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Form\InheritedForm;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -33,7 +33,8 @@ final class UserIdentityType extends AbstractType
                 'label' => 'form.user_identity.email.label',
                 'help' => 'form.user_identity.email.help',
                 'attr' => ['placeholder' => 'form.user_identity.email.placeholder', 'maxLength' => '64'],
-            ]);
+            ])
+        ;
     }
 
     /**

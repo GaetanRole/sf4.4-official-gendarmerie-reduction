@@ -19,11 +19,16 @@ use Ramsey\Uuid\UuidInterface;
 interface EntityInterface
 {
     public function getId(): ?int;
+
     public function getUuid(): UuidInterface;
+
     public function setUuid(UuidInterface $uuid): void;
 
     public function getCreatedAt(): ?DateTimeImmutable;
+
     public function getUpdatedAt(): ?DateTimeInterface;
+
     public function setCreatedAt(DateTimeInterface $updatedAt): void;
+
     public function setUpdatedAt(?DateTimeInterface $updatedAt): void;
 }

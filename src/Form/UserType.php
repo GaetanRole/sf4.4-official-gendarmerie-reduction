@@ -8,11 +8,11 @@ use App\Form\DataTransformer\ArrayToStringTransformer;
 use App\Form\Type\ChangePasswordType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -61,7 +61,8 @@ final class UserType extends AbstractType
                 'required' => false,
                 'label' => 'form.user.is_active.label',
                 'help' => 'form.user.is_active.help',
-            ]);
+            ])
+        ;
 
         if ($this->auth->isGranted('ROLE_SUPER_ADMIN')) {
             $builder

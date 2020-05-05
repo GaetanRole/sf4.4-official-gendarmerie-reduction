@@ -11,11 +11,11 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class SuccessPersistenceNotificationEvent extends Event
 {
-    public const
-        /** @var string FlashBag type for FlashBagInterface::add(). */
-        TYPE   = 'info',
-        /** @var string FlashBag domain for catalog. */
-        DOMAIN = 'flashes';
+    /** @var string FlashBag type for FlashBagInterface::add(). */
+    public const TYPE = 'info';
+
+    /** @var string FlashBag domain for catalog. */
+    public const DOMAIN = 'flashes';
 
     /** @var string */
     private $translationKey;

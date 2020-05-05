@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Repository\Adapter;
 
 use \Exception;
-use Ramsey\Uuid\Uuid;
-use App\Service\GlobalClock;
 use App\Entity\EntityInterface;
+use App\Event\SuccessPersistenceNotificationEvent;
+use App\Service\GlobalClock;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
-use App\Event\SuccessPersistenceNotificationEvent;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -47,7 +47,7 @@ final class RepositoryAdapter implements RepositoryAdapterInterface
     }
 
     /**
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function save(EntityInterface $entity, string $notificationKey = 'save.flash.success'): EntityInterface
     {
@@ -58,11 +58,12 @@ final class RepositoryAdapter implements RepositoryAdapterInterface
         $this->entityManager->flush();
 
         $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent($notificationKey));
+
         return $entity;
     }
 
     /**
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function update(EntityInterface $entity, string $notificationKey = 'update.flash.success'): EntityInterface
     {
@@ -71,6 +72,7 @@ final class RepositoryAdapter implements RepositoryAdapterInterface
         $this->entityManager->flush();
 
         $this->eventDispatcher->dispatch(new SuccessPersistenceNotificationEvent($notificationKey));
+
         return $entity;
     }
 

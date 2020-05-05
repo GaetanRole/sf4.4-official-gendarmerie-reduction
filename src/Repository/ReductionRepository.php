@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method  Reduction|null find($id, $lockMode = null, $lockVersion = null)
- * @method  Reduction|null findOneBy(array $criteria, array $orderBy = null)
- * @method  Reduction[]    findAll()
- * @method  Reduction[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Reduction|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reduction|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reduction[]    findAll()
+ * @method Reduction[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
@@ -39,7 +39,7 @@ class ReductionRepository extends ServiceEntityRepository
      *
      * @todo    Add PagerFanta
      *
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function findLatestBy(Category $category = null, $limit = null): Paginator
     {
@@ -52,11 +52,13 @@ class ReductionRepository extends ServiceEntityRepository
             ->andWhere('r.isActive = :status')
             ->orderBy('r.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime())
-            ->setParameter('status', true);
+            ->setParameter('status', true)
+        ;
 
         if (null !== $category) {
             $qb->andWhere(':category MEMBER OF r.categories')
-                ->setParameter('category', $category);
+                ->setParameter('category', $category)
+            ;
         }
 
         if (null !== $limit) {
@@ -69,30 +71,32 @@ class ReductionRepository extends ServiceEntityRepository
     /**
      * Count each Reduction rows with a status parameter.
      *
-     * @throws NoResultException        If the query returned no result.
-     * @throws NonUniqueResultException If the query result is not unique.
+     * @throws NoResultException        if the query returned no result
+     * @throws NonUniqueResultException if the query result is not unique
      */
     public function countReductionByStatus(bool $status)
     {
         $qb = $this->createQueryBuilder('r')
             ->select('count(r.id)')
             ->andWhere('r.isActive = :status')
-            ->setParameter('status', $status);
+            ->setParameter('status', $status)
+        ;
 
         return $qb
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     /**
-     * @return  Reduction[]
+     * @return Reduction[]
      */
     public function findBySearchQuery(string $rawQuery, int $limit = Reduction::NUM_ITEMS): array
     {
         $query = $this->sanitizeSearchQuery($rawQuery);
         $searchTerms = $this->extractSearchTerms($query);
 
-        if (0 === count($searchTerms)) {
+        if (0 === \count($searchTerms)) {
             return [];
         }
 
@@ -100,14 +104,16 @@ class ReductionRepository extends ServiceEntityRepository
         foreach ($searchTerms as $key => $term) {
             $queryBuilder
                 ->orWhere('r.brand LIKE :c_'.$key)
-                ->setParameter('c_'.$key, '%'.$term.'%');
+                ->setParameter('c_'.$key, '%'.$term.'%')
+            ;
         }
 
         return $queryBuilder
             ->orderBy('r.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     /**
@@ -124,6 +130,7 @@ class ReductionRepository extends ServiceEntityRepository
     private function extractSearchTerms(string $searchQuery): array
     {
         $terms = array_unique(explode(' ', $searchQuery));
+
         return array_filter($terms, static function ($term) {
             return 2 <= mb_strlen($term);
         });

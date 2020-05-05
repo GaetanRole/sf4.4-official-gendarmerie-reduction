@@ -6,11 +6,12 @@ namespace App\Security\Voter;
 
 use App\Entity\Reduction;
 use App\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * @todo    Add unit tests for it.
+ *
  * @see     https://symfony.com/doc/current/security/voters.html
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

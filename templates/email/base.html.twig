@@ -1,7 +1,8 @@
+{# @todo Add trads #}
 {# @see https://www.campaignmonitor.com/css/email-client/outlook-express/ #}
 {# @see https://mjml.io/api #}
 
-{% apply inky_to_html|inline_css(source('@css/email/foundation-emails.css'), source('@css/email/theme.css')) %}
+{% apply inky_to_html|inline_css(source('@css/email/foundation-emails.min.css'), source('@css/email/theme.min.css')) %}
     <container class="container-background" bgcolor="#131C23">
         <spacer size="30"></spacer>
         <row class="header">

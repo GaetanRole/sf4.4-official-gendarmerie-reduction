@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use JsonSerializable;
+use \JsonSerializable;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use App\Entity\Traits\EntityUserIdentityTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
@@ -70,6 +70,7 @@ class Opinion implements JsonSerializable, EntityInterface
     public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -81,6 +82,7 @@ class Opinion implements JsonSerializable, EntityInterface
     public function setReduction(Reduction $reduction): self
     {
         $this->reduction = $reduction;
+
         return $this;
     }
 
@@ -92,6 +94,7 @@ class Opinion implements JsonSerializable, EntityInterface
     public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
         return $this;
     }
 }

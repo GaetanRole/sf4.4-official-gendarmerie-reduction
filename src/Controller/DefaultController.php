@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use \Exception;
 use App\Form\ContactType;
 use App\Repository\ReductionRepository;
 use App\Service\PromoGendMailer;
-use \Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -30,7 +30,7 @@ final class DefaultController extends AbstractController
     public function index(ReductionRepository $reductionRepository): Response
     {
         return $this->render('default/index.html.twig', [
-            'reductions' => $reductionRepository->findLatestBy(null, 6)
+            'reductions' => $reductionRepository->findLatestBy(null, 6),
         ]);
     }
 

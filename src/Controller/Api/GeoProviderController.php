@@ -20,8 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class GeoProviderController extends AbstractController
 {
     /**
-     * @internal    Check AJAX request from views.
-     * @return      JsonResponse|string Return an error response or the searchField.
+     * @internal    check AJAX request from views
+     *
+     * @return JsonResponse|string return an error response or the searchField
      */
     private function isQueryStringInvalid(?string $searchQuery, string $searchField)
     {
@@ -31,6 +32,7 @@ final class GeoProviderController extends AbstractController
                 Response::HTTP_UNPROCESSABLE_ENTITY,
             );
             $response->headers->set('Content-Type', 'application/problem+json');
+
             return $response;
         }
 
@@ -45,6 +47,7 @@ final class GeoProviderController extends AbstractController
     {
         $queryValue = $request->query->get('search');
         $response = $this->isQueryStringInvalid($queryValue, ModelEnum::DEPARTMENT_CLASS_NAME);
+
         return (ModelEnum::DEPARTMENT_CLASS_NAME === $response) ?
             new JsonResponse($client->Municipality()->getAllMunicipalitiesByDepartment($queryValue)) : $response;
     }
@@ -57,6 +60,7 @@ final class GeoProviderController extends AbstractController
     {
         $queryValue = $request->query->get('search');
         $response = $this->isQueryStringInvalid($queryValue, ModelEnum::REGION_CLASS_NAME);
+
         return (ModelEnum::REGION_CLASS_NAME === $response) ?
             new JsonResponse($client->Department()->getAllDepartmentsByRegion($queryValue)) : $response;
     }

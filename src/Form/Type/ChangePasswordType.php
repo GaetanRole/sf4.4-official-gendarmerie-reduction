@@ -25,13 +25,16 @@ final class ChangePasswordType extends AbstractType
                 'constraints' => [new NotBlank(['message' => 'form.change_password.plain_password.not_blank'])],
                 'invalid_message' => 'form.change_password.plain_password.invalid',
                 'options' => ['attr' => ['class' => 'password-field']],
-                'first_options'  => [
+                'first_options' => [
                     'label' => 'form.change_password.plain_password.first.label',
-                    'attr' => ['placeholder' => 'form.change_password.plain_password.first.placeholder']],
+                    'attr' => ['placeholder' => 'form.change_password.plain_password.first.placeholder'],
+                ],
                 'second_options' => [
                     'label' => 'form.change_password.plain_password.second.label',
-                    'attr' => ['placeholder' => 'form.change_password.plain_password.second.placeholder']],
-            ]);
+                    'attr' => ['placeholder' => 'form.change_password.plain_password.second.placeholder'],
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

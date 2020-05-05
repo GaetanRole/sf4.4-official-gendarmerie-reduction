@@ -7,12 +7,12 @@ namespace App\Entity;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use App\Entity\Traits\EntityUserIdentityTrait;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Validator\Constraints as AppAssert;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
@@ -60,10 +60,10 @@ class Reduction implements EntityInterface
      * )
      * @ORM\OrderBy({"name": "ASC"})
      * @Assert\Count(
-     *     min = "1",
-     *     max = "3",
-     *     minMessage = "validator.reduction.categories.min_count",
-     *     maxMessage = "validator.reduction.categories.max_count"
+     *     min="1",
+     *     max="3",
+     *     minMessage="validator.reduction.categories.min_count",
+     *     maxMessage="validator.reduction.categories.max_count"
      * )
      */
     private $categories;
@@ -159,14 +159,14 @@ class Reduction implements EntityInterface
     private $municipality;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
     private $isBigDeal;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -201,6 +201,7 @@ class Reduction implements EntityInterface
     public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -212,6 +213,7 @@ class Reduction implements EntityInterface
     public function setBrand(Brand $brand): self
     {
         $this->brand = $brand;
+
         return $this;
     }
 
@@ -251,6 +253,7 @@ class Reduction implements EntityInterface
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -262,6 +265,7 @@ class Reduction implements EntityInterface
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -273,6 +277,7 @@ class Reduction implements EntityInterface
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -306,6 +311,7 @@ class Reduction implements EntityInterface
     public function setRegion(string $region): self
     {
         $this->region = $region;
+
         return $this;
     }
 
@@ -317,6 +323,7 @@ class Reduction implements EntityInterface
     public function setDepartment(?string $department): self
     {
         $this->department = $department;
+
         return $this;
     }
 
@@ -328,6 +335,7 @@ class Reduction implements EntityInterface
     public function setMunicipality(?string $municipality): self
     {
         $this->municipality = $municipality;
+
         return $this;
     }
 
@@ -339,6 +347,7 @@ class Reduction implements EntityInterface
     public function setIsBigDeal(bool $isBigDeal): self
     {
         $this->isBigDeal = $isBigDeal;
+
         return $this;
     }
 

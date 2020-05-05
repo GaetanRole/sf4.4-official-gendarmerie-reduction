@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Service;
 
 use \DateTime;
-use \Exception;
 use \DateTimeInterface;
+use \Exception;
 use Innmind\TimeContinuum\Format\ISO8601;
 use Innmind\TimeContinuum\TimeContinuum\Earth;
 use Innmind\TimeContinuum\Timezone\Earth\Europe\Paris;
@@ -23,6 +23,7 @@ class GlobalClock
 
     /**
      * Default clock format.
+     *
      * @var ISO8601
      */
     private $format;
@@ -41,7 +42,7 @@ class GlobalClock
     /**
      * Returning a DateTime obj based on timeZone.
      *
-     * @throws  Exception DateTime Emits Exception in case of an error.
+     * @throws Exception dateTime Emits Exception in case of an error
      */
     public function getNowInDateTime(): DateTimeInterface
     {

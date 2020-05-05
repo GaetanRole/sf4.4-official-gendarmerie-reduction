@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Service\EntityManager\ImageManager;
-use Doctrine\ORM\Event\OnFlushEventArgs;
 use \Exception;
 use App\Entity\Image;
 use App\Entity\Reduction;
+use App\Service\EntityManager\ImageManager;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
  * A Listener handling image upload.
+ *
  * @todo Write unit tests for this listener.
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

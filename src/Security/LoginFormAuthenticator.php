@@ -76,7 +76,8 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
         /** @var User $user */
         $user = $this->entityManager
             ->getRepository(User::class)
-            ->findOneBy(['username' => $credentials['username']]);
+            ->findOneBy(['username' => $credentials['username']])
+        ;
 
         $this->validator->checkUser($user);
 

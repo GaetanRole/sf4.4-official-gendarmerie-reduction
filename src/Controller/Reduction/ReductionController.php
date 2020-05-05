@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
-use App\Form\SearchType;
-use App\Service\EntityManager\ReductionManager;
 use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
+use App\Form\SearchType;
+use App\Repository\Adapter\RepositoryAdapterInterface;
+use App\Service\EntityManager\ReductionManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\Adapter\RepositoryAdapterInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/reduction", name="app_reduction_")
@@ -55,8 +55,9 @@ final class ReductionController extends AbstractController
     /**
      * @see     ImageUploadListener
      *
-     * @Route("/post", name="post", methods={"GET","POST"})
-     * @throws  Exception Datetime Exception
+     * @Route("/post", name="post", methods={"GET", "POST"})
+     *
+     * @throws Exception Datetime Exception
      */
     public function post(Request $request, ReductionManager $reductionManager): Response
     {

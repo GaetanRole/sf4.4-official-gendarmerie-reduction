@@ -9,10 +9,10 @@ use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -76,14 +76,14 @@ class User implements UserInterface, Serializable, EntityInterface
      * @ORM\Column(type="string", length=32, nullable=true)
      * @Assert\Regex(
      *     pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
-     *     message="validator.user.phone_number.regex")
+     * message="validator.user.phone_number.regex")
      */
     private $phoneNumber;
 
     /**
      * @Assert\Length(max=4096)
      * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",
-     *     message="validator.user.plain_password.regex")
+     * message="validator.user.plain_password.regex")
      */
     private $plainPassword;
 
@@ -95,7 +95,7 @@ class User implements UserInterface, Serializable, EntityInterface
     private $password;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
@@ -142,6 +142,7 @@ class User implements UserInterface, Serializable, EntityInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -156,6 +157,7 @@ class User implements UserInterface, Serializable, EntityInterface
     public function setIdentity(string $identity): self
     {
         $this->identity = $identity;
+
         return $this;
     }
 
@@ -204,6 +206,7 @@ class User implements UserInterface, Serializable, EntityInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -235,14 +238,16 @@ class User implements UserInterface, Serializable, EntityInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
     public function hasRole(string $role): bool
     {
-        if (in_array($role, $this->roles, true)) {
+        if (\in_array($role, $this->roles, true)) {
             return true;
         }
+
         return false;
     }
 

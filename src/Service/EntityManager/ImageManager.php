@@ -51,6 +51,7 @@ final class ImageManager
     {
         if ($image->getCreatedAt()) {
             $image->setUpdatedAt($this->clock->getNowInDateTime());
+
             return $image;
         }
 
@@ -63,6 +64,7 @@ final class ImageManager
     public function upload(UploadedFile $file, Image $image): File
     {
         $image->syncWithUploadedFile();
+
         return $file->move($this->getTargetDirectory(), $image->getFilePath());
     }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Twig\Extension\AbstractExtension;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -50,10 +50,10 @@ final class LinksExtension extends AbstractExtension
         $html = '<ul>';
 
         foreach ($locales as $locale) {
-            $label = ($country === 'fr') ? self::LOCALE_FR_LABELS[$locale] : self::LOCALE_EN_LABELS[$locale];
+            $label = ('fr' === $country) ? self::LOCALE_FR_LABELS[$locale] : self::LOCALE_EN_LABELS[$locale];
             $html .= '<li>'.$this->generateLink($label, $locale, $routeName, $routeParameters).'</li>';
         }
 
-        return $html . '</ul>';
+        return $html.'</ul>';
     }
 }

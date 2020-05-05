@@ -1,3 +1,5 @@
-<?php // dev.encrypt.public on Thu, 23 Apr 2020 20:35:22 +0200
+<?php
+
+// dev.encrypt.public on Thu, 23 Apr 2020 20:35:22 +0200
 
 return "\x2B\x5E\x1B\x7C\x20F\x23h\xE9\x9B\xA5\xF6\xBD\xC0\xEB\xEF\x1C\xD6\x92I7\x99\x17p\xFFr\x23\xDD\x19\xA7QI";

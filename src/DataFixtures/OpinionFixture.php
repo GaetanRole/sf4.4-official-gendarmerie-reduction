@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\DataFixtures\Reduction\ReductionFixture;
-use Faker;
+use App\Entity\User;
 use \Exception;
-use Ramsey\Uuid\Uuid;
+use App\DataFixtures\Reduction\ReductionFixture;
 use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -27,6 +28,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
 
     /**
      * Global project's clock.
+     *
      * @var GlobalClock
      */
     private $clock;
@@ -35,7 +37,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
     private $container;
 
     /**
-     * @link    https://github.com/Innmind/TimeContinuum Global clock
+     * @see    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
@@ -47,9 +49,9 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
      * Load OPINION_NB_TUPLE opinions to DB.
      *
      * @see     3 Loop iterator depends on const OPINION_NB_TUPLE
+     * @see    https://github.com/fzaninotto/Faker
      *
-     * @link    https://github.com/fzaninotto/Faker
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -65,9 +67,11 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
             $opinion->setCreatedAt($this->clock->getNowInDateTime());
             $opinion->setUpdatedAt(null);
 
+            /** @var User $author */
             $opinion->setUser($author)
                 ->setReduction($reduction)
-                ->setComment($faker->realText(100));
+                ->setComment($faker->realText(100))
+            ;
 
             $manager->persist($opinion);
         }
@@ -81,12 +85,12 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
      * @see     9 See UserFixture::USER_NB_TUPLE - 1 for index 0
      * @see     15 See ReductionFixture::REDUCTION_NB_TUPLE - 1 for index 0
      *
-     * @throws  Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getOpinionReferenceData(): array
     {
         $opinionData = [];
-        for ($index = 0; $index < self::OPINION_NB_TUPLE; $index++) {
+        for ($index = 0; $index < self::OPINION_NB_TUPLE; ++$index) {
             // $opinionData = [$index, $author, $reduction];
             $opinionData[] = [
                 $this->getReference(

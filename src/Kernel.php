@@ -38,7 +38,7 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @throws  Exception
+     * @throws Exception
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
@@ -54,7 +54,7 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @throws  LoaderLoadException
+     * @throws LoaderLoadException
      */
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {

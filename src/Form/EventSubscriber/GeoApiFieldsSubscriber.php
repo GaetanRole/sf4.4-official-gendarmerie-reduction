@@ -37,7 +37,7 @@ final class GeoApiFieldsSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'onPreSetData',
-            FormEvents::PRE_SUBMIT => 'onPreSetSubmit'
+            FormEvents::PRE_SUBMIT => 'onPreSetSubmit',
         ];
     }
 
@@ -57,8 +57,11 @@ final class GeoApiFieldsSubscriber implements EventSubscriberInterface
             'label' => 'form.reduction.department.label',
             'help' => 'form.reduction.department.help',
             'placeholder' => 'form.reduction.department.placeholder',
-            'choices' => $region ? $this->geoClient->Department()->getAllDepartmentsByRegion($region) : [],
-            'attr' => ['data-autocomplete-department-url' => $this->router->generate('api_geo_get_departments')],
+            'choices' => $region ?
+                $this->geoClient->Department()->getAllDepartmentsByRegion($region) : [],
+            'attr' => [
+                'data-autocomplete-department-url' => $this->router->generate('api_geo_get_departments'),
+            ],
         ]);
 
         $form->add('municipality', GeoApiSelect2Type::class, [
@@ -67,9 +70,11 @@ final class GeoApiFieldsSubscriber implements EventSubscriberInterface
             'label' => 'form.reduction.municipality.label',
             'help' => 'form.reduction.municipality.help',
             'placeholder' => 'form.reduction.municipality.placeholder',
-            'choices' =>
-                $department ? $this->geoClient->Municipality()->getAllMunicipalitiesByDepartment($department) : [],
-            'attr' => ['data-autocomplete-municipality-url' => $this->router->generate('api_geo_get_municipalities')],
+            'choices' => $department ?
+                $this->geoClient->Municipality()->getAllMunicipalitiesByDepartment($department) : [],
+            'attr' => [
+                'data-autocomplete-municipality-url' => $this->router->generate('api_geo_get_municipalities'),
+            ],
         ]);
     }
 
@@ -80,8 +85,8 @@ final class GeoApiFieldsSubscriber implements EventSubscriberInterface
     {
         $this->formModifier(
             $event->getForm(),
-            is_array($event->getData()) ? $event->getData()['region'] : $event->getData()->getRegion(),
-            is_array($event->getData()) ? $event->getData()['department'] : $event->getData()->getDepartment()
+            \is_array($event->getData()) ? $event->getData()['region'] : $event->getData()->getRegion(),
+            \is_array($event->getData()) ? $event->getData()['department'] : $event->getData()->getDepartment()
         );
     }
 

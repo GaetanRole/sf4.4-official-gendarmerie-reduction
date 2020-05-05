@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
-use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * A trait for id and uuid properties in every entities.

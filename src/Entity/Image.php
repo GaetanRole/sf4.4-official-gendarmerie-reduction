@@ -8,11 +8,11 @@ use \InvalidArgumentException;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
@@ -48,7 +48,6 @@ class Image
         return $this->extension;
     }
 
-
     public function setExtension(string $extension): self
     {
         $this->extension = $extension;
@@ -70,7 +69,7 @@ class Image
 
     public function isUploaded(): bool
     {
-        return (null !== $this->createdAt);
+        return null !== $this->createdAt;
     }
 
     public function getFilePath(string $fromPath = null): string

@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\DataFixtures\Reduction;
 
+use \Exception;
 use App\DataFixtures\BrandFixture;
 use App\DataFixtures\CategoryFixture;
 use App\DataFixtures\UserFixture;
 use App\Entity\Image;
-use App\Utils\FilesystemStaticUtilities;
-use Faker;
-use \Exception;
-use Ramsey\Uuid\Uuid;
 use App\Entity\Reduction;
-use EasySlugger\SluggerInterface;
 use App\Service\GlobalClock;
+use App\Utils\FilesystemStaticUtilities;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use EasySlugger\SluggerInterface;
+use Faker;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -36,6 +36,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
 
     /**
      * Global project's clock.
+     *
      * @var GlobalClock
      */
     private $clock;
@@ -50,7 +51,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     private $imageUploadDirectory;
 
     /**
-     * @link    https://github.com/Innmind/TimeContinuum Global clock
+     * @see    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(
         GlobalClock $clock,
@@ -68,9 +69,9 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      * Load REDUCTION_NB_TUPLE reductions to DB.
      *
      * @see     3 Loop iterator depends on const REDUCTION_NB_TUPLE
-     * @link    https://github.com/fzaninotto/Faker
+     * @see    https://github.com/fzaninotto/Faker
      *
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -97,8 +98,9 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
                 ->setRegion($this->getRandomRegion())
                 ->setDepartment($this->getRandomDepartment())
                 ->setMunicipality($faker->city)
-                ->setIsBigDeal((bool)random_int(0, 1))
-                ->setIsActive((bool)random_int(0, 1));
+                ->setIsBigDeal((bool) random_int(0, 1))
+                ->setIsActive((bool) random_int(0, 1))
+            ;
 
             $manager->persist($reduction);
             $this->addReference(self::REDUCTION_REFERENCE.$index, $reduction);
@@ -132,12 +134,12 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
      *
      * @see     7 See UserFixture::USER_NB_TUPLE - 1 for index 0
      *
-     * @throws  Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getReductionData(): array
     {
         $reductions = [];
-        for ($index = 0; $index < self::REDUCTION_NB_TUPLE; $index++) {
+        for ($index = 0; $index < self::REDUCTION_NB_TUPLE; ++$index) {
             // $reduction = [$index, $author, $brand, $categories, image];
             $reductions[] = [
                 $index,
@@ -154,7 +156,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     /**
      * Get a random Brand from BrandFixture.
      *
-     * @throws  Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getRandomBrand(): string
     {
@@ -170,7 +172,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     /**
      * Get an array of random Category references.
      *
-     * @throws  Exception Random Exception
+     * @throws Exception Random Exception
      */
     private function getRandomCategories(): array
     {
@@ -178,7 +180,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
         // * @Assert\Count(max="3")
         $maxIndex = random_int(1, 3);
 
-        for ($index = 0; $index < $maxIndex; $index++) {
+        for ($index = 0; $index < $maxIndex; ++$index) {
             $randomCategoryReferences[]
                 = $this->getReference(CategoryFixture::CATEGORY_REFERENCE.random_int(0, 4));
         }
@@ -189,7 +191,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     /**
      * Create a fake Image object based on a static image fixture
      *
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     private function getAStaticImageFixture(): Image
     {
@@ -200,7 +202,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
         $image->setExtension('jpeg');
 
         FilesystemStaticUtilities::forceFileCopying(
-            __DIR__ . '/base-image-fixture.jpeg',
+            __DIR__.'/base-image-fixture.jpeg',
             $this->imageUploadDirectory,
             '/'.$image->getUuid()->toString().'.'.$image->getExtension()
         );

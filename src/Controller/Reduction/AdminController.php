@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
-use App\Service\EntityManager\ReductionManager;
 use \Exception;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
+use App\Repository\Adapter\RepositoryAdapterInterface;
+use App\Service\EntityManager\ReductionManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Repository\Adapter\RepositoryAdapterInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/reduction", name="app_admin_reduction_")
@@ -44,15 +44,16 @@ final class AdminController extends AbstractController
         $repository = $this->repositoryAdapter->getRepository(Reduction::class);
 
         return $this->render('reduction/admin/waiting_list.html.twig', [
-            'reductions' => $repository->findBy(['isActive'=> false], ['createdAt' => 'DESC'])
+            'reductions' => $repository->findBy(['isActive' => false], ['createdAt' => 'DESC']),
         ]);
     }
 
     /**
      * @see     ImageUploadListener
      *
-     * @Route("/{slug}/edit", name="edit", methods={"GET","POST"})
-     * @throws  Exception Datetime Exception
+     * @Route("/{slug}/edit", name="edit", methods={"GET", "POST"})
+     *
+     * @throws Exception Datetime Exception
      */
     public function edit(Request $request, Reduction $reduction): Response
     {
@@ -66,6 +67,7 @@ final class AdminController extends AbstractController
             $this->repositoryAdapter->update(
                 $this->reductionManager->prepareAnUpdatedReduction($reduction, $previousTitle)
             );
+
             return $this->redirectToRoute('app_reduction_index');
         }
 

@@ -33,7 +33,8 @@ class PromoGendMailer
     }
 
     /**
-     * ->from() is set in
+     * ->from() is set in MailerSetFromFieldSubscriber.
+     *
      * @throws TransportExceptionInterface
      */
     public function send(
@@ -52,7 +53,8 @@ class PromoGendMailer
                 'sender_email' => $context['email'],
                 'subject' => $context['subject'],
                 'message' => $context['message'],
-            ]);
+            ])
+        ;
 
         $this->mailer->send($email);
     }

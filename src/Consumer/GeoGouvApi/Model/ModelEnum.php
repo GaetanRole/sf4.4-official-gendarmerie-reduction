@@ -12,13 +12,13 @@ use App\Utils\AbstractBasicEnum;
 abstract class ModelEnum extends AbstractBasicEnum
 {
     /** @var string Classes */
-    public const DEPARTMENT_CLASS_NAME = 'Department',
-        MUNICIPALITY_CLASS_NAME = 'Municipality',
-        REGION_CLASS_NAME = 'Region';
+    public const DEPARTMENT_CLASS_NAME = 'Department';
+    public const MUNICIPALITY_CLASS_NAME = 'Municipality';
+    public const REGION_CLASS_NAME = 'Region';
 
     /** @var string Classes */
-    public const REGION_INTERNATIONAL_ENDPOINT = 'International',
-        REGION_NATIONAL_ENDPOINT = 'National';
+    public const REGION_INTERNATIONAL_ENDPOINT = 'International';
+    public const REGION_NATIONAL_ENDPOINT = 'National';
 
     /** @var array Models */
     public const MODEL_CLASSES = [
@@ -28,7 +28,7 @@ abstract class ModelEnum extends AbstractBasicEnum
     ];
 
     /** @var string Endpoints */
-    public const DEPARTMENT_ENDPOINT = 'departements',
-        MUNICIPALITY_ENDPOINT = 'communes',
-        REGION_ENDPOINT = 'regions';
+    public const DEPARTMENT_ENDPOINT = 'departements';
+    public const MUNICIPALITY_ENDPOINT = 'communes';
+    public const REGION_ENDPOINT = 'regions';
 }

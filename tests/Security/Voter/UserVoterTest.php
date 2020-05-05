@@ -6,13 +6,14 @@ namespace App\Tests\Security\Voter;
 
 use \Generator;
 use App\Entity\User;
-use PHPUnit\Framework\TestCase;
 use App\Security\Voter\UserVoter;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * @group   Unit
+ *
  * @see     https://symfony.com/doc/current/security/voters.html
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -27,10 +28,12 @@ final class UserVoterTest extends TestCase
         $userStub = $this->createMock(User::class);
         $userStub
             ->method('getRoles')
-            ->willReturn([$role]);
+            ->willReturn([$role])
+        ;
         $userStub
             ->method('hasRole')
-            ->willReturnOnConsecutiveCalls($isGrantedFirstExpectation, $isGrantedSecondExpectation);
+            ->willReturnOnConsecutiveCalls($isGrantedFirstExpectation, $isGrantedSecondExpectation)
+        ;
 
         return $userStub;
     }
@@ -41,25 +44,25 @@ final class UserVoterTest extends TestCase
             'edit',
             $this->createAnUserStub('ROLE_ADMIN', false, true),
             $this->createAnUserStub('ROLE_USER', false, true),
-            Voter::ACCESS_DENIED
+            Voter::ACCESS_DENIED,
         ];
         yield 'A Super Admin can edit an Admin' => [
             'status',
             $this->createAnUserStub('ROLE_ADMIN', false, true),
             $this->createAnUserStub('ROLE_SUPER_ADMIN', true, false),
-            Voter::ACCESS_GRANTED
+            Voter::ACCESS_GRANTED,
         ];
         yield 'An Admin can not delete a Super Admin' => [
             'delete',
             $this->createAnUserStub('ROLE_SUPER_ADMIN', true, false),
             $this->createAnUserStub('ROLE_ADMIN', false, true),
-            Voter::ACCESS_DENIED
+            Voter::ACCESS_DENIED,
         ];
         yield 'An User can be deleted by others' => [
             'delete',
             $this->createAnUserStub('ROLE_USER', false, false),
             $this->createAnUserStub('ROLE_ADMIN', false, true),
-            Voter::ACCESS_GRANTED
+            Voter::ACCESS_GRANTED,
         ];
     }
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\EventSubscriber;
 
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Translation\Translator;
 use App\Event\SuccessPersistenceNotificationEvent;
 use App\EventSubscriber\PersistenceNotificationSubscriber;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\Translation\Translator;
 
 /**
  * @group   Unit

@@ -7,13 +7,13 @@ namespace App\Controller\Opinion;
 use \Exception;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/opinion", name="app_admin_opinion_")
@@ -34,8 +34,9 @@ final class AdminController extends AbstractController
     /**
      * @todo    Probably have to add a dynamic edit below a Reduction.
      *
-     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET","POST"})
-     * @throws  Exception Datetime Exception
+     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET", "POST"})
+     *
+     * @throws Exception Datetime Exception
      */
     public function edit(Request $request, Opinion $opinion): Response
     {
@@ -44,6 +45,7 @@ final class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repositoryAdapter->update($opinion);
+
             return $this->redirectToRoute('app_admin_dashboard');
         }
 

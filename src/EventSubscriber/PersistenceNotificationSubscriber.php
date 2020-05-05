@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Event\SuccessPersistenceNotificationEvent;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Notifies all persistence from RepositoryAdapter::save(), ::update() and ::delete() methods.

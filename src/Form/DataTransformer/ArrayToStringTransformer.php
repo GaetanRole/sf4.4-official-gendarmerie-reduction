@@ -19,8 +19,9 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     /**
      * Transforms an array to a string.
      *
-     * @param   mixed $array The value in the original representation
-     * @return  string|null The value in the transformed representation
+     * @param mixed $array The value in the original representation
+     *
+     * @return string|null The value in the transformed representation
      */
     public function transform($array): ?string
     {
@@ -30,8 +31,9 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     /**
      * Reverse transform a string to an array.
      *
-     * @param   mixed $string The value in the transformed representation
-     * @return  array|null The value in the original representation
+     * @param mixed $string The value in the transformed representation
+     *
+     * @return array|null The value in the original representation
      */
     public function reverseTransform($string): ?array
     {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Tests\Event;
 
 use \ReflectionClass;
+use App\Event\SuccessPersistenceNotificationEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\Event;
-use App\Event\SuccessPersistenceNotificationEvent;
 
 /**
  * @group   Unit

@@ -26,6 +26,7 @@ class ListUsersCommand extends Command
 {
     /**
      * Command used in console.
+     *
      * @var string
      */
     protected static $defaultName = 'app:list-users';

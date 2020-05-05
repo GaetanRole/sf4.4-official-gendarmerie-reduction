@@ -7,12 +7,12 @@ namespace App\Controller\Opinion;
 use \Exception;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\Adapter\RepositoryAdapterInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/opinion", name="app_opinion_")
@@ -32,10 +32,12 @@ final class OpinionController extends AbstractController
 
     /**
      * Adding one Opinion on an existing Reduction (get by slug).
+     *
      * @todo    Probably have to add a dynamic form below a Reduction.
      *
-     * @Route("/comment/{slug}", name="comment", methods={"GET","POST"})
-     * @throws  Exception Datetime Exception
+     * @Route("/comment/{slug}", name="comment", methods={"GET", "POST"})
+     *
+     * @throws Exception Datetime Exception
      */
     public function comment(Request $request, Reduction $reduction): Response
     {
@@ -49,6 +51,7 @@ final class OpinionController extends AbstractController
             $opinion->setReduction($reduction);
 
             $this->repositoryAdapter->save($opinion);
+
             return $this->redirectToRoute('app_reduction_view', ['slug' => $reduction->getSlug()]);
         }
 

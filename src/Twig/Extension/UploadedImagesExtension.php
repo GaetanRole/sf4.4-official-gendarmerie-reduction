@@ -7,8 +7,8 @@ namespace App\Twig\Extension;
 use App\Entity\Image;
 use Liip\ImagineBundle\Templating\FilterExtension;
 use Symfony\Component\Asset\Context\RequestStackContext;
-use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * A Twig extension completed by Imagine filter extension,
@@ -36,7 +36,7 @@ final class UploadedImagesExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('uploaded_asset', [$this, 'getUploadedAndCachedAssetPath'])
+            new TwigFunction('uploaded_asset', [$this, 'getUploadedAndCachedAssetPath']),
         ];
     }
 

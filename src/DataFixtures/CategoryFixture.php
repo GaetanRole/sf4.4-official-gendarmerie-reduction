@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use Faker;
 use \Exception;
-use Ramsey\Uuid\Uuid;
 use App\Entity\Category;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Persistence\ObjectManager;
+use Faker;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,6 +26,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
 
     /**
      * Global project's clock.
+     *
      * @var GlobalClock
      */
     private $clock;
@@ -34,7 +35,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
     private $container;
 
     /**
-     * @link    https://github.com/Innmind/TimeContinuum Global clock
+     * @see    https://github.com/Innmind/TimeContinuum Global clock
      */
     public function __construct(GlobalClock $clock, ContainerInterface $container)
     {
@@ -46,9 +47,9 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
      * Load three types of Categories to DB.
      *
      * @see     3 $categories[5] to use its references in ReductionFixture
-     * @link    https://github.com/fzaninotto/Faker
+     * @see    https://github.com/fzaninotto/Faker
      *
-     * @throws  Exception Datetime Exception
+     * @throws Exception Datetime Exception
      */
     public function load(ObjectManager $manager): void
     {
@@ -62,7 +63,8 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
             $category->setUpdatedAt(null);
 
             $category->setName(ucfirst($name))
-                ->setDescription($faker->realText(100));
+                ->setDescription($faker->realText(100))
+            ;
 
             $manager->persist($category);
             $this->addReference(self::CATEGORY_REFERENCE.$index, $category);

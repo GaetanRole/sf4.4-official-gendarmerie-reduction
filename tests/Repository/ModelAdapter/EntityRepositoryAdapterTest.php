@@ -6,17 +6,17 @@ namespace App\Tests\Repository\ModelAdapter;
 
 use \DateTime;
 use \Exception;
-use Ramsey\Uuid\Uuid;
 use App\Entity\Category;
-use App\Service\GlobalClock;
-use PHPUnit\Framework\TestCase;
-use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Innmind\TimeContinuum\Format\ISO8601;
-use PHPUnit\Framework\MockObject\MockObject;
-use Innmind\TimeContinuum\TimeContinuum\Earth;
 use App\Repository\Adapter\RepositoryAdapter;
 use App\Repository\Adapter\RepositoryAdapterInterface;
+use App\Repository\CategoryRepository;
+use App\Service\GlobalClock;
+use Doctrine\ORM\EntityManagerInterface;
+use Innmind\TimeContinuum\Format\ISO8601;
+use Innmind\TimeContinuum\TimeContinuum\Earth;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -41,7 +41,7 @@ final class EntityRepositoryAdapterTest extends TestCase
     protected function setUp(): void
     {
         $this->entityManagerMock = $this->createMock(EntityManagerInterface::class);
-        $this->eventDispatcherMock  = $this->createMock(EventDispatcherInterface::class);
+        $this->eventDispatcherMock = $this->createMock(EventDispatcherInterface::class);
 
         $this->entityRepositoryAdapter = new RepositoryAdapter(
             $this->entityManagerMock,
@@ -74,7 +74,8 @@ final class EntityRepositoryAdapterTest extends TestCase
             ->expects($this->once())
             ->method('getRepository')
             ->with(Category::class)
-            ->willReturn($categoryTestedDummy);
+            ->willReturn($categoryTestedDummy)
+        ;
 
         $this->assertInstanceOf(
             CategoryRepository::class,
@@ -92,15 +93,18 @@ final class EntityRepositoryAdapterTest extends TestCase
         $this->entityManagerMock
             ->expects($this->once())
             ->method('persist')
-            ->with($category);
+            ->with($category)
+        ;
 
         $this->entityManagerMock
             ->expects($this->once())
-            ->method('flush');
+            ->method('flush')
+        ;
 
         $this->eventDispatcherMock
             ->expects($this->once())
-            ->method('dispatch');
+            ->method('dispatch')
+        ;
 
         $category = $this->entityRepositoryAdapter->save($category);
 
@@ -119,11 +123,13 @@ final class EntityRepositoryAdapterTest extends TestCase
 
         $this->entityManagerMock
             ->expects($this->once())
-            ->method('flush');
+            ->method('flush')
+        ;
 
         $this->eventDispatcherMock
             ->expects($this->once())
-            ->method('dispatch');
+            ->method('dispatch')
+        ;
 
         $this->assertNull($category->getUpdatedAt());
 
@@ -139,15 +145,18 @@ final class EntityRepositoryAdapterTest extends TestCase
 
         $this->entityManagerMock
             ->expects($this->once())
-            ->method('remove');
+            ->method('remove')
+        ;
 
         $this->entityManagerMock
             ->expects($this->once())
-            ->method('flush');
+            ->method('flush')
+        ;
 
         $this->eventDispatcherMock
             ->expects($this->once())
-            ->method('dispatch');
+            ->method('dispatch')
+        ;
 
         $this->entityRepositoryAdapter->delete($category);
     }

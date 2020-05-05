@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="20" resname="reduction.save.flash.success">
         <source>reduction.save.flash.success</source>
-        <target>La réduction a bien été ajoutée. Celle-ci sera vérifiée par les administrateurs et affichée par la suite. Merci camarade !</target>
+        <target>La réduction a bien été ajoutée. Celle-ci sera vérifiée au préalable par les administrateurs puis affichée. Merci camarade !</target>
       </trans-unit>
       <trans-unit id="21" resname="reduction.validation.flash.success">
         <source>reduction.validation.flash.success</source>

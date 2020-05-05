@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use Doctrine\Persistence\ManagerRegistry;
 use \Exception;
 use App\Entity\Opinion;
 use App\Service\GlobalClock;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method  Opinion|null find($id, $lockMode = null, $lockVersion = null)
- * @method  Opinion|null findOneBy(array $criteria, array $orderBy = null)
- * @method  Opinion[]    findAll()
- * @method  Opinion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Opinion|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Opinion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Opinion[]    findAll()
+ * @method Opinion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
@@ -33,8 +33,9 @@ class OpinionRepository extends ServiceEntityRepository
     /**
      * Find last articles.
      *
-     * @return  Opinion[]
-     * @throws  Exception Datetime Exception
+     * @return Opinion[]
+     *
+     * @throws Exception Datetime Exception
      */
     public function findLatest(): array
     {
@@ -44,7 +45,8 @@ class OpinionRepository extends ServiceEntityRepository
             ->innerJoin('o.reduction', 'r')
             ->andWhere('o.createdAt <= :now')
             ->orderBy('o.createdAt', 'DESC')
-            ->setParameter('now', $this->clock->getNowInDateTime());
+            ->setParameter('now', $this->clock->getNowInDateTime())
+        ;
 
         return $qb->getQuery()->execute();
     }

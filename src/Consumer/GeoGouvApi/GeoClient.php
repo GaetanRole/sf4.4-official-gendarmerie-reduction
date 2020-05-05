@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Consumer\GeoGouvApi;
 
+use \InvalidArgumentException;
 use App\Consumer\GeoGouvApi\Model\ModelEnum;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
-use \InvalidArgumentException;
 
 /**
  * Class GeoClient consuming https://geo.api.gouv.fr/ API.
@@ -48,8 +48,9 @@ class GeoClient
 
     public function __call(string $className, array $arguments)
     {
-        if (in_array($className, ModelEnum::MODEL_CLASSES, true)) {
+        if (\in_array($className, ModelEnum::MODEL_CLASSES, true)) {
             $className = self::MODEL_API_NAMESPACE.$className;
+
             return new $className($this->httpClient);
         }
 
@@ -59,7 +60,7 @@ class GeoClient
     public function fields(array $fields): GeoClient
     {
         foreach ($fields as $field) {
-            if (in_array($field, $this->availableFields, false)) {
+            if (\in_array($field, $this->availableFields, false)) {
                 $this->userFields[] = $field;
             }
         }
@@ -72,14 +73,14 @@ class GeoClient
      */
     public function search(string $key = '', string $value = ''): array
     {
-        if (in_array($key, $this->availableParams, false)) {
+        if (\in_array($key, $this->availableParams, false)) {
             $this->userParam = $key;
             $this->userSearch = $value;
         }
 
         $url = $this->url.'?'.$this->userParam.'='.$this->userSearch;
 
-        if (count($this->userFields) > 0) {
+        if (\count($this->userFields) > 0) {
             $url .= '&fields='.implode(',', $this->userFields);
         }
 
@@ -98,7 +99,7 @@ class GeoClient
         }
 
         if (Response::HTTP_OK === $response->getStatusCode()) {
-            return json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+            return json_decode($response->getBody()->getContents(), true, 512, \JSON_THROW_ON_ERROR);
         }
 
         return [$response->getStatusCode() => $response->getReasonPhrase()];
