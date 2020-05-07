@@ -45,12 +45,11 @@
 
     <section class="bg-grey p-5">
         <div class="container mb-5">
-            <div class="row">
+            <div id="search-results">
                 <div class="col-md-12">
-                    <h2 class="mb-5 font-weight-light">0 réduction trouvée.</h2>
                     <div class="bg-white card text-center p-5">
                         <p>
-                            {{ 'table.empty'|trans }}
+                            {{ 'reduction.index.body.search.empty'|trans }}
                         </p>
                     </div>
                 </div>
@@ -61,6 +60,19 @@
 
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $("#search-form").submit(function(e) {
+            e.preventDefault();
+
+            let $form = $(e.currentTarget);
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'GET',
+                data: $form.serialize(),
+                success: function(data) {$('#search-results').html(data);},
+            });
+        });
+    </script>
     <script>
         $('select[data-select]').select2();
 

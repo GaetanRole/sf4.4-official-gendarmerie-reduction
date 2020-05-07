@@ -207,18 +207,18 @@ input[type="search"]:focus {
 }
 
 .card {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px !important;
-    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px !important;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
+    -moz-box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
 }
 
 .card:hover {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 4px 10px !important;
-    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 4px 10px !important;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 4px 10px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
+    -moz-box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
 }
 
 .img-thumbnail {
@@ -344,6 +344,12 @@ span.select2-selection.select2-selection--single {
     box-shadow: rgba(0, 0, 0, 0.10) 0 2px 6px;
 }
 
+.border-radius {
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important;
+}
+
 /* Index */
 
 .card-title {
@@ -411,6 +417,7 @@ span.select2-selection.select2-selection--single {
     border-radius: 10px;
     border-style: none !important;
 }
+
 .search-btn:hover {
     background-color: var(--grey-medium);
 }

@@ -39,7 +39,7 @@ class ReductionRepository extends ServiceEntityRepository
      *
      * @todo    Add PagerFanta
      *
-     * @throws Exception Datetime Exception
+     * @throws Exception dateTime Emits Exception in case of an error
      */
     public function findLatestBy(Category $category = null, $limit = null): Paginator
     {
@@ -89,50 +89,38 @@ class ReductionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Reduction[]
+     * @throws Exception dateTime Emits Exception in case of an error
      */
-    public function findBySearchQuery(string $rawQuery, int $limit = Reduction::NUM_ITEMS): array
+    public function findByLocation(array $locationParameters): Paginator
     {
-        $query = $this->sanitizeSearchQuery($rawQuery);
-        $searchTerms = $this->extractSearchTerms($query);
+        $qb = $this->createQueryBuilder('r')
+            ->addSelect('b', 'c', 'i')
+            ->leftJoin('r.brand', 'b')
+            ->leftJoin('r.categories', 'c')
+            ->leftJoin('r.image', 'i')
+            ->andWhere('r.isActive = :status')
+            ->orderBy('r.createdAt', 'DESC')
+            ->setParameter('status', true)
+        ;
 
-        if (0 === \count($searchTerms)) {
-            return [];
-        }
-
-        $queryBuilder = $this->createQueryBuilder('r');
-        foreach ($searchTerms as $key => $term) {
-            $queryBuilder
-                ->orWhere('r.brand LIKE :c_'.$key)
-                ->setParameter('c_'.$key, '%'.$term.'%')
+        if ($locationParameters['region']) {
+            $qb->andWhere('r.region = :region')
+                ->setParameter('region', $locationParameters['region'])
             ;
         }
 
-        return $queryBuilder
-            ->orderBy('r.createdAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+        if ($locationParameters['department']) {
+            $qb->andWhere('r.department = :department')
+                ->setParameter('department', $locationParameters['department'])
+            ;
+        }
 
-    /**
-     * Removes all non-alphanumeric characters except whitespaces.
-     */
-    private function sanitizeSearchQuery(string $query): string
-    {
-        return trim(preg_replace('/[[:space:]]+/', ' ', $query));
-    }
+        if ($locationParameters['municipality']) {
+            $qb->andWhere('r.municipality = :municipality')
+                ->setParameter('municipality', $locationParameters['municipality'])
+            ;
+        }
 
-    /**
-     * Splits the search query into terms and removes the ones which are irrelevant.
-     */
-    private function extractSearchTerms(string $searchQuery): array
-    {
-        $terms = array_unique(explode(' ', $searchQuery));
-
-        return array_filter($terms, static function ($term) {
-            return 2 <= mb_strlen($term);
-        });
+        return new Paginator($qb);
     }
 }

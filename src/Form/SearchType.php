@@ -17,6 +17,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 final class SearchType extends AbstractType
 {
+    /** @var array */
+    public const SEARCH_METHODS = ['location', 'brand'];
+
     /** @var GeoClient */
     private $geoClient;
 
@@ -37,8 +40,8 @@ final class SearchType extends AbstractType
     {
         $builder->add('method', ChoiceType::class, [
             'choices' => [
-                'form.search.method.label.location' => 'location',
-                'form.search.method.label.brand' => 'brand',
+                'form.search.method.label.location' => self::SEARCH_METHODS[0],
+                'form.search.method.label.brand' => self::SEARCH_METHODS[1],
             ],
             'data' => 'location',
             'expanded' => true,
