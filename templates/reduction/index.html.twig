@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content_id 'reduction-index' %}
-{%- block content -%}
+{% block content -%}
     <section class="container-fluid bg-white box-shadow text-center mt-5 p-5">
         <h1 class="sr-only">{{ 'reduction.index.body.h1'|trans }}</h1>
         {{ form_start(form) }}
@@ -48,9 +48,9 @@
             <div id="search-results">
                 <div class="col-md-12">
                     <div class="bg-white card text-center p-5">
-                        <p>
-                            {{ 'reduction.index.body.search.empty'|trans }}
-                        </p>
+                        <h3 class="lead font-weight-light">
+                            {{ 'reduction.search-results.body.empty'|trans }}
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -61,17 +61,29 @@
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
+        // Handle click event after an asynchronous Ajax request.
+        $(document).on('click', '.link-callback', function(e){
+            e.preventDefault();
+            let tag = $(e.currentTarget);
+            ajaxRequestCallback($("#search-form").attr('action'), tag.attr("href"), tag.data('pagination'));
+        });
+
+        // Catch form submit and do an Ajax request.
         $("#search-form").submit(function(e) {
             e.preventDefault();
-
-            let $form = $(e.currentTarget);
-            $.ajax({
-                url: $form.attr('action'),
-                method: 'GET',
-                data: $form.serialize(),
-                success: function(data) {$('#search-results').html(data);},
-            });
+            let form = $(e.currentTarget);
+            ajaxRequestCallback(form.attr('action'), form.serialize(), 1);
         });
+
+        let ajaxRequestCallback = (action, data, page) => {
+            $.ajax({
+                url: action,
+                method: 'GET',
+                data: data+'&search%5Bpage%5D='+page,
+                success: function(data) {$('#search-results').html(data);},
+                complete: function() {$('html, body').stop().animate({scrollTop: '+='+$('#search-title').offset().top}, 'fast');},
+            });
+        };
     </script>
     <script>
         $('select[data-select]').select2();

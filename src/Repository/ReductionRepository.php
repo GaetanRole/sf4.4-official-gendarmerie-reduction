@@ -8,10 +8,11 @@ use \Exception;
 use App\Entity\Category;
 use App\Entity\Reduction;
 use App\Service\GlobalClock;
+use App\Service\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -41,7 +42,7 @@ class ReductionRepository extends ServiceEntityRepository
      *
      * @throws Exception dateTime Emits Exception in case of an error
      */
-    public function findLatestBy(Category $category = null, $limit = null): Paginator
+    public function findLatestBy(Category $category = null, $limit = null): DoctrinePaginator
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('u', 'c', 'i')
@@ -65,7 +66,7 @@ class ReductionRepository extends ServiceEntityRepository
             $qb->setMaxResults($limit);
         }
 
-        return new Paginator($qb);
+        return new DoctrinePaginator($qb);
     }
 
     /**
@@ -91,7 +92,7 @@ class ReductionRepository extends ServiceEntityRepository
     /**
      * @throws Exception dateTime Emits Exception in case of an error
      */
-    public function findByLocation(array $locationParameters): Paginator
+    public function findByLocation(array $locationParameters, int $page = 1): Paginator
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('b', 'c', 'i')
@@ -121,6 +122,6 @@ class ReductionRepository extends ServiceEntityRepository
             ;
         }
 
-        return new Paginator($qb);
+        return (new Paginator($qb))->paginate($page);
     }
 }

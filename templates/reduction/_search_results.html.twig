@@ -1,38 +1,69 @@
 <div class="row">
     <div class="col-md-12">
-        <h2 class="mt-5 mb-5 font-weight-light">{{ 'reduction.search-results.body.h2'|trans({'%count%': reductions|length}) }}</h2>
+        <h2 id="search-title" class="mt-5 mb-5 font-weight-light">{{ 'reduction.search-results.body.h2'|trans({'%count%': paginator|length}) }}</h2>
     </div>
 </div>
 <div class="row">
-    {% for reduction in reductions %}
+    {% if paginator is empty or paginator.results is empty %}
         <div class="col-md-12">
-            <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3 vertical-center">
-                                <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
-                            </div>
-                            <div class="col-md-9 p-3">
-                                <h3 class="card-title text-dark p-0 m-0"><span class="text-info">{{ reduction.brand }}</span> - {{ reduction.title|upper }}</h3>
-                                <p><small class="text-secondary">{{ 'reduction.search-results.body.creation.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
-                                <p class="card-text text-secondary pt-2 pb-2">{{ reduction.description|slice(0, 128) ~ '...'}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="badge badge-pill badge-dark">{{ reduction.categories|join(', ', 'reduction.search-results.body.subtitle.category.join'|trans) }}</small>
+            <div class="bg-white card text-center p-5">
+                <h3 class="lead font-weight-light">
+                    {{ 'reduction.search-results.body.no-result'|trans }}
+                </h3>
+            </div>
+        </div>
+    {% else %}
+        {% for reduction in paginator.results %}
+            <div class="col-md-12">
+                <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 vertical-center">
+                                    <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
+                                </div>
+                                <div class="col-md-9 p-3">
+                                    <h3 class="card-title text-dark p-0 m-0"><span class="text-info">{{ reduction.brand.name }}</span> - {{ reduction.title|upper }}</h3>
+                                    <p><small class="text-secondary">{{ 'reduction.search-results.body.creation.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
+                                    <p class="card-text text-secondary pt-2 pb-2">{{ reduction.description|slice(0, 64) ~ '...'}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="badge badge-pill badge-dark">{{ reduction.categories|join(', ', 'reduction.search-results.body.subtitle.category.join'|trans) }}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    {% else %}
-        <div class="col-md-12">
-            <div class="bg-white card text-center p-5">
-                <p>
-                    {{ 'reduction.search-results.body.no-result'|trans }}
-                </p>
+                </a>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 </div>
+{% if paginator is not empty and paginator.hasToPaginate %}
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center flex-wrap font-weight-light">
+                    {% if paginator.hasPreviousPage %}
+                        <li class="page-item box-shadow"><a href="{{ pastQueryString }}" data-pagination="{{ paginator.previousPage }}" rel="previous" class="page-link link-callback">{{ 'paginator.previous'|trans }}</a></li>
+                    {% else %}
+                        <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.previous'|trans }}</span></li>
+                    {% endif %}
+
+                    {% for i in 1..paginator.lastPage %}
+                        {% if i is same as(paginator.currentPage) %}
+                            <li class="page-item active box-shadow"><span class="page-link">{{ i }} <span class="sr-only">{{ 'paginator.current'|trans }}</span></span></li>
+                        {% else %}
+                            <li class="page-item box-shadow"><a href="{{ pastQueryString }}" data-pagination="{{ i }}" class="page-link link-callback">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if paginator.hasNextPage %}
+                        <li class="page-item box-shadow"><a href="{{ pastQueryString }}" data-pagination="{{ paginator.nextPage }}" rel="next" class="page-link link-callback">{{ 'paginator.next'|trans }}</a></li>
+                    {% else %}
+                        <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.next'|trans }}</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}

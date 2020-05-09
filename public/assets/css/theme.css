@@ -180,6 +180,15 @@ input[type="search"]:focus {
     background-color: var(--grey-medium) !important;
 }
 
+.badge {
+    padding: 0.6em;
+}
+
+.badge-pill {
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
 .bg-light {
     background-color: var(--white) !important;
 }
@@ -237,6 +246,30 @@ input[type="search"]:focus {
 .input-group-text {
     color: var(--white);
     background-color: var(--grey-medium);
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: .75rem;
+    color: var(--grey-medium);
+    border: none;
+}
+
+.page-link:hover {
+    color: var(--grey-medium);
+    text-decoration: none;
+    background-color: var(--grey-light);
+    border-color: transparent;
+}
+
+.page-item.active .page-link {
+    background-color: var(--grey-medium);
+    border-color: transparent;
+}
+
+.page-link:focus {
+    box-shadow: none;
 }
 
 /* Select2 overriding
