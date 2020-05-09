@@ -1,0 +1,13 @@
+{% macro breadcrumb(crumbs = {}) %}
+    <nav aria-label="breadcrumb" class="bg-dark border-radius mt-4 mb-5">
+        <ol class="breadcrumb">
+            {% for url, label in crumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ label }}</li>
+                {% else %}
+                    <li class="breadcrumb-item"><a href="{{ path(url) }}" title="{{ 'breadcrumb.link.title'|trans }}">{{ label }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+{% endmacro %}

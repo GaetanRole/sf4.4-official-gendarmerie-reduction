@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
                 </li>
             {% endif %}
-            <li class="nav-item {{ currentRoute is same as('app_reduction_index') ? 'active' }}">
+            <li class="nav-item {{ 'reduction' in currentRoute ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_reduction_index') }}" title="{{ 'base.header.nav.reduction.link.title'|trans }}">{{ 'base.header.nav.reduction.link'|trans }}</a>
             </li>
             <li class="nav-item {{ currentRoute is same as('app_contact') ? 'active' }}">

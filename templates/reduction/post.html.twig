@@ -10,14 +10,16 @@
 
 {% block content_id 'reduction-post' %}
 {% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-5 p-5">
-                <div class="col">
-                    <h1>{{ 'reduction.post.body.h1'|trans }}</h1>
+    {% import "macro/_breadcrumb.html.twig" as macro %}
+
+    <section class="bg-white mt-5 pt-5 pb-5">
+        <div class="container pb-5 pt-5">
+            <div class="row">
+                <div class="col-md">
+                    <h1 class="font-weight-bold">{{ 'reduction.post.body.h1'|trans }}</h1>
+                    {{ macro.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_post': 'link.reduction.post'|trans }) }}
 
                     {{ include('reduction/_form.html.twig') }}
-                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
                 </div>
             </div>
         </div>

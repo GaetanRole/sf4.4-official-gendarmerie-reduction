@@ -1,4 +1,21 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-<button class="btn btn-sm btn-dark">{{ 'btn.save'|trans }}</button>
+    {{ form_row(form.userIdentity) }}
+<hr class="mt-4 mb-5">
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.image) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.brand) }}
+        {{ form_row(form.categories) }}
+    </div>
+</div>
+<hr class="mt-4 mb-5">
+    {{ form_row(form.region) }}
+    {{ form_row(form.department) }}
+    {{ form_row(form.municipality) }}
+
+<button class="btn btn-sm btn-dark mt-3 mb-3"><i class="fas fa-check"></i>&nbsp;{{ 'btn.save'|trans }}</button>
 {{ form_end(form) }}

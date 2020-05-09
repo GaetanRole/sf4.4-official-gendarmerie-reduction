@@ -84,11 +84,16 @@ select {
 }
 
 select option {
-    padding: 10px;
+    padding: 15px;
 }
 
 select[multiple]:focus option:checked {
     background: linear-gradient(0deg, var(--grey-medium) 0%, var(--grey-medium) 100%);
+}
+
+.col-form-label,
+label {
+    font-weight: 600;
 }
 
 select,
@@ -144,6 +149,11 @@ input[type="color"]:focus,
 
 input[type="search"]:focus {
     border-color: transparent !important;
+}
+
+hr {
+    border: 2px solid var(--grey-opaque);
+    opacity: 0.3;
 }
 
 ::-webkit-scrollbar {
@@ -246,6 +256,23 @@ input[type="search"]:focus {
 .input-group-text {
     color: var(--white);
     background-color: var(--grey-medium);
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: .6rem 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--white);
+}
+
+.breadcrumb a:hover {
+    color: var(--grey);
+}
+
+.breadcrumb-item.active {
+    color: var(--grey);
 }
 
 .page-link {
@@ -505,6 +532,11 @@ span.select2-selection.select2-selection--single {
 
 .custom-file-label::after {
     opacity: 0;
+}
+
+.custom-file-label {
+    padding: 12px 0 0 20px;
+    height: 50px;
 }
 
 /* Responsive

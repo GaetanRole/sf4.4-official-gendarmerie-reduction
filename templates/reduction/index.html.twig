@@ -10,47 +10,51 @@
 
 {% block content_id 'reduction-index' %}
 {% block content -%}
-    <section class="container-fluid bg-white box-shadow text-center mt-5 p-5">
-        <h1 class="sr-only">{{ 'reduction.index.body.h1'|trans }}</h1>
-        {{ form_start(form) }}
-        <div class="row text-dark lead font-weight-light p-5">
-            <div class="col-lg-3 offset-lg-3">
-                {{ form_row(form.method[0]) }}
-            </div>
-            <div class="col-lg-3">
-                {{ form_row(form.method[1]) }}
-            </div>
-        </div>
-        <div class="search-bar row p-4 mb-5">
-            <div class="col-lg-10">
-                <div class="row">
-                    <div class="col-md-4">
-                        {{ form_row(form.region, { 'help': '' }) }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form_row(form.department, { 'help': '' }) }}
-                    </div>
-                    <div class="col-md-4">
-                        {{ form_row(form.municipality, { 'help': '' }) }}
-                    </div>
+    <section class="bg-white box-shadow text-center mt-5 p-5">
+        <div class="container-fluid">
+            <h1 class="sr-only">{{ 'reduction.index.body.h1'|trans }}</h1>
+            {{ form_start(form) }}
+            <div class="row text-dark lead p-5">
+                <div class="col-lg-3 offset-lg-3">
+                    {{ form_row(form.method[0], { 'label_attr': { 'class': 'font-weight-light' } }) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(form.method[1], { 'label_attr': { 'class': 'font-weight-light' } }) }}
                 </div>
             </div>
-            <div class="col-lg-2 vertical-center">
-                <button type="submit" class="search-btn"><i class="fas fa-search"></i> {{ 'btn.search'|trans }}</button>
+            <div class="search-bar row p-4 mb-5">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.region, { 'help': '' }) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.department, { 'help': '' }) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.municipality, { 'help': '' }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 vertical-center">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i> {{ 'btn.search'|trans }}</button>
+                </div>
             </div>
+            {{ form_end(form) }}
+            <a class="btn btn-sm btn-dark" href="{{ path('app_reduction_post') }}" title="{{ 'link.reduction.post.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.reduction.post'|trans }}</a>
         </div>
-        {{ form_end(form) }}
-        <a class="btn btn-sm btn-dark" href="{{ path('app_reduction_post') }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.reduction.post'|trans }}</a>
     </section>
 
-    <section class="bg-grey p-5">
-        <div class="container mb-5">
+    <section class="bg-grey p-5 mb-5">
+        <div class="container">
             <div id="search-results">
-                <div class="col-md-12">
-                    <div class="bg-white card text-center p-5">
-                        <h3 class="lead font-weight-light">
-                            {{ 'reduction.search-results.body.empty'|trans }}
-                        </h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bg-white card text-center p-5">
+                            <h3 class="lead font-weight-light">
+                                {{ 'reduction.search-results.body.empty'|trans }}
+                            </h3>
+                        </div>
                     </div>
                 </div>
             </div>
