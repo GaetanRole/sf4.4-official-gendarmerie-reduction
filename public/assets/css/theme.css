@@ -237,6 +237,14 @@ hr {
     box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
 }
 
+.album .card-body {
+    min-height: 260px;
+}
+
+.card-text {
+    min-height: 80px;
+}
+
 .img-thumbnail {
     padding: 0;
     background-color: transparent;

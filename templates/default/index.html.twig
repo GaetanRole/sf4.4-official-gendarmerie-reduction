@@ -52,7 +52,7 @@
             <div class="container-semi-fluid">
                 <div class="row pb-5">
                     {% for reduction in reductions %}
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
                                 <div class="card mb-4 shadow-sm">
                                     <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
