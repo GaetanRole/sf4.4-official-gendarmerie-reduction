@@ -238,10 +238,10 @@ hr {
 }
 
 .album .card-body {
-    min-height: 260px;
+    min-height: 250px;
 }
 
-.card-text {
+.album .card-text {
     min-height: 80px;
 }
 
