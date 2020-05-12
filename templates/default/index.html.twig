@@ -57,11 +57,21 @@
                                 <div class="card mb-4 shadow-sm">
                                     <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
                                     <div class="card-body">
-                                        <h3 class="card-title text-dark p-0 m-0"><span class="text-info">{{ reduction.brand.name }}</span> - {{ reduction.title|capitalize}}</h3>
-                                        <p><small class="text-secondary">{{ 'reduction.search-results.body.creation.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
+                                        <h3 class="card-title text-dark p-0 m-0"><span class="badge badge-lg badge-info mr-2">{{ reduction.brand.name }}</span>&nbsp;{{ reduction.title|capitalize }}</h3>
+                                        <p><small class="text-secondary">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
                                         <p class="card-text text-secondary pt-2 pb-2">{{ reduction.description|slice(0, 64) ~ '...'}}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="badge badge-pill badge-dark">{{ reduction.categories|join(', ', 'reduction.search-results.body.subtitle.category.join'|trans) }}</small>
+                                        <div class="d-flex justify-content-between align-items-center vertical-center">
+                                            <p class="m-0 badge badge-lg badge-dark">{{ reduction.categories|join(', ', 'category.join'|trans) }}</p>
+                                            <p class="m-0 text-right">
+                                                <small class="font-weight-light text-dark">
+                                                    {% if reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_INTERNATIONAL_ENDPOINT') or
+                                                        reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_NATIONAL_ENDPOINT') %}
+                                                        <strong>{{ reduction.region }}</strong>
+                                                    {% else %}
+                                                        <strong>{{ 'department'|trans }} :</strong> {{ reduction.department }}
+                                                    {% endif %}
+                                                </small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +82,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="lead font-weight-light text-center">
-                                        {{ 'reduction.search-results.body.empty'|trans }}
+                                        {{ 'reduction.empty'|trans }}
                                     </h3>
                                 </div>
                             </div>

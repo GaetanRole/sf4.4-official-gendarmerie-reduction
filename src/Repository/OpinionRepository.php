@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use \Exception;
 use App\Entity\Opinion;
+use App\Entity\Reduction;
 use App\Service\GlobalClock;
+use App\Service\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,6 +21,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OpinionRepository extends ServiceEntityRepository
 {
+    /** @var int Opinion number per page. */
+    private const PAGE_SIZE = 5;
+
     /** @var GlobalClock */
     private $clock;
 
@@ -30,24 +34,17 @@ class OpinionRepository extends ServiceEntityRepository
         parent::__construct($registry, Opinion::class);
     }
 
-    /**
-     * Find last articles.
-     *
-     * @return Opinion[]
-     *
-     * @throws Exception Datetime Exception
-     */
-    public function findLatest(): array
+    public function findFirstBy(Reduction $reduction, int $page = 1): Paginator
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('u', 'r')
-            ->innerJoin('o.user', 'u')
-            ->innerJoin('o.reduction', 'r')
-            ->andWhere('o.createdAt <= :now')
-            ->orderBy('o.createdAt', 'DESC')
-            ->setParameter('now', $this->clock->getNowInDateTime())
+            ->leftJoin('o.user', 'u')
+            ->leftJoin('o.reduction', 'r')
+            ->andWhere('o.reduction = :reduction')
+            ->orderBy('r.createdAt', 'ASC')
+            ->setParameter('reduction', $reduction)
         ;
 
-        return $qb->getQuery()->execute();
+        return (new Paginator($qb, self::PAGE_SIZE))->paginate($page);
     }
 }

@@ -1,0 +1,61 @@
+<div class="pt-5">
+    {% if paginator is empty or paginator.results is empty %}
+        <div class="bg-white box-shadow border-radius text-center p-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="lead font-weight-light">
+                        {{ 'opinion.empty'|trans }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% for opinion in paginator.results %}
+            <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-3">
+                <div class="row">
+                    <div class="col-lg-1 text-center vertical-center">
+                        <img class="rounded-circle" src="{{ asset('assets/images/avatars/user-1.png') }}" alt="">
+                    </div>
+                    <div class="col-lg-10 vertical-center p-4">
+                        <h6>{% if opinion.user.isAdmin %}<span class="badge badge-lg badge-dark">Admin</span>&nbsp;{% endif %}{{ opinion.name }}&nbsp;<small class="font-weight-light">{{ opinion.email }}</small></h6>
+                        <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ opinion.createdAt|date('d-m-Y') }}</small></p>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-lg-12">
+                        <p class="font-weight-light">{{ opinion.comment }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% if paginator is not empty and paginator.hasToPaginate %}
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center flex-wrap font-weight-light">
+                    {% if paginator.hasPreviousPage %}
+                        <li class="page-item box-shadow"><a href="{{ path('app_reduction_view', {'slug': reduction.slug, 'page': paginator.previousPage}) }}" data-pagination="{{ paginator.previousPage }}" rel="previous" class="page-link">{{ 'paginator.previous'|trans }}</a></li>
+                    {% else %}
+                        <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.previous'|trans }}</span></li>
+                    {% endif %}
+
+                    {% for i in 1..paginator.lastPage %}
+                        {% if i is same as(paginator.currentPage) %}
+                            <li class="page-item active box-shadow"><span class="page-link">{{ i }} <span class="sr-only">{{ 'paginator.current'|trans }}</span></span></li>
+                        {% else %}
+                            <li class="page-item box-shadow"><a href="{{ path('app_reduction_view', {'slug': reduction.slug, 'page': i}) }}" data-pagination="{{ i }}" class="page-link">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if paginator.hasNextPage %}
+                        <li class="page-item box-shadow"><a href="{{ path('app_reduction_view', {'slug': reduction.slug, 'page': paginator.nextPage}) }}" data-pagination="{{ paginator.nextPage }}" rel="next" class="page-link">{{ 'paginator.next'|trans }}</a></li>
+                    {% else %}
+                        <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.next'|trans }}</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}

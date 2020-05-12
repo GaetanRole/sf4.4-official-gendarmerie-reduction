@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Reduction;
 
-use \Exception;
+use App\Entity\Opinion;
 use App\Entity\Reduction;
 use App\Form\ReductionType;
 use App\Form\SearchType;
@@ -37,7 +37,7 @@ final class ReductionController extends AbstractController
      *
      * @see GeoApiFieldsSubscriber
      *
-     * @Route(name="index", methods={"GET"})
+     * @Route(name="index", methods="GET")
      */
     public function index(): Response
     {
@@ -56,8 +56,6 @@ final class ReductionController extends AbstractController
      * @see     ImageUploadListener
      *
      * @Route("/post", name="post", methods={"GET", "POST"})
-     *
-     * @throws Exception Datetime Exception
      */
     public function post(Request $request, ReductionManager $reductionManager): Response
     {
@@ -67,7 +65,7 @@ final class ReductionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repositoryAdapter->save(
-                $reductionManager->prepareAPostedReduction($reduction, $request->getClientIp(), $this->getUser()),
+                $reductionManager->prepare($reduction, $this->getUser(), $request->getClientIp()),
                 'reduction.save.flash.success'
             );
 
@@ -78,13 +76,21 @@ final class ReductionController extends AbstractController
     }
 
     /**
-     * @todo    Add all related Opinions (PagerFanta) and trans IsGranted message.
+     * @todo    Trans IsGranted message.
      *
      * @IsGranted("view", subject="reduction", message="You do not have rights to view this unverified reduction.")
-     * @Route("/{slug}/view", name="view", methods={"GET"})
+     * @Route("/{slug}/view/{page<[1-9]\d*>?1}", name="view", methods="GET")
      */
-    public function view(Reduction $reduction): Response
+    public function view(Reduction $reduction, int $page): Response
     {
-        return $this->render('reduction/view.html.twig', ['reduction' => $reduction]);
+        $opinions = $this->repositoryAdapter
+            ->getRepository(Opinion::class)
+            ->findFirstBy($reduction, $page)
+        ;
+
+        return $this->render('reduction/view.html.twig', [
+            'reduction' => $reduction,
+            'paginator' => $opinions,
+        ]);
     }
 }

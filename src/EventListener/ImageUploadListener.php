@@ -47,7 +47,7 @@ final class ImageUploadListener
 
         foreach ($entities as $entity) {
             if ($entity instanceof Reduction && $entity->getImage()) {
-                $this->uploadFile($this->imageManager->prepareImageEntity($entity->getImage()));
+                $this->uploadFile($this->imageManager->prepare($entity->getImage()));
 
                 $classMetadata = $em->getClassMetadata(Image::class);
                 $uow->recomputeSingleEntityChangeSet($classMetadata, $entity->getImage());

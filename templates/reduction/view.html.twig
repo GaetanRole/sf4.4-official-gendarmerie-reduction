@@ -1,3 +1,4 @@
+{# @todo Cut JS script in external script files #}
 {% extends 'base.html.twig' %}
 
 {% block og_title 'reduction.view.head.meta.title'|trans %}
@@ -5,85 +6,101 @@
 
 
 {% block content_id 'reduction-view' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'reduction.view.body.h1'|trans }}</h1>
+{% block content -%}
+    {% import "macro/_breadcrumb.html.twig" as macro %}
 
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ reduction.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Uuid</th>
-                            <td>{{ reduction.uuid }}</td>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <td>{{ reduction.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>{{ reduction.email }}</td>
-                        </tr>
-                        <tr>
-                            <th>ClientIp</th>
-                            <td>{{ reduction.clientIp }}</td>
-                        </tr>
-                        <tr>
-                            <th>Title</th>
-                            <td>{{ reduction.title }}</td>
-                        </tr>
-                        <tr>
-                            <th>Slug</th>
-                            <td>{{ reduction.slug }}</td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>{{ reduction.description }}</td>
-                        </tr>
-                        <tr>
-                            <th>Region</th>
-                            <td>{{ reduction.region }}</td>
-                        </tr>
-                        <tr>
-                            <th>Department</th>
-                            <td>{{ reduction.department }}</td>
-                        </tr>
-                        <tr>
-                            <th>Municipality</th>
-                            <td>{{ reduction.municipality }}</td>
-                        </tr>
-                        <tr>
-                            <th>IsBigDeal</th>
-                            <td>{{ reduction.isBigDeal ? 'Yes' : 'No' }}</td>
-                        </tr>
-                        <tr>
-                            <th>IsActive</th>
-                            <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
-                        </tr>
-                        <tr>
-                            <th>CreatedAt</th>
-                            <td>{{ reduction.createdAt ? reduction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>UpdatedAt</th>
-                            <td>{{ reduction.updatedAt ? reduction.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+    <section class="bg-white box-shadow mt-5 p-5">
+        <div class="container pb-5 pt-5">
+            <div class="row">
+                <div class="col-lg">
+                    <h1 class="font-weight-bold">{{ 'reduction.view.body.h1'|trans }}</h1>
+                    {{ macro.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
+                </div>
+            </div>
 
-                    <a href="{{ path('app_reduction_index') }}">{{ 'link.reduction.index'|trans }}</a>
-
-                    <a href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
-
-                    {{ include('reduction/admin/_delete_form.html.twig') }}
+            <div class="row">
+                <div class="col-lg-1 vertical-center">
+                    <img class="rounded-circle" src="{{ asset('assets/images/avatars/admin.png') }}" alt="">
+                </div>
+                <div class="col-lg-10 vertical-center p-4">
+                    <h6>{% if reduction.user.isAdmin %}<span class="badge badge-lg badge-dark">Admin</span>&nbsp;{% endif %}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
+                    <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : 02/05/2020</small></p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-5">
+            <div class="row">
+                <div class="col-lg-5 text-center text-lg-left">
+                    <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
+                </div>
+                <div class="col-lg-7 pt-5 pt-lg-0">
+                    <h2 class="font-weight-bold"><span class="badge badge-lg badge-info mr-2">{{ reduction.brand.name }}</span>&nbsp;{{ reduction.title|capitalize }}</h2>
+                    <p class="m-0">
+                        <small class="font-weight-light">
+                            {% if reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_INTERNATIONAL_ENDPOINT') or
+                                reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_NATIONAL_ENDPOINT') %}
+                                <strong>{{ reduction.region }}</strong>
+                            {% else %}
+                            <strong>{{ 'region'|trans }} :</strong> {{ reduction.region }}
+                            {% endif %}
+                            {% if reduction.department %}
+                                <br><strong>{{ 'department'|trans }} :</strong> {{ reduction.department }}
+                            {% endif %}
+                            {% if reduction.municipality %}
+                                <br><strong>{{ 'municipality'|trans }} :</strong> {{ reduction.municipality }}
+                            {% endif %}
+                        </small>
+                    </p>
+                    <hr>
+                    <p class="font-weight-light">{{ reduction.description|nl2br }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="badge badge-lg badge-dark">{{ reduction.categories|join(', ', 'category.join'|trans) }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="bg-grey p-md-5 p-3">
+        <div class="container">
+            <div class="card border-radius pr-3 pt-4 pl-3 mb-2">
+                <div class="row pr-2 pl-2">
+                    <div class="col-lg-12">
+                        <h5 class="font-weight-light">{{ 'reduction.view.body.opinion.h5'|trans }}</h5>
+                    </div>
+                </div>
+                <div class="row pr-2 pl-2">
+                    <div class="col-lg-12">
+                        {{ render(controller('App\\Controller\\Opinion\\OpinionController::commentForm', {'slug': reduction.slug})) }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="opinion-results">
+                {{ include('reduction/_opinion_results.html.twig') }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){"view"!==$(location).attr("href").split("/").pop()&&$("html, body").stop().animate({scrollTop:$("#opinion-results").offset().top},"fast")});
+
+        // Catch form submit and do an Ajax request.
+        $("#opinion-form").submit(function(e) {
+            e.preventDefault();
+            let form = $(e.currentTarget);
+            ajaxRequestCallback(form.attr('action'), form.serialize());
+        });
+
+        let ajaxRequestCallback = (action, data) => {
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: data,
+                success: function() {document.location.reload();},
+                error: function(jqXHR) {$('#opinion-form').html(jqXHR.responseText);}
+            });
+        };
+    </script>
 {% endblock %}

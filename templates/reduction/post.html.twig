@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block content_id 'reduction-post' %}
-{% block content %}
+{% block content -%}
     {% import "macro/_breadcrumb.html.twig" as macro %}
 
     <section class="bg-white mt-5 pt-5 pb-5">
         <div class="container pb-5 pt-5">
             <div class="row">
-                <div class="col-md">
+                <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'reduction.post.body.h1'|trans }}</h1>
                     {{ macro.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_post': 'link.reduction.post'|trans }) }}
 
@@ -40,8 +40,8 @@
         const regionSelect = $('#reduction_region');
         const departmentSelect = $('#reduction_department');
         const municipalitySelect = $('#reduction_municipality');
-        const departmentDivSelect = $('#reduction div:nth-child(8)');
-        const municipalityDivSelect = $('#reduction div:nth-child(9)');
+        const departmentDivSelect = $('#reduction-post div:nth-child(6)');
+        const municipalityDivSelect = $('#reduction-post div:nth-child(7)');
 
         let hideDepartmentAndMunicipalitySelectField = () => {
             departmentDivSelect.fadeOut('slow');

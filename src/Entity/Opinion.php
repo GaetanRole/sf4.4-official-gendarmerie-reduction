@@ -46,7 +46,7 @@ class Opinion implements JsonSerializable, EntityInterface
      * @Assert\Length(
      *     min=5,
      *     minMessage="validator.opinion.comment.min_length",
-     *     max=10000,
+     *     max=1024,
      *     maxMessage="validator.opinion.comment.max_length"
      * )
      */

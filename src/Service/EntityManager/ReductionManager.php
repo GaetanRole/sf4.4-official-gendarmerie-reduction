@@ -16,11 +16,11 @@ final class ReductionManager
     /**
      * Prepare all reduction entities before persist.
      */
-    public function prepareAPostedReduction(Reduction $reduction, ?string $clientIp, User $user): Reduction
+    public function prepare(Reduction $reduction, User $user, ?string $clientIp): Reduction
     {
-        $reduction->setClientIp($clientIp);
         $reduction->setSlug(SeoSlugger::uniqueSlugify($reduction->getTitle()));
         $reduction->setUser($user);
+        $reduction->setClientIp($clientIp);
 
         // An admin doesn't need a verification.
         if ($user->isAdmin()) {
@@ -33,7 +33,7 @@ final class ReductionManager
     /**
      * Keep the last Reduction title (instead of making a new one).
      */
-    public function prepareAnUpdatedReduction(Reduction $reduction, string $oldTitle): Reduction
+    public function handleTitle(Reduction $reduction, string $oldTitle): Reduction
     {
         $currentReductionTitle = $reduction->getTitle();
 
@@ -47,7 +47,7 @@ final class ReductionManager
     /**
      * Enable/Disable a Reduction and do not include an Image during the flush.
      */
-    public function prepareAReductionValidation(Reduction $reduction): Reduction
+    public function changeStatus(Reduction $reduction): Reduction
     {
         $reduction->isActive() ? $reduction->setIsActive(false) : $reduction->setIsActive(true);
         $reduction->setImageOutOfContext();

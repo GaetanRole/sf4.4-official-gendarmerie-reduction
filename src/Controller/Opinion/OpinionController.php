@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Opinion;
 
-use \Exception;
 use App\Entity\Reduction;
 use App\Form\OpinionType;
 use App\Repository\Adapter\RepositoryAdapterInterface;
+use App\Service\EntityManager\OpinionManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,19 +25,40 @@ final class OpinionController extends AbstractController
     /** @var RepositoryAdapterInterface */
     private $repositoryAdapter;
 
-    public function __construct(RepositoryAdapterInterface $repositoryAdapter)
-    {
+    /** @var OpinionManager */
+    private $opinionManager;
+
+    public function __construct(
+        RepositoryAdapterInterface $repositoryAdapter,
+        OpinionManager $opinionManager
+    ) {
         $this->repositoryAdapter = $repositoryAdapter;
+        $this->opinionManager = $opinionManager;
     }
 
     /**
-     * Adding one Opinion on an existing Reduction (get by slug).
-     *
-     * @todo    Probably have to add a dynamic form below a Reduction.
+     * This method is called via a Twig render() function in reduction/view.html.twig.
+     * Ajax is used to submit this one.
+     */
+    public function commentForm(Reduction $reduction): Response
+    {
+        $form = $this->createForm(
+            OpinionType::class,
+            null,
+            ['action' => $this->generateUrl('app_opinion_comment', ['slug' => $reduction->getSlug()])]
+        );
+
+        return $this->render('opinion/_comment_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Adding one Opinion on an existing Reduction and return a response (handled by AJAX).
+     * If the form is valid, data are persisted and the page is reloaded (a simple POST action).
+     * If not, form errors are sent in error Ajax function.
      *
      * @Route("/comment/{slug}", name="comment", methods={"GET", "POST"})
-     *
-     * @throws Exception Datetime Exception
      */
     public function comment(Request $request, Reduction $reduction): Response
     {
@@ -45,16 +66,23 @@ final class OpinionController extends AbstractController
         $form->handleRequest($request);
 
         if ($reduction && $form->isSubmitted() && $form->isValid()) {
-            $opinion = $form->getData();
-            $opinion->setClientIp($request->getClientIp());
-            $opinion->setUser($this->getUser());
-            $opinion->setReduction($reduction);
+            $this->repositoryAdapter->save(
+                $this->opinionManager->prepare(
+                    $form->getData(),
+                    $reduction,
+                    $request->getClientIp(),
+                    $this->getUser()
+                ),
+            );
 
-            $this->repositoryAdapter->save($opinion);
-
-            return $this->redirectToRoute('app_reduction_view', ['slug' => $reduction->getSlug()]);
+            return new Response('Page is reloaded for flash messages and comments.');
         }
 
-        return $this->render('opinion/comment.html.twig', ['form' => $form->createView()]);
+        return new Response(
+            $this->renderView('opinion/_comment_form.html.twig', [
+                'form' => $form->createView(),
+            ]),
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
     }
 }

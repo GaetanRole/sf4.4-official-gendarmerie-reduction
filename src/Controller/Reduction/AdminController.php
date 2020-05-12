@@ -65,7 +65,7 @@ final class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repositoryAdapter->update(
-                $this->reductionManager->prepareAnUpdatedReduction($reduction, $previousTitle)
+                $this->reductionManager->handleTitle($reduction, $previousTitle)
             );
 
             return $this->redirectToRoute('app_reduction_index');
@@ -84,7 +84,7 @@ final class AdminController extends AbstractController
     {
         if ($this->isCsrfTokenValid('status'.$reduction->getSlug(), $request->request->get('_token'))) {
             $this->repositoryAdapter->update(
-                $this->reductionManager->prepareAReductionValidation($reduction),
+                $this->reductionManager->changeStatus($reduction),
                 'reduction.validation.flash.success'
             );
         }

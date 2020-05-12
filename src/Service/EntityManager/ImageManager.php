@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\EntityManager;
 
+use \Exception;
 use App\Entity\Image;
 use App\Service\GlobalClock;
-use Exception;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Filesystem\Filesystem;
@@ -47,7 +47,7 @@ final class ImageManager
      *
      * @throws Exception From DateTime provided by GlobalClock and Uuid::uuid4
      */
-    public function prepareImageEntity(Image $image): Image
+    public function prepare(Image $image): Image
     {
         if ($image->getCreatedAt()) {
             $image->setUpdatedAt($this->clock->getNowInDateTime());

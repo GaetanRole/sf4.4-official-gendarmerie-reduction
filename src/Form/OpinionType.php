@@ -19,7 +19,7 @@ final class OpinionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('userIdentity', UserIdentityType::class, ['data_class' => Opinion::class])
+            ->add('userIdentity', UserIdentityType::class, ['label' => false, 'data_class' => Opinion::class])
             ->add('comment', TextareaType::class, [
                 'required' => true,
                 'label' => 'form.opinion.comment.label',
@@ -27,8 +27,8 @@ final class OpinionType extends AbstractType
                 'attr' => [
                     'placeholder' => 'form.opinion.comment.placeholder',
                     'minLength' => '5',
-                    'maxLength' => '10000',
-                    'rows' => 30,
+                    'maxLength' => '1024',
+                    'rows' => 8,
                 ],
             ])
         ;
@@ -36,6 +36,10 @@ final class OpinionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Opinion::class, 'translation_domain' => 'forms']);
+        $resolver->setDefaults([
+            'data_class' => Opinion::class,
+            'translation_domain' => 'forms',
+            'attr' => ['id' => 'opinion-form'],
+        ]);
     }
 }

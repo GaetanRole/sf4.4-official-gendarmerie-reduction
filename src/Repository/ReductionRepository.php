@@ -38,8 +38,6 @@ class ReductionRepository extends ServiceEntityRepository
     /**
      * Find last active articles.
      *
-     * @todo    Add PagerFanta
-     *
      * @throws Exception dateTime Emits Exception in case of an error
      */
     public function findLatestBy(Category $category = null, $limit = null): DoctrinePaginator
@@ -86,7 +84,7 @@ class ReductionRepository extends ServiceEntityRepository
         return $qb
             ->getQuery()
             ->getSingleScalarResult()
-        ;
+            ;
     }
 
     /**

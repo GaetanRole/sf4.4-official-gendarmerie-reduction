@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+<hr class="mb-5">
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.userIdentity) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.comment) }}
+    </div>
+</div>
+<button class="btn btn-sm btn-dark mt-3 mb-4"><i class="fas fa-pen"></i>&nbsp;{{ 'btn.publish'|trans }}</button>
+{{ form_end(form) }}
