@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class UserController extends AbstractController
 {
     /**
-     * @Route("/{uuid<^.{36}$>}", name="show", methods={"GET"})
+     * @Route("/{uuid<^.{36}$>}", name="show", methods="GET")
      */
     public function show(User $user): Response
     {

@@ -33,8 +33,6 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @todo    Add paginator PagerFanta.
-     *
      * @Route(name="index", methods={"GET"})
      */
     public function index(): Response
@@ -83,7 +81,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods="DELETE")
      */
     public function delete(Request $request, Category $category, TranslatorInterface $translator): RedirectResponse
     {

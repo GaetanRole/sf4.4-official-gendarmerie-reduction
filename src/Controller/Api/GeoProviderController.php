@@ -41,7 +41,7 @@ final class GeoProviderController extends AbstractController
 
     /**
      * @api Ajax calls from reduction/new and reduction/edit views.
-     * @Route("/get-municipalities-from-department", name="get_municipalities", methods={"GET"})
+     * @Route("/get-municipalities-from-department", name="get_municipalities", methods="GET")
      */
     public function getMunicipalitiesAccordingToOneDepartment(Request $request, GeoClient $client): JsonResponse
     {
@@ -54,7 +54,7 @@ final class GeoProviderController extends AbstractController
 
     /**
      * @api Ajax calls from reduction/new and reduction/edit views.
-     * @Route("/get-departments-from-region", name="get_departments", methods={"GET"})
+     * @Route("/get-departments-from-region", name="get_departments", methods="GET")
      */
     public function getDepartmentsAccordingToOneRegion(Request $request, GeoClient $client): JsonResponse
     {

@@ -31,7 +31,7 @@ final class DashboardController extends AbstractController
     /**
      * @todo    Add all useful data for admin index.
      *
-     * @Route("/dashboard", name="dashboard", methods={"GET"})
+     * @Route("/dashboard", name="dashboard", methods="GET")
      */
     public function dashboard(): Response
     {

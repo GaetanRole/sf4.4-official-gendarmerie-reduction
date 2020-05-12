@@ -53,7 +53,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods="DELETE")
      */
     public function delete(Request $request, Opinion $opinion): RedirectResponse
     {

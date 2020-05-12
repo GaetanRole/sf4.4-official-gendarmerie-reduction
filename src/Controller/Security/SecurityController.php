@@ -13,6 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @todo    Check best practices on this one.
+ *
  * @Route(name="app_security_")
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>

@@ -20,6 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @todo See voter exception translation message
+ *
  * @Route("/admin/user", name="app_admin_user_")
  * @IsGranted("ROLE_ADMIN")
  *
@@ -103,7 +104,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{uuid<^.{36}$>}", name="change_status", methods={"PUT"})
+     * @Route("/{uuid<^.{36}$>}", name="change_status", methods="PUT")
      * @IsGranted("status", subject="user", message="You do not have rights to do so.")
      */
     public function changeStatus(Request $request, User $user): RedirectResponse
@@ -117,7 +118,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{uuid<^.{36}$>}", name="delete", methods={"DELETE"})
+     * @Route("/{uuid<^.{36}$>}", name="delete", methods="DELETE")
      * @IsGranted("delete", subject="user", message="You do not have rights to do so.")
      */
     public function delete(Request $request, User $user, TranslatorInterface $translator): RedirectResponse

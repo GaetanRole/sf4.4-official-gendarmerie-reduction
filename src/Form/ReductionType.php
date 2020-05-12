@@ -40,9 +40,6 @@ final class ReductionType extends AbstractType
         $this->router = $router;
     }
 
-    /**
-     * @todo Is CollectionType a better choice ?
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

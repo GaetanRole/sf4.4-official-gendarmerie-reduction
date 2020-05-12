@@ -35,8 +35,6 @@ final class DefaultController extends AbstractController
     }
 
     /**
-     * @todo Add translator for flash email message
-     *
      * @throws TransportExceptionInterface
      * @Route("/contact", name="contact", methods={"GET", "POST"})
      */

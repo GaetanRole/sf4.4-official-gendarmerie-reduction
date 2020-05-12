@@ -151,9 +151,6 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
-    "pagerfanta/pagerfanta": {
-        "version": "v2.1.3"
-    },
     "pdepend/pdepend": {
         "version": "2.7.1"
     },
@@ -634,9 +631,6 @@
     },
     "webmozart/assert": {
         "version": "1.8.0"
-    },
-    "white-october/pagerfanta-bundle": {
-        "version": "v1.3.2"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

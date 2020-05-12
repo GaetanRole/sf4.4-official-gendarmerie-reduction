@@ -37,7 +37,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/waiting-list", name="waiting_list", methods={"GET"})
+     * @Route("/waiting-list", name="waiting_list", methods="GET")
      */
     public function list(): Response
     {
@@ -78,7 +78,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="change_status", methods={"PUT"})
+     * @Route("/{slug}", name="change_status", methods="PUT")
      */
     public function changeStatus(Request $request, Reduction $reduction): RedirectResponse
     {
@@ -93,7 +93,7 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="delete", methods={"DELETE"})
+     * @Route("/{slug}", name="delete", methods="DELETE")
      */
     public function delete(Request $request, Reduction $reduction): RedirectResponse
     {
