@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Entity\Reduction;
+use App\Entity\Article;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
-final class ReductionVoter extends Voter
+final class ArticleVoter extends Voter
 {
     /** @var string Voter action. */
     private const VIEW = 'view';
@@ -26,7 +26,7 @@ final class ReductionVoter extends Voter
      */
     protected function supports($attribute, $subject): bool
     {
-        return $subject instanceof Reduction && self::VIEW === $attribute;
+        return $subject instanceof Article && self::VIEW === $attribute;
     }
 
     /**
@@ -44,14 +44,14 @@ final class ReductionVoter extends Voter
     }
 
     /**
-     * Check if the user has admin rights to view an unverified reduction.
+     * Check if the user has admin rights to view a disabled article.
      */
-    private function canView(Reduction $reduction, User $user): bool
+    private function canView(Article $article, User $user): bool
     {
         if ($user->isAdmin()) {
             return true;
         }
 
-        return $reduction->isActive();
+        return $article->isActive();
     }
 }

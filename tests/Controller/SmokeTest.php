@@ -72,9 +72,13 @@ final class SmokeTest extends AbstractWebTestCase
     public function provideSecureUrls(): Generator
     {
         yield ['/en/admin/dashboard'];
+        yield ['/en/admin/article/new'];
         yield ['/en/admin/brand'];
+        yield ['/en/admin/brand/new'];
         yield ['/en/admin/category'];
+        yield ['/en/admin/category/new'];
         yield ['/en/admin/user'];
+        yield ['/en/admin/user/new'];
         yield ['/en/admin/reduction/waiting-list'];
         yield ['/en/reduction'];
         yield ['/en/reduction/post'];
@@ -85,6 +89,7 @@ final class SmokeTest extends AbstractWebTestCase
      */
     public function provideUserUrls(): Generator
     {
+        yield ['/en/article'];
         yield ['/en/reduction'];
         yield ['/en/reduction/post'];
     }

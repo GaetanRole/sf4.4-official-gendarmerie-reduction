@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 final class UserVoter extends Voter
 {
-    /** Voter actions */
+    /** @var string Voter actions */
     private const EDIT = 'edit';
     private const STATUS = 'status';
     private const DELETE = 'delete';

@@ -38,6 +38,9 @@ final class ArticleController extends AbstractController
     }
 
     /**
+     * @todo    Trans IsGranted message.
+     *
+     * @IsGranted("view", subject="article", message="You do not have rights to view this disabled article.")
      * @Route("/{slug}/view", name="view", methods="GET")
      */
     public function view(Article $article): Response
