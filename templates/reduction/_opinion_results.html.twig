@@ -1,3 +1,4 @@
+{% import 'macro/_admin.html.twig' as admin %}
 <div class="pt-5">
     {% if paginator is empty or paginator.results is empty %}
         <div class="bg-white box-shadow border-radius text-center p-5">
@@ -14,10 +15,10 @@
             <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-3">
                 <div class="row">
                     <div class="col-lg-1 text-center vertical-center">
-                        <img class="rounded-circle" src="{{ asset('assets/images/avatars/user-1.png') }}" alt="">
+                        <img class="rounded-circle" src="{{ opinion.user|avatar }}" alt="{{ reduction.user.username }} avatar.">
                     </div>
                     <div class="col-lg-10 vertical-center p-4">
-                        <h6>{% if opinion.user.isAdmin %}<span class="badge badge-lg badge-dark">Admin</span>&nbsp;{% endif %}{{ opinion.name }}&nbsp;<small class="font-weight-light">{{ opinion.email }}</small></h6>
+                        <h6>{{ admin.getBadge(opinion.user) }}{{ opinion.name }}&nbsp;<small class="font-weight-light">{{ opinion.email }}</small></h6>
                         <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ opinion.createdAt|date('d-m-Y') }}</small></p>
                     </div>
                 </div>

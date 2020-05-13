@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Form\DataTransformer\ArrayToStringTransformer;
+use App\Form\Type\AvatarType;
 use App\Form\Type\ChangePasswordType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -56,6 +57,12 @@ final class UserType extends AbstractType
                 'label' => 'form.user.phone_number.label',
                 'help' => 'form.user.phone_number.help',
                 'attr' => ['placeholder' => 'form.user.phone_number.placeholder', 'maxLength' => '32'],
+            ])
+            ->add('avatar', AvatarType::class, [
+                'expanded' => false,
+                'multiple' => false,
+                'label' => 'form.user.avatar.label',
+                'help' => 'form.user.avatar.help',
             ])
             ->add('isActive', CheckboxType::class, [
                 'required' => false,

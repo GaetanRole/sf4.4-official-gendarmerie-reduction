@@ -3,6 +3,10 @@
 {% block og_title 'user.admin.new.head.meta.title'|trans %}
 {% block title 'user.admin.new.head.meta.title'|trans %}
 
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block content_id 'user-admin-new' %}
 {% block content %}
     <section>
@@ -18,4 +22,11 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $('select[data-select]').select2();
+    </script>
 {% endblock %}

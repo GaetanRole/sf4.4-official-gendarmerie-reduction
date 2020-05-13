@@ -89,6 +89,7 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setIsActive(true)
                 ->setRoles([$roles[array_rand($roles)]])
+                ->setAvatar($this->getARandomAvatar($user->hasRole('ROLE_SUPER_ADMIN')))
             ;
 
             $manager->persist($user);
@@ -112,6 +113,28 @@ final class UserFixture extends Fixture implements FixtureGroupInterface
         ];
 
         return $identities[array_rand($identities)];
+    }
+
+    /**
+     * Get a random avatar, except for an admin.
+     */
+    private function getARandomAvatar(bool $isSuperAdmin): string
+    {
+        if ($isSuperAdmin) {
+            return 'super-admin-avatar.png';
+        }
+
+        $avatars = [
+            'user-avatar-cat.png',
+            'user-avatar-elephant.png',
+            'user-avatar-fox.png',
+            'user-avatar-monkey.png',
+            'user-avatar-panda.png',
+            'user-avatar-penguin.png',
+            'user-avatar-rabbit.png',
+        ];
+
+        return $avatars[array_rand($avatars)];
     }
 
     /**

@@ -53,6 +53,42 @@
         <source>form.user.phone_number.placeholder</source>
         <target>Un numéro. Ex: 06-54-54-54-54 ou +33 6...</target>
       </trans-unit>
+      <trans-unit id="41" resname="form.user.avatar.label">
+        <source>form.user.avatar.label</source>
+        <target>Avatar du compte</target>
+      </trans-unit>
+      <trans-unit id="42" resname="form.user.avatar.help">
+        <source>form.user.avatar.help</source>
+        <target>Choisissez un avatar spécifique à un type de compte.</target>
+      </trans-unit>
+      <trans-unit id="50" resname="form.avatar.cat">
+        <source>form.avatar.cat</source>
+        <target>Chat</target>
+      </trans-unit>
+      <trans-unit id="51" resname="form.avatar.elephant">
+        <source>form.avatar.elephant</source>
+        <target>Éléphant</target>
+      </trans-unit>
+      <trans-unit id="52" resname="form.avatar.fox">
+        <source>form.avatar.fox</source>
+        <target>Renard</target>
+      </trans-unit>
+      <trans-unit id="53" resname="form.avatar.monkey">
+        <source>form.avatar.monkey</source>
+        <target>Singe</target>
+      </trans-unit>
+      <trans-unit id="54" resname="form.avatar.panda">
+        <source>form.avatar.panda</source>
+        <target>Panda</target>
+      </trans-unit>
+      <trans-unit id="55" resname="form.avatar.penguin">
+        <source>form.avatar.penguin</source>
+        <target>Pingouin</target>
+      </trans-unit>
+      <trans-unit id="56" resname="form.avatar.rabbit">
+        <source>form.avatar.rabbit</source>
+        <target>Lapin</target>
+      </trans-unit>
       <trans-unit id="zHF_zZd" resname="form.user.is_active.label">
         <source>form.user.is_active.label</source>
         <target>Profil actif par défaut ?</target>

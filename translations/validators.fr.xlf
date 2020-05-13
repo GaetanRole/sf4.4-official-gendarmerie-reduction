@@ -533,6 +533,10 @@
         <source>validator.user.phone_number.regex</source>
         <target>Le numéro n'est pas valide. Veuillez vérifier celui-ci. Ex: 0610101010.</target>
       </trans-unit>
+      <trans-unit id="32" resname="validator.user.avatar.regex">
+        <source>validator.user.avatar.regex</source>
+        <target>L'avatar selectionné n'est pas valide.</target>
+      </trans-unit>
       <trans-unit id="sLmQ15Z" resname="form.change_password.plain_password.not_blank">
         <source>form.change_password.plain_password.not_blank</source>
         <target>Vous devez renseigner un mot de passe valide.</target>

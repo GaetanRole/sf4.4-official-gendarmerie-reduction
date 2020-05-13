@@ -53,6 +53,42 @@
         <source>form.user.phone_number.placeholder</source>
         <target>__form.user.phone_number.placeholder</target>
       </trans-unit>
+      <trans-unit id="41" resname="form.user.avatar.label">
+        <source>form.user.avatar.label</source>
+        <target>__form.user.avatar.label</target>
+      </trans-unit>
+      <trans-unit id="42" resname="form.user.avatar.help">
+        <source>form.user.avatar.help</source>
+        <target>__form.user.avatar.help</target>
+      </trans-unit>
+      <trans-unit id="50" resname="form.avatar.cat">
+        <source>form.avatar.cat</source>
+        <target>__form.avatar.cat</target>
+      </trans-unit>
+      <trans-unit id="51" resname="form.avatar.elephant">
+        <source>form.avatar.elephant</source>
+        <target>__form.avatar.elephant</target>
+      </trans-unit>
+      <trans-unit id="52" resname="form.avatar.fox">
+        <source>form.avatar.fox</source>
+        <target>__form.avatar.fox</target>
+      </trans-unit>
+      <trans-unit id="53" resname="form.avatar.monkey">
+        <source>form.avatar.monkey</source>
+        <target>__form.avatar.monkey</target>
+      </trans-unit>
+      <trans-unit id="54" resname="form.avatar.panda">
+        <source>form.avatar.panda</source>
+        <target>__form.avatar.panda</target>
+      </trans-unit>
+      <trans-unit id="55" resname="form.avatar.penguin">
+        <source>form.avatar.penguin</source>
+        <target>__form.avatar.penguin</target>
+      </trans-unit>
+      <trans-unit id="56" resname="form.avatar.rabbit">
+        <source>form.avatar.rabbit</source>
+        <target>__form.avatar.rabbit</target>
+      </trans-unit>
       <trans-unit id="zHF_zZd" resname="form.user.is_active.label">
         <source>form.user.is_active.label</source>
         <target>__form.user.is_active.label</target>

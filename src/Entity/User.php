@@ -81,6 +81,14 @@ class User implements UserInterface, Serializable, EntityInterface
     private $phoneNumber;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=25)
+     * @Assert\Regex(pattern="/^user-avatar-.*$/", message="validator.user.avatar.regex")
+     */
+    private $avatar;
+
+    /**
      * @Assert\Length(max=4096)
      * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",
      * message="validator.user.plain_password.regex")
@@ -181,6 +189,18 @@ class User implements UserInterface, Serializable, EntityInterface
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

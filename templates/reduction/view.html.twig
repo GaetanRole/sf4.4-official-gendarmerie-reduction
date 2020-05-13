@@ -7,24 +7,25 @@
 
 {% block content_id 'reduction-view' %}
 {% block content -%}
-    {% import "macro/_breadcrumb.html.twig" as macro %}
+    {% from 'macro/_breadcrumb.html.twig' import breadcrumb as breadcrumb_macro %}
+    {% import 'macro/_admin.html.twig' as admin %}
 
     <section class="bg-white box-shadow mt-5 p-5">
         <div class="container pb-5 pt-5">
             <div class="row">
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'reduction.view.body.h1'|trans }}</h1>
-                    {{ macro.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
+                    {{ breadcrumb_macro({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-1 vertical-center">
-                    <img class="rounded-circle" src="{{ asset('assets/images/avatars/admin.png') }}" alt="">
+                    <img class="rounded-circle" src="{{ reduction.user|avatar }}" alt="{{ reduction.user.username }} avatar.">
                 </div>
                 <div class="col-lg-10 vertical-center p-4">
-                    <h6>{% if reduction.user.isAdmin %}<span class="badge badge-lg badge-dark">Admin</span>&nbsp;{% endif %}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
-                    <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : 02/05/2020</small></p>
+                    <h6>{{ admin.getBadge(reduction.user) }}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
+                    <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
                 </div>
             </div>
             <hr class="mt-4 mb-5">
