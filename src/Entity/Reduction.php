@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use App\Entity\Traits\EntityUserIdentityTrait;
+use App\Repository\ReductionRepository;
 use App\Validator\Constraints as AppAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ReductionRepository")
+ * @ORM\Entity(repositoryClass=ReductionRepository::class)
  * @UniqueEntity(fields={"title"})
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -37,7 +38,7 @@ class Reduction implements EntityInterface
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reductions")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reductions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -45,7 +46,7 @@ class Reduction implements EntityInterface
     /**
      * @var Brand
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="reductions")
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="reductions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $brand;
@@ -54,7 +55,7 @@ class Reduction implements EntityInterface
      * @var Category[]|ArrayCollection
      *
      * @ORM\ManyToMany(
-     *     targetEntity="App\Entity\Category",
+     *     targetEntity=Category::class,
      *     inversedBy="reductions",
      *     cascade={"persist"}
      * )
@@ -97,7 +98,7 @@ class Reduction implements EntityInterface
      * @Assert\Length(
      *     min=10,
      *     minMessage="validator.reduction.description.min_length",
-     *     max=10000,
+     *     max=1024,
      *     maxMessage="validator.reduction.description.max_length"
      * )
      */
@@ -106,7 +107,7 @@ class Reduction implements EntityInterface
     /**
      * @var Image|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity=Image::class, cascade={"all"}, orphanRemoval=true)
      *
      * @AppAssert\ImageObject(
      *     mimeTypes={"image/jpeg", "image/png"},
@@ -163,18 +164,18 @@ class Reduction implements EntityInterface
      *
      * @ORM\Column(type="boolean")
      */
-    private $isBigDeal;
+    private $isBigDeal = false;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $isActive;
+    private $isActive = false;
 
     /**
      * @ORM\OneToMany(
-     *     targetEntity="App\Entity\Opinion",
+     *     targetEntity=Opinion::class,
      *     mappedBy="reduction",
      *     orphanRemoval=true,
      *     cascade={"persist"}
@@ -187,11 +188,7 @@ class Reduction implements EntityInterface
     {
         $this->categories = new ArrayCollection();
         $this->opinions = new ArrayCollection();
-        $this->isBigDeal = false;
-        $this->isActive = false;
     }
-
-    /* Auto generated methods */
 
     public function getUser(): ?User
     {

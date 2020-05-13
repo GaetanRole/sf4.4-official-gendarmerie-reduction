@@ -7,6 +7,7 @@ namespace App\Entity;
 use \Serializable;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
  *     fields={"username"},
  *     message="valitor.user.unique.message"
@@ -107,8 +108,7 @@ class User implements UserInterface, Serializable, EntityInterface
      *
      * @ORM\Column(type="boolean")
      */
-    private $isActive;
-
+    private $isActive = false;
     /**
      * @var array
      *
@@ -117,21 +117,20 @@ class User implements UserInterface, Serializable, EntityInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="Reduction", mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Reduction::class, mappedBy="user")
      */
     private $reductions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Opinion", mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Opinion::class, mappedBy="user")
      */
     private $opinions;
 
     public function __construct()
     {
-        $this->isActive = true;
-        $this->roles[] = 'ROLE_USER';
         $this->reductions = new ArrayCollection();
         $this->opinions = new ArrayCollection();
+        $this->roles[] = 'ROLE_USER';
     }
 
     public function __toString(): string

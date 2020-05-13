@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
+use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
+ * @ORM\Entity(repositoryClass=BrandRepository::class)
  * @UniqueEntity(fields={"name"})
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -49,7 +50,7 @@ class Brand implements EntityInterface
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Reduction", mappedBy="brand")
+     * @ORM\OneToMany(targetEntity=Reduction::class, mappedBy="brand")
      */
     private $reductions;
 

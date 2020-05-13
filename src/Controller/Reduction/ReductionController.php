@@ -6,6 +6,7 @@ namespace App\Controller\Reduction;
 
 use App\Entity\Opinion;
 use App\Entity\Reduction;
+use App\Entity\User;
 use App\Form\ReductionType;
 use App\Form\SearchType;
 use App\Repository\Adapter\RepositoryAdapterInterface;
@@ -64,9 +65,12 @@ final class ReductionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $user = $this->getUser();
+
             $this->repositoryAdapter->save(
-                $reductionManager->prepare($reduction, $this->getUser(), $request->getClientIp()),
-                'reduction.save.flash.success'
+                $reductionManager->prepare($reduction, $user, $request->getClientIp()),
+                $user->isAdmin() ? 'save.flash.success' : 'reduction.save.flash.success'
             );
 
             return $this->redirectToRoute('app_reduction_index');

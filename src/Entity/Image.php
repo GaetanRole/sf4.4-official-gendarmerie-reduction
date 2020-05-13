@@ -38,11 +38,6 @@ class Image
      */
     private $file;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getExtension(): ?string
     {
         return $this->extension;

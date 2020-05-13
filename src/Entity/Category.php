@@ -7,6 +7,7 @@ namespace App\Entity;
 use \JsonSerializable;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @UniqueEntity(fields={"name"})
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -50,7 +51,7 @@ class Category implements JsonSerializable, EntityInterface
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Reduction", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Reduction::class, mappedBy="categories")
      */
     private $reductions;
 

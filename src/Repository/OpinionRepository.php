@@ -38,8 +38,8 @@ class OpinionRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('u', 'r')
-            ->leftJoin('o.user', 'u')
-            ->leftJoin('o.reduction', 'r')
+            ->innerJoin('o.user', 'u')
+            ->innerJoin('o.reduction', 'r')
             ->andWhere('o.reduction = :reduction')
             ->orderBy('r.createdAt', 'ASC')
             ->setParameter('reduction', $reduction)

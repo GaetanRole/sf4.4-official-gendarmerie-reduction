@@ -8,11 +8,12 @@ use \JsonSerializable;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityTimeTrait;
 use App\Entity\Traits\EntityUserIdentityTrait;
+use App\Repository\OpinionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OpinionRepository")
+ * @ORM\Entity(repositoryClass=OpinionRepository::class)
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
  */
@@ -25,7 +26,7 @@ class Opinion implements JsonSerializable, EntityInterface
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="opinions")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="opinions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -33,7 +34,7 @@ class Opinion implements JsonSerializable, EntityInterface
     /**
      * @var Reduction
      *
-     * @ORM\ManyToOne(targetEntity="Reduction", inversedBy="opinions")
+     * @ORM\ManyToOne(targetEntity=Reduction::class, inversedBy="opinions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reduction;

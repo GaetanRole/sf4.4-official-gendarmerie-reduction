@@ -36,7 +36,7 @@ class ReductionRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find last active articles.
+     * Find last active reductions.
      *
      * @throws Exception dateTime Emits Exception in case of an error
      */
@@ -45,7 +45,7 @@ class ReductionRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->addSelect('u', 'c', 'i')
             ->innerJoin('r.user', 'u')
-            ->leftJoin('r.categories', 'c')
+            ->innerJoin('r.categories', 'c')
             ->leftJoin('r.image', 'i')
             ->andWhere('r.createdAt <= :now')
             ->andWhere('r.isActive = :status')
@@ -94,8 +94,8 @@ class ReductionRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('r')
             ->addSelect('b', 'c', 'i')
-            ->leftJoin('r.brand', 'b')
-            ->leftJoin('r.categories', 'c')
+            ->innerJoin('r.brand', 'b')
+            ->innerJoin('r.categories', 'c')
             ->leftJoin('r.image', 'i')
             ->andWhere('r.isActive = :status')
             ->orderBy('r.createdAt', 'DESC')

@@ -23,6 +23,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class DefaultController extends AbstractController
 {
+    /** @var int Reduction number per page. */
+    private const DEFAULT_PAGE_SIZE = 6;
+
     /**
      * @throws Exception Datetime Exception
      * @Route("/", name="index", methods={"GET"})
@@ -30,7 +33,7 @@ final class DefaultController extends AbstractController
     public function index(ReductionRepository $reductionRepository): Response
     {
         return $this->render('default/index.html.twig', [
-            'reductions' => $reductionRepository->findLatestBy(null, 6),
+            'reductions' => $reductionRepository->findLatestBy(null, self::DEFAULT_PAGE_SIZE),
         ]);
     }
 

@@ -81,6 +81,9 @@ final class UserType extends AbstractType
                         'form.user.roles.choices.role_user' => 'ROLE_USER',
                         'form.user.roles.choices.role_admin' => 'ROLE_ADMIN',
                     ],
+                    'attr' => [
+                        'data-select' => true,
+                    ],
                     'label' => 'form.user.roles.label',
                     'help' => 'form.user.roles.help',
                 ])

@@ -72,7 +72,7 @@ final class ReductionType extends AbstractType
                 'attr' => [
                     'placeholder' => 'form.reduction.description.placeholder',
                     'minLength' => '10',
-                    'maxLength' => '10000',
+                    'maxLength' => '1024',
                     'rows' => 10,
                 ],
             ])
