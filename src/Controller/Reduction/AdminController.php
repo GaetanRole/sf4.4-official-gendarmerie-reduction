@@ -65,7 +65,7 @@ final class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repositoryAdapter->update(
-                $this->reductionManager->handleTitle($reduction, $previousTitle)
+                $this->reductionManager->handleSlug($reduction, $previousTitle)
             );
 
             return $this->redirectToRoute('app_reduction_index');

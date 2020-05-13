@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block og_title 'article.index.head.meta.title'|trans %}
+{% block title 'article.index.head.meta.title'|trans %}
+
+{% block content_id 'article-index' %}
+{% block content -%}
+    <section>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1>{{ 'article.index.body.h1'|trans }}</h1>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Slug</th>
+                            <th>Summary</th>
+                            <th>Content</th>
+                            <th>Resources</th>
+                            <th>Priority</th>
+                            <th>IsActive</th>
+                            <th>Id</th>
+                            <th>Uuid</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if paginator is empty or paginator.results is empty %}
+                            <tr>
+                                <td colspan="12">no records found</td>
+                            </tr>
+                        {% else %}
+                            {% for article in paginator.results %}
+                                <tr>
+                                    <td>{{ article.title }}</td>
+                                    <td>{{ article.slug }}</td>
+                                    <td>{{ article.summary }}</td>
+                                    <td>{{ article.content }}</td>
+                                    <td>{{ article.resources ? article.resources|join(', ') : '' }}</td>
+                                    <td>{{ article.priority }}</td>
+                                    <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
+                                    <td>{{ article.id }}</td>
+                                    <td>{{ article.uuid }}</td>
+                                    <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>
+                                        <a href="{{ path('app_article_view', {'slug': article.slug}) }}">show</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

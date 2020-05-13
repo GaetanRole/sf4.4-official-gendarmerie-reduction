@@ -137,6 +137,74 @@
         <source>form.change_password.plain_password.second.placeholder</source>
         <target>__form.change_password.plain_password.second.placeholder</target>
       </trans-unit>
+      <trans-unit id="80" resname="form.article.title.label">
+        <source>form.article.title.label</source>
+        <target>__form.article.title.label</target>
+      </trans-unit>
+      <trans-unit id="81" resname="form.article.title.help">
+        <source>form.article.title.help</source>
+        <target>__form.article.title.help</target>
+      </trans-unit>
+      <trans-unit id="82" resname="form.article.title.placeholder">
+        <source>form.article.title.placeholder</source>
+        <target>__form.article.title.placeholder</target>
+      </trans-unit>
+      <trans-unit id="83" resname="form.article.summary.label">
+        <source>form.article.summary.label</source>
+        <target>__form.article.summary.label</target>
+      </trans-unit>
+      <trans-unit id="84" resname="form.article.summary.help">
+        <source>form.article.summary.help</source>
+        <target>__form.article.summary.help</target>
+      </trans-unit>
+      <trans-unit id="85" resname="form.article.summary.placeholder">
+        <source>form.article.summary.placeholder</source>
+        <target>__form.article.summary.placeholder</target>
+      </trans-unit>
+      <trans-unit id="86" resname="form.article.content.label">
+        <source>form.article.content.label</source>
+        <target>__form.article.content.label</target>
+      </trans-unit>
+      <trans-unit id="87" resname="form.article.content.help">
+        <source>form.article.content.help</source>
+        <target>__form.article.content.help</target>
+      </trans-unit>
+      <trans-unit id="88" resname="form.article.content.placeholder">
+        <source>form.article.content.placeholder</source>
+        <target>__form.article.content.placeholder</target>
+      </trans-unit>
+      <trans-unit id="89" resname="form.article.priority.choices.low">
+        <source>form.article.priority.choices.low</source>
+        <target>__form.article.priority.choices.low</target>
+      </trans-unit>
+      <trans-unit id="90" resname="form.article.priority.choices.medium">
+        <source>form.article.priority.choices.medium</source>
+        <target>__form.article.priority.choices.medium</target>
+      </trans-unit>
+      <trans-unit id="91" resname="form.article.priority.choices.high">
+        <source>form.article.priority.choices.high</source>
+        <target>__form.article.priority.choices.high</target>
+      </trans-unit>
+      <trans-unit id="92" resname="form.article.priority.choices.urgent">
+        <source>form.article.priority.choices.urgent</source>
+        <target>__form.article.priority.choices.urgent</target>
+      </trans-unit>
+      <trans-unit id="93" resname="form.article.priority.label">
+        <source>form.article.priority.label</source>
+        <target>__form.article.priority.label</target>
+      </trans-unit>
+      <trans-unit id="94" resname="form.article.priority.help">
+        <source>form.article.priority.help</source>
+        <target>__form.article.priority.help</target>
+      </trans-unit>
+      <trans-unit id="95" resname="form.article.is_active.label">
+        <source>form.article.is_active.label</source>
+        <target>__form.article.is_active.label</target>
+      </trans-unit>
+      <trans-unit id="96" resname="form.article.is_active.help">
+        <source>form.article.is_active.help</source>
+        <target>__form.article.is_active.help</target>
+      </trans-unit>
       <trans-unit id="AgIUVR4" resname="form.brand.name.label">
         <source>form.brand.name.label</source>
         <target>__form.brand.name.label</target>

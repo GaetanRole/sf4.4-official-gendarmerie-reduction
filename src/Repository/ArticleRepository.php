@@ -42,8 +42,8 @@ class ArticleRepository extends ServiceEntityRepository
             ->innerJoin('a.user', 'u')
             ->andWhere('a.createdAt <= :now')
             ->andWhere('a.isActive = :status')
-            ->addOrderBy('a.createdAt', 'DESC')
             ->addOrderBy('a.priority', 'DESC')
+            ->addOrderBy('a.createdAt', 'DESC')
             ->setParameter('now', $this->clock->getNowInDateTime())
             ->setParameter('status', true)
         ;

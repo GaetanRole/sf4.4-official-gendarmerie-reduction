@@ -72,7 +72,7 @@ class Article implements EntityInterface
      * @Assert\Length(
      *     min=5,
      *     minMessage="validator.article.summary.min_length",
-     *     max=255,
+     *     max=254,
      *     maxMessage="validator.article.summary.max_length"
      * )
      */

@@ -137,6 +137,74 @@
         <source>form.change_password.plain_password.second.placeholder</source>
         <target>********</target>
       </trans-unit>
+      <trans-unit id="80" resname="form.article.title.label">
+        <source>form.article.title.label</source>
+        <target>Titre de l'article *</target>
+      </trans-unit>
+      <trans-unit id="81" resname="form.article.title.help">
+        <source>form.article.title.help</source>
+        <target>Celui-ci doit être court et concis.</target>
+      </trans-unit>
+      <trans-unit id="82" resname="form.article.title.placeholder">
+        <source>form.article.title.placeholder</source>
+        <target>Entrez un titre. Ex: Nouveau site en ligne !</target>
+      </trans-unit>
+      <trans-unit id="83" resname="form.article.summary.label">
+        <source>form.article.summary.label</source>
+        <target>Résumé de l'article *</target>
+      </trans-unit>
+      <trans-unit id="84" resname="form.article.summary.help">
+        <source>form.article.summary.help</source>
+        <target>Le résumé sera la partie visible depuis la recherche et l'accueil.</target>
+      </trans-unit>
+      <trans-unit id="85" resname="form.article.summary.placeholder">
+        <source>form.article.summary.placeholder</source>
+        <target>Écrivez un résumé en quelques mots.</target>
+      </trans-unit>
+      <trans-unit id="86" resname="form.article.content.label">
+        <source>form.article.content.label</source>
+        <target>Contenu de l'article *</target>
+      </trans-unit>
+      <trans-unit id="87" resname="form.article.content.help">
+        <source>form.article.content.help</source>
+        <target>Attention à l'orthographe. Aucune vérification n'a lieu par la suite.</target>
+      </trans-unit>
+      <trans-unit id="88" resname="form.article.content.placeholder">
+        <source>form.article.content.placeholder</source>
+        <target>Écrivez votre article.</target>
+      </trans-unit>
+      <trans-unit id="89" resname="form.article.priority.choices.low">
+        <source>form.article.priority.choices.low</source>
+        <target>Priorité faible.</target>
+      </trans-unit>
+      <trans-unit id="90" resname="form.article.priority.choices.medium">
+        <source>form.article.priority.choices.medium</source>
+        <target>Priorité normale.</target>
+      </trans-unit>
+      <trans-unit id="91" resname="form.article.priority.choices.high">
+        <source>form.article.priority.choices.high</source>
+        <target>Priorité haute.</target>
+      </trans-unit>
+      <trans-unit id="92" resname="form.article.priority.choices.urgent">
+        <source>form.article.priority.choices.urgent</source>
+        <target>Priorité urgente.</target>
+      </trans-unit>
+      <trans-unit id="93" resname="form.article.priority.label">
+        <source>form.article.priority.label</source>
+        <target>Niveau de priorité de l'article *</target>
+      </trans-unit>
+      <trans-unit id="94" resname="form.article.priority.help">
+        <source>form.article.priority.help</source>
+        <target>Le niveau de priorité joue sur l'ordre d'affichage des articles.</target>
+      </trans-unit>
+      <trans-unit id="95" resname="form.article.is_active.label">
+        <source>form.article.is_active.label</source>
+        <target>Actif ?</target>
+      </trans-unit>
+      <trans-unit id="96" resname="form.article.is_active.help">
+        <source>form.article.is_active.help</source>
+        <target>Sélectionnez si oui ou non l'article est actif à la création.</target>
+      </trans-unit>
       <trans-unit id="AgIUVR4" resname="form.brand.name.label">
         <source>form.brand.name.label</source>
         <target>Nom de l'enseigne *</target>

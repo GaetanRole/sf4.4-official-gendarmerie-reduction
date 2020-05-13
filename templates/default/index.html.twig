@@ -39,7 +39,7 @@
                         <div class="col-md p-3">
                             <h3 class="text-center font-weight-bold p-0">{{ article.title|capitalize }}</h3>
                             <p class="text-center m-0"><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
-                            <a href="#" title="">
+                            <a href="{{ path('app_article_view', {'slug': article.slug}) }}" title="{{ article.title }}">
                                 <p class="card-text text-dark text-center mt-3">{{ article.summary }}</p>
                             </a>
                         </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="row mt-5 mb-5 pb-3">
                     <div class="col-md-12 text-center">
-                        <a class="btn btn-sm btn-dark" href="#" title="{{ 'link.article.index.title'|trans }}">{{ 'link.article.index'|trans }}&nbsp;<i class="fas fa-arrow-right"></i></a>
+                        <a class="btn btn-sm btn-dark" href="{{ path('app_article_index') }}" title="{{ 'link.article.index.title'|trans }}">{{ 'link.article.index'|trans }}&nbsp;<i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 <div class="row">
                     {% for reduction in reductions %}
                         <div class="col-lg-4">
-                            <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
+                            <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" title="{{ reduction.title }}">
                                 <div class="card mb-4 shadow-sm">
                                     <img class="img-thumbnail" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
                                     <div class="card-body">

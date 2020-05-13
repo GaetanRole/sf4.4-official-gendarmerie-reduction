@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Controller for the default Admin dashboard linking to other admin controllers related to business logic.
  * Statistics or Admin features can be added here.
  *
+ * @see \App\Controller\Article\AdminController
  * @see \App\Controller\Brand\AdminController
  * @see \App\Controller\Category\AdminController
  * @see \App\Controller\Opinion\AdminController

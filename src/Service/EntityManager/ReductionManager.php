@@ -31,9 +31,9 @@ final class ReductionManager
     }
 
     /**
-     * Keep the last Reduction title (instead of making a new one).
+     * Keep the last Reduction slug (instead of making a new one).
      */
-    public function handleTitle(Reduction $reduction, string $oldTitle): Reduction
+    public function handleSlug(Reduction $reduction, string $oldTitle): Reduction
     {
         $currentReductionTitle = $reduction->getTitle();
 

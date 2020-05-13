@@ -31,8 +31,10 @@ final class DefaultController extends AbstractController
     private const DEFAULT_REDUCTION_PAGE_SIZE = 6;
 
     /**
+     * @todo Think about render(controller()) and to use cache.
+     *
      * @throws Exception Datetime Exception
-     * @Route("/", name="index", methods={"GET"})
+     * @Route("/", name="index", methods="GET")
      */
     public function index(ArticleRepository $articleRepository, ReductionRepository $reductionRepository): Response
     {
