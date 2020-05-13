@@ -1,0 +1,31 @@
+{% macro paginate(paginator, route_name, route_params = {}) %}
+    {% if paginator is not empty and paginator.hasToPaginate %}
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="mt-5">
+                    <ul class="pagination justify-content-center flex-wrap font-weight-light">
+                        {% if paginator.hasPreviousPage %}
+                            <li class="page-item box-shadow"><a href="{{ path(route_name, route_params|merge({'page': paginator.previousPage})) }}" data-pagination="{{ paginator.previousPage }}" rel="previous" class="page-link">{{ 'paginator.previous'|trans }}</a></li>
+                        {% else %}
+                            <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.previous'|trans }}</span></li>
+                        {% endif %}
+
+                        {% for i in 1..paginator.lastPage %}
+                            {% if i is same as(paginator.currentPage) %}
+                                <li class="page-item active box-shadow"><span class="page-link">{{ i }} <span class="sr-only">{{ 'paginator.current'|trans }}</span></span></li>
+                            {% else %}
+                                <li class="page-item box-shadow"><a href="{{ path(route_name, route_params|merge({'page': i})) }}" data-pagination="{{ i }}" class="page-link">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if paginator.hasNextPage %}
+                            <li class="page-item box-shadow"><a href="{{ path(route_name, route_params|merge({'page': paginator.nextPage})) }}" data-pagination="{{ paginator.nextPage }}" rel="next" class="page-link">{{ 'paginator.next'|trans }}</a></li>
+                        {% else %}
+                            <li class="page-item disabled box-shadow"><span class="page-link">{{ 'paginator.next'|trans }}</span></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

@@ -6,76 +6,36 @@
 
 {% block content_id 'article-view' %}
 {% block content -%}
-    {% from 'macro/_breadcrumb.html.twig' import breadcrumb as breadcrumb_macro %}
-    {% import 'macro/_admin.html.twig' as admin %}
+    {% import 'macro/_breadcrumb.html.twig' as macro_breadcrumb %}
+    {% import 'macro/_admin.html.twig' as macro_admin %}
 
     <section class="bg-white box-shadow mt-5 p-5">
         <div class="container pb-5 pt-5">
             <div class="row">
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'article.view.body.h1'|trans }}</h1>
-                    {{ breadcrumb_macro({'app_article_index': 'link.article.index'|trans, 'app_article_view': 'link.article.view'|trans }) }}
+                    {{ macro_breadcrumb.breadcrumb({'app_article_index': 'link.article.index'|trans, 'app_article_view': 'link.article.view'|trans }) }}
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-1 vertical-center">
-                    <img class="rounded-circle" src="{{ article.user|avatar }}" alt="{{ article.user.username }} avatar.">
+                    <img class="rounded-circle" src="{{ article.user|avatar_src }}" alt="{{ article.user }} avatar.">
                 </div>
                 <div class="col-lg-10 vertical-center p-4">
-                    <h6>{{ admin.getBadge(article.user) }}{{ article.user|capitalize }}&nbsp;<small class="font-weight-light">{{ article.user.email }}</small></h6>
+                    <h6>{{ macro_admin.getBadge(article.user) }}{{ article.user|capitalize }}&nbsp;<small class="font-weight-light">{{ article.user.email }}</small></h6>
                     <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
                 </div>
             </div>
 
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th>Title</th>
-                    <td>{{ article.title }}</td>
-                </tr>
-                <tr>
-                    <th>Slug</th>
-                    <td>{{ article.slug }}</td>
-                </tr>
-                <tr>
-                    <th>Summary</th>
-                    <td>{{ article.summary }}</td>
-                </tr>
-                <tr>
-                    <th>Content</th>
-                    <td>{{ article.content|nl2br }}</td>
-                </tr>
-                <tr>
-                    <th>Resources</th>
-                    <td>{{ article.resources ? article.resources|join(', ') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Priority</th>
-                    <td>{{ article.priority }}</td>
-                </tr>
-                <tr>
-                    <th>IsActive</th>
-                    <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
-                </tr>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ article.id }}</td>
-                </tr>
-                <tr>
-                    <th>Uuid</th>
-                    <td>{{ article.uuid }}</td>
-                </tr>
-                <tr>
-                    <th>CreatedAt</th>
-                    <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>UpdatedAt</th>
-                    <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                </tbody>
-            </table>
+            <hr class="mt-4 mb-4">
+
+            <div class="row">
+                <div class="col-lg">
+                    <h2 class="font-weight-bold">{{ article.title|capitalize }}</h2>
+                    <p class="font-weight-light mt-5">{{ article.content|nl2br }}</p>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}

@@ -26,7 +26,7 @@ final class AvatarExtension extends AbstractExtension
 
     public function getFilters(): array
     {
-        return [new TwigFilter('avatar', [$this, 'getAvatar'], ['is_safe' => ['html']])];
+        return [new TwigFilter('avatar_src', [$this, 'getAvatar'], ['is_safe' => ['html']])];
     }
 
     public function getAvatar(User $user): string

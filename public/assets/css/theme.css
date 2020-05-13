@@ -223,18 +223,19 @@ hr {
 }
 
 .card {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
-    -moz-box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
-    box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 8px !important;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 8px !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 8px !important;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .card:hover {
-    -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
-    -moz-box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
-    box-shadow: rgba(0, 0, 0, 0.19) 0 5px 10px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px !important;
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px !important;
 }
 
 .album .card-body {
@@ -358,8 +359,8 @@ span.select2-selection.select2-selection--single {
 -------------------------------------------------- */
 
 .notification-badge {
-    float:right;
-    margin-bottom:-20px;
+    float: right;
+    margin-bottom: -20px;
 }
 
 .background-gradient {
@@ -385,6 +386,14 @@ span.select2-selection.select2-selection--single {
 -------------------------------------------------- */
 
 /** Global styles **/
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
 
 .disabled {
     pointer-events: none;

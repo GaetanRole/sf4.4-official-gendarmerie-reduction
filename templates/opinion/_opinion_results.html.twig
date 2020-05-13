@@ -1,0 +1,36 @@
+{% import 'macro/_admin.html.twig' as macro_admin %}
+{% import 'macro/_paginator.html.twig' as macro_paginator %}
+
+<div class="pt-5">
+    {% if paginator is empty or paginator.results is empty %}
+        <div class="bg-white box-shadow border-radius text-center p-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="lead font-weight-light">
+                        {{ 'opinion.empty'|trans }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% for opinion in paginator.results %}
+            <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-3">
+                <div class="row">
+                    <div class="col-lg-1 text-center vertical-center">
+                        <img class="rounded-circle" src="{{ opinion.user|avatar_src }}" alt="{{ opinion.user }} avatar.">
+                    </div>
+                    <div class="col-lg-10 vertical-center p-4">
+                        <h6>{{ macro_admin.getBadge(opinion.user) }}{{ opinion.name }}&nbsp;<small class="font-weight-light">{{ opinion.email }}</small></h6>
+                        <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ opinion.createdAt|date('d-m-Y') }}</small></p>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-lg-12">
+                        <p class="font-weight-light">{{ opinion.comment }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{{ macro_paginator.paginate(paginator, 'app_reduction_view', {'slug': reduction.slug}) }}

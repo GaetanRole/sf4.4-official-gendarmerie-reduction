@@ -77,8 +77,8 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
             $article->setUser($author)
                 ->setTitle($articleTitle)
                 ->setSlug($this->slugger::uniqueSlugify($articleTitle))
-                ->setSummary($faker->realText(128))
-                ->setContent($faker->realText(254))
+                ->setSummary($faker->realText(254))
+                ->setContent($faker->realText(508))
                 ->setPriority(random_int(0, 3))
                 ->setIsActive((bool) random_int(0, 1))
             ;

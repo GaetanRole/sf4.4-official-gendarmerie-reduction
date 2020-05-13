@@ -5,58 +5,42 @@
 
 {% block content_id 'article-index' %}
 {% block content -%}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'article.index.body.h1'|trans }}</h1>
+    {% import 'macro/_paginator.html.twig' as macro_paginator %}
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Summary</th>
-                            <th>Content</th>
-                            <th>Resources</th>
-                            <th>Priority</th>
-                            <th>IsActive</th>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% if paginator is empty or paginator.results is empty %}
-                            <tr>
-                                <td colspan="12">no records found</td>
-                            </tr>
-                        {% else %}
-                            {% for article in paginator.results %}
-                                <tr>
-                                    <td>{{ article.title }}</td>
-                                    <td>{{ article.slug }}</td>
-                                    <td>{{ article.summary }}</td>
-                                    <td>{{ article.content }}</td>
-                                    <td>{{ article.resources ? article.resources|join(', ') : '' }}</td>
-                                    <td>{{ article.priority }}</td>
-                                    <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
-                                    <td>{{ article.id }}</td>
-                                    <td>{{ article.uuid }}</td>
-                                    <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                    <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                    <td>
-                                        <a href="{{ path('app_article_view', {'slug': article.slug}) }}">show</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
+    <section class="bg-light pb-5 pt-5 mt-5">
+        <div class="container pt-5">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <h1 class="font-weight-bold">{{ 'article.index.body.h1'|trans }}</h1>
+                    <p class="lead">{{ 'article.index.body.description'|trans }}</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md">
+                    {% if paginator is empty or paginator.results is empty %}
+                        <div class="card border-radius mb-4">
+                            <div class="card-body text-center p-5">
+                                <h3 class="lead font-weight-light">
+                                    {{ 'article.empty'|trans }}
+                                </h3>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% for article in paginator.results %}
+                            <a href="{{ path('app_article_view', {'slug': article.slug}) }}">
+                                <div class="card border-radius mb-4">
+                                    <div class="card-body vertical-center p-3">
+                                        <h3 class="card-title text-dark p-0 m-0">{{ article.title|capitalize }}</h3>
+                                        <p><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
+                                        <p class="card-text text-secondary pt-2">{{ article.summary }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {{ macro_paginator.paginate(paginator, 'app_article_index') }}
         </div>
     </section>
 {% endblock %}

@@ -7,28 +7,30 @@
 
 {% block content_id 'reduction-view' %}
 {% block content -%}
-    {% from 'macro/_breadcrumb.html.twig' import breadcrumb as breadcrumb_macro %}
-    {% import 'macro/_admin.html.twig' as admin %}
+    {% import 'macro/_breadcrumb.html.twig' as macro_breadcrumb %}
+    {% import 'macro/_admin.html.twig' as macro_admin %}
 
     <section class="bg-white box-shadow mt-5 p-5">
         <div class="container pb-5 pt-5">
             <div class="row">
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'reduction.view.body.h1'|trans }}</h1>
-                    {{ breadcrumb_macro({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
+                    {{ macro_breadcrumb.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-1 vertical-center">
-                    <img class="rounded-circle" src="{{ reduction.user|avatar }}" alt="{{ reduction.user.username }} avatar.">
+                    <img class="rounded-circle" src="{{ reduction.user|avatar_src }}" alt="{{ reduction.user }} avatar.">
                 </div>
                 <div class="col-lg-10 vertical-center p-4">
-                    <h6>{{ admin.getBadge(reduction.user) }}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
+                    <h6>{{ macro_admin.getBadge(reduction.user) }}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
                     <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
                 </div>
             </div>
-            <hr class="mt-4 mb-5">
+
+            <hr class="mt-4 mb-4">
+
             <div class="row">
                 <div class="col-lg-5 text-center text-lg-left">
                     <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
@@ -41,7 +43,7 @@
                                 reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_NATIONAL_ENDPOINT') %}
                                 <strong>{{ reduction.region }}</strong>
                             {% else %}
-                            <strong>{{ 'region'|trans }} :</strong> {{ reduction.region }}
+                                <strong>{{ 'region'|trans }} :</strong> {{ reduction.region }}
                             {% endif %}
                             {% if reduction.department %}
                                 <br><strong>{{ 'department'|trans }} :</strong> {{ reduction.department }}
@@ -77,7 +79,7 @@
             </div>
 
             <div id="opinion-results">
-                {{ include('reduction/_opinion_results.html.twig') }}
+                {{ include('opinion/_opinion_results.html.twig') }}
             </div>
         </div>
     </section>
