@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use \Exception;
 use App\Form\ContactType;
+use App\Repository\ArticleRepository;
 use App\Repository\ReductionRepository;
 use App\Service\PromoGendMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,21 +24,27 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class DefaultController extends AbstractController
 {
+    /** @var int Article number per page. */
+    private const DEFAULT_ARTICLE_PAGE_SIZE = 3;
+
     /** @var int Reduction number per page. */
-    private const DEFAULT_PAGE_SIZE = 6;
+    private const DEFAULT_REDUCTION_PAGE_SIZE = 6;
 
     /**
      * @throws Exception Datetime Exception
      * @Route("/", name="index", methods={"GET"})
      */
-    public function index(ReductionRepository $reductionRepository): Response
+    public function index(ArticleRepository $articleRepository, ReductionRepository $reductionRepository): Response
     {
         return $this->render('default/index.html.twig', [
-            'reductions' => $reductionRepository->findLatestBy(null, self::DEFAULT_PAGE_SIZE),
+            'articles' => $articleRepository->findLatestImportant(self::DEFAULT_ARTICLE_PAGE_SIZE),
+            'reductions' => $reductionRepository->findLatestBy(null, self::DEFAULT_REDUCTION_PAGE_SIZE),
         ]);
     }
 
     /**
+     * Emails are written for french people, translations are not required.
+     *
      * @throws TransportExceptionInterface
      * @Route("/contact", name="contact", methods={"GET", "POST"})
      */
@@ -57,10 +64,9 @@ final class DefaultController extends AbstractController
                 Email::PRIORITY_HIGH
             );
 
-            $sender = ucfirst($form->getData()['name']);
             $this->addFlash(
                 'info',
-                $translator->trans('send.flash.success', ['%name%' => $sender], 'flashes')
+                $translator->trans('send.flash.success', ['%name%' => ucfirst($form->getData()['name'])], 'flashes')
             );
 
             return $this->redirectToRoute('app_index');

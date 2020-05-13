@@ -381,6 +381,50 @@
         <source>The CSRF token is invalid. Please try to resubmit the form.</source>
         <target>Le jeton CSRF est invalide. Veuillez renvoyer le formulaire.</target>
       </trans-unit>
+      <trans-unit id="61" resname="validator.article.title.not_blank">
+        <source>validator.article.title.not_blank</source>
+        <target>Le titre de l'article ne peut pas être vide.</target>
+      </trans-unit>
+      <trans-unit id="62" resname="validator.article.title.min_length">
+        <source>validator.article.title.min_length</source>
+        <target>Le titre de l'article doit avoir plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="63" resname="validator.article.title.max_length">
+        <source>validator.article.title.max_length</source>
+        <target>Le titre de l'article ne doit pas dépasser plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="64" resname="validator.article.summary.not_blank">
+        <source>validator.article.summary.not_blank</source>
+        <target>Le sommaire visible de l'article ne peut pas être vide.</target>
+      </trans-unit>
+      <trans-unit id="65" resname="validator.article.summary.min_length">
+        <source>validator.article.summary.min_length</source>
+        <target>Le sommaire visible de l'article doit contenir plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="66" resname="validator.article.summary.max_length">
+        <source>validator.article.summary.max_length</source>
+        <target>Le sommaire visible de l'article ne doit pas dépasser plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="67" resname="validator.article.content.not_blank">
+        <source>validator.article.content.not_blank</source>
+        <target>Le contenu de l'article ne peut pas être vide.</target>
+      </trans-unit>
+      <trans-unit id="68" resname="validator.article.content.min_length">
+        <source>validator.article.content.min_length</source>
+        <target>Le contenu de l'article doit contenir plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="69" resname="validator.article.content.max_length">
+        <source>validator.article.content.max_length</source>
+        <target>Le contenu de l'article ne doit pas dépasser plus de {{ limit }} caractères.</target>
+      </trans-unit>
+      <trans-unit id="70" resname="validator.article.priority.min_value">
+        <source>validator.article.priority.min_value</source>
+        <target>La priorité minimum de l'article doit être supérieure ou égale à {{ limit }}.</target>
+      </trans-unit>
+      <trans-unit id="71" resname="validator.article.priority.max_value">
+        <source>validator.article.priority.max_value</source>
+        <target>La priorité maximum de l'article doit être inférieure ou égale à {{ limit }}.</target>
+      </trans-unit>
       <trans-unit id="rvZ2e6p" resname="validator.user_identity.name.max_length">
         <source>validator.user_identity.name.max_length</source>
         <target>L'identité ne doit pas dépasser plus de {{ limit }} caractères.</target>

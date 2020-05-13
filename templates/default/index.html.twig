@@ -32,10 +32,29 @@
                 <p class="w-100 text-center lead">{{ 'index.body.article.description'|trans }}</p>
             </div>
         </div>
-        <div class="px-5 pb-5">
-            <div class="container">
-                <div class="row pb-5 mb-5">
-                    <p class="card-text text-dark text-center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        <div class="p-3">
+            <div class="container-semi-fluid">
+                <div class="row">
+                    {% for article in articles %}
+                        <div class="col-md p-3">
+                            <h3 class="text-center font-weight-bold p-0">{{ article.title|capitalize }}</h3>
+                            <p class="text-center m-0"><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
+                            <a href="#" title="">
+                                <p class="card-text text-dark text-center mt-3">{{ article.summary }}</p>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="col-md-6 offset-md-3 p-3">
+                            <h3 class="lead font-weight-light text-center">
+                                {{ 'article.empty'|trans }}
+                            </h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row mt-5 mb-5 pb-3">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-sm btn-dark" href="#" title="{{ 'link.article.index.title'|trans }}">{{ 'link.article.index'|trans }}&nbsp;<i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +69,7 @@
         </div>
         <div class="album px-5 pb-5">
             <div class="container-semi-fluid">
-                <div class="row pb-5">
+                <div class="row">
                     {% for reduction in reductions %}
                         <div class="col-lg-4">
                             <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
@@ -78,7 +97,7 @@
                             </a>
                         </div>
                     {% else %}
-                        <div class="col-md-6 offset-md-3">
+                        <div class="col-md-6 offset-md-3 pb-5">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="lead font-weight-light text-center">
@@ -89,6 +108,13 @@
                         </div>
                     {% endfor %}
                 </div>
+                {% if reductions is not empty %}
+                    <div class="row mt-5 mb-5 pb-3">
+                        <div class="col-md-12 text-center">
+                            <a class="btn btn-sm btn-dark" href="{{ path('app_reduction_index') }}" title="{{ 'link.reduction.index'|trans }}">{{ 'link.reduction.index'|trans }}&nbsp;<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>

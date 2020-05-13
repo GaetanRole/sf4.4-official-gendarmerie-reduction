@@ -381,6 +381,50 @@
         <source>The CSRF token is invalid. Please try to resubmit the form.</source>
         <target>The CSRF token is invalid. Please try to resubmit the form.</target>
       </trans-unit>
+      <trans-unit id="61" resname="validator.article.title.not_blank">
+        <source>validator.article.title.not_blank</source>
+        <target>__validator.article.title.not_blank</target>
+      </trans-unit>
+      <trans-unit id="62" resname="validator.article.title.min_length">
+        <source>validator.article.title.min_length</source>
+        <target>__validator.article.title.min_length</target>
+      </trans-unit>
+      <trans-unit id="63" resname="validator.article.title.max_length">
+        <source>validator.article.title.max_length</source>
+        <target>__validator.article.title.max_length</target>
+      </trans-unit>
+      <trans-unit id="64" resname="validator.article.summary.not_blank">
+        <source>validator.article.summary.not_blank</source>
+        <target>__validator.article.summary.not_blank</target>
+      </trans-unit>
+      <trans-unit id="65" resname="validator.article.summary.min_length">
+        <source>validator.article.summary.min_length</source>
+        <target>__validator.article.summary.min_length</target>
+      </trans-unit>
+      <trans-unit id="66" resname="validator.article.summary.max_length">
+        <source>validator.article.summary.max_length</source>
+        <target>__validator.article.summary.max_length</target>
+      </trans-unit>
+      <trans-unit id="67" resname="validator.article.content.not_blank">
+        <source>validator.article.content.not_blank</source>
+        <target>__validator.article.content.not_blank</target>
+      </trans-unit>
+      <trans-unit id="68" resname="validator.article.content.min_length">
+        <source>validator.article.content.min_length</source>
+        <target>__validator.article.content.min_length</target>
+      </trans-unit>
+      <trans-unit id="69" resname="validator.article.content.max_length">
+        <source>validator.article.content.max_length</source>
+        <target>__validator.article.content.max_length</target>
+      </trans-unit>
+      <trans-unit id="70" resname="validator.article.priority.min_value">
+        <source>validator.article.priority.min_value</source>
+        <target>__validator.article.priority.min_value</target>
+      </trans-unit>
+      <trans-unit id="71" resname="validator.article.priority.max_value">
+        <source>validator.article.priority.max_value</source>
+        <target>__validator.article.priority.max_value</target>
+      </trans-unit>
       <trans-unit id="rvZ2e6p" resname="validator.user_identity.name.max_length">
         <source>validator.user_identity.name.max_length</source>
         <target>__validator.user_identity.name.max_length</target>

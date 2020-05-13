@@ -130,7 +130,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
     }
 
     /**
-     * Get an array of references useful for Reduction instances.
+     * Get an array of references useful for Reduction instances and some data.
      *
      * @see     7 See UserFixture::USER_NB_TUPLE - 1 for index 0
      *
