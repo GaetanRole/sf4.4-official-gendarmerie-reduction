@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-center">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-center">
     <a class="navbar-brand mr-0" href="{{ path('app_index') }}" title="{{ 'home.link.back.title'|trans }}">
         <img src="{{ asset('assets/images/gendarmerie-logo.png') }}" width="26" height="30" class="d-inline-block align-top m-1 mr-2" alt="Gendarmerie Logo">
         <img src="{{ asset('assets/images/promogend-logo.png') }}" alt="PromoGend Logo">
@@ -6,6 +6,11 @@
     <button class="navbar-toggler ml-2 ml-sm-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    {% if 'dashboard' in currentRoute or 'admin' in currentRoute %}
+        <button id="collapsingLeftSideBar" class="navbar-toggler ml-1" type="button">
+            <span class="sidebar-toggler-icon"><i class="fas fa-indent"></i></span>
+        </button>
+    {% endif %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto text-center">
             <li class="nav-item {{ currentRoute is same as('app_index') ? 'active' }}">
@@ -30,7 +35,7 @@
         <ul class="navbar-nav text-center">
             {% if is_granted('IS_AUTHENTICATED_FULLY') -%}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_security_logout') }}" title="{{ 'base.header.nav.logout.link.title'|trans }}">{{ 'base.header.nav.logout.link'|trans }}</a>
+                    <a class="nav-link" href="{{ path('app_security_logout') }}" title="Ciao !">{{ 'base.header.nav.logout.link'|trans }}</a>
                 </li>
             {% else -%}
                 <li class="nav-item {{ currentRoute is same as('app_security_login') ? 'active' }}">

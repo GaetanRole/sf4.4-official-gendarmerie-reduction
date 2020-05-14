@@ -358,11 +358,6 @@ span.select2-selection.select2-selection--single {
 /* Header
 -------------------------------------------------- */
 
-.notification-badge {
-    float: right;
-    margin-bottom: -20px;
-}
-
 .background-gradient {
     background: rgb(19,28,35);
     background: -moz-linear-gradient(270deg, rgb(18, 25, 31) 52%, rgba(22, 41, 56, 0.93) 100%);
@@ -380,6 +375,11 @@ span.select2-selection.select2-selection--single {
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center;
+}
+
+.notification-badge {
+    float: right;
+    margin-bottom: -20px;
 }
 
 /* Body and global styles
@@ -560,7 +560,6 @@ span.select2-selection.select2-selection--single {
 
 /* Responsive
 -------------------------------------------------- */
-
 
 @media (min-width: 576px) {
     .container-semi-fluid {

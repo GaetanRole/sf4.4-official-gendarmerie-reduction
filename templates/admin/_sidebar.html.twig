@@ -1,0 +1,75 @@
+<nav id="sidebar" class="bg-dark">
+    <div class="sidebar-header">
+        <h4 class="lead text-white">{{ 'admin.sidebard.title'|trans }}</h4>
+    </div>
+
+    <ul class="navbar-nav mx-auto list-unstyled components">
+        <li class="nav-item {{ currentRoute is same as('app_admin_dashboard') ? 'active' }}">
+            <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'admin.sidebar.dashboard.title'|trans }}"><i class="fas fa-columns"></i>&nbsp;{{ 'admin.sidebar.dashboard'|trans }}</a>
+        </li>
+        <li class="nav-item {{ 'brand' in currentRoute ? 'active' }}">
+            <a href="#brandSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" title="{{ 'admin.sidebar.brand.title'|trans }}"><i class="far fa-copyright"></i>&nbsp;{{ 'admin.sidebar.brand'|trans }}</a>
+            <ul class="collapse list-unstyled" id="brandSubmenu">
+                <li {{ currentRoute is same as('app_admin_brand_index') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_brand_index') }}" title="Page {{ 'link.admin.brand.index'|trans }}">{{ 'link.admin.brand.index'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_admin_brand_new') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_brand_new') }}" title="Page {{ 'link.admin.brand.new'|trans }}">{{ 'link.admin.brand.new'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item {{ 'category' in currentRoute ? 'active' }}">
+            <a href="#categorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" title="{{ 'admin.sidebar.category.title'|trans }}"><i class="fas fa-list"></i>&nbsp;{{ 'admin.sidebar.category'|trans }}</a>
+            <ul class="collapse list-unstyled" id="categorySubmenu">
+                <li {{ currentRoute is same as('app_admin_category_index') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_category_index') }}" title="Page {{ 'link.admin.category.index'|trans }}">{{ 'link.admin.category.index'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_admin_category_new') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_category_new') }}" title="Page {{ 'link.admin.category.new'|trans }}">{{ 'link.admin.category.new'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item {{ 'user' in currentRoute ? 'active' }}">
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" title="{{ 'admin.sidebar.user.title'|trans }}"><i class="fas fa-users"></i>&nbsp;{{ 'admin.sidebar.user'|trans }}</a>
+            <ul class="collapse list-unstyled" id="userSubmenu">
+                <li {{ currentRoute is same as('app_admin_user_index') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_user_index') }}" title="Page {{ 'link.admin.user.index'|trans }}">{{ 'link.admin.user.index'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_admin_user_new') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_user_new') }}" title="Page {{ 'link.admin.user.new'|trans }}">{{ 'link.admin.user.new'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item {{ 'article' in currentRoute ? 'active' }}">
+            <a href="#articleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" title="{{ 'admin.sidebar.article.title'|trans }}"><i class="fas fa-newspaper"></i>&nbsp;{{ 'admin.sidebar.article'|trans }}</a>
+            <ul class="collapse list-unstyled" id="articleSubmenu">
+                <li {{ currentRoute is same as('app_admin_article_index') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_article_index') }}" title="Page {{ 'link.admin.article.index'|trans }}">{{ 'link.admin.article.index'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_admin_article_new') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_article_new') }}" title="Page {{ 'link.admin.article.new'|trans }}">{{ 'link.admin.article.new'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item {{ 'reduction' in currentRoute ? 'active' }}">
+            <a href="#reductionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" title="{{ 'admin.sidebar.reduction.title'|trans }}"><i class="fas fa-comments-dollar"></i>&nbsp;{{ 'admin.sidebar.reduction'|trans }}</a>
+            <ul class="collapse list-unstyled" id="reductionSubmenu">
+                <li {{ currentRoute is same as('app_admin_reduction_waiting_list') ? 'class="active"' }}>
+                    <a href="{{ path('app_admin_reduction_waiting_list') }}" title="Page {{ 'link.admin.reduction.waiting-list'|trans }}">{{ 'link.admin.reduction.waiting-list'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_admin_reduction_index') ? 'class="active"' }}>
+                    <a href="{{ path('app_reduction_index') }}" title="Page {{ 'link.reduction.index'|trans }}">{{ 'link.reduction.index'|trans }}</a>
+                </li>
+                <li {{ currentRoute is same as('app_reduction_post') ? 'class="active"' }}>
+                    <a href="{{ path('app_reduction_post') }}" title="Page {{ 'link.reduction.post'|trans }}">{{ 'link.reduction.post'|trans }}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul class="list-unstyled components">
+        <li>
+            <a href="{{ path('app_security_logout') }}" title="Ciao !"><i class="fas fa-sign-out-alt"></i>&nbsp;{{ 'base.header.nav.logout.link'|trans }}</a>
+        </li>
+    </ul>
+</nav>

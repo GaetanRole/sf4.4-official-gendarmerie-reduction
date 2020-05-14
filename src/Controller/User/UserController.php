@@ -34,10 +34,22 @@ final class UserController extends AbstractController
         OpinionRepository $opinionRepository,
         ArticleRepository $articleRepository
     ): Response {
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+
+        $opinions = $currentUser->isAdmin() ?
+            $opinionRepository->findBy(['user' => $user], ['createdAt' => 'DESC']) :
+            $opinionRepository->findLatestByUser($user);
+
+        $articles = $currentUser->isAdmin() ?
+            $articleRepository->findBy(['user' => $user], ['createdAt' => 'DESC']) :
+            $articleRepository->findLatestByUser($user, self::USER_ARTICLE_PAGE_SIZE);
+
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'opinions' => $opinionRepository->findLatestByUser($user),
-            'articles' => $articleRepository->findLatestByUser($user, self::USER_ARTICLE_PAGE_SIZE),
+            'opinions' => $opinions,
+            'articles' => $articles,
         ]);
     }
 }

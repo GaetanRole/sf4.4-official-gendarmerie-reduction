@@ -37,6 +37,20 @@ final class AdminController extends AbstractController
     }
 
     /**
+     * @Route(name="index", methods="GET")
+     */
+    public function index(): Response
+    {
+        $articles = $this->repositoryAdapter
+            ->getRepository(Article::class)
+            ->findAll();
+
+        return $this->render('article/admin/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
