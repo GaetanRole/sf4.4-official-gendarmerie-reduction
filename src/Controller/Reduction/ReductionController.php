@@ -89,7 +89,7 @@ final class ReductionController extends AbstractController
     {
         $opinions = $this->repositoryAdapter
             ->getRepository(Opinion::class)
-            ->findFirstBy($reduction, $page)
+            ->findFirstByReduction($reduction, $page)
         ;
 
         return $this->render('reduction/view.html.twig', [

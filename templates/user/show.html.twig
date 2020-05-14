@@ -4,67 +4,76 @@
 {% block title 'user.show.head.meta.title'|trans %}
 
 {% block content_id 'user-show' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'user.show.body.h1'|trans }}</h1>
+{% block content -%}
+    {% import 'macro/_admin.html.twig' as macro_admin %}
 
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ user.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Uuid</th>
-                            <td>{{ user.uuid }}</td>
-                        </tr>
-                        <tr>
-                            <th>Username</th>
-                            <td>{{ user.username }}</td>
-                        </tr>
-                        <tr>
-                            <th>Identity</th>
-                            <td>{{ user.identity }}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>{{ user.email }}</td>
-                        </tr>
-                        <tr>
-                            <th>PhoneNumber</th>
-                            <td>{{ user.phoneNumber }}</td>
-                        </tr>
-                        <tr>
-                            <th>Password</th>
-                            <td>{{ user.password }}</td>
-                        </tr>
-                        <tr>
-                            <th>IsActive</th>
-                            <td>{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</td>
-                        </tr>
-                        <tr>
-                            <th>Roles</th>
-                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>CreatedAt</th>
-                            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>UpdatedAt</th>
-                            <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <a href="{{ path('app_admin_user_index') }}">{{ 'link.admin.user.index'|trans }}</a>
-
-                    <a href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }}</a>
-
-                    {{ include('user/admin/_delete_form.html.twig') }}
+    <section class="bg-white box-shadow mt-5 p-5">
+        <div class="container pb-5 pt-5">
+            <div class="row mb-5">
+                <div class="col-lg">
+                    <h1 class="font-weight-bold">{{ 'user.show.body.h1'|trans }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7">
+                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h2.opinions'|trans }}</h3>
+                    {% for opinion in opinions %}
+                        <a href="{{ path('app_reduction_view', {'slug': opinion.reduction.slug }) }}" title="{{ opinion.reduction.title }}">
+                            <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+                                <div class="row p-2">
+                                    <div class="col-lg-12">
+                                        <p class="font-weight-light text-dark">{{ opinion.comment }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+                            <div class="row p-2">
+                                <div class="col-lg-12">
+                                    <p class="font-weight-light text-dark">{{ 'opinion.empty'|trans }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr class="mt-4 mb-4">
+                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h2.articles'|trans }}</h3>
+                    {% for article in articles %}
+                        <a href="{{ path('app_article_view', {'slug': article.slug }) }}" title="{{ article.title }}">
+                            <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+                                <div class="row p-2">
+                                    <div class="col-lg-12">
+                                        <h5 class="text-dark p-0 m-0">{{ article.title|capitalize }}</h5>
+                                        <p><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
+                                        <p class="font-weight-light text-dark">{{ article.summary }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% else %}
+                        <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+                            <div class="row p-2">
+                                <div class="col-lg-12">
+                                    <p class="font-weight-light text-dark">{{ 'article.empty'|trans }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-5">
+                    <div class="row text-right">
+                        <div class="col-lg-8 vertical-center p-2">
+                            <p>{{ macro_admin.getBadge(user) }}</p>
+                            <p class="m-0">{{ user.identity }}</p>
+                            <h5 class="m-0">{{ user|capitalize }}&nbsp;<small class="font-weight-light">{{ user.email }}</small></h5>
+                            <p class="m-0"><small class="font-weight-light">{{ user.phoneNumber }}</small></p>
+                            <p class="m-0"><small class="font-weight-light">{{ 'member.date'|trans }} : {{ user.createdAt|date('d-m-Y') }}</small></p>
+                            <p class="m-0"><small class="badge badge-secondary font-weight-light">{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</small></p>
+                        </div>
+                        <div class="col-lg-3 vertical-center p-2">
+                            <img class="rounded-circle" src="{{ user|avatar_src }}" alt="{{ user }} avatar.">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

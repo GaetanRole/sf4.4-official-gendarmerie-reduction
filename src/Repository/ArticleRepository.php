@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use \Exception;
 use App\Entity\Article;
+use App\Entity\User;
 use App\Service\GlobalClock;
 use App\Service\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -69,5 +70,28 @@ class ArticleRepository extends ServiceEntityRepository
         ;
 
         return (new Paginator($qb))->paginate($page);
+    }
+
+    /**
+     * Find last active articles for an active user.
+     */
+    public function findLatestByUser(User $user, $limit = null): DoctrinePaginator
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->addSelect('u')
+            ->innerJoin('a.user', 'u')
+            ->andWhere('a.isActive = :status')
+            ->andWhere('a.user = :user')
+            ->andWhere('u.isActive = :status')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setParameter('status', true)
+            ->setParameter('user', $user)
+        ;
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return new DoctrinePaginator($qb);
     }
 }

@@ -21,11 +21,15 @@
 
             <div class="row">
                 <div class="col-lg-1 vertical-center">
-                    <img class="rounded-circle" src="{{ reduction.user|avatar_src }}" alt="{{ reduction.user }} avatar.">
+                    <a href="{{ path('app_user_show', {'uuid': reduction.user.uuid}) }}" title="{{ reduction.user }} page." class="text-dark">
+                        <img class="rounded-circle" src="{{ reduction.user|avatar_src }}" alt="{{ reduction.user }} avatar.">
+                    </a>
                 </div>
                 <div class="col-lg-10 vertical-center p-4">
-                    <h6>{{ macro_admin.getBadge(reduction.user) }}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
-                    <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
+                    <a href="{{ path('app_user_show', {'uuid': reduction.user.uuid}) }}" title="{{ reduction.user }} page." class="text-dark">
+                        <h6>{{ macro_admin.getBadge(reduction.user) }}{{ reduction.name|capitalize }}&nbsp;<small class="font-weight-light">{{ reduction.email }}</small></h6>
+                        <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
+                    </a>
                 </div>
             </div>
 

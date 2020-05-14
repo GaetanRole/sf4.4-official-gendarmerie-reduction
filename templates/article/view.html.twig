@@ -20,11 +20,15 @@
 
             <div class="row">
                 <div class="col-lg-1 vertical-center">
-                    <img class="rounded-circle" src="{{ article.user|avatar_src }}" alt="{{ article.user }} avatar.">
+                    <a href="{{ path('app_user_show', {'uuid': article.user.uuid}) }}" title="{{ article.user }} page." class="text-dark">
+                        <img class="rounded-circle" src="{{ article.user|avatar_src }}" alt="{{ article.user }} avatar.">
+                    </a>
                 </div>
                 <div class="col-lg-10 vertical-center p-4">
-                    <h6>{{ macro_admin.getBadge(article.user) }}{{ article.user|capitalize }}&nbsp;<small class="font-weight-light">{{ article.user.email }}</small></h6>
-                    <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
+                    <a href="{{ path('app_user_show', {'uuid': article.user.uuid}) }}" title="{{ article.user }} page." class="text-dark">
+                        <h6>{{ macro_admin.getBadge(article.user) }}{{ article.user|capitalize }}&nbsp;<small class="font-weight-light">{{ article.user.email }}</small></h6>
+                        <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
+                    </a>
                 </div>
             </div>
 
