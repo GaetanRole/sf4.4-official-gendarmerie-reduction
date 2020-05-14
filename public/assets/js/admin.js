@@ -5,7 +5,7 @@ $('#collapsingLeftSideBar').click(function () {
 
 $(function () {
     $("#brand-table").tablesorter();
-    $("#category-index-table").tablesorter();
-    $("#user-index-table").tablesorter();
-    $("#article-index-table").tablesorter();
+    $("#category-table").tablesorter();
+    $("#user-table").tablesorter();
+    $("#article-table").tablesorter();
 });

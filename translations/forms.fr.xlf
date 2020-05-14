@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="7IORjB5" resname="form.category.description.placeholder">
         <source>form.category.description.placeholder</source>
-        <target>Renseignez une éventuelle description.</target>
+        <target>Renseignez ici une éventuelle description.</target>
       </trans-unit>
       <trans-unit id="WuOPBA0" resname="form.opinion.comment.label">
         <source>form.opinion.comment.label</source>

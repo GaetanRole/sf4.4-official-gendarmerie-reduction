@@ -1,52 +1,50 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block og_title 'category.admin.index.head.meta.title'|trans %}
 {% block title 'category.admin.index.head.meta.title'|trans %}
 
 {% block content_id 'category-admin-index' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'category.admin.index.body.h1'|trans }}</h1>
 
-                    <a href="{{ path('app_admin_category_new') }}">{{ 'link.admin.category.new'|trans }}</a>
-
-                    <table class="table">
-                        <thead>
+{% block admin_title 'category.admin.index.body.h1'|trans %}
+{% block admin_content -%}
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mt-5 mb-4">
+        <div class="row">
+            <div class="col-lg table-responsive p-4">
+                <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_admin_category_new') }}" title="{{ 'link.admin.category.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.category.new'|trans }}</a>
+                <p class="lead font-weight-light">{{ 'category.admin.count'|trans({'%count%': categories|length}) }}</p>
+                <table id="category-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UUID</th>
+                        <th>{{ 'admin.table.tr.name'|trans }}</th>
+                        <th>{{ 'admin.table.tr.description'|trans }}</th>
+                        <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
                         <tr>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.uuid }}</td>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.description|slice(0, 64) ~ '...' }}</td>
+                            <td>{{ category.createdAt ? category.createdAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}">{{ 'admin.table.edit'|trans }}</a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for category in categories %}
-                            <tr>
-                                <td>{{ category.id }}</td>
-                                <td>{{ category.uuid }}</td>
-                                <td>{{ category.name }}</td>
-                                <td>{{ category.description }}</td>
-                                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>
-                                    <a href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}">{{ 'link.admin.category.edit'|trans }}</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="7">{{ 'table.empty'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

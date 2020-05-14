@@ -36,7 +36,7 @@ final class CategoryType extends AbstractType
                 'attr' => [
                     'placeholder' => 'form.category.description.placeholder',
                     'maxLength' => '255',
-                    'rows' => 20,
+                    'rows' => 5,
                 ],
             ])
         ;
