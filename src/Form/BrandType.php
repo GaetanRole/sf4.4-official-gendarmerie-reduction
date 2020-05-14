@@ -36,7 +36,7 @@ final class BrandType extends AbstractType
                 'attr' => [
                     'placeholder' => 'form.brand.description.placeholder',
                     'maxLength' => '255',
-                    'rows' => 20,
+                    'rows' => 5,
                 ],
             ])
         ;

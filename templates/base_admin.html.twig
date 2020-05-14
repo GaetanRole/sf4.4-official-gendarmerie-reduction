@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/theme.bootstrap_4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
 {% endblock %}
 
@@ -11,7 +12,7 @@
 
     <section id="content" class="bg-grey p-5 mb-5">
         <div class="container-fluid p-md-5 pt-5 mb-5">
-            <div class="row mb-5">
+            <div class="row">
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{% block admin_title %}{% endblock %}</h1>
                 </div>
@@ -29,5 +30,6 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script src="{{ asset('assets/js/plugins/jquery.tablesorter.min.js') }}"></script>
     <script src="{{ asset('assets/js/admin.min.js') }}"></script>
 {% endblock %}

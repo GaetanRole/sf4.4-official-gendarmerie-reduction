@@ -1,5 +1,5 @@
-<form method="post" class="mt-2" action="{{ path('app_admin_brand_delete', {'uuid': brand.uuid}) }}" onsubmit="return confirm('Are you sure you want to delete this brand?');">
+<form method="post" class="mt-2" action="{{ path('app_admin_brand_delete', {'uuid': brand.uuid}) }}" onsubmit="return confirm('{{ 'admin.notification.confirm.delete'|trans }}');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ brand.uuid) }}">
-    <button class="btn btn-sm btn-danger">{{ 'btn.delete'|trans }}</button>
+    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>&nbsp;{{ 'btn.delete'|trans }}</button>
 </form>

@@ -1,21 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
-{% block title 'brand.admin.new.head.meta.title'|trans %}
 {% block og_title 'brand.admin.new.head.meta.title'|trans %}
+{% block title 'brand.admin.new.head.meta.title'|trans %}
 
 {% block content_id 'brand-admin-new' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'brand.admin.new.body.h1'|trans }}</h1>
 
-                    {{ include('brand/admin/_form.html.twig') }}
+{% block admin_title 'brand.admin.new.body.h1'|trans %}
+{% block admin_content -%}
+    {% import 'macro/_breadcrumb.html.twig' as macro_breadcrumb %}
 
-                    <a href="{{ path('app_admin_brand_index') }}">{{ 'link.admin.brand.index'|trans }}</a>
-                </div>
+    {{ macro_breadcrumb.breadcrumb({'app_admin_brand_index': 'link.admin.brand.index'|trans, 'app_admin_brand_new': 'link.admin.brand.new'|trans }) }}
+
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+        <div class="row">
+            <div class="col-lg p-4">
+                {{ include('brand/admin/_form.html.twig') }}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

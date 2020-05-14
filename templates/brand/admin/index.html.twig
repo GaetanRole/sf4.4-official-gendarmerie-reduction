@@ -1,52 +1,50 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
-{% block title 'brand.admin.index.head.meta.title'|trans %}
 {% block og_title 'brand.admin.index.head.meta.title'|trans %}
+{% block title 'brand.admin.index.head.meta.title'|trans %}
 
 {% block content_id 'brand-admin-index' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'brand.admin.index.body.h1'|trans }}</h1>
 
-                    <a href="{{ path('app_admin_brand_new') }}">{{ 'link.admin.brand.new'|trans }}</a>
-
-                    <table class="table">
-                        <thead>
+{% block admin_title 'brand.admin.index.body.h1'|trans %}
+{% block admin_content -%}
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mt-5 mb-4">
+        <div class="row">
+            <div class="col-lg table-responsive p-4">
+                <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_admin_brand_new') }}" title="{{ 'link.admin.brand.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.brand.new'|trans }}</a>
+                <p class="lead font-weight-light">{{ 'brand.admin.count'|trans({'%count%': brands|length}) }}</p>
+                <table id="brand-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UUID</th>
+                        <th>{{ 'admin.table.tr.name'|trans }}</th>
+                        <th>{{ 'admin.table.tr.description'|trans }}</th>
+                        <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for brand in brands %}
                         <tr>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
+                            <td>{{ brand.id }}</td>
+                            <td>{{ brand.uuid }}</td>
+                            <td>{{ brand.name }}</td>
+                            <td>{{ brand.description|slice(0, 64) ~ '...' }}</td>
+                            <td>{{ brand.createdAt ? brand.createdAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>{{ brand.updatedAt ? brand.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_brand_edit', {'uuid': brand.uuid}) }}">{{ 'admin.table.edit'|trans }}</a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for brand in brands %}
-                            <tr>
-                                <td>{{ brand.id }}</td>
-                                <td>{{ brand.uuid }}</td>
-                                <td>{{ brand.name }}</td>
-                                <td>{{ brand.description }}</td>
-                                <td>{{ brand.createdAt ? brand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ brand.updatedAt ? brand.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>
-                                    <a href="{{ path('app_admin_brand_edit', {'uuid': brand.uuid}) }}">{{ 'link.admin.brand.edit'|trans }}</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="7">{{ 'table.empty'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
