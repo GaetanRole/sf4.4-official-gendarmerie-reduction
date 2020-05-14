@@ -111,6 +111,8 @@ clean:	qa-clean-conf cc ## Remove all generated files
 
 clear:	db-destroy cc-assets clean ## Remove all generated files and db
 
+clear-prod: cc-assets clean ## Remove all generated prod files
+
 update:	## Update dependencies
 		$(COMPOSER) update --no-interaction --no-scripts
 
