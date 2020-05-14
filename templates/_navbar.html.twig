@@ -16,12 +16,6 @@
             <li class="nav-item {{ currentRoute is same as('app_index') ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_index') }}" title="{{ 'base.header.nav.home.link.title'|trans }}">{{ 'base.header.nav.home.link'|trans }} <span class="sr-only">{{ 'base.header.nav.current'|trans }}</span></a>
             </li>
-            {% if is_granted('ROLE_ADMIN') -%}
-                <li class="nav-item {{ 'admin' in currentRoute ? 'active' }}">
-                    <a class="badge badge-pill badge-info notification-badge" href="{{ path('app_admin_reduction_waiting_list') }}" title="{{ 'link.admin.reduction.waiting-list.link.title'|trans }}">{{ unverified_reductions_number() }} <i class="fas fa-search"></i></a>
-                    <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">{{ 'base.header.nav.admin.link'|trans }}</a>
-                </li>
-            {% endif %}
             <li class="nav-item {{ 'article' in currentRoute ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_article_index') }}" title="{{ 'base.header.nav.article.link.title'|trans }}">{{ 'base.header.nav.article.link'|trans }}</a>
             </li>
@@ -31,6 +25,12 @@
             <li class="nav-item {{ currentRoute is same as('app_contact') ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_contact') }}" title="{{ 'base.header.nav.contact.link.title'|trans }}">{{ 'base.header.nav.contact.link'|trans }}</a>
             </li>
+            {%- if is_granted('ROLE_ADMIN') -%}
+                <li class="nav-item {{ 'admin' in currentRoute ? 'active' }}">
+                    <a class="badge badge-pill badge-info notification-badge" href="{{ path('app_admin_reduction_waiting_list') }}" title="{{ 'link.admin.reduction.waiting-list.link.title'|trans }}">{{ unverified_reductions_number() }} <i class="fas fa-search"></i></a>
+                    <a class="nav-link" href="{{ path('app_admin_dashboard') }}" title="{{ 'base.header.nav.admin.link.title'|trans }}">|&nbsp; {{ 'base.header.nav.admin.link'|trans }}</a>
+                </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav text-center">
             {% if is_granted('IS_AUTHENTICATED_FULLY') -%}
