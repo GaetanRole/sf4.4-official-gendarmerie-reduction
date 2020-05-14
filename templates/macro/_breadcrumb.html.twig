@@ -5,7 +5,7 @@
                 {% if loop.last %}
                     <li class="breadcrumb-item active" aria-current="page">{{ label }}</li>
                 {% else %}
-                    <li class="breadcrumb-item"><a href="{{ path(url) }}" title="{{ 'breadcrumb.link.title'|trans }}">{{ label }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path(url) }}" title="{{ 'link.breadcrumb.title'|trans }}">{{ label }}</a></li>
                 {% endif %}
             {% endfor %}
         </ol>
