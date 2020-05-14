@@ -27,7 +27,7 @@ install:	.env.local vendor db-init ## Set up the project : copy the env and star
 
 install-prod:	.env.local
 				sed -i -E s/APP_ENV=[a-zA-Z]+/APP_ENV=prod/ .env.local
-				$(COMPOSER) install --no-dev --optimize-autoloader
+				$(COMPOSER) install --no-dev --optimize-autoloader --no-scripts
 				$(CONSOLE) cache:clear --env=prod
 
 sf-console\:%:	## Calling Symfony console

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block description 'error.head.meta.description'|trans %}
+
+{% block og_title %}
+    {{ status_code }}: {{ 'error.head.meta.title'|trans }}
+{% endblock %}
+{% block og_description 'error.head.meta.description'|trans %}
+
+{% block title %}
+    {{ status_code }}: {{ 'error.head.meta.title'|trans }}
+{% endblock %}
+
+{% block content_id 'error' %}
+{% block content -%}
+    <section class="bg-light">
+        <div class="container mt-5 pb-5 pt-5">
+            <div class="row pb-5 pt-5">
+                <div class="col-md text-center">
+                    <h1 class="font-weight-bold">{{ 'error.body.h1'|trans }}</h1>
+                    <p class="lead mb-5"><span class="badge badge-lg badge-danger">{{ status_code }} : {{ status_text }}</span></p>
+                    <p>{{ 'error.body.text'|trans }}</p>
+                    <div class="mb-3 pt-4">
+                        <a class="btn btn-sm btn-danger text-white" href="{{ path('app_index') }}" title="{{ 'home.link.back.title'|trans }}"><i class="fas fa-arrow-left"></i> {{ 'home.link.back'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
