@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block description 'privacy.head.meta.description'|trans %}
+
+{% block og_title 'privacy.head.meta.title'|trans %}
+{% block og_description 'privacy.head.meta.description'|trans %}
+
+{% block title 'privacy.head.meta.title'|trans %}
+
+{% block content_id 'privacy' %}
+{% block content -%}
+    <section class="bg-light">
+        <div class="container mt-5 pb-5 pt-5">
+            <div class="row pb-5 pt-5">
+                <div class="col-md">
+                    <h1 class="font-weight-bold mb-5">{{ 'privacy.body.h1'|trans }}</h1>
+                    <br>
+                    <h3>Fichiers journaux et témoins</h3>
+                    <p>
+                        Nous recueillons certaines informations par le biais de fichiers journaux (log file) et de fichiers témoins (cookies). Il s'agit principalement des informations suivantes :
+                    </p>
+                    <ul>
+                        <li>Adresse IP</li>
+                        <li>Pages visitées et requêtes</li>
+                        <li>Heure et jour de connexion</li>
+                    </ul>
+                    <p>
+                        Le recours à de tels fichiers nous permet :
+                    </p>
+                    <ul>
+                        <li>Amélioration du service et accueil personnalisé</li>
+                        <li>Statistique</li>
+                    </ul>
+                    <hr>
+                    <h3>Droit d'opposition et de retrait</h3>
+                    <p>
+                        Nous nous engageons à vous offrir un droit d'opposition et de retrait quant à vos renseignements personnels.<br>
+                        Le droit d'opposition s'entend comme étant la possiblité offerte aux internautes de refuser que leurs renseignements
+                        personnels soient utilisées à certaines fins mentionnées lors de la collecte.<br>
+                    </p>
+                    <p>
+                        Le droit de retrait s'entend comme étant la possiblité offerte aux internautes de demander à ce que leurs
+                        renseignements personnels ne figurent plus, par exemple, dans une liste de diffusion.<br>
+                    </p>
+                    <p>
+                        Pour pouvoir exercer ces droits, vous pouvez : <br>
+                        Code postal : 02 rue du Nant, Meythe 74960<br>	Courriel : promogend@gmail.com<br>	Téléphone : 0614492251<br>	Section du site web : http://www.promogend.fr/<br>	</p><hr/>
+                    <h3>Droit d'accès</h3>
+                    <p>
+                        Nous nous engageons à reconnaître un droit d'accès et de rectification aux personnes
+                        concernées désireuses de consulter, modifier, voire radier les informations les concernant.<br>
+
+
+                        L'exercice de ce droit se fera :<br>
+                        Code postal : 02 rue du Nant, Meythe 74960<br>	Courriel : promogend@gmail.com<br>	Téléphone : 0614492251<br>	Section du site web : http://www.promogend.fr/<br>	</p><hr/>
+                    <h3>Sécurité</h3>
+                    <p>
+
+                        Les renseignements personnels que nous collectons sont conservés
+                        dans un environnement sécurisé. Les personnes travaillant pour nous sont tenues de respecter la confidentialité de vos informations.<br>
+                        Pour assurer la sécurité de vos renseignements personnels, nous avons recours aux mesures suivantes :
+                    </p>
+                    <ul>
+                        <li>Protocole SSL (Secure Sockets Layer)</li>
+                        <li>Gestion des accès - personne autorisée</li>
+                        <li>Gestion des accès - personne concernée</li>
+                        <li>Logiciel de surveillance du réseau</li>
+                        <li>Sauvegarde informatique</li>
+                        <li>Développement de certificat numérique</li>
+                        <li>Identifiant / mot de passe</li>
+                        <li>Pare-feu (Firewalls)</li>
+                    </ul>
+                    <p>
+                        Nous nous engageons à maintenir un haut degré de confidentialité en intégrant les dernières innovations technologiques permettant d'assurer
+                        la confidentialité de vos transactions. Toutefois, comme aucun mécanisme n'offre une sécurité maximale, une part de risque est toujours présente
+                        lorsque l'on utilise Internet pour transmettre des renseignements personnels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

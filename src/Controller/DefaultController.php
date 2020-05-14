@@ -76,4 +76,24 @@ final class DefaultController extends AbstractController
 
         return $this->render('default/contact.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @todo Think about cache.
+     *
+     * @Route("/about/terms", name="about_terms", methods="GET")
+     */
+    public function terms(): Response
+    {
+        return $this->render('default/terms.html.twig');
+    }
+
+    /**
+     * @todo Think about cache.
+     *
+     * @Route("/about/privacy", name="about_privacy", methods="GET")
+     */
+    public function privacy(): Response
+    {
+        return $this->render('default/privacy.html.twig');
+    }
 }

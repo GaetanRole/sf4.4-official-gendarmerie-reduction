@@ -1,7 +1,7 @@
 <section class="container text-white p-5 text-center">
     <div class="row">
         <div class="col-sm">
-            <h6 class="font-weight-bold">{{ 'footer.services.title'|trans }}</h6>
+            <h6 class="font-weight-bold">{{ 'base.footer.services.title'|trans }}</h6>
             <ul class="list-unstyled text-small">
                 <li><a class="text-muted" href="{{ path('app_index') }}" title="{{ 'base.header.nav.home.link.title'|trans }}">{{ 'base.header.nav.home.link'|trans }}</a></li>
                 <li><a class="text-muted" href="{{ path('app_article_index') }}" title="{{ 'base.header.nav.article.link.title'|trans }}">{{ 'base.header.nav.article.link'|trans }}</a></li>
@@ -10,12 +10,10 @@
             </ul>
         </div>
         <div class="col-sm">
-            <h6 class="font-weight-bold">About</h6>
+            <h6 class="font-weight-bold">{{ 'base.footer.about.title'|trans }}</h6>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
+                <li><a class="text-muted" href="{{ path('app_about_privacy') }}" title="{{ 'base.footer.about.privacy.link.title'|trans }}">{{ 'base.footer.about.privacy.link'|trans }}</a></li>
+                <li><a class="text-muted" href="{{ path('app_about_terms') }}" title="{{ 'base.footer.about.terms.link.title'|trans }}">{{ 'base.footer.about.terms.link'|trans }}</a></li>
             </ul>
         </div>
         <div class="col-sm">
@@ -23,8 +21,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col mt-3">
-            <p><strong>PromoGend</strong> <br><small class="d-block mb-3 text-muted">&copy; 2019-2020</small></p>
+        <div class="col mt-5">
+            <p>
+                <strong>PromoGend</strong>
+                <br>
+                <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
+                <br>
+                <a class="text-white" href="https://github.com/GaetanRole/sf4.4-official-gendarmerie-reduction" title="Promogend Github"><small><i class="fab fa-github"></i>&nbsp;PromoGend on Github</small></a>
+                <br>
+                <a class="text-white" href="https://github.com/GaetanRole" title="Gaëtan Rolé-Dubruille Github"><small><i class="fab fa-apple"></i>&nbsp;Symfony Dev and Design&nbsp;:&nbsp;Gaëtan Rolé-Dubruille</small></a>
+            </p>
         </div>
     </div>
 </section>
