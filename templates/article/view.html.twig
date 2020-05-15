@@ -15,6 +15,9 @@
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'article.view.body.h1'|trans }}</h1>
                     {{ macro_breadcrumb.breadcrumb({'app_article_index': 'link.article.index'|trans, 'app_article_view': 'link.article.view'|trans }) }}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-dark right mb-3" href="{{ path('app_admin_article_edit', {'slug': article.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}"><i class="fas fa-pen"></i>&nbsp;{{ 'admin.table.edit.link'|trans }}</a>
+                    {% endif %}
                 </div>
             </div>
 

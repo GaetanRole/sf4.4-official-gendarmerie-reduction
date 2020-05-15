@@ -16,7 +16,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-7">
-                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h2.opinions'|trans }}</h3>
+                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h3.opinions'|trans }}</h3>
                     {% for opinion in opinions %}
                         <a href="{{ path('app_reduction_view', {'slug': opinion.reduction.slug }) }}" title="{{ opinion.reduction.title }}">
                             <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
@@ -37,7 +37,7 @@
                         </div>
                     {% endfor %}
                     <hr class="mt-4 mb-4">
-                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h2.articles'|trans }}</h3>
+                    <h3 class="lead font-weight-light mb-4">{{ 'user.show.body.h3.articles'|trans }}</h3>
                     {% for article in articles %}
                         <a href="{{ path('app_article_view', {'slug': article.slug }) }}" title="{{ article.title }}">
                             <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
@@ -71,8 +71,13 @@
                             <p class="m-0"><small class="font-weight-light">{{ 'member.date'|trans }} : {{ user.createdAt|date('d-m-Y') }}</small></p>
                             <p class="m-0"><small class="badge badge-secondary font-weight-light">{{ user.isActive ? 'is_active'|trans : 'is_not_active'|trans }}</small></p>
                         </div>
-                        <div class="col-lg-3 vertical-center p-2">
+                        <div class="col-lg-3 text-md-center vertical-center p-2">
                             <img class="rounded-circle" src="{{ user|avatar_src }}" alt="{{ user }} avatar.">
+                            {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
+                                <p class="mt-2">{{ 'admin.table.p.same_acl'|trans }}</p>
+                            {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
+                                <a class="btn btn-sm btn-dark mt-2 px-4" href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}"><i class="fas fa-pen"></i></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

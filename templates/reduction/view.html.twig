@@ -16,6 +16,9 @@
                 <div class="col-lg">
                     <h1 class="font-weight-bold">{{ 'reduction.view.body.h1'|trans }}</h1>
                     {{ macro_breadcrumb.breadcrumb({'app_reduction_index': 'link.reduction.index'|trans, 'app_reduction_view': 'link.reduction.view'|trans }) }}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-dark right mb-3" href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}"><i class="fas fa-pen"></i>&nbsp;{{ 'admin.table.edit.link'|trans }}</a>
+                    {% endif %}
                 </div>
             </div>
 

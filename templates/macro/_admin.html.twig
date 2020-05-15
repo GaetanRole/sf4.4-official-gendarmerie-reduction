@@ -1,8 +1,8 @@
 {% macro getBadge(user) %}
     {% if user.hasRole('ROLE_SUPER_ADMIN') %}
-        <span class="badge badge-lg badge-info">Super Admin</span>&nbsp;
+        <span class="badge badge-lg badge-info mb-2 mb-md-0">Super Admin</span>&nbsp;
     {% endif %}
     {% if user.hasRole('ROLE_ADMIN') %}
-        <span class="badge badge-lg badge-dark">Admin</span>&nbsp;
+        <span class="badge badge-lg badge-dark mb-2 mb-md-0">Admin</span>&nbsp;
     {% endif %}
 {% endmacro %}

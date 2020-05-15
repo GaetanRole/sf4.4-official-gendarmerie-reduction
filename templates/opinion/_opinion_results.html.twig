@@ -15,7 +15,11 @@
     {% else %}
         {% for opinion in paginator.results %}
             <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-3">
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('opinion/admin/_delete_form.html.twig') }}
+                {% endif %}
                 <div class="row">
+
                     <div class="col-lg-1 text-center vertical-center">
                         <a href="{{ path('app_user_show', {'uuid': opinion.user.uuid}) }}" title="{{ opinion.user }} page." class="text-dark">
                             <img class="rounded-circle" src="{{ opinion.user|avatar_src }}" alt="{{ opinion.user }} avatar.">
@@ -26,13 +30,17 @@
                             <h6>{{ macro_admin.getBadge(opinion.user) }}{{ opinion.name }}&nbsp;<small class="font-weight-light">{{ opinion.email }}</small></h6>
                             <p class="m-0"><small class="font-weight-light">{{ 'publish.date'|trans }} : {{ opinion.createdAt|date('d-m-Y') }}</small></p>
                         </a>
+
                     </div>
+
                 </div>
                 <div class="row p-2">
                     <div class="col-lg-12">
+
                         <p class="font-weight-light">{{ opinion.comment }}</p>
                     </div>
                 </div>
+
             </div>
         {% endfor %}
     {% endif %}

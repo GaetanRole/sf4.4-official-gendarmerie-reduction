@@ -22,8 +22,8 @@
                                 <div class="col-md-3 text-center vertical-center">
                                     <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
                                 </div>
-                                <div class="col-md-9 p-3">
-                                    <h3 class="card-title text-dark p-0 m-0"><span class="badge badge-lg badge-info mr-2">{{ reduction.brand.name }}</span>&nbsp;{{ reduction.title|capitalize }}</h3>
+                                <div class="col-md-9 p-md-3 p-4">
+                                    <h3 class="card-title text-dark p-0 m-0"><span class="badge badge-lg badge-info mr-2 mb-md-1 mb-3">{{ reduction.brand.name }}</span>{{ reduction.title|capitalize }}</h3>
                                     <p><small class="text-secondary">{{ 'publish.date'|trans }} : {{ reduction.createdAt|date('d-m-Y') }}</small></p>
                                     <p class="card-text text-secondary pt-2 pb-2">{{ reduction.description|slice(0, 64) ~ '...'}}</p>
                                     <div class="d-flex justify-content-between align-items-center">

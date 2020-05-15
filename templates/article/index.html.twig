@@ -13,6 +13,9 @@
                 <div class="col-md">
                     <h1 class="font-weight-bold">{{ 'article.index.body.h1'|trans }}</h1>
                     <p class="lead">{{ 'article.index.body.description'|trans }}</p>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-sm btn-dark right mt-5" href="{{ path('app_admin_article_new') }}" title="{{ 'link.admin.article.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.article.new'|trans }}</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="row">

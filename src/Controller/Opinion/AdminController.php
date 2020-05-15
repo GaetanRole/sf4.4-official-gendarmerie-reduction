@@ -36,10 +36,12 @@ final class AdminController extends AbstractController
      */
     public function delete(Request $request, Opinion $opinion): RedirectResponse
     {
+        $slug = $opinion->getReduction()->getSlug();
+
         if ($this->isCsrfTokenValid('delete'.$opinion->getUuid()->toString(), $request->request->get('_token'))) {
             $this->repositoryAdapter->delete($opinion);
         }
 
-        return $this->redirectToRoute('app_admin_dashboard');
+        return $this->redirectToRoute('app_reduction_view', ['slug' => $slug]);
     }
 }
