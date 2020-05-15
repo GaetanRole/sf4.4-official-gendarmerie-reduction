@@ -1,78 +1,66 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block og_title 'reduction.admin.waiting-list.head.meta.title'|trans %}
 {% block title 'reduction.admin.waiting-list.head.meta.title'|trans %}
 
 {% block content_id 'reduction-admin-waiting-list' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'reduction.admin.waiting-list.body.h1'|trans }}</h1>
 
-                    <a href="{{ path('app_reduction_post') }}">{{ 'link.reduction.post'|trans }}</a>
-
-                    <table class="table">
-                        <thead>
+{% block admin_title 'reduction.admin.waiting-list.body.h1'|trans %}
+{% block admin_content -%}
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mt-5 mb-4">
+        <div class="row">
+            <div class="col-lg table-responsive p-4">
+                <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_reduction_post') }}" title="{{ 'link.reduction.post.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.reduction.post'|trans }}</a>
+                <p class="lead font-weight-light">{{ 'reduction.admin.count'|trans({'%count%': reductions|length}) }}</p>
+                <table id="reduction-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{ 'admin.table.tr.slug'|trans }}</th>
+                        <th>{{ 'admin.table.tr.image'|trans }}</th>
+                        <th>{{ 'admin.table.tr.title'|trans }}</th>
+                        <th>{{ 'admin.table.tr.location'|trans }}</th>
+                        <th>{{ 'admin.table.tr.name'|trans }}</th>
+                        <th>{{ 'admin.table.tr.email'|trans }}</th>
+                        <th>{{ 'admin.table.tr.ip'|trans }}</th>
+                        <th>{{ 'admin.table.tr.categories'|trans }}</th>
+                        <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reduction in reductions %}
                         <tr>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>ClientIp</th>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Description</th>
-                            <th>Categories</th>
-                            <th>Region</th>
-                            <th>Department</th>
-                            <th>Municipality</th>
-                            <th>IsBigDeal</th>
-                            <th>IsActive</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
+                            <td>{{ reduction.id }}</td>
+                            <td>{{ reduction.slug }}</td>
+                            <td><img class="border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" width="100" alt="{{ reduction.title }} Image."></td>
+                            <td>{{ reduction.title }}</td>
+                            <td>{{ reduction.region }}{% if reduction.department %}<br>{{ reduction.department }}{% endif %}{% if reduction.municipality %}<br>{{ reduction.municipality }}{% endif %}</td>
+                            <td>{{ reduction.name ?: '~'}}</td>
+                            <td>{{ reduction.email ?: '~'}}</td>
+                            <td>{{ reduction.clientIp ?: '~'}}</td>
+                            <td>
+                                {% for category in reduction.categories %}
+                                    {{ category }}
+                                {% endfor %}
+                            </td>
+                            <td>{{ reduction.createdAt|date('d-m-Y, H:i:s') }}</td>
+                            <td>{{ reduction.updatedAt ? reduction.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info mb-2" href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" title="{{ reduction.title }}">{{ 'admin.table.view.link'|trans }}</a>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                {{ include('reduction/admin/_status_form.html.twig') }}
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for reduction in reductions %}
-                            <tr>
-                                <td>{{ reduction.id }}</td>
-                                <td>{{ reduction.uuid }}</td>
-                                <td>{{ reduction.name }}</td>
-                                <td>{{ reduction.email }}</td>
-                                <td>{{ reduction.clientIp }}</td>
-                                <td>{{ reduction.title }}</td>
-                                <td>{{ reduction.slug }}</td>
-                                <td>{{ reduction.description }}</td>
-                                <td>
-                                    {% for category in reduction.categories %}
-                                        {{ category }}
-                                    {% endfor %}
-                                </td>
-                                <td>{{ reduction.region }}</td>
-                                <td>{{ reduction.department }}</td>
-                                <td>{{ reduction.municipality }}</td>
-                                <td>{{ reduction.isBigDeal? 'Yes' : 'No' }}</td>
-                                <td>{{ reduction.isActive ? 'Yes' : 'No' }}</td>
-                                <td>{{ reduction.createdAt ? reduction.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ reduction.updatedAt ? reduction.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>
-                                    <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">{{ 'link.reduction.view'|trans }}</a>
-                                    <a href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}">{{ 'link.admin.reduction.edit'|trans }}</a>
-                                    {{ include('reduction/admin/_status_form.html.twig') }}
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="17">{{ 'table.empty'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="12">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

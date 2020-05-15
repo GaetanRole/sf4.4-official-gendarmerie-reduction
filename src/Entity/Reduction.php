@@ -247,7 +247,7 @@ class Reduction implements EntityInterface
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -271,7 +271,7 @@ class Reduction implements EntityInterface
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -305,7 +305,7 @@ class Reduction implements EntityInterface
         return $this->region;
     }
 
-    public function setRegion(string $region): self
+    public function setRegion(?string $region): self
     {
         $this->region = $region;
 

@@ -21,8 +21,15 @@
         <div class="row">
             <div class="col-lg p-4">
                 {{ include('article/admin/_form.html.twig') }}
-                {{ include('article/admin/_delete_form.html.twig') }}
-                {{ include('article/admin/_status_form.html.twig') }}
+                <hr class="mt-4 mb-4">
+                <div class="d-sm-inline-flex">
+                    <div class="mr-2">
+                        {{ include('article/admin/_delete_form.html.twig') }}
+                    </div>
+                    <div>
+                        {{ include('article/admin/_status_form.html.twig') }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

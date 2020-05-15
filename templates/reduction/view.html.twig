@@ -40,7 +40,14 @@
                     <img class="img-thumbnail border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" alt="{{ reduction.title }} Image.">
                 </div>
                 <div class="col-lg-7 pt-5 pt-lg-0">
-                    <h2 class="font-weight-bold"><span class="badge badge-lg badge-info mr-2">{{ reduction.brand.name }}</span>&nbsp;{{ reduction.title|capitalize }}</h2>
+                    <div class="d-sm-inline-flex mb-3">
+                        <div class="mr-2 vertical-center">
+                            <p class="badge badge-lg badge-info m-0">{{ reduction.brand.name }}</p>
+                        </div>
+                        <div class="vertical-center">
+                            <h2 class="font-weight-bold m-0">{{ reduction.title|capitalize }}</h2>
+                        </div>
+                    </div>
                     <p class="m-0">
                         <small class="font-weight-light">
                             {% if reduction.region is constant('App\\Consumer\\GeoGouvApi\\Model\\ModelEnum::REGION_INTERNATIONAL_ENDPOINT') or

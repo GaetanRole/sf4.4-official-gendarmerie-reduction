@@ -35,7 +35,7 @@
                             <td><img class="rounded-circle" src="{{ user|avatar_src }}" alt="{{ user }} avatar."></td>
                             <td>{{ user.username }}</td>
                             <td>{{ user.identity }}</td>
-                            <td>{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</td>
+                            <td>{{ user.isActive ? 'is_active'|trans : 'is_not_active'|trans }}</td>
                             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                             <td>{{ user.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ user.updatedAt ? user.updatedAt|date('d-m-Y, H:i:s') : '' }}</td>

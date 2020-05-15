@@ -36,7 +36,7 @@
                             <td>{{ article.summary|slice(0, 16) ~ '...' }}</td>
                             <td>{{ article.content|slice(0, 32) ~ '...' }}</td>
                             <td>{{ article.priority }}</td>
-                            <td>{{ article.isActive ? 'article.is_active'|trans : 'article.is_not_active'|trans }}</td>
+                            <td>{{ article.isActive ? 'is_active'|trans : 'is_not_active'|trans }}</td>
                             <td>{{ article.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>

@@ -8,4 +8,5 @@ $(function () {
     $("#category-table").tablesorter();
     $("#user-table").tablesorter();
     $("#article-table").tablesorter();
+    $("#reduction-table").tablesorter();
 });
