@@ -30,7 +30,7 @@
                             <td>{{ brand.id }}</td>
                             <td>{{ brand.uuid }}</td>
                             <td>{{ brand.name }}</td>
-                            <td>{{ brand.description|slice(0, 64) ~ '...' }}</td>
+                            <td>{{ brand.description ? brand.description|slice(0, 64) ~ '...' : '~' }}</td>
                             <td>{{ brand.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ brand.updatedAt ? brand.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>

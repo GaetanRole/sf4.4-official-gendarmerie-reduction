@@ -1,4 +1,4 @@
-<form method="post" class="mt-2" action="{{ path('app_admin_user_change_status', {'uuid': user.uuid}) }}" onsubmit="return confirm('{{ 'admin.notification.confirm.status'|trans }}">
+<form method="post" class="mt-2" action="{{ path('app_admin_user_change_status', {'uuid': user.uuid}) }}" onsubmit="return confirm('{{ 'admin.notification.confirm.status'|trans }}');">
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="_token" value="{{ csrf_token('status' ~ user.uuid) }}">
     <button class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>&nbsp;{{ 'btn.status'|trans }}</button>

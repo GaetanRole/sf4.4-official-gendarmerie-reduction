@@ -88,7 +88,7 @@ final class AdminController extends AbstractController
                 $this->articleManager->handleSlug($article, $previousTitle)
             );
 
-            return $this->redirectToRoute('app_article_index');
+            return $this->redirectToRoute('app_admin_article_index');
         }
 
         return $this->render('article/admin/edit.html.twig', [
@@ -106,7 +106,7 @@ final class AdminController extends AbstractController
             $this->repositoryAdapter->update($this->articleManager->changeStatus($article));
         }
 
-        return $this->redirectToRoute('app_article_index');
+        return $this->redirectToRoute('app_admin_article_index');
     }
 
     /**
@@ -118,6 +118,6 @@ final class AdminController extends AbstractController
             $this->repositoryAdapter->delete($article);
         }
 
-        return $this->redirectToRoute('app_article_index');
+        return $this->redirectToRoute('app_admin_article_index');
     }
 }

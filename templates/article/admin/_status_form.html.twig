@@ -1,0 +1,5 @@
+<form method="post" class="mt-2" action="{{ path('app_admin_article_change_status', {'slug': article.slug}) }}" onsubmit="return confirm('{{ 'admin.notification.confirm.status'|trans }}');">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_token" value="{{ csrf_token('status' ~ article.slug) }}">
+    <button class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>&nbsp;{{ 'btn.status'|trans }}</button>
+</form>

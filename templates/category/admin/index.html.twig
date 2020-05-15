@@ -30,7 +30,7 @@
                             <td>{{ category.id }}</td>
                             <td>{{ category.uuid }}</td>
                             <td>{{ category.name }}</td>
-                            <td>{{ category.description|slice(0, 64) ~ '...' }}</td>
+                            <td>{{ category.description ? category.description|slice(0, 64) ~ '...' : '~' }}</td>
                             <td>{{ category.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>

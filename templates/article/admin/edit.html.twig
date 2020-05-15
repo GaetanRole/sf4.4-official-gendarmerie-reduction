@@ -1,32 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block og_title 'article.admin.edit.head.meta.title'|trans %}
 {% block title 'article.admin.edit.head.meta.title'|trans %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content_id 'article-admin-edit' %}
-{% block content -%}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'article.admin.edit.body.h1'|trans }}</h1>
 
-                    {{ include('article/admin/_form.html.twig') }}
+{% block admin_title 'article.admin.edit.body.h1'|trans %}
+{% block admin_content -%}
+    {% import 'macro/_breadcrumb.html.twig' as macro_breadcrumb %}
 
-                    <a href="{{ path('app_article_index') }}">{{ 'link.article.index'|trans }}</a>
+    {{ macro_breadcrumb.breadcrumb({'app_admin_article_index': 'link.admin.article.index'|trans, 'app_admin_article_edit': 'link.admin.article.edit'|trans }) }}
 
-                    {{ include('article/admin/_delete_form.html.twig') }}
-                </div>
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+        <div class="row">
+            <div class="col-lg p-4">
+                {{ include('article/admin/_form.html.twig') }}
+                {{ include('article/admin/_delete_form.html.twig') }}
+                {{ include('article/admin/_status_form.html.twig') }}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $('select[data-select]').select2();

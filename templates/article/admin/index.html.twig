@@ -1,0 +1,58 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block og_title 'article.admin.index.head.meta.title'|trans %}
+{% block title 'article.admin.index.head.meta.title'|trans %}
+
+{% block content_id 'article-admin-index' %}
+
+{% block admin_title 'article.admin.index.body.h1'|trans %}
+{% block admin_content -%}
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mt-5 mb-4">
+        <div class="row">
+            <div class="col-lg table-responsive p-4">
+                <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_admin_article_new') }}" title="{{ 'link.admin.article.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.article.new'|trans }}</a>
+                <p class="lead font-weight-light">{{ 'article.admin.count'|trans({'%count%': articles|length}) }}</p>
+                <table id="article-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{ 'admin.table.tr.slug'|trans }}</th>
+                        <th>{{ 'admin.table.tr.title'|trans }}</th>
+                        <th>{{ 'admin.table.tr.summary'|trans }}</th>
+                        <th>{{ 'admin.table.tr.content'|trans }}</th>
+                        <th>{{ 'admin.table.tr.priority'|trans }}</th>
+                        <th>{{ 'admin.table.tr.isActive'|trans }}</th>
+                        <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.slug }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.summary|slice(0, 16) ~ '...' }}</td>
+                            <td>{{ article.content|slice(0, 32) ~ '...' }}</td>
+                            <td>{{ article.priority }}</td>
+                            <td>{{ article.isActive ? 'article.is_active'|trans : 'article.is_not_active'|trans }}</td>
+                            <td>{{ article.createdAt|date('d-m-Y, H:i:s') }}</td>
+                            <td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info mb-2" href="{{ path('app_article_view', {'slug': article.slug}) }}" title="{{ article.title }}">{{ 'admin.table.view.link'|trans }}</a>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_article_edit', {'slug': article.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                {{ include('article/admin/_status_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
