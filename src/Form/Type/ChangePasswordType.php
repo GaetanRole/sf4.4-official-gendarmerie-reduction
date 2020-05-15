@@ -26,6 +26,7 @@ final class ChangePasswordType extends AbstractType
                 'invalid_message' => 'form.change_password.plain_password.invalid',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'first_options' => [
+                    'help' => 'form.change_password.plain_password.help',
                     'label' => 'form.change_password.plain_password.first.label',
                     'attr' => ['placeholder' => 'form.change_password.plain_password.first.placeholder'],
                 ],

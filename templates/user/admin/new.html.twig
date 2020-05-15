@@ -1,30 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block og_title 'user.admin.new.head.meta.title'|trans %}
 {% block title 'user.admin.new.head.meta.title'|trans %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content_id 'user-admin-new' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'user.admin.new.body.h1'|trans }}</h1>
 
-                    {{ include('user/admin/_form.html.twig') }}
+{% block admin_title 'user.admin.new.body.h1'|trans %}
+{% block admin_content -%}
+    {% import 'macro/_breadcrumb.html.twig' as macro_breadcrumb %}
 
-                    <a href="{{ path('app_admin_user_index') }}">{{ 'link.admin.user.index'|trans }}</a>
-                </div>
+    {{ macro_breadcrumb.breadcrumb({'app_admin_user_index': 'link.admin.user.index'|trans, 'app_admin_user_new': 'link.admin.user.new'|trans }) }}
+
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mb-4">
+        <div class="row">
+            <div class="col-lg p-4">
+                {{ include('user/admin/_form.html.twig') }}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
         $('select[data-select]').select2();

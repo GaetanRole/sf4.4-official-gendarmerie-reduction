@@ -31,10 +31,10 @@
                             <td>{{ brand.uuid }}</td>
                             <td>{{ brand.name }}</td>
                             <td>{{ brand.description|slice(0, 64) ~ '...' }}</td>
-                            <td>{{ brand.createdAt ? brand.createdAt|date('d-m-Y, H:i:s') : '~' }}</td>
+                            <td>{{ brand.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ brand.updatedAt ? brand.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>
-                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_brand_edit', {'uuid': brand.uuid}) }}">{{ 'admin.table.edit'|trans }}</a>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_brand_edit', {'uuid': brand.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
                             </td>
                         </tr>
                     {% else %}

@@ -16,10 +16,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @see https://symfony.com/doc/current/reference/constraints/UniqueEntity.html#fields
+ *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
  *     fields={"username"},
- *     message="valitor.user.unique.message"
+ *     message="validator.user.unique.username.message"
+ * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="validator.user.unique.email.message"
  * )
  *
  * @author  Gaëtan Rolé-Dubruille <gaetan.role@gmail.com>
@@ -146,7 +152,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -161,7 +167,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this->identity;
     }
 
-    public function setIdentity(string $identity): self
+    public function setIdentity(?string $identity): self
     {
         $this->identity = $identity;
 
@@ -173,7 +179,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -197,7 +203,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
 
@@ -234,7 +240,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActive(?bool $isActive): self
     {
         $this->isActive = $isActive;
 
@@ -254,7 +260,7 @@ class User implements UserInterface, Serializable, EntityInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
 

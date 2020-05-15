@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="41" resname="form.user.avatar.label">
         <source>form.user.avatar.label</source>
-        <target>Avatar du compte</target>
+        <target>Avatar du compte *</target>
       </trans-unit>
       <trans-unit id="42" resname="form.user.avatar.help">
         <source>form.user.avatar.help</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="wouPBT." resname="form.user.roles.help">
         <source>form.user.roles.help</source>
-        <target>Vous pouvez changer les droits d'un administrateur ou utilisateur à tout moment.</target>
+        <target>Vous pouvez changer les droits d'un administrateur ou d'un utilisateur à tout moment.</target>
       </trans-unit>
       <trans-unit id="bd9qfFn" resname="form.user.plain_password.help">
         <source>form.user.plain_password.help</source>
@@ -121,9 +121,13 @@
         <source>form.user_identity.email.placeholder</source>
         <target>Indiquez votre e-mail. Ex: email@email.fr.</target>
       </trans-unit>
+      <trans-unit id="101" resname="form.change_password.plain_password.help">
+        <source>form.change_password.plain_password.help</source>
+        <target>L'édition du mot de passe se fait à part, sans le formulaire ci-dessus. Le mot de passe doit contenir 8 caractères et 1 chiffre minimum.</target>
+      </trans-unit>
       <trans-unit id="IJkJmVj" resname="form.change_password.plain_password.first.label">
         <source>form.change_password.plain_password.first.label</source>
-        <target>Entrez un mot de passe</target>
+        <target>Entrez un nouveau mot de passe *</target>
       </trans-unit>
       <trans-unit id="RZ5bk.c" resname="form.change_password.plain_password.first.placeholder">
         <source>form.change_password.plain_password.first.placeholder</source>
@@ -131,7 +135,7 @@
       </trans-unit>
       <trans-unit id="GWhKR6S" resname="form.change_password.plain_password.second.label">
         <source>form.change_password.plain_password.second.label</source>
-        <target>Répétez le même mot de passe</target>
+        <target>Répétez le même mot de passe *</target>
       </trans-unit>
       <trans-unit id="HLdUqXZ" resname="form.change_password.plain_password.second.placeholder">
         <source>form.change_password.plain_password.second.placeholder</source>
@@ -383,7 +387,7 @@
       </trans-unit>
       <trans-unit id="Ptfaj3G" resname="form.user.identity.help">
         <source>form.user.identity.help</source>
-        <target>L'identité sera visible par tout le monde. Vous pouvez indiquer le rôle du compte (savoir s'il s'agit d'un admin ou utilisateur simple).</target>
+        <target>L'identité sera visible par tout le monde. Vous pouvez indiquer le rôle du compte (savoir s'il s'agit d'un admin ou d'un utilisateur simple).</target>
       </trans-unit>
       <trans-unit id="wl4_Hgl" resname="form.contact.name.label">
         <source>form.contact.name.label</source>

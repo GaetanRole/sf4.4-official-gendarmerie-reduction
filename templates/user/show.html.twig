@@ -65,7 +65,8 @@
                         <div class="col-lg-8 vertical-center p-2">
                             <p>{{ macro_admin.getBadge(user) }}</p>
                             <p class="m-0">{{ user.identity }}</p>
-                            <h5 class="m-0">{{ user|capitalize }}&nbsp;<small class="font-weight-light">{{ user.email }}</small></h5>
+                            <h5 class="m-0">{{ user|capitalize }}&nbsp;</h5>
+                            <p class="m-0"><small class="font-weight-light">{{ user.email }}</small></p>
                             <p class="m-0"><small class="font-weight-light">{{ user.phoneNumber }}</small></p>
                             <p class="m-0"><small class="font-weight-light">{{ 'member.date'|trans }} : {{ user.createdAt|date('d-m-Y') }}</small></p>
                             <p class="m-0"><small class="badge badge-secondary font-weight-light">{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</small></p>

@@ -1,66 +1,62 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block og_title 'user.admin.index.head.meta.title'|trans %}
 {% block title 'user.admin.index.head.meta.title'|trans %}
 
 {% block content_id 'user-admin-index' %}
-{% block content %}
-    <section>
-        <div class="container">
-            <div class="row mb-4">
-                <div class="col">
-                    <h1>{{ 'user.admin.index.body.h1'|trans }}</h1>
 
-                    <a href="{{ path('app_admin_user_new') }}">{{ 'link.admin.user.new'|trans }}</a>
-
-                    <table class="table">
-                        <thead>
+{% block admin_title 'user.admin.index.body.h1'|trans %}
+{% block admin_content -%}
+    <div class="bg-white box-shadow border-radius pr-3 pt-3 pl-3 mt-5 mb-4">
+        <div class="row">
+            <div class="col-lg table-responsive p-4">
+                <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_admin_user_new') }}" title="{{ 'link.admin.user.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.user.new'|trans }}</a>
+                <p class="lead font-weight-light">{{ 'user.admin.count'|trans({'%count%': users|length}) }}</p>
+                <table id="user-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UUID</th>
+                        <th>{{ 'admin.table.tr.avatar'|trans }}</th>
+                        <th>{{ 'admin.table.tr.username'|trans }}</th>
+                        <th>{{ 'admin.table.tr.identity'|trans }}</th>
+                        <th>{{ 'admin.table.tr.isActive'|trans }}</th>
+                        <th>{{ 'admin.table.tr.roles'|trans }}</th>
+                        <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
+                        <th>{{ 'admin.table.tr.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
                         <tr>
-                            <th>Id</th>
-                            <th>Uuid</th>
-                            <th>Username</th>
-                            <th>Identity</th>
-                            <th>Email</th>
-                            <th>PhoneNumber</th>
-                            <th>isActive</th>
-                            <th>Roles</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>actions</th>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.uuid }}</td>
+                            <td><img class="rounded-circle" src="{{ user|avatar_src }}" alt="{{ user }} avatar."></td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.identity }}</td>
+                            <td>{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</td>
+                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                            <td>{{ user.createdAt|date('d-m-Y, H:i:s') }}</td>
+                            <td>{{ user.updatedAt ? user.updatedAt|date('d-m-Y, H:i:s') : '' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info mb-2" href="{{ path('app_user_show', {'uuid': user.uuid}) }}" title="{{ user }} page.">{{ 'admin.table.view.link'|trans }}</a>
+                                {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
+                                    {{ 'user.admin.index.table.p.same_acl'|trans }}
+                                {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
+                                    <a class="btn btn-sm btn-dark" href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                    {{ include('user/admin/_status_form.html.twig') }}
+                                {% endif %}
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for user in users %}
-                            <tr>
-                                <td>{{ user.id }}</td>
-                                <td>{{ user.uuid }}</td>
-                                <td>{{ user.username }}</td>
-                                <td>{{ user.identity }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.phoneNumber }}</td>
-                                <td>{{ user.isActive ? 'user.is_active'|trans : 'user.is_not_active'|trans }}</td>
-                                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>
-                                    {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
-                                        <p>{{ 'user.admin.index.table.p.same_acl'|trans }}</p>
-                                    {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
-                                        <a href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}">{{ 'link.admin.user.edit'|trans }} {{ user.roles|json_encode }}.</a>
-                                        {{ include('user/admin/_status_form.html.twig') }}
-                                    {% endif %}
-                                    <a href="{{ path('app_user_show', {'uuid': user.uuid}) }}">{{ 'link.user.show'|trans }}</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="11">{{ 'table.empty'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">{{ 'table.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

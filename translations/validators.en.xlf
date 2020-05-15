@@ -537,9 +537,13 @@
         <source>validator.reduction.municipality.max_length</source>
         <target>__validator.reduction.municipality.max_length</target>
       </trans-unit>
-      <trans-unit id="fyQdvKq" resname="valitor.user.unique.message">
-        <source>valitor.user.unique.message</source>
-        <target>__valitor.user.unique.message</target>
+      <trans-unit id="fyQdvKq" resname="validator.user.unique.username.message">
+        <source>validator.user.unique.username.message</source>
+        <target>__validator.user.unique.username.message</target>
+      </trans-unit>
+      <trans-unit id="111" resname="validator.user.unique.email.message">
+        <source>validator.user.unique.email.message</source>
+        <target>__validator.user.unique.email.message</target>
       </trans-unit>
       <trans-unit id="dT0Aehg" resname="validator.user.username.not_blank">
         <source>validator.user.username.not_blank</source>

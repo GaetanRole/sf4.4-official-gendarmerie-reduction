@@ -121,6 +121,10 @@
         <source>form.user_identity.email.placeholder</source>
         <target>__form.user_identity.email.placeholder</target>
       </trans-unit>
+      <trans-unit id="101" resname="form.change_password.plain_password.help">
+        <source>form.change_password.plain_password.help</source>
+        <target>__form.change_password.plain_password.help</target>
+      </trans-unit>
       <trans-unit id="IJkJmVj" resname="form.change_password.plain_password.first.label">
         <source>form.change_password.plain_password.first.label</source>
         <target>__form.change_password.plain_password.first.label</target>

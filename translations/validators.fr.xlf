@@ -537,9 +537,13 @@
         <source>validator.reduction.municipality.max_length</source>
         <target>La ville de la réduction ne doit pas dépasser plus de {{ limit }} caractères.</target>
       </trans-unit>
-      <trans-unit id="fyQdvKq" resname="valitor.user.unique.message">
-        <source>valitor.user.unique.message</source>
+      <trans-unit id="fyQdvKq" resname="validator.user.unique.username.message">
+        <source>validator.user.unique.username.message</source>
         <target>Ce nom d'utilisateur est déjà pris.</target>
+      </trans-unit>
+      <trans-unit id="111" resname="validator.user.unique.email.message">
+        <source>validator.user.unique.email.message</source>
+        <target>Cette adresse email est déjà prise.</target>
       </trans-unit>
       <trans-unit id="dT0Aehg" resname="validator.user.username.not_blank">
         <source>validator.user.username.not_blank</source>
