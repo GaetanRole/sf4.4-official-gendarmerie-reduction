@@ -16,10 +16,10 @@
             <li class="nav-item {{ currentRoute is same as('app_index') ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_index') }}" title="{{ 'base.header.nav.home.link.title'|trans }}">{{ 'base.header.nav.home.link'|trans }} <span class="sr-only">{{ 'base.header.nav.current'|trans }}</span></a>
             </li>
-            <li class="nav-item {{ 'article' in currentRoute ? 'active' }}">
+            <li class="nav-item {{ 'article' in currentRoute and 'admin' not in currentRoute ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_article_index') }}" title="{{ 'base.header.nav.article.link.title'|trans }}">{{ 'base.header.nav.article.link'|trans }}</a>
             </li>
-            <li class="nav-item {{ 'reduction' in currentRoute ? 'active' }}">
+            <li class="nav-item {{ 'reduction' in currentRoute and 'admin' not in currentRoute ? 'active' }}">
                 <a class="nav-link" href="{{ path('app_reduction_index') }}" title="{{ 'base.header.nav.reduction.link.title'|trans }}">{{ 'base.header.nav.reduction.link'|trans }}</a>
             </li>
             <li class="nav-item {{ currentRoute is same as('app_contact') ? 'active' }}">
