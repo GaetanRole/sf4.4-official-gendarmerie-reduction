@@ -32,27 +32,6 @@ final class AdminController extends AbstractController
     }
 
     /**
-     * @todo    Probably have to add a dynamic edit below a Reduction.
-     *
-     * @Route("/{uuid<^.{36}$>}/edit", name="edit", methods={"GET", "POST"})
-     *
-     * @throws Exception Datetime Exception
-     */
-    public function edit(Request $request, Opinion $opinion): Response
-    {
-        $form = $this->createForm(OpinionType::class, $opinion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->repositoryAdapter->update($opinion);
-
-            return $this->redirectToRoute('app_admin_dashboard');
-        }
-
-        return $this->render('opinion/admin/edit.html.twig', ['opinion' => $opinion, 'form' => $form->createView()]);
-    }
-
-    /**
      * @Route("/{uuid<^.{36}$>}", name="delete", methods="DELETE")
      */
     public function delete(Request $request, Opinion $opinion): RedirectResponse
