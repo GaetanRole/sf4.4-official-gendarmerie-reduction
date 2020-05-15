@@ -16,7 +16,6 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>{{ 'admin.table.tr.slug'|trans }}</th>
                         <th>{{ 'admin.table.tr.image'|trans }}</th>
                         <th>{{ 'admin.table.tr.title'|trans }}</th>
                         <th>{{ 'admin.table.tr.location'|trans }}</th>
@@ -33,7 +32,6 @@
                     {% for reduction in reductions %}
                         <tr>
                             <td>{{ reduction.id }}</td>
-                            <td>{{ reduction.slug }}</td>
                             <td><img class="border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" width="100" alt="{{ reduction.title }} Image."></td>
                             <td>{{ reduction.title }}</td>
                             <td>{{ reduction.region }}{% if reduction.department %}<br>{{ reduction.department }}{% endif %}{% if reduction.municipality %}<br>{{ reduction.municipality }}{% endif %}</td>
