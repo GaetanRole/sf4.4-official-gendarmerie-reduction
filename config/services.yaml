@@ -15,8 +15,8 @@ services:
             GuzzleHttp\ClientInterface $httpClient: '@app.client'
             EasySlugger\SluggerInterface $slugger: '@app.slugger'
             string $imageUploadDirectory: '%upload_directory%/images'
-            string $recipient: 'gaetan.role@gmail.com'
-            string $sender: 'gaetan.role@gmail.com'
+            string $recipient: 'promogend@gmail.com'
+            string $sender: 'promogend@gmail.com'
 
     app.client:
         class: GuzzleHttp\Client
