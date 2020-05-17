@@ -53,39 +53,39 @@
         <source>form.user.phone_number.placeholder</source>
         <target>__form.user.phone_number.placeholder</target>
       </trans-unit>
-      <trans-unit id="41" resname="form.user.avatar.label">
+      <trans-unit id="okdPUjG" resname="form.user.avatar.label">
         <source>form.user.avatar.label</source>
         <target>__form.user.avatar.label</target>
       </trans-unit>
-      <trans-unit id="42" resname="form.user.avatar.help">
+      <trans-unit id="jkhYxWn" resname="form.user.avatar.help">
         <source>form.user.avatar.help</source>
         <target>__form.user.avatar.help</target>
       </trans-unit>
-      <trans-unit id="50" resname="form.avatar.cat">
+      <trans-unit id="peiEdIx" resname="form.avatar.cat">
         <source>form.avatar.cat</source>
         <target>__form.avatar.cat</target>
       </trans-unit>
-      <trans-unit id="51" resname="form.avatar.elephant">
+      <trans-unit id="UJT9d9y" resname="form.avatar.elephant">
         <source>form.avatar.elephant</source>
         <target>__form.avatar.elephant</target>
       </trans-unit>
-      <trans-unit id="52" resname="form.avatar.fox">
+      <trans-unit id="E_AZx.G" resname="form.avatar.fox">
         <source>form.avatar.fox</source>
         <target>__form.avatar.fox</target>
       </trans-unit>
-      <trans-unit id="53" resname="form.avatar.monkey">
+      <trans-unit id="apQ2cPA" resname="form.avatar.monkey">
         <source>form.avatar.monkey</source>
         <target>__form.avatar.monkey</target>
       </trans-unit>
-      <trans-unit id="54" resname="form.avatar.panda">
+      <trans-unit id="92oA2l7" resname="form.avatar.panda">
         <source>form.avatar.panda</source>
         <target>__form.avatar.panda</target>
       </trans-unit>
-      <trans-unit id="55" resname="form.avatar.penguin">
+      <trans-unit id="rFsbnfE" resname="form.avatar.penguin">
         <source>form.avatar.penguin</source>
         <target>__form.avatar.penguin</target>
       </trans-unit>
-      <trans-unit id="56" resname="form.avatar.rabbit">
+      <trans-unit id="LL4tifl" resname="form.avatar.rabbit">
         <source>form.avatar.rabbit</source>
         <target>__form.avatar.rabbit</target>
       </trans-unit>
@@ -121,7 +121,7 @@
         <source>form.user_identity.email.placeholder</source>
         <target>__form.user_identity.email.placeholder</target>
       </trans-unit>
-      <trans-unit id="101" resname="form.change_password.plain_password.help">
+      <trans-unit id="NNY6aIb" resname="form.change_password.plain_password.help">
         <source>form.change_password.plain_password.help</source>
         <target>__form.change_password.plain_password.help</target>
       </trans-unit>
@@ -141,71 +141,71 @@
         <source>form.change_password.plain_password.second.placeholder</source>
         <target>__form.change_password.plain_password.second.placeholder</target>
       </trans-unit>
-      <trans-unit id="80" resname="form.article.title.label">
+      <trans-unit id="jS4QKlF" resname="form.article.title.label">
         <source>form.article.title.label</source>
         <target>__form.article.title.label</target>
       </trans-unit>
-      <trans-unit id="81" resname="form.article.title.help">
+      <trans-unit id="4m.wvQM" resname="form.article.title.help">
         <source>form.article.title.help</source>
         <target>__form.article.title.help</target>
       </trans-unit>
-      <trans-unit id="82" resname="form.article.title.placeholder">
+      <trans-unit id="fw_fWUC" resname="form.article.title.placeholder">
         <source>form.article.title.placeholder</source>
         <target>__form.article.title.placeholder</target>
       </trans-unit>
-      <trans-unit id="83" resname="form.article.summary.label">
+      <trans-unit id="5RGom7V" resname="form.article.summary.label">
         <source>form.article.summary.label</source>
         <target>__form.article.summary.label</target>
       </trans-unit>
-      <trans-unit id="84" resname="form.article.summary.help">
+      <trans-unit id="KjQCMa1" resname="form.article.summary.help">
         <source>form.article.summary.help</source>
         <target>__form.article.summary.help</target>
       </trans-unit>
-      <trans-unit id="85" resname="form.article.summary.placeholder">
+      <trans-unit id="N84tcjf" resname="form.article.summary.placeholder">
         <source>form.article.summary.placeholder</source>
         <target>__form.article.summary.placeholder</target>
       </trans-unit>
-      <trans-unit id="86" resname="form.article.content.label">
+      <trans-unit id="c3WxWDh" resname="form.article.content.label">
         <source>form.article.content.label</source>
         <target>__form.article.content.label</target>
       </trans-unit>
-      <trans-unit id="87" resname="form.article.content.help">
+      <trans-unit id="xPKqMgY" resname="form.article.content.help">
         <source>form.article.content.help</source>
         <target>__form.article.content.help</target>
       </trans-unit>
-      <trans-unit id="88" resname="form.article.content.placeholder">
+      <trans-unit id="3tMCs27" resname="form.article.content.placeholder">
         <source>form.article.content.placeholder</source>
         <target>__form.article.content.placeholder</target>
       </trans-unit>
-      <trans-unit id="89" resname="form.article.priority.choices.low">
+      <trans-unit id="HJsxloY" resname="form.article.priority.choices.low">
         <source>form.article.priority.choices.low</source>
         <target>__form.article.priority.choices.low</target>
       </trans-unit>
-      <trans-unit id="90" resname="form.article.priority.choices.medium">
+      <trans-unit id="pGYy6qw" resname="form.article.priority.choices.medium">
         <source>form.article.priority.choices.medium</source>
         <target>__form.article.priority.choices.medium</target>
       </trans-unit>
-      <trans-unit id="91" resname="form.article.priority.choices.high">
+      <trans-unit id="VeUzxOe" resname="form.article.priority.choices.high">
         <source>form.article.priority.choices.high</source>
         <target>__form.article.priority.choices.high</target>
       </trans-unit>
-      <trans-unit id="92" resname="form.article.priority.choices.urgent">
+      <trans-unit id="zPuIK4a" resname="form.article.priority.choices.urgent">
         <source>form.article.priority.choices.urgent</source>
         <target>__form.article.priority.choices.urgent</target>
       </trans-unit>
-      <trans-unit id="93" resname="form.article.priority.label">
+      <trans-unit id="0ammTj8" resname="form.article.priority.label">
         <source>form.article.priority.label</source>
         <target>__form.article.priority.label</target>
       </trans-unit>
-      <trans-unit id="94" resname="form.article.priority.help">
+      <trans-unit id="DaLOjVc" resname="form.article.priority.help">
         <source>form.article.priority.help</source>
         <target>__form.article.priority.help</target>
       </trans-unit>
-      <trans-unit id="95" resname="form.article.is_active.label">
+      <trans-unit id="xj.kBHQ" resname="form.article.is_active.label">
         <source>form.article.is_active.label</source>
         <target>__form.article.is_active.label</target>
       </trans-unit>
-      <trans-unit id="96" resname="form.article.is_active.help">
+      <trans-unit id="JEPy2ul" resname="form.article.is_active.help">
         <source>form.article.is_active.help</source>
         <target>__form.article.is_active.help</target>
       </trans-unit>
@@ -305,15 +305,15 @@
         <source>form.reduction.description.placeholder</source>
         <target>__form.reduction.description.placeholder</target>
       </trans-unit>
-      <trans-unit id="0" resname="form.reduction.image.label">
+      <trans-unit id="2ysiYRh" resname="form.reduction.image.label">
         <source>form.reduction.image.label</source>
         <target>__form.reduction.image.label</target>
       </trans-unit>
-      <trans-unit id="1" resname="form.reduction.image.help">
+      <trans-unit id=".f6f.7N" resname="form.reduction.image.help">
         <source>form.reduction.image.help</source>
         <target>__form.reduction.image.help</target>
       </trans-unit>
-      <trans-unit id="3" resname="form.image.delete.label">
+      <trans-unit id="pu7aIEo" resname="form.image.delete.label">
         <source>form.image.delete.label</source>
         <target>__form.image.delete.label</target>
       </trans-unit>
@@ -361,11 +361,11 @@
         <source>form.reduction.categories.help</source>
         <target>__form.reduction.categories.help</target>
       </trans-unit>
-      <trans-unit id="10" resname="form.search.method.label.location">
+      <trans-unit id="iHSTERZ" resname="form.search.method.label.location">
         <source>form.search.method.label.location</source>
         <target>__form.search.method.label.location</target>
       </trans-unit>
-      <trans-unit id="11" resname="form.search.method.label.brand">
+      <trans-unit id="Hbfiobj" resname="form.search.method.label.brand">
         <source>form.search.method.label.brand</source>
         <target>__form.search.method.label.brand</target>
       </trans-unit>

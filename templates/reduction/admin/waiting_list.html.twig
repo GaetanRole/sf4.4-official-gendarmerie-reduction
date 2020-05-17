@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg table-responsive p-4">
                 <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_reduction_post') }}" title="{{ 'link.reduction.post.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.reduction.post'|trans }}</a>
-                <p class="lead font-weight-light">{{ 'reduction.admin.count'|trans({'%count%': reductions|length}) }}</p>
+                <p class="lead font-weight-light">{{ reductions|length }} {{ 'reduction.admin.count'|trans }}</p>
                 <table id="reduction-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
                     <thead>
                     <tr>

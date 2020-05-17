@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="rZNP0ya" resname="admin.sidebard.title">
+        <source>admin.sidebard.title</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id=".Zxxt.T" resname="admin.sidebar.dashboard.title">
+        <source>admin.sidebar.dashboard.title</source>
+        <target>Cliquez pour accéder à l'accueil administrateur</target>
+      </trans-unit>
+      <trans-unit id="MzNWNir" resname="admin.sidebar.dashboard">
+        <source>admin.sidebar.dashboard</source>
+        <target>Accueil administrateur</target>
+      </trans-unit>
+      <trans-unit id="xC2NyWD" resname="admin.sidebar.brand.title">
+        <source>admin.sidebar.brand.title</source>
+        <target>Accéder à l'accueil administrateur</target>
+      </trans-unit>
+      <trans-unit id="4RHYaMX" resname="admin.sidebar.brand">
+        <source>admin.sidebar.brand</source>
+        <target>Enseignes</target>
+      </trans-unit>
+      <trans-unit id="QECRdmU" resname="link.admin.brand.index">
+        <source>link.admin.brand.index</source>
+        <target>Voir les enseignes</target>
+      </trans-unit>
+      <trans-unit id="FGvLYFS" resname="link.admin.brand.new">
+        <source>link.admin.brand.new</source>
+        <target>Ajouter une enseigne</target>
+      </trans-unit>
+      <trans-unit id="P6FOGKp" resname="admin.sidebar.category.title">
+        <source>admin.sidebar.category.title</source>
+        <target>Accéder aux catégories</target>
+      </trans-unit>
+      <trans-unit id="p8lh0sT" resname="admin.sidebar.category">
+        <source>admin.sidebar.category</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id=".Fhp_cY" resname="link.admin.category.index">
+        <source>link.admin.category.index</source>
+        <target>Voir les catégories</target>
+      </trans-unit>
+      <trans-unit id="o5KWDas" resname="link.admin.category.new">
+        <source>link.admin.category.new</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="ldfD4lX" resname="admin.sidebar.user.title">
+        <source>admin.sidebar.user.title</source>
+        <target>Accéder aux utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="QATrjTs" resname="admin.sidebar.user">
+        <source>admin.sidebar.user</source>
+        <target>Utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="jGaByO0" resname="link.admin.user.index">
+        <source>link.admin.user.index</source>
+        <target>Voir les utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="woC9Hor" resname="link.admin.user.new">
+        <source>link.admin.user.new</source>
+        <target>Ajouter un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="aLKVtLy" resname="admin.sidebar.article.title">
+        <source>admin.sidebar.article.title</source>
+        <target>Accéder aux articles</target>
+      </trans-unit>
+      <trans-unit id="fuDuFlT" resname="admin.sidebar.article">
+        <source>admin.sidebar.article</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id="D5pysOf" resname="link.admin.article.index">
+        <source>link.admin.article.index</source>
+        <target>Voir les articles</target>
+      </trans-unit>
+      <trans-unit id="s7X7.i7" resname="link.admin.article.new">
+        <source>link.admin.article.new</source>
+        <target>Ajouter un article</target>
+      </trans-unit>
+      <trans-unit id="Mic85es" resname="admin.sidebar.reduction.title">
+        <source>admin.sidebar.reduction.title</source>
+        <target>Accéder aux réductions</target>
+      </trans-unit>
+      <trans-unit id="JB8nmvg" resname="admin.sidebar.reduction">
+        <source>admin.sidebar.reduction</source>
+        <target>Réductions</target>
+      </trans-unit>
+      <trans-unit id="cLjKOkK" resname="link.admin.reduction.waiting-list">
+        <source>link.admin.reduction.waiting-list</source>
+        <target>Liste d'attente</target>
+      </trans-unit>
+      <trans-unit id="VEghGlV" resname="link.reduction.index">
+        <source>link.reduction.index</source>
+        <target>Rechercher une réduction</target>
+      </trans-unit>
+      <trans-unit id="JV0Gxj8" resname="link.reduction.post">
+        <source>link.reduction.post</source>
+        <target>Ajouter une réduction</target>
+      </trans-unit>
+      <trans-unit id="IrDLaUb" resname="base.header.nav.logout.link">
+        <source>base.header.nav.logout.link</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="w9xohiS" resname="admin.dashboard.head.meta.title">
+        <source>admin.dashboard.head.meta.title</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="gw2Ztl9" resname="admin.dashboard.body.h1">
+        <source>admin.dashboard.body.h1</source>
+        <target>Tableau de bord administrateur</target>
+      </trans-unit>
+      <trans-unit id="bEDILzH" resname="user.admin.new.head.meta.title">
+        <source>user.admin.new.head.meta.title</source>
+        <target>Ajouter un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="HQGKFfy" resname="user.admin.new.body.h1">
+        <source>user.admin.new.body.h1</source>
+        <target>Ajouter un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="xHYmhVf" resname="admin.notification.confirm.delete">
+        <source>admin.notification.confirm.delete</source>
+        <target>Êtes-vous certain de vouloir supprimer cet élément ?</target>
+      </trans-unit>
+      <trans-unit id="Kx69suG" resname="btn.delete">
+        <source>btn.delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="OdYaDqk" resname="user.admin.edit.head.meta.title">
+        <source>user.admin.edit.head.meta.title</source>
+        <target>Éditer un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="QFPpi8B" resname="user.admin.edit.body.h1">
+        <source>user.admin.edit.body.h1</source>
+        <target>Éditer un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="6dY3.B0" resname="link.admin.user.edit">
+        <source>link.admin.user.edit</source>
+        <target>Éditer un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="O.Rhoe0" resname="btn.save">
+        <source>btn.save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="PaWjN0S" resname="admin.notification.confirm.status">
+        <source>admin.notification.confirm.status</source>
+        <target>Êtes-vous sûr de vouloir confirmer ?</target>
+      </trans-unit>
+      <trans-unit id="nhwSJu1" resname="btn.status">
+        <source>btn.status</source>
+        <target>Activer/Désactiver</target>
+      </trans-unit>
+      <trans-unit id="uGTrLR." resname="user.admin.index.head.meta.title">
+        <source>user.admin.index.head.meta.title</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="Z.dOBNd" resname="user.admin.index.body.h1">
+        <source>user.admin.index.body.h1</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="eF_BC8g" resname="link.admin.user.new.title">
+        <source>link.admin.user.new.title</source>
+        <target>Ajouter un nouvel utilisateur</target>
+      </trans-unit>
+      <trans-unit id="DvvVwK8" resname="user.admin.count">
+        <source>user.admin.count</source>
+        <target> utilisateurs sont enregistrés en base.</target>
+      </trans-unit>
+      <trans-unit id="Eog76TE" resname="admin.table.tr.avatar">
+        <source>admin.table.tr.avatar</source>
+        <target>Avatar</target>
+      </trans-unit>
+      <trans-unit id="2D_YX5K" resname="admin.table.tr.username">
+        <source>admin.table.tr.username</source>
+        <target>Nom de compte</target>
+      </trans-unit>
+      <trans-unit id="S.tgFIl" resname="admin.table.tr.identity">
+        <source>admin.table.tr.identity</source>
+        <target>Identité</target>
+      </trans-unit>
+      <trans-unit id="St49ChX" resname="admin.table.tr.isActive">
+        <source>admin.table.tr.isActive</source>
+        <target>Actif ?</target>
+      </trans-unit>
+      <trans-unit id="yIBJDx1" resname="admin.table.tr.roles">
+        <source>admin.table.tr.roles</source>
+        <target>Rôles</target>
+      </trans-unit>
+      <trans-unit id="44udLiC" resname="admin.table.tr.creationDate">
+        <source>admin.table.tr.creationDate</source>
+        <target>Date de création</target>
+      </trans-unit>
+      <trans-unit id="tKU8Hpl" resname="admin.table.tr.updateDate">
+        <source>admin.table.tr.updateDate</source>
+        <target>Date de modification</target>
+      </trans-unit>
+      <trans-unit id="TPcRMZ8" resname="admin.table.tr.actions">
+        <source>admin.table.tr.actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="Ui4F1D." resname="is_active">
+        <source>is_active</source>
+        <target>Actif</target>
+      </trans-unit>
+      <trans-unit id="ALetZLS" resname="is_not_active">
+        <source>is_not_active</source>
+        <target>Non actif</target>
+      </trans-unit>
+      <trans-unit id="nAp.27e" resname="admin.table.view.link">
+        <source>admin.table.view.link</source>
+        <target>Voir</target>
+      </trans-unit>
+      <trans-unit id="_Bl2ANw" resname="admin.table.p.same_acl">
+        <source>admin.table.p.same_acl</source>
+        <target>Vous disposez des mêmes droits</target>
+      </trans-unit>
+      <trans-unit id="CqsEABs" resname="admin.table.edit.link.title">
+        <source>admin.table.edit.link.title</source>
+        <target>Cliquez pour éditer</target>
+      </trans-unit>
+      <trans-unit id="CrEZjO2" resname="admin.table.edit.link">
+        <source>admin.table.edit.link</source>
+        <target>Éditer</target>
+      </trans-unit>
+      <trans-unit id="Nhr9Q20" resname="table.empty">
+        <source>table.empty</source>
+        <target>Aucun résultat.</target>
+      </trans-unit>
+      <trans-unit id="_Db4PEN" resname="user.show.head.meta.title">
+        <source>user.show.head.meta.title</source>
+        <target>Profil utilisateur</target>
+      </trans-unit>
+      <trans-unit id=".LmEm_q" resname="user.show.body.h1">
+        <source>user.show.body.h1</source>
+        <target>Profil utilisateur</target>
+      </trans-unit>
+      <trans-unit id="ljKm4mQ" resname="user.show.body.h3.opinions">
+        <source>user.show.body.h3.opinions</source>
+        <target>Commentaires postés</target>
+      </trans-unit>
+      <trans-unit id="ttMIDG3" resname="opinion.empty">
+        <source>opinion.empty</source>
+        <target>Aucun commentaire.</target>
+      </trans-unit>
+      <trans-unit id="kEWKwdz" resname="user.show.body.h3.articles">
+        <source>user.show.body.h3.articles</source>
+        <target>Articles publiés</target>
+      </trans-unit>
+      <trans-unit id="1NZbxje" resname="publish.date">
+        <source>publish.date</source>
+        <target>Publié le</target>
+      </trans-unit>
+      <trans-unit id="J7A8fND" resname="article.empty">
+        <source>article.empty</source>
+        <target>Aucun article publié pour l'instant.</target>
+      </trans-unit>
+      <trans-unit id="bFm6c3F" resname="member.date">
+        <source>member.date</source>
+        <target>Membre depuis le</target>
+      </trans-unit>
+      <trans-unit id="6l4myWZ" resname="brand.admin.new.head.meta.title">
+        <source>brand.admin.new.head.meta.title</source>
+        <target>Ajouter une enseigne</target>
+      </trans-unit>
+      <trans-unit id="WduWX_0" resname="brand.admin.new.body.h1">
+        <source>brand.admin.new.body.h1</source>
+        <target>Ajouter une enseigne</target>
+      </trans-unit>
+      <trans-unit id="l_vBp05" resname="brand.admin.edit.head.meta.title">
+        <source>brand.admin.edit.head.meta.title</source>
+        <target>Éditer une enseigne</target>
+      </trans-unit>
+      <trans-unit id="g6O1c9b" resname="brand.admin.edit.body.h1">
+        <source>brand.admin.edit.body.h1</source>
+        <target>Éditer une enseigne</target>
+      </trans-unit>
+      <trans-unit id="mAkopGm" resname="link.admin.brand.edit">
+        <source>link.admin.brand.edit</source>
+        <target>Éditer une enseigne</target>
+      </trans-unit>
+      <trans-unit id="pnJL0sq" resname="brand.admin.index.head.meta.title">
+        <source>brand.admin.index.head.meta.title</source>
+        <target>Tableau des enseignes</target>
+      </trans-unit>
+      <trans-unit id="ehn4GYN" resname="brand.admin.index.body.h1">
+        <source>brand.admin.index.body.h1</source>
+        <target>Tableau des enseignes</target>
+      </trans-unit>
+      <trans-unit id="gaec3b8" resname="link.admin.brand.new.title">
+        <source>link.admin.brand.new.title</source>
+        <target>Cliquez pour ajouter une enseigne</target>
+      </trans-unit>
+      <trans-unit id="qjw.lKS" resname="brand.admin.count">
+        <source>brand.admin.count</source>
+        <target> enseignes sont enregistrées en base</target>
+      </trans-unit>
+      <trans-unit id="fBauNA5" resname="admin.table.tr.name">
+        <source>admin.table.tr.name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="NDEs21X" resname="admin.table.tr.description">
+        <source>admin.table.tr.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="S_KmjRS" resname="link.breadcrumb.title">
+        <source>link.breadcrumb.title</source>
+        <target>Cliquez pour retourner à cette page</target>
+      </trans-unit>
+      <trans-unit id="oOXdtd2" resname="paginator.previous">
+        <source>paginator.previous</source>
+        <target>Précédent</target>
+      </trans-unit>
+      <trans-unit id="tX4BnBn" resname="paginator.current">
+        <source>paginator.current</source>
+        <target>Actuel</target>
+      </trans-unit>
+      <trans-unit id="rjAecsf" resname="paginator.next">
+        <source>paginator.next</source>
+        <target>Suivant</target>
+      </trans-unit>
+      <trans-unit id="Jd_qITE" resname="btn.close">
+        <source>btn.close</source>
+        <target>Fermer</target>
+      </trans-unit>
+      <trans-unit id="oMtPsdg" resname="category.admin.new.head.meta.title">
+        <source>category.admin.new.head.meta.title</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="7HBghSk" resname="category.admin.new.body.h1">
+        <source>category.admin.new.body.h1</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="sxtx0qH" resname="category.admin.edit.head.meta.title">
+        <source>category.admin.edit.head.meta.title</source>
+        <target>Éditer une catégorie</target>
+      </trans-unit>
+      <trans-unit id="3kP5N9C" resname="category.admin.edit.body.h1">
+        <source>category.admin.edit.body.h1</source>
+        <target>Éditer une catégorie</target>
+      </trans-unit>
+      <trans-unit id="ao59nhj" resname="link.admin.category.edit">
+        <source>link.admin.category.edit</source>
+        <target>Éditer une catégorie</target>
+      </trans-unit>
+      <trans-unit id="UKzcgqA" resname="category.admin.index.head.meta.title">
+        <source>category.admin.index.head.meta.title</source>
+        <target>Tableau des catégories</target>
+      </trans-unit>
+      <trans-unit id="EFJrfeI" resname="category.admin.index.body.h1">
+        <source>category.admin.index.body.h1</source>
+        <target>Tableau des catégories</target>
+      </trans-unit>
+      <trans-unit id="SLSeKoB" resname="link.admin.category.new.title">
+        <source>link.admin.category.new.title</source>
+        <target>Cliquez pour ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="FvxoqJr" resname="category.admin.count">
+        <source>category.admin.count</source>
+        <target> catégories sont enregistrées en base</target>
+      </trans-unit>
+      <trans-unit id="rqJeAFd" resname="reduction.admin.waiting-list.head.meta.title">
+        <source>reduction.admin.waiting-list.head.meta.title</source>
+        <target>Liste d'attente</target>
+      </trans-unit>
+      <trans-unit id="pRQ5XhB" resname="reduction.admin.waiting-list.body.h1">
+        <source>reduction.admin.waiting-list.body.h1</source>
+        <target>Liste des réductions en attente</target>
+      </trans-unit>
+      <trans-unit id="OtYVbDW" resname="link.reduction.post.title">
+        <source>link.reduction.post.title</source>
+        <target>Cliquez pour poster une réduction</target>
+      </trans-unit>
+      <trans-unit id="etHXiI8" resname="reduction.admin.count">
+        <source>reduction.admin.count</source>
+        <target> réductions sont enregistrées en base</target>
+      </trans-unit>
+      <trans-unit id="91XSsHW" resname="admin.table.tr.image">
+        <source>admin.table.tr.image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="naechiV" resname="admin.table.tr.brand">
+        <source>admin.table.tr.brand</source>
+        <target>Enseigne</target>
+      </trans-unit>
+      <trans-unit id="K.XfB7Y" resname="admin.table.tr.title">
+        <source>admin.table.tr.title</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="Rn_gJ8f" resname="admin.table.tr.location">
+        <source>admin.table.tr.location</source>
+        <target>Localisation</target>
+      </trans-unit>
+      <trans-unit id="MCTIX4K" resname="admin.table.tr.email">
+        <source>admin.table.tr.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="zc7vvfq" resname="admin.table.tr.ip">
+        <source>admin.table.tr.ip</source>
+        <target>IP</target>
+      </trans-unit>
+      <trans-unit id="KMJw2Tk" resname="admin.table.tr.categories">
+        <source>admin.table.tr.categories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="MiSddIA" resname="reduction.admin.edit.head.meta.title">
+        <source>reduction.admin.edit.head.meta.title</source>
+        <target>Éditer une réduction</target>
+      </trans-unit>
+      <trans-unit id="Vym5g2." resname="reduction.admin.edit.body.h1">
+        <source>reduction.admin.edit.body.h1</source>
+        <target>Éditer une réduction</target>
+      </trans-unit>
+      <trans-unit id="DD0fyoU" resname="link.admin.reduction.edit">
+        <source>link.admin.reduction.edit</source>
+        <target>Éditer une réduction</target>
+      </trans-unit>
+      <trans-unit id="1kf8tUp" resname="form.reduction.file.placeholder">
+        <source>form.reduction.file.placeholder</source>
+        <target>Ouvrir...</target>
+      </trans-unit>
+      <trans-unit id="0wsl.G6" resname="form.reduction.image.js.check.text">
+        <source>form.reduction.image.js.check.text</source>
+        <target>Êtes-vous sûr de vouloir ajouter une réduction sans image ?</target>
+      </trans-unit>
+      <trans-unit id="VIlVVGv" resname="region.form.geo.select.option">
+        <source>region.form.geo.select.option</source>
+        <target>Précisez votre recherche</target>
+      </trans-unit>
+      <trans-unit id="W21tioM" resname="reduction.view.head.meta.title">
+        <source>reduction.view.head.meta.title</source>
+        <target>Réduction</target>
+      </trans-unit>
+      <trans-unit id="Qup8Ec0" resname="reduction.view.body.h1">
+        <source>reduction.view.body.h1</source>
+        <target>Réduction</target>
+      </trans-unit>
+      <trans-unit id="jqLqhuf" resname="link.reduction.view">
+        <source>link.reduction.view</source>
+        <target>Voir une réduction</target>
+      </trans-unit>
+      <trans-unit id="xpfSmBv" resname="region">
+        <source>region</source>
+        <target>Région</target>
+      </trans-unit>
+      <trans-unit id="KtKfZXQ" resname="department">
+        <source>department</source>
+        <target>Département</target>
+      </trans-unit>
+      <trans-unit id="y5LqJ5T" resname="municipality">
+        <source>municipality</source>
+        <target>Commune</target>
+      </trans-unit>
+      <trans-unit id="y8zQ3qN" resname="category.join">
+        <source>category.join</source>
+        <target> et </target>
+      </trans-unit>
+      <trans-unit id="re6_ARS" resname="reduction.view.body.opinion.h5">
+        <source>reduction.view.body.opinion.h5</source>
+        <target>Écrire un commentaire</target>
+      </trans-unit>
+      <trans-unit id="hHb2hBO" resname="reduction.search-results.body.h2">
+        <source>reduction.search-results.body.h2</source>
+        <target>réductions trouvées</target>
+      </trans-unit>
+      <trans-unit id="MhC_wyQ" resname="reduction.no-result">
+        <source>reduction.no-result</source>
+        <target>Aucune réduction trouvée.</target>
+      </trans-unit>
+      <trans-unit id="DoCjhgx" resname="reduction.post.head.meta.title">
+        <source>reduction.post.head.meta.title</source>
+        <target>Publier une réduction</target>
+      </trans-unit>
+      <trans-unit id="qKJ.QYC" resname="reduction.post.body.h1">
+        <source>reduction.post.body.h1</source>
+        <target>Publier une réduction</target>
+      </trans-unit>
+      <trans-unit id="mRDp3Zq" resname="reduction.index.head.meta.title">
+        <source>reduction.index.head.meta.title</source>
+        <target>Rechercher une réduction</target>
+      </trans-unit>
+      <trans-unit id="3wlaTXj" resname="reduction.index.body.h1">
+        <source>reduction.index.body.h1</source>
+        <target>Rechercher une réduction</target>
+      </trans-unit>
+      <trans-unit id="ZckcCop" resname="btn.search">
+        <source>btn.search</source>
+        <target>Rechercher</target>
+      </trans-unit>
+      <trans-unit id="RyPPLdW" resname="reduction.empty">
+        <source>reduction.empty</source>
+        <target>Aucune réduction recherchée.</target>
+      </trans-unit>
+      <trans-unit id="vux2YZ9" resname="btn.publish">
+        <source>btn.publish</source>
+        <target>Publier</target>
+      </trans-unit>
+      <trans-unit id=".rnzqWA" resname="home.link.back.title">
+        <source>home.link.back.title</source>
+        <target>Cliquez pour retourner à l'accueil</target>
+      </trans-unit>
+      <trans-unit id="Cu.X9ZB" resname="base.header.nav.home.link.title">
+        <source>base.header.nav.home.link.title</source>
+        <target>Cliquez pour retourner à l'accueil</target>
+      </trans-unit>
+      <trans-unit id="MQBP.KL" resname="base.header.nav.home.link">
+        <source>base.header.nav.home.link</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="k0W.9rP" resname="base.header.nav.current">
+        <source>base.header.nav.current</source>
+        <target>Courant</target>
+      </trans-unit>
+      <trans-unit id="cvijr5u" resname="base.header.nav.article.link.title">
+        <source>base.header.nav.article.link.title</source>
+        <target>Cliquez pour accéder aux articles</target>
+      </trans-unit>
+      <trans-unit id="MqnXNw7" resname="base.header.nav.article.link">
+        <source>base.header.nav.article.link</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id="JPjRrBF" resname="base.header.nav.reduction.link.title">
+        <source>base.header.nav.reduction.link.title</source>
+        <target>Cliquez pour accéder aux réductions</target>
+      </trans-unit>
+      <trans-unit id="ABDcJz7" resname="base.header.nav.reduction.link">
+        <source>base.header.nav.reduction.link</source>
+        <target>Réductions</target>
+      </trans-unit>
+      <trans-unit id="IWLen9X" resname="base.header.nav.contact.link.title">
+        <source>base.header.nav.contact.link.title</source>
+        <target>Cliquez pour nous contacter</target>
+      </trans-unit>
+      <trans-unit id="Ij_63nW" resname="base.header.nav.contact.link">
+        <source>base.header.nav.contact.link</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="B14FGYX" resname="link.admin.reduction.waiting-list.link.title">
+        <source>link.admin.reduction.waiting-list.link.title</source>
+        <target>Cliquez pour accéder à la liste d'attente des réductions</target>
+      </trans-unit>
+      <trans-unit id="QI.DsXo" resname="base.header.nav.admin.link.title">
+        <source>base.header.nav.admin.link.title</source>
+        <target>Cliquez pour accéder à votre tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="0LR5.tW" resname="base.header.nav.admin.link">
+        <source>base.header.nav.admin.link</source>
+        <target>Administrateur</target>
+      </trans-unit>
+      <trans-unit id="._htYRY" resname="base.header.nav.login.link.title">
+        <source>base.header.nav.login.link.title</source>
+        <target>Cliquez pour vous connecter</target>
+      </trans-unit>
+      <trans-unit id="eRBEx0C" resname="base.header.nav.login.link">
+        <source>base.header.nav.login.link</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="zMHwCh8" resname="article.admin.new.head.meta.title">
+        <source>article.admin.new.head.meta.title</source>
+        <target>Ajouter un article</target>
+      </trans-unit>
+      <trans-unit id="Q7SaEFP" resname="article.admin.new.body.h1">
+        <source>article.admin.new.body.h1</source>
+        <target>Ajouter un article</target>
+      </trans-unit>
+      <trans-unit id="dhCB.6J" resname="article.admin.edit.head.meta.title">
+        <source>article.admin.edit.head.meta.title</source>
+        <target>Éditer un article</target>
+      </trans-unit>
+      <trans-unit id="TD5HHLd" resname="article.admin.edit.body.h1">
+        <source>article.admin.edit.body.h1</source>
+        <target>Éditer un article</target>
+      </trans-unit>
+      <trans-unit id="KLi90M0" resname="link.admin.article.edit">
+        <source>link.admin.article.edit</source>
+        <target>Éditer un article</target>
+      </trans-unit>
+      <trans-unit id="45xQjpX" resname="article.admin.index.head.meta.title">
+        <source>article.admin.index.head.meta.title</source>
+        <target>Tableau des articles</target>
+      </trans-unit>
+      <trans-unit id="Y0KETIc" resname="article.admin.index.body.h1">
+        <source>article.admin.index.body.h1</source>
+        <target>Tableau des articles</target>
+      </trans-unit>
+      <trans-unit id="1qi0Ji3" resname="link.admin.article.new.title">
+        <source>link.admin.article.new.title</source>
+        <target>Cliquez pour ajouter un article</target>
+      </trans-unit>
+      <trans-unit id="tLtPCVx" resname="article.admin.count">
+        <source>article.admin.count</source>
+        <target>articles sont enregistrés en base</target>
+      </trans-unit>
+      <trans-unit id="ylvq6sS" resname="admin.table.tr.slug">
+        <source>admin.table.tr.slug</source>
+        <target>Lien (slug)</target>
+      </trans-unit>
+      <trans-unit id="eLdv6GE" resname="admin.table.tr.summary">
+        <source>admin.table.tr.summary</source>
+        <target>Sommaire</target>
+      </trans-unit>
+      <trans-unit id="24jiW2D" resname="admin.table.tr.content">
+        <source>admin.table.tr.content</source>
+        <target>Contenu</target>
+      </trans-unit>
+      <trans-unit id="k4l5DyV" resname="admin.table.tr.priority">
+        <source>admin.table.tr.priority</source>
+        <target>Priorité</target>
+      </trans-unit>
+      <trans-unit id="5rxqs2y" resname="article.view.head.meta.title">
+        <source>article.view.head.meta.title</source>
+        <target>Lire un article</target>
+      </trans-unit>
+      <trans-unit id="YzrV6cs" resname="article.view.body.h1">
+        <source>article.view.body.h1</source>
+        <target>Article</target>
+      </trans-unit>
+      <trans-unit id="GFq8V0g" resname="link.article.index">
+        <source>link.article.index</source>
+        <target>Voir les articles</target>
+      </trans-unit>
+      <trans-unit id="hT3qEjw" resname="link.article.view">
+        <source>link.article.view</source>
+        <target>Voir l'article</target>
+      </trans-unit>
+      <trans-unit id="HQW_N8I" resname="article.index.head.meta.title">
+        <source>article.index.head.meta.title</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id="FJma6Tb" resname="article.index.body.h1">
+        <source>article.index.body.h1</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id="syYhYo4" resname="article.index.body.description">
+        <source>article.index.body.description</source>
+        <target>Retrouvez toutes les dernières actualités du site PromoGend, publiées ici par le staff.</target>
+      </trans-unit>
+      <trans-unit id="66i_8xo" resname="terms.head.meta.description">
+        <source>terms.head.meta.description</source>
+        <target>Présentation des mentions légales de l'association PromoGend.</target>
+      </trans-unit>
+      <trans-unit id="UjnvJpE" resname="terms.head.meta.title">
+        <source>terms.head.meta.title</source>
+        <target>Mentions légales</target>
+      </trans-unit>
+      <trans-unit id="g5_WBwG" resname="terms.body.h1">
+        <source>terms.body.h1</source>
+        <target>Mentions légales</target>
+      </trans-unit>
+      <trans-unit id="bXf.1bl" resname="privacy.head.meta.description">
+        <source>privacy.head.meta.description</source>
+        <target>Présentation de la politique de confidentialité du site, de l'association PromoGend.</target>
+      </trans-unit>
+      <trans-unit id="TyfXgtc" resname="privacy.head.meta.title">
+        <source>privacy.head.meta.title</source>
+        <target>Politique de confidentialité</target>
+      </trans-unit>
+      <trans-unit id="fB43XQi" resname="privacy.body.h1">
+        <source>privacy.body.h1</source>
+        <target>Politique de confidentialité</target>
+      </trans-unit>
+      <trans-unit id="f7yIsiI" resname="contact.head.meta.description">
+        <source>contact.head.meta.description</source>
+        <target>Contactez-nous via notre formulaire de contact. Nous vous répondrons dès que possible !</target>
+      </trans-unit>
+      <trans-unit id="RR2W4zn" resname="contact.head.meta.title">
+        <source>contact.head.meta.title</source>
+        <target>Contactez-nous</target>
+      </trans-unit>
+      <trans-unit id="teMy7po" resname="contact.body.h1">
+        <source>contact.body.h1</source>
+        <target>Écrivez-nous un petit mot !</target>
+      </trans-unit>
+      <trans-unit id="AOq3SIW" resname="btn.send">
+        <source>btn.send</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="yKOF_l0" resname="index.head.meta.description">
+        <source>index.head.meta.description</source>
+        <target>PromoGend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
+      </trans-unit>
+      <trans-unit id="34WnIim" resname="index.head.meta.title">
+        <source>index.head.meta.title</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="HarvFp2" resname="index.header.h1">
+        <source>index.header.h1</source>
+        <target>PromoGend</target>
+      </trans-unit>
+      <trans-unit id="xbEZUI3" resname="index.header.description">
+        <source>index.header.description</source>
+        <target>Bienvenue sur PromoGend ! Le site des offres et des réductions à destination des militaires de la Gendarmerie Nationale.</target>
+      </trans-unit>
+      <trans-unit id="XHqjztk" resname="btn.learn-more">
+        <source>btn.learn-more</source>
+        <target>En apprendre plus !</target>
+      </trans-unit>
+      <trans-unit id="jlJ9xer" resname="index.body.article.h2">
+        <source>index.body.article.h2</source>
+        <target>Derniers articles</target>
+      </trans-unit>
+      <trans-unit id="pV2NQlt" resname="index.body.article.description">
+        <source>index.body.article.description</source>
+        <target>Retrouvez les derniers actualités publiées par l'association PromoGend.</target>
+      </trans-unit>
+      <trans-unit id="iXWxE_p" resname="link.article.index.title">
+        <source>link.article.index.title</source>
+        <target>Cliquez pour voir les articles</target>
+      </trans-unit>
+      <trans-unit id="9CmyR9t" resname="index.body.reduction.h2">
+        <source>index.body.reduction.h2</source>
+        <target>Dernières réductions</target>
+      </trans-unit>
+      <trans-unit id="2d0UgeM" resname="index.body.reduction.description">
+        <source>index.body.reduction.description</source>
+        <target>Retrouvez les dernières réductions ajoutées et validées par la communauté PromoGend.</target>
+      </trans-unit>
+      <trans-unit id="j7mtFaM" resname="base.head.meta.description">
+        <source>base.head.meta.description</source>
+        <target>PromoGend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
+      </trans-unit>
+      <trans-unit id="SNvq9F." resname="base.head.meta.title">
+        <source>base.head.meta.title</source>
+        <target>Le site des réductions de la Gendarmerie Nationale</target>
+      </trans-unit>
+      <trans-unit id="59cMi3i" resname="base.footer.services.title">
+        <source>base.footer.services.title</source>
+        <target>Services</target>
+      </trans-unit>
+      <trans-unit id="D0p_Kqe" resname="base.footer.about.title">
+        <source>base.footer.about.title</source>
+        <target>À propos</target>
+      </trans-unit>
+      <trans-unit id="aOTZoSG" resname="base.footer.about.privacy.link.title">
+        <source>base.footer.about.privacy.link.title</source>
+        <target>Cliquez pour voir les politiques de confidentialité</target>
+      </trans-unit>
+      <trans-unit id="iCEzALQ" resname="base.footer.about.privacy.link">
+        <source>base.footer.about.privacy.link</source>
+        <target>Politique de confidentialité</target>
+      </trans-unit>
+      <trans-unit id="lbC8keq" resname="base.footer.about.terms.link.title">
+        <source>base.footer.about.terms.link.title</source>
+        <target>Cliquez pour voir les mentions légales</target>
+      </trans-unit>
+      <trans-unit id="tOn03aR" resname="base.footer.about.terms.link">
+        <source>base.footer.about.terms.link</source>
+        <target>Mentions légales</target>
+      </trans-unit>
+      <trans-unit id="CGYkr95" resname="login.head.meta.description">
+        <source>login.head.meta.description</source>
+        <target>Connectez-vous avec un compte pré-enregistré par Promogend afin de profiter d'offres et réductions. Les identifiants sont accessibles depuis le groupe Facebook PromoGend.</target>
+      </trans-unit>
+      <trans-unit id="BQkzFUH" resname="login.head.meta.title">
+        <source>login.head.meta.title</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="ppRfupw" resname="login.body.h1">
+        <source>login.body.h1</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="UVnEemT" resname="login.form.username.label">
+        <source>login.form.username.label</source>
+        <target>Identifiant</target>
+      </trans-unit>
+      <trans-unit id="NRUZzJu" resname="login.form.username.placeholder">
+        <source>login.form.username.placeholder</source>
+        <target>Identifiant de compte</target>
+      </trans-unit>
+      <trans-unit id="OyhW8sn" resname="login.form.password.label">
+        <source>login.form.password.label</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="h4HMw0h" resname="login.form.password.placeholder">
+        <source>login.form.password.placeholder</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="8emu4Yy" resname="login.form.remember_me">
+        <source>login.form.remember_me</source>
+        <target>Se souvenir de moi ?</target>
+      </trans-unit>
+      <trans-unit id="KXSzZJt" resname="login.form.submit">
+        <source>login.form.submit</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="GBOW1we" resname="login.form.subtitle">
+        <source>login.form.subtitle</source>
+        <target>Vous ne pouvez pas créer de compte sur le site. Il vous faut accèder à la page Facebook du groupe PromoGend pour avoir un compte.</target>
+      </trans-unit>
+      <trans-unit id="A1h_z03" resname="home.link.back">
+        <source>home.link.back</source>
+        <target>Retour à l'accueil</target>
+      </trans-unit>
+      <trans-unit id="8kf2eVh" resname="error.head.meta.description">
+        <source>error.head.meta.description</source>
+        <target>Une erreur est survenue. Merci de contacter le support en cas de problème ou de rejoindre l'accueil pour poursuivre votre navigation.</target>
+      </trans-unit>
+      <trans-unit id="ER8NG5L" resname="error.head.meta.title">
+        <source>error.head.meta.title</source>
+        <target>Une erreur est survenue !</target>
+      </trans-unit>
+      <trans-unit id="Fz09Ywo" resname="error.body.h1">
+        <source>error.body.h1</source>
+        <target>Une erreur est survenue !</target>
+      </trans-unit>
+      <trans-unit id="VIP4pmi" resname="error.body.text">
+        <source>error.body.text</source>
+        <target>Une erreur s'est produite. En cas de problème persistant merci de contacter le support via le formulaire de contact ou Facebook.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

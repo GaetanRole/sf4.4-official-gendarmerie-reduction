@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg table-responsive p-4">
                 <a class="btn btn-sm btn-dark right mt-4 mb-5" href="{{ path('app_admin_category_new') }}" title="{{ 'link.admin.category.new.title'|trans }}"><i class="fas fa-plus"></i>&nbsp;{{ 'link.admin.category.new'|trans }}</a>
-                <p class="lead font-weight-light">{{ 'category.admin.count'|trans({'%count%': categories|length}) }}</p>
+                <p class="lead font-weight-light">{{ categories|length }} {{ 'category.admin.count'|trans }}</p>
                 <table id="category-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap text-center">
                     <thead>
                     <tr>

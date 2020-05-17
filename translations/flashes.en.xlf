@@ -33,15 +33,15 @@
         <source>delete.flash.success</source>
         <target>__delete.flash.success</target>
       </trans-unit>
-      <trans-unit id="7" resname="send.flash.success">
+      <trans-unit id="7Hq1TyQ" resname="send.flash.success">
         <source>send.flash.success</source>
         <target>__send.flash.success</target>
       </trans-unit>
-      <trans-unit id="20" resname="reduction.save.flash.success">
+      <trans-unit id="pVtkDE1" resname="reduction.save.flash.success">
         <source>reduction.save.flash.success</source>
         <target>__reduction.save.flash.success</target>
       </trans-unit>
-      <trans-unit id="21" resname="reduction.validation.flash.success">
+      <trans-unit id="lc_j.tH" resname="reduction.validation.flash.success">
         <source>reduction.validation.flash.success</source>
         <target>__reduction.validation.flash.success</target>
       </trans-unit>

@@ -33,15 +33,15 @@
         <source>delete.flash.success</source>
         <target>Votre suppression a bien été effectuée.</target>
       </trans-unit>
-      <trans-unit id="7" resname="send.flash.success">
+      <trans-unit id="7Hq1TyQ" resname="send.flash.success">
         <source>send.flash.success</source>
         <target>%name% votre email a bien été envoyé. Nous vous répondrons dès que possible !</target>
       </trans-unit>
-      <trans-unit id="20" resname="reduction.save.flash.success">
+      <trans-unit id="pVtkDE1" resname="reduction.save.flash.success">
         <source>reduction.save.flash.success</source>
         <target>La réduction a bien été ajoutée. Celle-ci sera vérifiée au préalable par les administrateurs puis affichée. Merci camarade !</target>
       </trans-unit>
-      <trans-unit id="21" resname="reduction.validation.flash.success">
+      <trans-unit id="lc_j.tH" resname="reduction.validation.flash.success">
         <source>reduction.validation.flash.success</source>
         <target>Le statut de la réduction a bien été modifié. Vous pouvez le changer à tout moment depuis la page des réductions.</target>
       </trans-unit>
