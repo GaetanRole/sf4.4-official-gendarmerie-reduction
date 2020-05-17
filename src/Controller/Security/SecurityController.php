@@ -20,6 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class SecurityController extends AbstractController
 {
+    private const PRE_REGISTERED_USER = 'utilisateur.facebook';
+
     /**
      * @Route("/login", name="login")
      */
@@ -38,7 +40,7 @@ final class SecurityController extends AbstractController
         }
 
         return $this->render('security/login.html.twig', [
-            'last_username' => $authenticationUtils->getLastUsername(),
+            'username' => $authenticationUtils->getLastUsername() ?: self::PRE_REGISTERED_USER,
             'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
     }

@@ -205,6 +205,10 @@ hr {
     background-color: var(--grey) !important;
 }
 
+.bg-grey-opaque {
+    background-color: var(--grey-opaque) !important;
+}
+
 .bg-dark {
     background-color: var(--grey-dark) !important;
 }

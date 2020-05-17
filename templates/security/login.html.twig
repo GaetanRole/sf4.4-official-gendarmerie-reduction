@@ -24,12 +24,12 @@
 
                     <div class="input-group mb-3">
                         <label for="inputUsername" class="d-none">{{ 'login.form.username.label'|trans }}</label>
-                        <input type="text" class="form-control" value="{{ last_username }}" name="username" id="inputUsername" placeholder="{{ 'login.form.username.placeholder'|trans }}" required autofocus>
+                        <input type="text" class="form-control bg-grey-opaque" value="{{ username }}" name="username" id="inputUsername" placeholder="{{ 'login.form.username.placeholder'|trans }}" required>
                     </div>
 
                     <div class="input-group mb-3">
                         <label for="inputPassword" class="d-none">{{ 'login.form.password.label'|trans }}</label>
-                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="{{ 'login.form.password.placeholder'|trans }}" required>
+                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="{{ 'login.form.password.placeholder'|trans }}" required autofocus>
                     </div>
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
