@@ -50,7 +50,9 @@ final class ReductionManager
     public function changeStatus(Reduction $reduction): Reduction
     {
         $reduction->isActive() ? $reduction->setIsActive(false) : $reduction->setIsActive(true);
-        $reduction->setImageOutOfContext();
+        if ($reduction->getImage()) {
+            $reduction->setImageOutOfContext();
+        }
 
         return $reduction;
     }
