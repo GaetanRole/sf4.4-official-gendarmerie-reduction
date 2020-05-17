@@ -15,7 +15,7 @@
     {% else %}
         {% for reduction in paginator.results %}
             <div class="col-md-12">
-                <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}">
+                <a href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" rel="external">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <div class="row">
