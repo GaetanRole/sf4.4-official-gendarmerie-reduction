@@ -566,7 +566,7 @@ span.select2-selection.select2-selection--single {
 /* Reduction */
 
 #reduction_brand_help {
-    color :var(--info) !important;
+    color: var(--info) !important;
     font-weight: 600;
 }
 
