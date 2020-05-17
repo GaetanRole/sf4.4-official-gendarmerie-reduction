@@ -524,6 +524,10 @@ span.select2-selection.select2-selection--single {
     display: inline-block;
 }
 
+#search-form .form-check input[type="radio"] {
+    display: none;
+}
+
 #search-form .form-check-input {
     -webkit-appearance: none;
     -moz-appearance: none;

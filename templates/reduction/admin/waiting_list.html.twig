@@ -46,8 +46,8 @@
                             </td>
                             <td>{{ reduction.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>
-                                <a class="btn btn-sm btn-info mb-2" href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" title="{{ reduction.title }}">{{ 'admin.table.view.link'|trans }}</a>
-                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                <a class="btn btn-sm btn-info mb-1" href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" title="{{ reduction.title }}">{{ 'admin.table.view.link'|trans }}</a>
+                                <a class="btn btn-sm btn-dark mb-1" href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
                                 {{ include('reduction/admin/_status_form.html.twig') }}
                             </td>
                         </tr>

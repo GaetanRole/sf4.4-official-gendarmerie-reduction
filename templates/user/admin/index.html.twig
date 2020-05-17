@@ -40,11 +40,11 @@
                             <td>{{ user.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ user.updatedAt ? user.updatedAt|date('d-m-Y, H:i:s') : '' }}</td>
                             <td>
-                                <a class="btn btn-sm btn-info mb-2" href="{{ path('app_user_show', {'uuid': user.uuid}) }}" title="{{ user }} page.">{{ 'admin.table.view.link'|trans }}</a>
+                                <a class="btn btn-sm btn-info mb-1" href="{{ path('app_user_show', {'uuid': user.uuid}) }}" title="{{ user }} page.">{{ 'admin.table.view.link'|trans }}</a>
                                 {% if is_granted('ROLE_SUPER_ADMIN') and user.roles|json_encode is same as ('["ROLE_SUPER_ADMIN"]') %}
                                     <p>{{ 'admin.table.p.same_acl'|trans }}</p>
                                 {% elseif is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') and user.roles|json_encode == '["ROLE_USER"]' %}
-                                    <a class="btn btn-sm btn-dark" href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                    <a class="btn btn-sm btn-dark mb-1" href="{{ path('app_admin_user_edit', {'uuid': user.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
                                     {{ include('user/admin/_status_form.html.twig') }}
                                 {% endif %}
                             </td>
