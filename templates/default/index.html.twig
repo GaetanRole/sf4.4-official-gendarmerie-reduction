@@ -36,13 +36,13 @@
             <div class="container-semi-fluid">
                 <div class="row">
                     {% for article in articles %}
-                        <div class="col-md p-3">
-                            <h3 class="text-center font-weight-bold p-0">{{ article.title|capitalize }}</h3>
-                            <p class="text-center m-0"><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
-                            <a href="{{ path('app_article_view', {'slug': article.slug}) }}" title="{{ article.title }}">
+                        <a href="{{ path('app_article_view', {'slug': article.slug}) }}" title="{{ article.title }}">
+                            <div class="col-md p-3">
+                                <h3 class="text-center text-dark font-weight-bold p-0">{{ article.title|capitalize }}</h3>
+                                <p class="text-center m-0"><small class="text-secondary">{{ 'publish.date'|trans }} : {{ article.createdAt|date('d-m-Y') }}</small></p>
                                 <p class="card-text text-dark text-center mt-3">{{ article.summary }}</p>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     {% else %}
                         <div class="col-md-6 offset-md-3 p-3">
                             <h3 class="lead font-weight-light text-center">{{ 'article.empty'|trans }}</h3>
