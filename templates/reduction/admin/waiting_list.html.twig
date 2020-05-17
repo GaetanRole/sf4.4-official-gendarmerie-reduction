@@ -17,6 +17,7 @@
                     <tr>
                         <th>ID</th>
                         <th>{{ 'admin.table.tr.image'|trans }}</th>
+                        <th>{{ 'admin.table.tr.brand'|trans }}</th>
                         <th>{{ 'admin.table.tr.title'|trans }}</th>
                         <th>{{ 'admin.table.tr.location'|trans }}</th>
                         <th>{{ 'admin.table.tr.name'|trans }}</th>
@@ -24,7 +25,6 @@
                         <th>{{ 'admin.table.tr.ip'|trans }}</th>
                         <th>{{ 'admin.table.tr.categories'|trans }}</th>
                         <th>{{ 'admin.table.tr.creationDate'|trans }}</th>
-                        <th>{{ 'admin.table.tr.updateDate'|trans }}</th>
                         <th>{{ 'admin.table.tr.actions'|trans }}</th>
                     </tr>
                     </thead>
@@ -33,6 +33,7 @@
                         <tr>
                             <td>{{ reduction.id }}</td>
                             <td><img class="border-radius" src="{{ uploaded_asset(reduction.image, 'thumbnail') }}" width="100" alt="{{ reduction.title }} Image."></td>
+                            <td>{% if reduction.brand.name is constant('App\\Form\\BrandType::UNKNOWN_BRAND_NAME') %}<span class="badge badge-lg badge-danger">{{ reduction.brand.name }}</span>{% else %}{{ reduction.brand.name }}{% endif %}</td>
                             <td>{{ reduction.title }}</td>
                             <td>{{ reduction.region }}{% if reduction.department %}<br>{{ reduction.department }}{% endif %}{% if reduction.municipality %}<br>{{ reduction.municipality }}{% endif %}</td>
                             <td>{{ reduction.name ?: '~'}}</td>
@@ -44,7 +45,6 @@
                                 {% endfor %}
                             </td>
                             <td>{{ reduction.createdAt|date('d-m-Y, H:i:s') }}</td>
-                            <td>{{ reduction.updatedAt ? reduction.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>
                                 <a class="btn btn-sm btn-info mb-2" href="{{ path('app_reduction_view', {'slug': reduction.slug}) }}" title="{{ reduction.title }}">{{ 'admin.table.view.link'|trans }}</a>
                                 <a class="btn btn-sm btn-dark" href="{{ path('app_admin_reduction_edit', {'slug': reduction.slug}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>

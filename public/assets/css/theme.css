@@ -565,6 +565,11 @@ span.select2-selection.select2-selection--single {
 
 /* Reduction */
 
+#reduction_brand_help {
+    color :var(--info) !important;
+    font-weight: 600;
+}
+
 .custom-file-label::after {
     opacity: 0;
 }

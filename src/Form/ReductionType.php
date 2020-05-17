@@ -53,6 +53,9 @@ final class ReductionType extends AbstractType
                 'class' => Brand::class,
                 'placeholder' => 'form.reduction.brand.placeholder',
                 'choice_label' => 'name',
+                'query_builder' => static function (EntityRepository $er) {
+                    return $er->createQueryBuilder('b')->orderBy('b.name', 'ASC');
+                },
                 'attr' => ['data-select' => true],
                 'label' => 'form.reduction.brand.label',
                 'help' => 'form.reduction.brand.help',

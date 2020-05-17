@@ -16,6 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class BrandType extends AbstractType
 {
+    /** @var string A static variable in prod DB for an unknown brand. */
+    public const UNKNOWN_BRAND_NAME = '[ * Enseigne Inconnue * ]';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
