@@ -6,6 +6,9 @@
 
 {% block stylesheets %}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+    <style>
+        .tmp-css .form-group{margin-bottom:0!important}.tmp-css label{padding:0!important}.tmp-css small{font-size:.85rem}
+    </style>
 {% endblock %}
 
 {% block content_id 'reduction-index' %}
@@ -18,8 +21,9 @@
                 <div class="col-lg-3 offset-lg-3">
                     {{ form_row(form.method[0], { 'label_attr': { 'class': 'font-weight-light' } }) }}
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 tmp-css">
                     {{ form_row(form.method[1], { 'label_attr': { 'class': 'font-weight-light disabled' } }) }}
+                    <small class="text-info">Cette fonctionnalité arrive prochainement !</small>
                 </div>
             </div>
             <div class="search-bar row p-4 mb-5">
@@ -96,15 +100,22 @@
         const departmentSelect = $('#search_department');
         const municipalitySelect = $('#search_municipality');
 
-        let hideDepartmentAndMunicipalitySelectField = () => {
+        let disableDepartmentAndMunicipalitySelectFields = () => {
+            $($(departmentSelect).data('select2').$container).addClass('disabled');
+            $($(municipalitySelect).data('select2').$container).addClass('disabled');
+        };
+
+        let hideDepartmentAndMunicipalitySelectFields = () => {
             municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
             departmentSelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
+            disableDepartmentAndMunicipalitySelectFields();
         };
 
         let setDataAccordingToOneField = (name, currentSelector, data) => {
             if (currentSelector === departmentSelect) {
                 municipalitySelect.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
             }
+            $($(currentSelector).data('select2').$container).removeClass('disabled');
             currentSelector.html('').append('<option value="">{{ 'region.form.geo.select.option'|trans }}</option>');
             $.each(data, (key, value) => {
                 currentSelector.append('<option value="' + value + '">' + key + '</option>');
@@ -121,10 +132,13 @@
             });
         };
 
+        disableDepartmentAndMunicipalitySelectFields();
+
         regionSelect.change(function () {
+            disableDepartmentAndMunicipalitySelectFields();
             // If International or National is selected, hide others select fields
             ($(this).val() === 'International' || $(this).val() === 'National') ?
-                hideDepartmentAndMunicipalitySelectField() : ajaxCallback('department', departmentSelect, $(this).val());
+                hideDepartmentAndMunicipalitySelectFields() : ajaxCallback('department', departmentSelect, $(this).val());
         });
         departmentSelect.change(function () { ajaxCallback('municipality', municipalitySelect, $(this).val()); });
     </script>

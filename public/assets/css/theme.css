@@ -522,6 +522,8 @@ span.select2-selection.select2-selection--single {
 
 #search-form .form-check-input {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     outline: none;
     margin-left: 0;
 }
