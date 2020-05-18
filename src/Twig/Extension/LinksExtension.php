@@ -16,7 +16,7 @@ final class LinksExtension extends AbstractExtension
 {
     /** @var array CONST for locale labels, useful to create Twig links. */
     public const LOCALE_EN_LABELS = ['en' => 'English', 'fr' => 'French'];
-    public const LOCALE_FR_LABELS = ['en' => 'Englais', 'fr' => 'Français'];
+    public const LOCALE_FR_LABELS = ['en' => 'Anglais', 'fr' => 'Français'];
 
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
