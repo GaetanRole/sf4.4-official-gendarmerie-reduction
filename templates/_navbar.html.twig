@@ -37,7 +37,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_security_logout') }}" title="Ciao !">{{ 'base.header.nav.logout.link'|trans }}</a>
                 </li>
-            {% else -%}utilisateur.facebook
+            {% else -%}
                 <li class="nav-item {{ currentRoute is same as('app_security_login') ? 'active' }}">
                     <a class="nav-link" href="{{ path('app_security_login') }}" title="{{ 'base.header.nav.login.link.title'|trans }}">{{ 'base.header.nav.login.link'|trans }}</a>
                 </li>
