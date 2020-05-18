@@ -34,7 +34,7 @@
                             <td>{{ category.createdAt|date('d-m-Y, H:i:s') }}</td>
                             <td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y, H:i:s') : '~' }}</td>
                             <td>
-                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}">{{ 'admin.table.edit.link'|trans }}</a>
+                                <a class="btn btn-sm btn-dark" href="{{ path('app_admin_category_edit', {'uuid': category.uuid}) }}" title="{{ 'admin.table.edit.link.title'|trans }}"><i class="fas fa-pen"></i></a>
                             </td>
                         </tr>
                     {% else %}
