@@ -37,14 +37,14 @@ final class UserIdentityType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => false,
-                'data' => $userName,
+                'empty_data' => $userName,
                 'label' => 'form.user_identity.name.label',
                 'help' => 'form.user_identity.name.help',
                 'attr' => ['placeholder' => 'form.user_identity.name.placeholder', 'maxLength' => '64'],
             ])
             ->add('email', EmailType::class, [
                 'required' => false,
-                'data' => $userEmail,
+                'empty_data' => $userEmail,
                 'label' => 'form.user_identity.email.label',
                 'help' => 'form.user_identity.email.help',
                 'attr' => ['placeholder' => 'form.user_identity.email.placeholder', 'maxLength' => '64'],
