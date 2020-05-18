@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="jbuN_sX" resname="form.reduction.brand.help">
         <source>form.reduction.brand.help</source>
-        <target>Sélectionnez une enseigne déjà existante. Si celle-ci n'existe pas, sélectionnez '[ * Enseigne Inconnue * ]' qui sera ajoutée par un administrateur une fois l'annonce validée. Merci de préciser celle-ci dans votre description.</target>
+        <target>Sélectionnez une enseigne déjà existante. Si celle-ci n'existe pas, sélectionnez '[ * Enseigne Inconnue * ]'. Indiquez le nom de l'enseigne dans "Votre description *". Un administrateur procédera à la vérification.</target>
       </trans-unit>
       <trans-unit id="BQ9LPCQ" resname="form.reduction.title.label">
         <source>form.reduction.title.label</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="EEIRLeX" resname="form.reduction.categories.help">
         <source>form.reduction.categories.help</source>
-        <target>Vous pouvez ajouter entre une et trois catégories.</target>
+        <target>Vous pouvez ajouter entre de une à trois catégories.</target>
       </trans-unit>
       <trans-unit id="iHSTERZ" resname="form.search.method.label.location">
         <source>form.search.method.label.location</source>

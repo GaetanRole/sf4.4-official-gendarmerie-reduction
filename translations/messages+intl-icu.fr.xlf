@@ -635,11 +635,11 @@
       </trans-unit>
       <trans-unit id="syYhYo4" resname="article.index.body.description">
         <source>article.index.body.description</source>
-        <target>Retrouvez toutes les dernières actualités du site PromoGend, publiées ici par le staff.</target>
+        <target>Retrouvez toutes les dernières actualités du site Promo'Gend, publiées ici par le staff.</target>
       </trans-unit>
       <trans-unit id="66i_8xo" resname="terms.head.meta.description">
         <source>terms.head.meta.description</source>
-        <target>Présentation des mentions légales de l'association PromoGend.</target>
+        <target>Présentation des mentions légales de l'association Promo'Gend.</target>
       </trans-unit>
       <trans-unit id="UjnvJpE" resname="terms.head.meta.title">
         <source>terms.head.meta.title</source>
@@ -651,7 +651,7 @@
       </trans-unit>
       <trans-unit id="bXf.1bl" resname="privacy.head.meta.description">
         <source>privacy.head.meta.description</source>
-        <target>Présentation de la politique de confidentialité du site, de l'association PromoGend.</target>
+        <target>Présentation de la politique de confidentialité du site, de l'association Promo'Gend.</target>
       </trans-unit>
       <trans-unit id="TyfXgtc" resname="privacy.head.meta.title">
         <source>privacy.head.meta.title</source>
@@ -679,7 +679,7 @@
       </trans-unit>
       <trans-unit id="yKOF_l0" resname="index.head.meta.description">
         <source>index.head.meta.description</source>
-        <target>PromoGend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
+        <target>Promo'Gend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
       </trans-unit>
       <trans-unit id="34WnIim" resname="index.head.meta.title">
         <source>index.head.meta.title</source>
@@ -687,11 +687,11 @@
       </trans-unit>
       <trans-unit id="HarvFp2" resname="index.header.h1">
         <source>index.header.h1</source>
-        <target>PromoGend</target>
+        <target>Promo'Gend</target>
       </trans-unit>
       <trans-unit id="xbEZUI3" resname="index.header.description">
         <source>index.header.description</source>
-        <target>Bienvenue sur PromoGend ! Le site des offres et des réductions à destination des militaires de la Gendarmerie Nationale.</target>
+        <target>Bienvenue sur Promo'Gend ! Le site des offres et des réductions à destination des militaires de la Gendarmerie Nationale.</target>
       </trans-unit>
       <trans-unit id="XHqjztk" resname="btn.learn-more">
         <source>btn.learn-more</source>
@@ -703,7 +703,7 @@
       </trans-unit>
       <trans-unit id="pV2NQlt" resname="index.body.article.description">
         <source>index.body.article.description</source>
-        <target>Retrouvez les derniers actualités publiées par l'association PromoGend.</target>
+        <target>Retrouvez les dernieres actualités publiées par l'association Promo'Gend.</target>
       </trans-unit>
       <trans-unit id="iXWxE_p" resname="link.article.index.title">
         <source>link.article.index.title</source>
@@ -715,11 +715,11 @@
       </trans-unit>
       <trans-unit id="2d0UgeM" resname="index.body.reduction.description">
         <source>index.body.reduction.description</source>
-        <target>Retrouvez les dernières réductions ajoutées et validées par la communauté PromoGend.</target>
+        <target>Retrouvez les dernières réductions ajoutées et validées par la communauté Promo'Gend.</target>
       </trans-unit>
       <trans-unit id="j7mtFaM" resname="base.head.meta.description">
         <source>base.head.meta.description</source>
-        <target>PromoGend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
+        <target>Promo'Gend est un site destiné aux militaires de la Gendarmerie Nationale, proposant des réductions et des offres sous certaines conditions.</target>
       </trans-unit>
       <trans-unit id="SNvq9F." resname="base.head.meta.title">
         <source>base.head.meta.title</source>
@@ -751,7 +751,7 @@
       </trans-unit>
       <trans-unit id="CGYkr95" resname="login.head.meta.description">
         <source>login.head.meta.description</source>
-        <target>Connectez-vous avec un compte pré-enregistré par Promogend afin de profiter d'offres et réductions. Les identifiants sont accessibles depuis le groupe Facebook PromoGend.</target>
+        <target>Connectez-vous avec un compte pré-enregistré par Promo'gend afin de profiter d'offres et réductions. Les identifiants sont accessibles depuis le groupe Facebook PromoGend.</target>
       </trans-unit>
       <trans-unit id="BQkzFUH" resname="login.head.meta.title">
         <source>login.head.meta.title</source>
@@ -787,7 +787,7 @@
       </trans-unit>
       <trans-unit id="GBOW1we" resname="login.form.subtitle">
         <source>login.form.subtitle</source>
-        <target>Vous ne pouvez pas créer de compte sur le site. Il vous faut accèder à la page Facebook du groupe PromoGend pour avoir un compte.</target>
+        <target>Vous ne pouvez pas créer de compte directement sur le site. Il vous faut accèder à la page Facebook du groupe Promo'Gend afin de vous procurer le mot de pass.</target>
       </trans-unit>
       <trans-unit id="A1h_z03" resname="home.link.back">
         <source>home.link.back</source>
