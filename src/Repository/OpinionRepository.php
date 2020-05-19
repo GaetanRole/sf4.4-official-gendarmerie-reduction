@@ -25,7 +25,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class OpinionRepository extends ServiceEntityRepository
 {
     /** @var int Opinion number per page. */
-    private const PAGE_SIZE = 5;
+    public const PAGE_SIZE = 5;
 
     /** @var GlobalClock */
     private $clock;

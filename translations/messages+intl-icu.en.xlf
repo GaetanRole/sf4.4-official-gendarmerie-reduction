@@ -809,6 +809,10 @@
         <source>error.body.text</source>
         <target>__error.body.text</target>
       </trans-unit>
+      <trans-unit id="8trxZD1" resname="admin.last.opinions">
+        <source>admin.last.opinions</source>
+        <target>__admin.last.opinions</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -809,6 +809,10 @@
         <source>error.body.text</source>
         <target>Une erreur s'est produite. En cas de problème persistant merci de contacter le support via le formulaire de contact ou Facebook.</target>
       </trans-unit>
+      <trans-unit id="8trxZD1" resname="admin.last.opinions">
+        <source>admin.last.opinions</source>
+        <target>opinions récentes en base.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

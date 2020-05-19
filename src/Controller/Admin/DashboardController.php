@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Repository\OpinionRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
 /**
  * Controller for the default Admin dashboard linking to other admin controllers related to business logic.
  * Statistics or Admin features can be added here.
@@ -34,8 +34,10 @@ final class DashboardController extends AbstractController
      *
      * @Route("/dashboard", name="dashboard", methods="GET")
      */
-    public function dashboard(): Response
+    public function dashboard(OpinionRepository $opinionRepository): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render('admin/dashboard.html.twig', [
+            'opinions' => $opinionRepository->findBy([], ['id' => 'DESC'], OpinionRepository::PAGE_SIZE)
+        ]);
     }
 }
