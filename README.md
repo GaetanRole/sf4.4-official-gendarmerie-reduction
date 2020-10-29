@@ -1,6 +1,6 @@
 # sf4.4-official-gendarmerie-reduction-website
 
-This website is the official reduction website for all Gendarmerie employees.
+This website is the official reduction website for all Gendarmerie employees, called [Promogend](https://www.promogend.fr/fr/)
 <br>This one is composed of few entities allowing to post some reductions, comments and search them by filters.
 <br>This repository also shows how to develop applications following the Symfony Best Practices, according to my past experience in SensioLabs.
 
@@ -37,7 +37,7 @@ $ make install      # Install all Symfony dependencies
 $ make tests        # Start PHPUnit tests and code coverage
 ```
 
-> The project's Makefile has few rules which could be very useful. 
+> The project's Makefile has few rules which could be very useful.
 > In fact, you have some rules for Q&A tools and unit/functional tests.
 > Take a look on it !
 
