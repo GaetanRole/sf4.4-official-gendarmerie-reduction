@@ -95,7 +95,7 @@ final class BrandFixture extends Fixture implements FixtureGroupInterface
             $brand->setUpdatedAt(null);
 
             $brand->setName($name)
-                ->setDescription($faker->realText(100))
+                ->setDescription($faker->sentence(20))
             ;
 
             $this->manager->persist($brand);

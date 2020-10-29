@@ -63,7 +63,7 @@ final class CategoryFixture extends Fixture implements FixtureGroupInterface
             $category->setUpdatedAt(null);
 
             $category->setName(ucfirst($name))
-                ->setDescription($faker->realText(100))
+                ->setDescription($faker->sentence(20))
             ;
 
             $manager->persist($category);

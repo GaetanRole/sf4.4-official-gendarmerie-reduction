@@ -48,7 +48,7 @@ final class LinksExtension extends AbstractExtension
     public function generateLinks(array $locales, ?string $routeName, ?array $routeParameters, ?string $country): string
     {
         // Prevents a debug error if no parameters in case of an exception.
-        if (!$routeName || !$routeParameters || !$country) {
+        if (!$routeName || $routeParameters === null || !$country) {
             return '';
         }
 

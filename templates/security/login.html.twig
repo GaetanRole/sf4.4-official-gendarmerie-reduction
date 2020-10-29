@@ -22,9 +22,13 @@
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
 
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <label for="inputUsername" class="d-none">{{ 'login.form.username.label'|trans }}</label>
                         <input type="text" class="form-control bg-grey-opaque" value="{{ username }}" name="username" id="inputUsername" placeholder="{{ 'login.form.username.placeholder'|trans }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <small class="text-danger">{{ 'login.form.login.subtitle'|trans }}</small>
                     </div>
 
                     <div class="input-group mb-3">

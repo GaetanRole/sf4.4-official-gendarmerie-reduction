@@ -785,6 +785,10 @@
         <source>login.form.submit</source>
         <target>__login.form.submit</target>
       </trans-unit>
+      <trans-unit id="CCkZKCW" resname="login.form.login.subtitle">
+        <source>login.form.login.subtitle</source>
+        <target>__login.form.login.subtitle</target>
+      </trans-unit>
       <trans-unit id="GBOW1we" resname="login.form.subtitle">
         <source>login.form.subtitle</source>
         <target>__login.form.subtitle</target>

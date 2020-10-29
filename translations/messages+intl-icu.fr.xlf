@@ -785,9 +785,13 @@
         <source>login.form.submit</source>
         <target>Se connecter</target>
       </trans-unit>
+      <trans-unit id="CCkZKCW" resname="login.form.login.subtitle">
+        <source>login.form.login.subtitle</source>
+        <target>Le login ne doit pas être modifié.</target>
+      </trans-unit>
       <trans-unit id="GBOW1we" resname="login.form.subtitle">
         <source>login.form.subtitle</source>
-        <target>Vous ne pouvez pas créer de compte directement sur le site. Il vous faut accèder à la page Facebook du groupe Promo'Gend afin de vous procurer le mot de pass.</target>
+        <target>Vous ne pouvez pas créer de compte directement sur le site. Il vous faut accèder à la page Facebook du groupe Promo'Gend afin de vous procurer le mot de passe.</target>
       </trans-unit>
       <trans-unit id="A1h_z03" resname="home.link.back">
         <source>home.link.back</source>

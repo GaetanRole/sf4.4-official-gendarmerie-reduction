@@ -93,7 +93,7 @@ final class ReductionFixture extends Fixture implements DependentFixtureInterfac
                 ->addCategory(...$categories)
                 ->setTitle($reductionTitle)
                 ->setSlug($this->slugger::uniqueSlugify($reductionTitle))
-                ->setDescription($faker->realText(300))
+                ->setDescription($faker->sentence(30))
                 ->setImage($image)
                 ->setRegion($this->getRandomRegion())
                 ->setDepartment($this->getRandomDepartment())

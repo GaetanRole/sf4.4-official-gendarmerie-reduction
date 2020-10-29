@@ -70,7 +70,7 @@ final class OpinionFixture extends Fixture implements DependentFixtureInterface
             /** @var User $author */
             $opinion->setUser($author)
                 ->setReduction($reduction)
-                ->setComment($faker->realText(128))
+                ->setComment($faker->sentence(20))
             ;
 
             $manager->persist($opinion);
